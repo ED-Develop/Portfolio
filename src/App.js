@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {HashRouter, Route, Switch} from "react-router-dom";
 import Music from "./components/Music/Music";
 import AsideContainer from "./components/Aside/AsideContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -61,11 +61,11 @@ let AppContainer = connect(mapStateToProps, {initializeApp})(App);
 
 const PortfolioApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 };
 
