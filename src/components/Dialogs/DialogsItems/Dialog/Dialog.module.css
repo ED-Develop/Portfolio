@@ -1,0 +1,42 @@
+.item a {
+    text-decoration: none;
+    display: block;
+}
+.dialog img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.dialog {
+    display: flex;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.dialog:hover {
+    border-bottom: 1px solid chartreuse;
+}
+.dialog span {
+    font-size: 11px;
+    color: #939598;
+    margin-right: 7px;
+}
+span.name {
+    font-size: 14px;
+    color: #27aae1;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 10px;
+}
+.content p {
+    font-size: 13px;
+    color: #939598;
+    margin-bottom: 20px;
+}
+.active {
+    border-bottom: 1px solid chartreuse;
+}

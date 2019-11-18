@@ -1,0 +1,41 @@
+.input img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px ;
+}
+.input {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+.input form {
+    display: flex;
+    align-items: center;
+}
+.input textarea {
+    width: 350px;
+    height: 60px;
+    resize: none;
+    margin-right: 10px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    color: #46484b;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+.input button {
+    font-size: 16px;
+    padding: 7px 25px;
+    border-radius: 30px;
+    border: none;
+    background-color: #27aae1;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+.input button:hover {
+    background-color: #229ace;
+}

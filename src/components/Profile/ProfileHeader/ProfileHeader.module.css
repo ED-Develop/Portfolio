@@ -1,0 +1,51 @@
+.container {
+    height: 260px;
+    background: url("https://fotooboi.org.ua/images/product_images/info_images/fotooboi-les-na-sklone-742.jpg") no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 0 0 5px 5px;
+}
+.profileNav {
+    height: 50px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: rgba(35, 31, 32, 0.71);
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profileNav ul {
+    display: flex;
+}
+.profileNav a {
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+.profileNav a:hover {
+    color: #27aae1;
+}
+a.active {
+    color: #27aae1;
+}
+.followers span {
+    color: #fff;
+    font-size: 14px;
+    line-height: 50px;
+    margin-right: 20px;
+}
+.view {
+    font-size: 16px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    border: none;
+    background-color: #27aae1;
+    color: #fff;
+    cursor: pointer;
+}
+.view:hover {
+    background-color: #229ace;
+}

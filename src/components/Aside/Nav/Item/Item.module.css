@@ -1,0 +1,22 @@
+.item {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.item_link {
+    text-decoration: none;
+    color: #6d6e71;
+    font-size: 16px;
+}
+.item_link img {
+    margin-right: 5px;
+    width: 20px;
+    position: relative;
+    top: 5px;
+}
+.activeLink {
+    color: #000;
+}
+
+.item_link:hover {
+    text-decoration: underline;
+}

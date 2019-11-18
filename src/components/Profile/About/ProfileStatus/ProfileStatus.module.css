@@ -1,0 +1,19 @@
+.status {
+    font-size: 16px;
+    color: #737578;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 300px;
+}
+.myProfile:hover {
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.status input {
+    padding: 5px;
+    font-size: 14px;
+}
+

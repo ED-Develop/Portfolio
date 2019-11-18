@@ -1,0 +1,56 @@
+.wrapper {
+    width: 85%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    grid-column-gap: 70px;
+    padding-top: 40px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.avatar img {
+    width: 100%;
+    border-radius: 5px;
+}
+.avatar h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #2c2c2c;
+}
+.avatar p {
+    font-size: 16px;
+    color: #737578;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.info {
+    color: #737578;
+}
+.contactsIcons img {
+    width: 30px;
+    height: 30px;
+}
+.contactsIcons a {
+    display: inline;
+    margin-right: 10px;
+}
+.info h3 img,
+.info p img{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+.info h3{
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 10px;
+    color: #56585b;
+}
+.info > div  {
+    border-bottom: 1px solid #e0e0e0;
+}
+.info > div:last-child {
+    border: none;
+}

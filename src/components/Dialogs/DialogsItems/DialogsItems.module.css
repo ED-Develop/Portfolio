@@ -1,0 +1,6 @@
+.items {
+    height: 400px;
+    box-sizing: border-box;
+    overflow: auto;
+}
+

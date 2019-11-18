@@ -1,0 +1,53 @@
+.userHeader {
+    position: relative;
+}
+.userHeader .logo {
+    width: 100%;
+    height: 120px;
+    border-radius: 5px 5px 0 0;
+}
+.userHeader .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    position: absolute;
+    left: 20px;
+    bottom: -20px;
+}
+.userBody {
+    margin-top: 30px;
+    padding: 0.1px 20px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 0 0 5px 5px;
+}
+.userBody button {
+    font-size: 16px;
+    padding: 7px 25px;
+    border-radius: 30px;
+    border: none;
+    background-color: #8dc63f;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+.userBody p {
+    width: 100%;
+    color: #6d6e71;
+    font-size: 14px;
+}
+.userBody .name {
+    font-size: 18px;
+    color: #2c2c2c;
+    font-weight: bold;
+}
+.userBody .name:hover {
+    text-decoration: underline;
+}
+
+.search button:hover {
+    background-color: #229ace;
+}

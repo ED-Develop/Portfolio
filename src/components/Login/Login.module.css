@@ -1,0 +1,59 @@
+.container {
+    background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(https://g1.dcdn.lt/images/pix/programisiai-atakuoja-74631562.jpg) fixed no-repeat;
+    background-size: 100%;
+    height: 800px;
+    padding-top: 50px;
+}
+.wrapper {
+    width: 1200px;
+    margin: auto;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.wrapper > div {
+    padding-top: 0.1px;
+    position: relative;
+}
+.form_background {
+    width: 575px;
+    height: 390px;
+    background: linear-gradient(to right, rgba(255,255,255, 0.2) , rgba(255,255,255, 0.05));
+    position: absolute;
+    left: -50px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    z-index: 1;
+}
+.form_background div {
+    transform: rotate(-90deg);
+    width: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+.form {
+    width: 505px;
+    height: 560px;
+    background-color: white;
+    color: #939598;
+    border-radius: 6px;
+    padding: 40px 40px 40px 60px;
+    margin-top: 30px;
+    box-sizing: border-box;
+    z-index: 50;
+    position: relative;
+}
+.form h3 {
+    color: #27aae1;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 20px 0 10px;
+}
+.form p {
+    margin: 0 0 10px;
+}

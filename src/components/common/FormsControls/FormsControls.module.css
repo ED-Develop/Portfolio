@@ -1,0 +1,44 @@
+div.error input {
+    border: 1px solid red;
+}
+.error {
+    position: relative;
+}
+
+.description {
+    position: absolute;
+    width: 200px;
+    height: 30px;
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    border-radius: 6px 0 0 6px;
+    text-align: center;
+    line-height: 30px;
+    left: -220px;
+}
+.descriptionTextarea {
+    position: absolute;
+    width: 200px;
+    height: 30px;
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 30px;
+    left: 0;
+    right: 0;
+    top: -40px;
+    margin: auto;
+}
+.description::after {
+    content: '';
+    display: block;
+    border: 15px solid transparent;
+    border-left: 15px solid rgba(255, 0, 0, 0.7);
+    position: absolute;
+    right: -30px;
+    top: 0;
+}
+.description.textarea::after {
+    top: -100px;
+}

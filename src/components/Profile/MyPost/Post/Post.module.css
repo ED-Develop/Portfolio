@@ -1,0 +1,104 @@
+.post {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    padding-top: 0.1px;
+
+
+}
+.avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 15px;
+    border: 3px solid #fff;
+}
+.postWraper {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+.postContent {
+    padding-right: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.delete {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #2c2c2c;
+    opacity: 0.3;
+}
+.delete:hover {
+    color: red;
+    opacity: 1;
+}
+.info {
+    padding-left: 20px;
+    border-left: 2px solid limegreen;
+    margin-top: 5px;
+    box-sizing: border-box;
+    position: relative;
+}
+.info::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: limegreen;
+    border-radius: 50%;
+    position: absolute;
+    left: -10px;
+}
+.info h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+.info p {
+    font-size: 14px;
+    color: #6d6e71;
+}
+.like img {
+    width: 15px;
+}
+.like {
+    align-self: center;
+    margin-right: 20px;
+    color: #8dc63f;
+    font-size: 14px;
+    cursor: pointer;
+}
+.description {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.description h3 a{
+    font-size: 14px;
+    color: #27aae1;
+}
+.description h3 a:hover {
+    text-decoration: underline;
+}
+.description .activity {
+    font-size: 13px;
+    color: #939598;
+}
+.postText {
+    font-size: 14px;
+    color: #6d6e71;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
