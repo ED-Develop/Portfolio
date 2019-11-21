@@ -1,6 +1,7 @@
 import {authAPI, profileAPI} from "../api/api";
-import {toggleIsFetching} from "./UsersReducer";
+
 import {stopSubmit} from "redux-form";
+import {toggleIsFetching} from "./appReducer";
 
 const SET_USER_DATA = 'portfolio/auth/SET_USER_DATA';
 const TOGGLE_IS_AUTH = 'portfolio/auth/TOGGLE_IS_AUTH';
@@ -48,7 +49,7 @@ const setUserData = (userId, login, email, isAuth) => {
         }
     }
 };
-const setProfilePhotos = (photos) => {
+export const setProfilePhotos = (photos) => {
     return {
         type: SET_PROFILE_PHOTOS,
         photos

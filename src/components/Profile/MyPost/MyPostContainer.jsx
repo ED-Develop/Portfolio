@@ -8,7 +8,8 @@ let mapStateToProps = (state) => {
     return {
         postData: getPosts(state),
         avatar: state.profilePage.profile.photos.small,
-        login: state.profilePage.profile.fullName
+        login: state.profilePage.profile.fullName,
+
     };
 };
 

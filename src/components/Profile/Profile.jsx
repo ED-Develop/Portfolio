@@ -5,20 +5,22 @@ import {Route} from "react-router-dom";
 import Album from "./Album/Album";
 import Projects from "./Projects/Projects";
 
-const Profile = ({status, updateProfileStatus, profile, isMyProfile, userId, isAuth}) => {
+const Profile = ({status, updateProfileStatus, followed,  profile, isMyProfile, userId, isAuth, uploadProfilePhoto, isUpload}) => {
     return (
         <div>
-            <ProfileHeader userId={userId} isMyProfile={isMyProfile}/>
+            <ProfileHeader followed={followed} userId={userId} isMyProfile={isMyProfile}/>
             {isAuth && <Route exact path='/' render={() => <About status={status}
-                                                                        updateProfileStatus={updateProfileStatus}
-                                                                        profile={profile}
-                                                                        isMyProfile={isMyProfile}/>}/>}
+                                                                  updateProfileStatus={updateProfileStatus}
+                                                                  uploadProfilePhoto={uploadProfilePhoto}
+                                                                  profile={profile}
+                                                                  isMyProfile={isMyProfile} isUpload={isUpload}/>}/>}
             <Route path='/profile/:userId?/album' render={() => <Album/>}/>
             <Route path='/profile/:userId?/project' render={() => <Projects/>}/>
             <Route path='/profile/:userId?/about' render={() => <About status={status}
                                                                        updateProfileStatus={updateProfileStatus}
+                                                                       uploadProfilePhoto={uploadProfilePhoto}
                                                                        profile={profile}
-                                                                       isMyProfile={isMyProfile}/>}/>
+                                                                       isMyProfile={isMyProfile} isUpload={isUpload}/>}/>
 
 
         </div>

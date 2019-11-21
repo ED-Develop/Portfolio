@@ -25,7 +25,7 @@ export const getTotalCount = (state) => {
 };
 
 export const getIsFetching = (state) => {
-    return state.peoplePage.isFetching;
+    return state.app.isFetching;
 };
 
 export const getFollowingInProgress = (state) => {

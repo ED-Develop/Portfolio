@@ -1,11 +1,14 @@
 import {profileAPI} from "../api/api";
+import {toggleIsFetching, uploadInProgress} from "./appReducer";
+import {setProfilePhotos} from "./authReducer";
 
 const ADD_POST = 'portfolio/profile/ADD-POST';
 const SET_USER_PROFILE = 'portfolio/profile/SET-USER-PROFILE';
-const TOGGLE_IS_FETCHING = 'portfolio/profile/TOGGLE_IS_FETCHING';
 const SET_PROFILE_STATUS = 'portfolio/profile/SET_PROFILE_STATUS';
 const DELETE_POST = 'portfolio/profile/DELETE_POST';
 const INCREMENTED_LIKE = 'portfolio/profile/INCREMENTED_LIKE';
+const UPLOAD_PROFILE_PHOTO_SUCCESS = 'portfolio/profile/UPLOAD_PROFILE_PHOTO_SUCCESS';
+
 
 let initialState = {
     postData: [
@@ -36,7 +39,7 @@ let initialState = {
     postTextValue: '',
     profile: null,
     status: '',
-    isFetching: false
+    followed: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -57,13 +60,6 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profile: action.profile
-
-            }
-        }
-        case TOGGLE_IS_FETCHING: {
-            return {
-                ...state,
-                isFetching: action.isFetching
 
             }
         }
@@ -89,6 +85,17 @@ const profileReducer = (state = initialState, action) => {
                         return post;
                     }
                 })
+            }
+        }
+        case UPLOAD_PROFILE_PHOTO_SUCCESS: {
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: {
+                        ...action.photos
+                    }
+                }
             }
         }
         default:
@@ -117,17 +124,17 @@ export const setUserProfile = (profile) => {
     }
 };
 
-const toggleIsFetching = (isFetching) => {
-    return {
-        type: TOGGLE_IS_FETCHING,
-        isFetching
-    }
-};
-
 const setProfileStatus = (status) => {
     return {
         type: SET_PROFILE_STATUS,
         status
+    }
+};
+
+const uploadProfilePhotoSuccess = (photos) => {
+    return {
+        type: UPLOAD_PROFILE_PHOTO_SUCCESS,
+        photos
     }
 };
 
@@ -154,6 +161,16 @@ export const updateProfileStatus = (status) => {
             dispatch(setProfileStatus(status));
         }
     }
+};
+
+export const uploadProfilePhoto = (photoFile) => {
+    return async (dispatch) => {
+        dispatch(uploadInProgress(true));
+        let photos = await profileAPI.uploadProfilePhoto((photoFile));
+        dispatch(uploadProfilePhotoSuccess(photos));
+        dispatch(setProfilePhotos(photos));
+        dispatch(uploadInProgress(false));
+    };
 };
 
 export default profileReducer;

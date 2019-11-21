@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileStatus, getUserProfile, updateProfileStatus} from "../../Redux/profileReducer";
+import {getProfileStatus, getUserProfile, updateProfileStatus, uploadProfilePhoto} from "../../Redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -43,10 +43,11 @@ class ProfileContainer extends React.Component {
         if (this.props.isFetching) {
             return <Preloader/>
         } else {
-            return <Profile updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}
+            return <Profile uploadProfilePhoto={this.props.uploadProfilePhoto}
+                            updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}
                             isAuth={this.props.isAuth} userId={this.state.userId}
                             isMyProfile={this.state.isMyProfile}
-                            profile={this.props.profile}/>
+                            profile={this.props.profile} isUpload={this.props.isUpload} followed={this.props.followed}/>
         }
     }
 }
@@ -55,11 +56,13 @@ let mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         myId: state.auth.userId,
-        isFetching: state.profilePage.isFetching,
+        isFetching: state.app.isFetching,
         status: state.profilePage.status,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        isUpload: state.app.isUpload,
+        followed: state.profilePage.followed
     };
 };
 
-export default compose(connect(mapStateToProps, {getUserProfile, getProfileStatus, updateProfileStatus}),
+export default compose(connect(mapStateToProps, {getUserProfile, getProfileStatus, updateProfileStatus, uploadProfilePhoto}),
     withRouter)(ProfileContainer);

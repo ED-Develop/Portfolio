@@ -2,7 +2,7 @@ import React from 'react';
 import s from './ProfileHeader.module.css'
 import {NavLink} from "react-router-dom";
 
-const ProfileHeader = React.memo(({isMyProfile, userId}) => {
+const ProfileHeader = React.memo(({isMyProfile, userId, followed}) => {
     return (
         <div className={s.container}>
                 <div className={s.profileNav}>
@@ -22,7 +22,8 @@ const ProfileHeader = React.memo(({isMyProfile, userId}) => {
                     </ul>
                     <div className={s.followers}>
                         <span>1,223 people following her</span>
-                        <button className={s.view}>{isMyProfile ? 'View followers' : 'Follow'}</button>
+                        {isMyProfile ? <button className={s.view}>View followers</button>
+                        : followed ? <button className={s.view}>Unfollow</button> :  <button className={s.view}>Follow</button>}
                     </div>
 
                 </div>

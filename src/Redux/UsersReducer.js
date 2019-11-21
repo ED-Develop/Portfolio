@@ -1,12 +1,12 @@
 import {usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objectHelpers";
+import {toggleIsFetching} from "./appReducer";
 
 const UN_FOLLOW = 'portfolio/users/UN-FOLLOW';
 const FOLLOW = 'portfolio/users/FOLLOW';
 const SET_USERS = 'portfolio/users/SET-USERS';
 const SET_CURRENT_PAGE = 'portfolio/users/SET-CURRENT-PAGE';
 const SET_TOTAL_COUNT = 'portfolio/users/SET-TOTAL-COUNT';
-const TOGGLE_IS_FETCHING = 'portfolio/users/TOGGLE-IS-FETCHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'portfolio/users/TOGGLE_FOLLOWING_PROGRESS';
 
 
@@ -16,7 +16,6 @@ let initialState = {
     currentPage: 1,
     startPage: 1,
     totalCount: 0,
-    isFetching: false,
     followingInProgress: []
 };
 
@@ -49,12 +48,6 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 totalCount: action.totalCount
-            }
-        }
-        case TOGGLE_IS_FETCHING: {
-            return {
-                ...state,
-                isFetching: action.isFetching
             }
         }
         case TOGGLE_FOLLOWING_PROGRESS: {
@@ -104,12 +97,7 @@ export const setTotalCount = (totalCount) => {
     }
 };
 
-export const toggleIsFetching = (isFetching) => {
-    return {
-        type: TOGGLE_IS_FETCHING,
-        isFetching: isFetching
-    }
-};
+
 export const toggleFollowingProgress = (isFetching, userId) => {
     return {
         type: TOGGLE_FOLLOWING_PROGRESS,

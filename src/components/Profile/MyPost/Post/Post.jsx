@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Post.module.css'
 
-const Post = ({post, deletePost, incrementedLike,login, avatar}) => {
+const Post = ({post, deletePost, incrementedLike,login, avatar, isMyProfile}) => {
     const onDeletePost = () => {
         deletePost(post.id);
     };
@@ -20,7 +20,7 @@ const Post = ({post, deletePost, incrementedLike,login, avatar}) => {
                     <img src={avatar} alt="avatar"/>
                 </div>
                 <div className={s.postContent}>
-                    <div onClick={onDeletePost} className={s.delete}>x</div>
+                    {isMyProfile && <div onClick={onDeletePost} className={s.delete}>&times;</div>}
                     <div className={s.description}>
                         <div>
                             <h3><a href="#">{login}</a></h3>
