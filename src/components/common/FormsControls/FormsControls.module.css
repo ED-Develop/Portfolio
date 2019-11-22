@@ -20,6 +20,10 @@ div.error textarea {
     right: -220px;
     border-radius: 0 6px 6px 0;
 }
+.description.captcha {
+    right: -20px;
+    border-radius: 0 6px 6px 0;
+}
 .description.left {
     border-radius: 6px 0 0 6px;
     left: -220px;
@@ -34,7 +38,8 @@ div.error textarea {
       right: -30px;
       top: 0;
   }
-.description.right::after {
+.description.right::after,
+.description.captcha::after{
     content: '';
     display: block;
     border: 15px solid transparent;

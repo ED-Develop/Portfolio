@@ -7,7 +7,7 @@ import {Redirect} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 
 
-const Login = ({login, isAuth, isFetching}) => {
+const Login = ({login, isAuth, isFetching, captchaURL}) => {
     const onSubmit = (formData) => {
         login(formData);
     };
@@ -23,7 +23,7 @@ const Login = ({login, isAuth, isFetching}) => {
                     <div className={style.form}>
                         <h3>Login</h3>
                         <p>Log into your account</p>
-                        <LoginReduxForm onSubmit={onSubmit}/>
+                        <LoginReduxForm captchaURL={captchaURL} onSubmit={onSubmit}/>
                     </div>
                     <div className={style.form_background}>
                         <div>Login</div>
@@ -37,7 +37,8 @@ const Login = ({login, isAuth, isFetching}) => {
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
-        isFetching: state.peoplePage.isFetching
+        isFetching: state.peoplePage.isFetching,
+        captchaURL: state.auth.captchaURL
     }
 };
 

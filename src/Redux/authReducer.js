@@ -1,4 +1,4 @@
-import {authAPI, profileAPI} from "../api/api";
+import {authAPI, profileAPI, securityAPI} from "../api/api";
 
 import {stopSubmit} from "redux-form";
 import {toggleIsFetching} from "./appReducer";
@@ -6,6 +6,7 @@ import {toggleIsFetching} from "./appReducer";
 const SET_USER_DATA = 'portfolio/auth/SET_USER_DATA';
 const TOGGLE_IS_AUTH = 'portfolio/auth/TOGGLE_IS_AUTH';
 const SET_PROFILE_PHOTOS = 'portfolio/auth/SET_PROFILE_PHOTOS';
+const SET_CAPTCHA_URL = 'portfolio/auth/SET_CAPTCHA_URL';
 
 
 let initialState = {
@@ -13,7 +14,8 @@ let initialState = {
     login: null,
     email: null,
     isAuth: false,
-    photos: {}
+    photos: {},
+    captchaURL: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -32,6 +34,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 photos: {...action.photos}
+            };
+        case SET_CAPTCHA_URL:
+            return {
+                ...state,
+                ...action.payload
             };
         default:
             return state;
@@ -56,6 +63,15 @@ export const setProfilePhotos = (photos) => {
     }
 };
 
+export const setCaptchaUrl = (captchaURL) => {
+    return {
+        type: SET_CAPTCHA_URL,
+        payload: {
+            captchaURL
+        }
+    }
+};
+
 export const getProfilePhotos = (userId) => async (dispatch) => {
     let data = await profileAPI.getUserProfile(userId);
     dispatch(setProfilePhotos(data.photos));
@@ -75,13 +91,18 @@ export const auth = () => {
 export const login = (formData) => {
         return async (dispatch) => {
             dispatch(toggleIsFetching(true));
-            let data = await authAPI.login(formData.email, formData.password, formData.rememberMe);
+            let data = await authAPI.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
             if (data.resultCode === 0) {
                 dispatch(auth());
             } else {
-                let message = data.messages ? data.messages : 'Some error';
-                dispatch(stopSubmit('login', {_error: message}));
+                if (data.resultCode === 10) {
+                    dispatch(getCaptchaUrl());
+                } else {
+                    let message = data.messages ? data.messages : 'Some error';
+                    dispatch(stopSubmit('login', {_error: message}));
+                }
             }
+            dispatch(setCaptchaUrl(null));
             dispatch(toggleIsFetching(false));
         }
     }
@@ -94,6 +115,13 @@ export const logout = () => {
             dispatch(setUserData(null, null, null, false));
         }
     }
+};
+
+export const getCaptchaUrl = () => {
+    return async (dispatch) => {
+        let data = await securityAPI.captcha();
+        dispatch(setCaptchaUrl(data.url));
+    };
 };
 
 

@@ -3,6 +3,16 @@ div.field {
     width: 100%;
     margin-bottom: 10px;
 }
+.captcha input {
+    padding: 6px 12px;
+    border-radius: 30px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    outline: none;
+}
+.captcha {
+    margin-bottom: 15px;
+}
 div.field input {
     width: 100%;
     padding: 6px 12px;

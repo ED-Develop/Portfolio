@@ -30,7 +30,9 @@ class ProfileContainer extends React.Component {
         }
         this.props.getUserProfile(this.state.userId);
         this.props.getProfileStatus(this.state.userId);
-        this.props.updateProfileDataSuccess(false);
+        if (this.props.isUpdateSuccess) {
+            this.props.updateProfileDataSuccess(false);
+        }
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -67,7 +69,8 @@ let mapStateToProps = (state) => {
         status: state.profilePage.status,
         isAuth: state.auth.isAuth,
         isUpload: state.app.isUpload,
-        followed: state.profilePage.followed
+        followed: state.profilePage.followed,
+        isUpdateSuccess: state.profilePage.isUpdateSuccess
     };
 };
 

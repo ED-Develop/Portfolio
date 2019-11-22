@@ -6,6 +6,8 @@ import {connect} from "react-redux";
 import {updateProfileData} from "../../Redux/profileReducer";
 import {Redirect} from "react-router-dom";
 import {required} from "../../utils/validators";
+import {compose} from "redux";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
 
 const Edit = ({updateProfileData, isUpdateSuccess, profile}) => {
 
@@ -100,4 +102,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {updateProfileData})(Edit);
+export default compose(connect(mapStateToProps, {updateProfileData}), withAuthRedirect)(Edit);

@@ -2,23 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/images/edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Edit/Edit.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/authReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/profileReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Input/Input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Input/Input.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/About/About.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/About.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/About/About.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.module.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -221,7 +213,7 @@
       <workItem from="1574063467243" duration="8216000" />
       <workItem from="1574249637192" duration="10943000" />
       <workItem from="1574321446373" duration="12872000" />
-      <workItem from="1574407520325" duration="13001000" />
+      <workItem from="1574407520325" duration="15690000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -244,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574322439787</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added update profile functional">
+      <created>1574427950086</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1574427950086</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +266,7 @@
     <MESSAGE value="Added file test.js" />
     <MESSAGE value="Deploy project" />
     <MESSAGE value="Added upload photo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added upload photo" />
+    <MESSAGE value="Added update profile functional" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added update profile functional" />
   </component>
 </project>

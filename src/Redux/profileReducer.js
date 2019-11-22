@@ -148,6 +148,7 @@ const uploadProfilePhotoSuccess = (photos) => {
 };
 
 export const updateProfileDataSuccess = (isUpdateSuccess) => {
+    debugger
     return {
         type: UPDATE_PROFILE_DATA_SUCCESS,
         isUpdateSuccess
