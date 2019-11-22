@@ -8,7 +8,7 @@ let maxLength50 = maxLength(50);
 const MyPostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={Textarea} validate={[maxLength50]} name={'post'} placeholder='Write what you wish'/>
+            <Field castomClassName={'top'} component={Textarea} validate={[maxLength50]} name={'post'} placeholder='Write what you wish'/>
             <button>Publish</button>
         </form>
     );

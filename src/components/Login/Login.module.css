@@ -1,11 +1,12 @@
 .container {
     background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(https://g1.dcdn.lt/images/pix/programisiai-atakuoja-74631562.jpg) fixed no-repeat;
-    background-size: 100%;
-    height: 800px;
+    background-size: 100% 100%;
+    height: 1200px;
     padding-top: 50px;
 }
 .wrapper {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin: auto;
     color: white;
     display: grid;
@@ -16,7 +17,7 @@
     position: relative;
 }
 .form_background {
-    width: 575px;
+    width: 95%;
     height: 390px;
     background: linear-gradient(to right, rgba(255,255,255, 0.2) , rgba(255,255,255, 0.05));
     position: absolute;
@@ -37,7 +38,7 @@
     color: white;
 }
 .form {
-    width: 505px;
+    width: 84%;
     height: 560px;
     background-color: white;
     color: #939598;

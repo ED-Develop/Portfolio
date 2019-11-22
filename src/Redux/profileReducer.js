@@ -1,6 +1,7 @@
 import {profileAPI} from "../api/api";
 import {toggleIsFetching, uploadInProgress} from "./appReducer";
 import {setProfilePhotos} from "./authReducer";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'portfolio/profile/ADD-POST';
 const SET_USER_PROFILE = 'portfolio/profile/SET-USER-PROFILE';
@@ -8,6 +9,7 @@ const SET_PROFILE_STATUS = 'portfolio/profile/SET_PROFILE_STATUS';
 const DELETE_POST = 'portfolio/profile/DELETE_POST';
 const INCREMENTED_LIKE = 'portfolio/profile/INCREMENTED_LIKE';
 const UPLOAD_PROFILE_PHOTO_SUCCESS = 'portfolio/profile/UPLOAD_PROFILE_PHOTO_SUCCESS';
+const UPDATE_PROFILE_DATA_SUCCESS = 'portfolio/profile/UPDATE_PROFILE_DATA_SUCCESS';
 
 
 let initialState = {
@@ -39,7 +41,8 @@ let initialState = {
     postTextValue: '',
     profile: null,
     status: '',
-    followed: false
+    followed: false,
+    isUpdateSuccess: false
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -98,6 +101,12 @@ const profileReducer = (state = initialState, action) => {
                 }
             }
         }
+        case UPDATE_PROFILE_DATA_SUCCESS: {
+            return {
+                ...state,
+                isUpdateSuccess: action.isUpdateSuccess
+            }
+        }
         default:
             return state;
     }
@@ -138,6 +147,12 @@ const uploadProfilePhotoSuccess = (photos) => {
     }
 };
 
+export const updateProfileDataSuccess = (isUpdateSuccess) => {
+    return {
+        type: UPDATE_PROFILE_DATA_SUCCESS,
+        isUpdateSuccess
+    }
+};
 
 export const getUserProfile = (userId) => {
     return async (dispatch) => {
@@ -171,6 +186,29 @@ export const uploadProfilePhoto = (photoFile) => {
         dispatch(setProfilePhotos(photos));
         dispatch(uploadInProgress(false));
     };
+};
+
+export const updateProfileData = (profileData) => {
+    return async (dispatch) => {
+        dispatch(updateProfileDataSuccess(false));
+        let data = await profileAPI.updateProfileData(profileData);
+        if (data.resultCode === 0) {
+            dispatch(updateProfileDataSuccess(true));
+        } else {
+            let errorItems = data.messages.map( message => {
+                let start = message.indexOf('>') + 1;
+                let item = message.slice(start, message.indexOf(')',start));
+                return item[0].toLowerCase() + item.slice(1);
+            });
+            let errors = {"contacts": {} };
+
+            errorItems.forEach( item => {
+                errors["contacts"][item] = 'Invalid url format';
+            } );
+            debugger
+            dispatch(stopSubmit('edit', errors));
+        }
+    }
 };
 
 export default profileReducer;

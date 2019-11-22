@@ -43,6 +43,11 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(response => response.data.data.photos)
+    },
+    updateProfileData (profileData) {
+        return instance.put(`profile`, profileData).then(response => {
+            return  response.data;
+        })
     }
 };
 

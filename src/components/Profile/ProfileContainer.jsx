@@ -1,7 +1,13 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileStatus, getUserProfile, updateProfileStatus, uploadProfilePhoto} from "../../Redux/profileReducer";
+import {
+    getProfileStatus,
+    getUserProfile,
+    updateProfileDataSuccess,
+    updateProfileStatus,
+    uploadProfilePhoto
+} from "../../Redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -24,6 +30,7 @@ class ProfileContainer extends React.Component {
         }
         this.props.getUserProfile(this.state.userId);
         this.props.getProfileStatus(this.state.userId);
+        this.props.updateProfileDataSuccess(false);
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -64,5 +71,5 @@ let mapStateToProps = (state) => {
     };
 };
 
-export default compose(connect(mapStateToProps, {getUserProfile, getProfileStatus, updateProfileStatus, uploadProfilePhoto}),
+export default compose(connect(mapStateToProps, {getUserProfile, getProfileStatus,updateProfileDataSuccess, updateProfileStatus, uploadProfilePhoto}),
     withRouter)(ProfileContainer);

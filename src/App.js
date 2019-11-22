@@ -10,6 +10,7 @@ import Preloader from "./components/common/Preloader/Preloader";
 import {initializeApp} from "./Redux/appReducer";
 import store from "./Redux/reduxStore";
 import withSuspense from "./hoc/withSuspense";
+import Edit from "./components/Edit/Edit";
 
 const DialogsContainer = React.lazy( () => import ("./components/Dialogs/DialogsContainer"));
 const Login = React.lazy( () => import ("./components/Login/Login"));
@@ -40,7 +41,7 @@ class App extends Component {
                             <Route path='/messages' render={withSuspense(DialogsContainer)}/>
                             <Route path='/people' render={withSuspense(People)}/>
                             <Route path='/music' component={Music}/>
-
+                            <Route path='/edit' component={Edit}/>
                         </div>
                     </main>
                 </Switch>

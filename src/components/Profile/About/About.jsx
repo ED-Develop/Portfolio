@@ -6,10 +6,12 @@ import information from '../../../assets/images/Information.png';
 import work from '../../../assets/images/work.png';
 import ok from '../../../assets/images/OK.png';
 import noo from '../../../assets/images/noo.png';
+import edit from '../../../assets/images/edit.png';
 import MyPostContainer from "../MyPost/MyPostContainer";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import Contacts from "./Contacts/Contacts";
 import ModalWindow from "../../common/ModalWindow/ModalWindow";
+import {NavLink} from "react-router-dom";
 
 const About = ({profile, uploadProfilePhoto , isUpload, ...props}) => {
     let [isModal, setIsModal] = useState(false);
@@ -51,9 +53,9 @@ const About = ({profile, uploadProfilePhoto , isUpload, ...props}) => {
                 <div className={style.avatar}>
                    <div className={style.avatarContainer}>
                        <img src={profile.photos.large ? profile.photos.large : userAvatar} alt="Avatar"/>
-                       <div className={style.avatarMenu}>
+                       {props.isMyProfile && <div className={style.avatarMenu}>
                            <p onClick={showModalWindow}>&#9650; <span>Load avatar</span></p>
-                       </div>
+                       </div>}
                    </div>
                     <h2>{profile.fullName}</h2>
                     <ProfileStatus isMyProfile={props.isMyProfile}
@@ -62,6 +64,9 @@ const About = ({profile, uploadProfilePhoto , isUpload, ...props}) => {
                 <div className={style.info}>
                     <div className={style.personal_information}>
                         <h3><img src={information} alt="i"/>Personal Information</h3>
+                        {props.isMyProfile && <div className={style.edit}>
+                            <NavLink to='/edit'><img src={edit} alt="edit"/></NavLink>
+                        </div>}
                         <p>{profile.aboutMe}</p>
                     </div>
                     <div className={style.work}>

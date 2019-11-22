@@ -24,7 +24,7 @@ let messageElements = messagesData
             <div className={s.messages}>
                 {messageElements}
             </div>
-            <Input userId={userId} addMessage={addMessage}/>
+            <Input avatar={avatar} userId={userId} addMessage={addMessage}/>
         </div>
     );
 }
