@@ -5,8 +5,9 @@ import {toggleIsFetching} from "./appReducer";
 
 const SET_USER_DATA = 'portfolio/auth/SET_USER_DATA';
 const TOGGLE_IS_AUTH = 'portfolio/auth/TOGGLE_IS_AUTH';
-const SET_PROFILE_PHOTOS = 'portfolio/auth/SET_PROFILE_PHOTOS';
+const SET_PROFILE_DATA = 'portfolio/auth/SET_PROFILE_DATA';
 const SET_CAPTCHA_URL = 'portfolio/auth/SET_CAPTCHA_URL';
+
 
 
 let initialState = {
@@ -30,9 +31,10 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: action.isAuth
             };
-        case SET_PROFILE_PHOTOS:
+        case SET_PROFILE_DATA:
             return {
                 ...state,
+                login: action.login,
                 photos: {...action.photos}
             };
         case SET_CAPTCHA_URL:
@@ -56,10 +58,11 @@ const setUserData = (userId, login, email, isAuth) => {
         }
     }
 };
-export const setProfilePhotos = (photos) => {
+export const setProfileData = (photos, login ) => {
     return {
-        type: SET_PROFILE_PHOTOS,
-        photos
+        type: SET_PROFILE_DATA,
+        photos,
+        login
     }
 };
 
@@ -72,17 +75,18 @@ export const setCaptchaUrl = (captchaURL) => {
     }
 };
 
-export const getProfilePhotos = (userId) => async (dispatch) => {
+export const getOwnerProfileData = (userId) => async (dispatch) => {
     let data = await profileAPI.getUserProfile(userId);
-    dispatch(setProfilePhotos(data.photos));
+    dispatch(setProfileData(data.photos, data.fullName));
 };
+
 
 export const auth = () => {
     return async (dispatch) => {
         let data = await authAPI.authMe();
         if (data.resultCode == 0) {
             let {id, login, email} = data.data;
-            dispatch(getProfilePhotos(id));
+            dispatch(getOwnerProfileData(id));
             dispatch(setUserData(id, login, email, true));
         }
     }

@@ -18,7 +18,13 @@ const Login = ({login, isAuth, isFetching, captchaURL}) => {
         <div className={style.container}>
             {isFetching && <Preloader/>}
             <div className={style.wrapper}>
-                <div><h1>Description</h1></div>
+                <div>
+                    <div className={style.description}>
+                        <h1>Find a cool job!!!</h1>
+                        <p>Portfolio is a social network that helps you get a job.</p>
+                        <p>So what are you waiting for? Start now.</p>
+                    </div>
+                </div>
                 <div>
                     <div className={style.form}>
                         <h3>Login</h3>

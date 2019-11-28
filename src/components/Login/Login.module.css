@@ -1,7 +1,7 @@
 .container {
     background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(https://g1.dcdn.lt/images/pix/programisiai-atakuoja-74631562.jpg) fixed no-repeat;
     background-size: 100% 100%;
-    height: 1200px;
+    min-height: 900px;
     padding-top: 50px;
 }
 .wrapper {
@@ -10,14 +10,14 @@
     margin: auto;
     color: white;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));;
 }
 .wrapper > div {
     padding-top: 0.1px;
     position: relative;
 }
 .form_background {
-    width: 95%;
+    width: 85%;
     height: 390px;
     background: linear-gradient(to right, rgba(255,255,255, 0.2) , rgba(255,255,255, 0.05));
     position: absolute;
@@ -38,7 +38,7 @@
     color: white;
 }
 .form {
-    width: 84%;
+    width: 74%;
     height: 560px;
     background-color: white;
     color: #939598;
@@ -57,4 +57,32 @@
 }
 .form p {
     margin: 0 0 10px;
+}
+.description {
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
+    padding: 140px 0;
+}
+.description h1 {
+    text-align: left;
+    font-family: 'Oswald', sans-serif;
+}
+
+@media screen and (max-width: 720px) {
+    .form {
+        margin: auto;
+    }
+    .form_background {
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .description {
+        padding: 0;
+        text-align: center;
+    }
+    .description h1 {
+        text-align: center;
+    }
 }

@@ -44,7 +44,7 @@ const Contacts = ({contacts}) => {
                 default:
                     alert('sdadsda');
             }
-            ContactElements.push(<a href={contacts[contact]}>{Img}</a>)
+            ContactElements.push(<a key={contacts[contact]} href={contacts[contact]}>{Img}</a>)
         }
     }
     return (

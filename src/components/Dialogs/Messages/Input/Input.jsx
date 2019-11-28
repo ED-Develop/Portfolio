@@ -7,10 +7,10 @@ import defaultAvatar from '../../../../assets/images/user.png';
 
 let maxLength50 = maxLength(50);
 
-const Input = ({addMessage, userId, avatar}) => {
+const Input = ({addMessage, userId, avatar, login}) => {
 
     let onAddMessage = (formData) => {
-        addMessage(formData.messageText, userId);
+        addMessage(formData.messageText, userId, login);
     };
 
     return (

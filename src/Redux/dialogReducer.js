@@ -11,39 +11,6 @@ let initialState = {
             avatar: 'https://img.novosti-n.org/upload/ukraine/131388.jpg',
             user: 'Linda Lohan'
         },
-        {
-            id: 2,
-            userId:5046,
-            date: '3 days ago',
-            message: '\n' +
-                'I was on vacation',
-            avatar: 'https://klv-oboi.ru/img/gallery/29/thumbs/thumb_l_15614.jpg',
-            user: 'Edouard Shvetsov'
-        },
-        {
-            id: 3,
-            userId: 22,
-            date: '3 days ago',
-            message: "that'style cool I wish I were you ",
-            avatar: 'https://img.novosti-n.org/upload/ukraine/131388.jpg',
-            user: 'Linda Lohan'
-        },
-        {
-            id: 4,
-            userId:5046,
-            date: '3 days ago',
-            message: 'By',
-            avatar: 'https://klv-oboi.ru/img/gallery/29/thumbs/thumb_l_15614.jpg',
-            user: 'Edouard Shvetsov'
-        },
-        {
-            id: 5,
-            userId: 22,
-            date: 'a min ago',
-            message: "Hi, how are you",
-            avatar: 'https://img.novosti-n.org/upload/ukraine/131388.jpg',
-            user: 'Linda Lohan'
-        }
     ],
     dialogsData: [
         {
@@ -100,9 +67,9 @@ const dialogReducer = (state = initialState, action) => {
                 date: 'a min ago',
                 message: action.messageText,
                 avatar: null,
-                user: 'Edouard Shvetsov'
+                user: action.login
             };
-
+            debugger
             return {
                 ...state,
                 messagesData: [... state.messagesData, newMessage],
@@ -118,6 +85,6 @@ const dialogReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessage = (messageText, userId) => ({type: ADD_MESSAGE, messageText, userId});
+export const addMessage = (messageText, userId, login) => ({type: ADD_MESSAGE, messageText, userId, login});
 
 export default dialogReducer;

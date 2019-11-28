@@ -7,7 +7,7 @@ const MyMessages = (props) => {
       <div className={style.message}>
           <div className={style.content}>
              <div className={style.info}>
-                 <span className={style.name}>Edouard Shvetsov</span>
+                 <span className={style.name}>{props.login}</span>
                  <span className={style.date}>{props.date}</span>
              </div>
               <p>{props.message}</p>

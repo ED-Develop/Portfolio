@@ -11,7 +11,8 @@ let mapStateToProps = (state) => {
         dialogsData: state.dialogsPage.dialogsData,
         messageTextValue: state.dialogsPage.messageTextValue,
         avatar: state.auth.photos.small,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        login: state.auth.login
     };
 };
 

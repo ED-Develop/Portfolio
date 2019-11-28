@@ -117,6 +117,15 @@ export const getUsers = (count, currentPage) => {
     };
 };
 
+export const searchUsers = (userName) => {
+    return async (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        let data = await usersAPI.searchUsers(userName);
+        dispatch(setUsers(data.items));
+        dispatch(toggleIsFetching(false));
+    };
+};
+
 const followUnfollowFlow = async (apiMethod, actionCreator, dispatch, userId) => {
     dispatch(toggleFollowingProgress(true, userId));
     let resultCode = await apiMethod(userId);

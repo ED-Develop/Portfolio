@@ -1,6 +1,6 @@
 import {profileAPI} from "../api/api";
 import {toggleIsFetching, uploadInProgress} from "./appReducer";
-import {setProfilePhotos} from "./authReducer";
+import {getOwnerProfileData, setProfileData} from "./authReducer";
 import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'portfolio/profile/ADD-POST';
@@ -41,7 +41,7 @@ let initialState = {
     postTextValue: '',
     profile: null,
     status: '',
-    followed: false,
+    followed: true,
     isUpdateSuccess: false
 };
 
@@ -148,7 +148,6 @@ const uploadProfilePhotoSuccess = (photos) => {
 };
 
 export const updateProfileDataSuccess = (isUpdateSuccess) => {
-    debugger
     return {
         type: UPDATE_PROFILE_DATA_SUCCESS,
         isUpdateSuccess
@@ -184,17 +183,19 @@ export const uploadProfilePhoto = (photoFile) => {
         dispatch(uploadInProgress(true));
         let photos = await profileAPI.uploadProfilePhoto((photoFile));
         dispatch(uploadProfilePhotoSuccess(photos));
-        dispatch(setProfilePhotos(photos));
+        dispatch(setProfileData(photos));
         dispatch(uploadInProgress(false));
     };
 };
 
 export const updateProfileData = (profileData) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
         dispatch(updateProfileDataSuccess(false));
         let data = await profileAPI.updateProfileData(profileData);
+        let userId = getState().auth.userId;
         if (data.resultCode === 0) {
             dispatch(updateProfileDataSuccess(true));
+            dispatch(getOwnerProfileData(userId));
         } else {
             let errorItems = data.messages.map( message => {
                 let start = message.indexOf('>') + 1;
@@ -206,7 +207,6 @@ export const updateProfileData = (profileData) => {
             errorItems.forEach( item => {
                 errors["contacts"][item] = 'Invalid url format';
             } );
-            debugger
             dispatch(stopSubmit('edit', errors));
         }
     }

@@ -9,11 +9,6 @@ const Profile = ({status, updateProfileStatus, followed,  profile, isMyProfile, 
     return (
         <div>
             <ProfileHeader followed={followed} userId={userId} isMyProfile={isMyProfile}/>
-            {isAuth && <Route exact path='/' render={() => <About status={status}
-                                                                  updateProfileStatus={updateProfileStatus}
-                                                                  uploadProfilePhoto={uploadProfilePhoto}
-                                                                  profile={profile}
-                                                                  isMyProfile={isMyProfile} isUpload={isUpload}/>}/>}
             <Route path='/profile/:userId?/album' render={() => <Album/>}/>
             <Route path='/profile/:userId?/project' render={() => <Projects/>}/>
             <Route path='/profile/:userId?/about' render={() => <About status={status}

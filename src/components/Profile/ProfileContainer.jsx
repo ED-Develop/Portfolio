@@ -37,6 +37,9 @@ class ProfileContainer extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         this.toggleIsMyProfile();
+        if (this.state.isMyProfile && !this.props.isAuth) {
+            this.props.history.push('/login');
+        }
         if (prevProps.match.params.userId !== this.props.match.params.userId && !this.state.isMyProfile) {
             if (!this.props.myId) {
                 this.props.history.push('/login');

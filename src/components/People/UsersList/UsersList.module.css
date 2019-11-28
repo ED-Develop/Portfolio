@@ -1,5 +1,6 @@
 .wrapper {
     width: 85%;
+    box-sizing: border-box;
     margin: auto;
     margin-bottom: 100px;
     padding-top: 20px;

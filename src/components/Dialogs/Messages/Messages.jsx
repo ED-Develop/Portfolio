@@ -4,16 +4,16 @@ import s from './Messages.module.css'
 import YourMessages from "./YourMessages/YourMessages";
 import Input from "./Input/Input";
 
-const Messages = ({messagesData,avatar, addMessage, userId}) => {
+const Messages = ({messagesData,avatar, addMessage, userId, login}) => {
 
 
 let messageElements = messagesData
     .map(message => {
         if (message.userId == userId) {
-            return <MyMessages date={message.date} message={message.message}
-                               avatar={avatar}/>
+            return <MyMessages key={message.id} date={message.date} message={message.message}
+                               avatar={avatar} login={login}/>
         } else {
-            return <YourMessages date={message.date} message={message.message} name={message.user}
+            return <YourMessages key={message.id} date={message.date} message={message.message} name={message.user}
                                  avatar={message.avatar}/>
         }
     });
@@ -24,7 +24,7 @@ let messageElements = messagesData
             <div className={s.messages}>
                 {messageElements}
             </div>
-            <Input avatar={avatar} userId={userId} addMessage={addMessage}/>
+            <Input login={login} avatar={avatar} userId={userId} addMessage={addMessage}/>
         </div>
     );
 }

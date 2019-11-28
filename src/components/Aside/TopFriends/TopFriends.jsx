@@ -4,7 +4,7 @@ import FriendItem from "./FriendItem/FriendItem";
 
 const TopFriends = ({friendsData}) => {
     let friendsItemElements = friendsData
-        .map( friend => <FriendItem avatar={friend.avatar}/>);
+        .map( friend => <FriendItem key={friend.id} avatar={friend.avatar}/>);
 
     return (
         <div className={style.container}>

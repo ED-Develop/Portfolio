@@ -13,7 +13,7 @@ const UserList = ({usersData, totalCount,count,startPage,onSetCurrentPage,curren
             <div className={style.wrapper}>
                 {usersData
                     .map((user) => {
-                        return <User id={user.id} status={user.status} key={user.id} profileImageUrl={user.photos.large}
+                        return <User key={user.id} id={user.id} status={user.status} key={user.id} profileImageUrl={user.photos.large}
                                      avatarUrl={user.photos.small}
                                      name={user.name}
                                      activity={'user.activity'} followed={user.followed} {...props}/>

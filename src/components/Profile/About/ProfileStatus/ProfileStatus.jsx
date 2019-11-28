@@ -26,7 +26,7 @@ const ProfileStatus = (props) => {
         <div className={style.status}>
             {editMode && props.isMyProfile ? <input onChange={onInputChange} value={status} onBlur={deactivateEditMode}
                                                     autoFocus={true} type="text"/>
-                : <div className={props.isMyProfile && style.myProfile} onClick={activateEditMode}>
+                : <div className={props.isMyProfile ? style.myProfile : ''} onClick={activateEditMode}>
                     {props.status || (props.isMyProfile && 'Изменить статус')}
                 </div>}
         </div>

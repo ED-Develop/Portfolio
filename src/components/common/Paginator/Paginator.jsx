@@ -23,12 +23,12 @@ const Paginator = ({onSetCurrentPage, currentPage, totalCount, count, portionSiz
         <div className={style.pagination}>
             {pages.map((p) => {
                 if (p == '<<') {
-                    return <span onClick={() => onSetCurrentPage(1)}>{p}</span>
+                    return <span key={p} onClick={() => onSetCurrentPage(1)}>{p}</span>
                 } else if (p == '>>') {
-                    return <span onClick={() => onSetCurrentPage(totalPages)}>{p}</span>
+                    return <span key={p} onClick={() => onSetCurrentPage(totalPages)}>{p}</span>
                 } else {
-                    return <span onClick={() => onSetCurrentPage(p)}
-                                 className={currentPage == p && style.active}>{p}</span>
+                    return <span key={p} onClick={() => onSetCurrentPage(p)}
+                                 className={currentPage == p ? style.active : ""}>{p}</span>
                 }
 
             })}

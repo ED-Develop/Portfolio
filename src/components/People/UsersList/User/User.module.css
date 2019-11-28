@@ -43,6 +43,7 @@
     font-size: 18px;
     color: #2c2c2c;
     font-weight: bold;
+    text-decoration: none;
 }
 .userBody .name:hover {
     text-decoration: underline;
