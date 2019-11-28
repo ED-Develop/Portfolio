@@ -19,23 +19,22 @@ const People = React.lazy(() => import ("./components/People/People"));
 
 
 class App extends Component {
-    /*catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
         this.props.setGlobalError(promiseRejectionEvent);
     };
 
     hideModalWindow = () => {
         this.props.setGlobalError(null);
-    };*/
+    };
 
     componentDidMount() {
         this.props.initializeApp();
-       /* window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);*/
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     }
 
-    /*componentWillUnmount() {
+    componentWillUnmount() {
         window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     }
-*/
     render() {
 
         if (!this.props.initialized) {
