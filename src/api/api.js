@@ -72,3 +72,18 @@ export const securityAPI = {
     }
 };
 
+export const dialogsAPI = {
+    startDialog (userId) {
+        return instance.put(`dialogs/${userId}`);
+    },
+    async getDialogs () {
+        const response = await instance.get('dialogs');
+        return response.data;
+    },
+    getMessages (userId) {
+        return instance.get(`dialogs/${userId}/messages`);
+    },
+    /*sendMessage (userId, message) {
+        return instance.post(`dialogs/${userId}/messages`, {message});
+    }*/
+};
