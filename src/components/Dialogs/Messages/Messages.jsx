@@ -4,10 +4,10 @@ import s from './Messages.module.css'
 import YourMessages from "./YourMessages/YourMessages";
 import Input from "./Input/Input";
 
-const Messages = ({messagesData,avatar, addMessage, userId, login}) => {
+const Messages = ({messages,avatar, addMessage, userId, login}) => {
 
 
-let messageElements = messagesData
+let messageElements = messages
     .map(message => {
         if (message.userId == userId) {
             return <MyMessages key={message.id} date={message.date} message={message.message}
@@ -22,7 +22,7 @@ let messageElements = messagesData
     return (
         <div>
             <div className={s.messages}>
-                {messageElements}
+                {messages.length ? messageElements : <h1>Send first message</h1>}
             </div>
             <Input login={login} avatar={avatar} userId={userId} addMessage={addMessage}/>
         </div>

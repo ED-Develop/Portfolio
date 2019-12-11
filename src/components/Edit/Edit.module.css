@@ -39,9 +39,8 @@
     margin-left: 165px;
 }
 .section {
-    border-top: 1px solid #e0e0e0;
     padding-right: 15px;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 div.section:nth-child(4) {
     border-bottom: 1px solid #e0e0e0;
@@ -49,6 +48,27 @@ div.section:nth-child(4) {
 .editForm h2 {
     color: #47494c;
     padding-left: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+}
+.editForm h2 span {
+    cursor: pointer;
+    margin-left: 15px;
+}
+h2.active::before {
+    content: '';
+    display: inline;
+    border: 10px solid transparent;
+    border-top: 10px solid #47494c;
+    align-self: center;
+}
+h2.disActive::before {
+    content: '';
+    display: inline;
+    border: 10px solid transparent;
+    border-left: 10px solid #47494c;
+    align-self: center;
 }
 .btn {
     padding-top: 20px;

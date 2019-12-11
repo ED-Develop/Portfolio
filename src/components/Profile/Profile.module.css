@@ -1,0 +1,124 @@
+.wrapper {
+    width: 85%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    grid-column-gap: 70px;
+    padding-top: 40px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.avatarContainer {
+    position: relative;
+}
+.avatarContainer .avatarMenu  {
+    width: 100%;
+    background-color: rgba(29,32,34,.7);
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 4px;
+    opacity: 0;
+    height: 1px;
+    transition: opacity 0.5s, height 0.5s cubic-bezier(0, 0, 1, 1);
+}
+.avatarContainer:hover .avatarMenu {
+    transition: opacity 0.5s, height 0.5s cubic-bezier(0, 0, 1, 1);
+    opacity: 1;
+    height: 41px;
+}
+.avatarContainer .avatarMenu p {
+    color: #ebebeb;
+    text-align: left;
+    margin: 0;
+    cursor: pointer;
+}
+.avatarContainer .avatarMenu p:hover span {
+    text-decoration: underline;
+    color: #fff;
+}
+.avatar img {
+    width: 100%;
+    border-radius: 5px;
+}
+.avatar h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #2c2c2c;
+}
+.avatar p {
+    font-size: 16px;
+    color: #737578;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.info {
+    color: #737578;
+}
+.contactsIcons img {
+    width: 30px;
+    height: 30px;
+}
+.contactsIcons a {
+    display: inline;
+    margin-right: 10px;
+}
+.info h3 img,
+.info p img{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
+.info h3{
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 10px;
+    color: #56585b;
+}
+.info > div  {
+    border-bottom: 1px solid #e0e0e0;
+}
+.info > div:last-child {
+    border: none;
+}
+.modalDescription > div {
+    margin: 10px 0;
+}
+.inputFile {
+    margin: 30px 0 10px;
+}
+.edit img {
+    width: 15px;
+}
+.personal_information {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.personal_information p {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+.btn button {
+    font-size: 16px;
+    padding: 7px 25px;
+    border-radius: 30px;
+    border: none;
+    background-color: #27aae1;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn button:hover {
+    background-color: #229ace;
+}
+.btn {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}

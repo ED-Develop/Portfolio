@@ -4,12 +4,14 @@ const INITIALIZED_SUCCESS = 'portfolio/app/INITIALIZED_SUCCESS';
 const TOGGLE_IS_FETCHING = 'portfolio/app/TOGGLE-IS-FETCHING';
 const UPLOAD_IN_PROGRESS = 'portfolio/app/UPLOAD_IN_PROGRESS';
 const SET_GLOBAL_ERROR = 'portfolio/app/SET_GLOBAL_ERROR';
+const TOGGLE_IS_SUCCESS = 'portfolio/app/TOGGLE_IS_SUCCESS';
 
 let initialState = {
     initialized: false,
     isFetching: false,
     isUpload: false,
-    globalError: null
+    globalError: null,
+    isSuccess: false
 };
 
 const appReducer = (state = initialState, action) => {
@@ -35,6 +37,12 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 globalError: action.globalError
+            }
+        }
+        case TOGGLE_IS_SUCCESS: {
+            return {
+                ...state,
+                ...action.payload
             }
         }
         default:
@@ -72,6 +80,15 @@ export const setGlobalError = (globalError) => {
     return {
         type: SET_GLOBAL_ERROR,
         globalError
+    }
+};
+
+export const toggleIsSuccess = (isSuccess) => {
+    return {
+        type:TOGGLE_IS_SUCCESS,
+        payload: {
+            isSuccess
+        }
     }
 };
 

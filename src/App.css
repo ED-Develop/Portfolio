@@ -17,6 +17,38 @@ body {
 }
 
 
+::-webkit-scrollbar-button {
+  background-image: url('');
+  background-repeat: no-repeat;
+  width: 6px;
+  height: 0px
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #a7a8ab;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+::-webkit-resizer {
+  background-image: url('');
+  background-repeat: no-repeat;
+  width: 7px;
+  height: 0px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+
 
 
 

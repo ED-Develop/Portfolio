@@ -4,3 +4,7 @@
     height: 400px;
     overflow: auto;
 }
+.messages h1 {
+    color: #939598;
+    line-height: 300px;
+}

@@ -8,9 +8,10 @@ import {
     updateProfileStatus,
     uploadProfilePhoto
 } from "../../Redux/profileReducer";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
+import {startDialogs} from "../../Redux/dialogReducer";
 
 
 class ProfileContainer extends React.Component {
@@ -18,44 +19,58 @@ class ProfileContainer extends React.Component {
         isMyProfile: false,
         userId: +this.props.match.params.userId || this.props.myId
     };
+
     toggleIsMyProfile = () => {
         if (+this.state.userId === this.props.myId && !this.state.isMyProfile) {
             this.setState({isMyProfile: true});
         }
     };
 
+    loadProfile = (userId) => {
+        this.props.getUserProfile(userId);
+        this.props.getProfileStatus(userId);
+    };
+
     componentDidMount() {
         if (!this.state.userId) {
             this.props.history.push('/login');
         }
-        this.props.getUserProfile(this.state.userId);
-        this.props.getProfileStatus(this.state.userId);
+
+        this.loadProfile(this.state.userId);
+
+
         if (this.props.isUpdateSuccess) {
             this.props.updateProfileDataSuccess(false);
         }
     };
 
     componentDidUpdate(prevProps, prevState) {
+        //load new profile
+        if (prevState.userId !== this.state.userId) {
+            this.loadProfile(this.state.userId);
+        }
+
+        //determine whose profile it is
         this.toggleIsMyProfile();
+
+        // if logout, redirect to login
         if (this.state.isMyProfile && !this.props.isAuth) {
             this.props.history.push('/login');
         }
-        if (prevProps.match.params.userId !== this.props.match.params.userId && !this.state.isMyProfile) {
-            if (!this.props.myId) {
-                this.props.history.push('/login');
-            } else {
-                this.props.getUserProfile(this.props.myId);
-                this.props.getProfileStatus(this.props.myId);
-                this.setState({userId: this.props.myId})
-            }
+        //change state if browser address bar changed
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            this.setState({userId: this.props.match.params.userId || this.props.myId});
         }
+
     }
 
     render() {
-        if (this.props.isFetching) {
+        if (this.props.isSuccess) {
+            return <Redirect to={`/messages/${this.state.userId}`}/>
+        } else if (this.props.isFetching) {
             return <Preloader/>
         } else {
-            return <Profile uploadProfilePhoto={this.props.uploadProfilePhoto}
+            return <Profile uploadProfilePhoto={this.props.uploadProfilePhoto} startDialogs={this.props.startDialogs}
                             updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}
                             isAuth={this.props.isAuth} userId={this.state.userId}
                             isMyProfile={this.state.isMyProfile}
@@ -66,16 +81,20 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        profile: state.profilePage.profile,
+        profile: state.profile.profile,
         myId: state.auth.userId,
         isFetching: state.app.isFetching,
-        status: state.profilePage.status,
+        status: state.profile.status,
         isAuth: state.auth.isAuth,
         isUpload: state.app.isUpload,
-        followed: state.profilePage.followed,
-        isUpdateSuccess: state.profilePage.isUpdateSuccess
+        followed: state.profile.followed,
+        isUpdateSuccess: state.profile.isUpdateSuccess,
+        isSuccess: state.app.isSuccess
     };
 };
 
-export default compose(connect(mapStateToProps, {getUserProfile, getProfileStatus,updateProfileDataSuccess, updateProfileStatus, uploadProfilePhoto}),
+export default compose(connect(mapStateToProps, {
+        getUserProfile, getProfileStatus, updateProfileDataSuccess,
+        updateProfileStatus, uploadProfilePhoto, startDialogs
+    }),
     withRouter)(ProfileContainer);

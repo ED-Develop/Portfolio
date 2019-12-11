@@ -78,7 +78,7 @@ const MainApp = () => {
                 <Switch>
                     <Route exact path='/' render={() => <Redirect to='/profile/about'/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/messages' render={withSuspense(DialogsContainer)}/>
+                    <Route path='/messages/:userId?' render={withSuspense(DialogsContainer)}/>
                     <Route path='/people' render={withSuspense(People)}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/edit' render={() => <Edit/>}/>

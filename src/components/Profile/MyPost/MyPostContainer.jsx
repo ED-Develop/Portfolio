@@ -7,8 +7,8 @@ import {getPosts} from "../../../Redux/profileSelector";
 let mapStateToProps = (state) => {
     return {
         postData: getPosts(state),
-        avatar: state.profilePage.profile.photos.small,
-        login: state.profilePage.profile.fullName,
+        avatar: state.profile.profile.photos.small,
+        login: state.profile.profile.fullName,
 
     };
 };

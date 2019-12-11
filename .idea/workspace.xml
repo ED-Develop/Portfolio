@@ -2,9 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/People.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Edit/InputItem/InputItem.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/dateFormatter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/appReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/appReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/asideReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/asideReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/dialogReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/profileSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileSelector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/Aside.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Aside.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/AsideContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/AsideContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/Nav/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Nav/Nav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/ProfileCard/ProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/ProfileCard/ProfileCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/TopFriends/FriendItem/FriendItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/TopFriends/FriendItem/FriendItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/TopFriends/TopFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/TopFriends/TopFriends.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/Dialog/Dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/Dialog/Dialog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/DialogsItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/DialogsItems.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/User/User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/User/User.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/User/User.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/User/User.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/About.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/About.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/Contacts/Contacts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Contacts/Contacts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/ProfileStatus/ProfileStatus.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/ProfileStatus/ProfileStatus.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Album/Album.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Album/Album.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileHeader/ProfileHeader.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileHeader/ProfileHeader.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Projects/Projects.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Projects/Projects.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/objectHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/objectHelpers.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,46 +63,55 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="1SCjSFfRDKR3tNdZUUViO8xtors" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Edit/InputItem" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/react-scripts" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Edit\InputItem" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\Contacts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\images" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\common" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\mainLink" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\People\UsersList" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\Contacts" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\common\Paginator" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -72,44 +126,43 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jest.Profile status component.status from props should be in the state">
-    <configuration name="Profile status component.status from props should be in the state" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Jest.length of messages should be incremented">
+    <configuration name="array dialogs will not be empty" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/components/Profile/About/ProfileStatus/ProfileStatus.test.jsx" />
+      <test-file value="$PROJECT_DIR$/src/Redux/dialogReducer.test.js" />
       <test-names>
-        <test-name value="Profile status component" />
-        <test-name value="status from props should be in the state" />
+        <test-name value="array dialogs will not be empty" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="like of post should be incremented" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="array messages will not be empty" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/Redux/profileReducer.test.js" />
+      <test-file value="$PROJECT_DIR$/src/Redux/dialogReducer.test.js" />
       <test-names>
-        <test-name value="like of post should be incremented" />
+        <test-name value="array messages will not be empty" />
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="renders without crashing" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="length of messages should be incremented" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/App.test.js" />
+      <test-file value="$PROJECT_DIR$/src/Redux/dialogReducer.test.js" />
       <test-names>
-        <test-name value="renders without crashing" />
+        <test-name value="length of messages should be incremented" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -135,11 +188,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.deploy" />
-        <item itemvalue="Jest.Profile status component.status from props should be in the state" />
-        <item itemvalue="Jest.renders without crashing" />
-        <item itemvalue="Jest.like of post should be incremented" />
+        <item itemvalue="npm.start" />
+        <item itemvalue="Jest.length of messages should be incremented" />
+        <item itemvalue="Jest.array messages will not be empty" />
+        <item itemvalue="Jest.array dialogs will not be empty" />
       </list>
     </recent_temporary>
   </component>
@@ -220,7 +273,26 @@
       <workItem from="1574784438856" duration="414000" />
       <workItem from="1574799377591" duration="1390000" />
       <workItem from="1574885387875" duration="2616000" />
-      <workItem from="1574927956248" duration="641000" />
+      <workItem from="1574927956248" duration="2047000" />
+      <workItem from="1574933443934" duration="1440000" />
+      <workItem from="1574944835571" duration="243000" />
+      <workItem from="1574957340992" duration="98000" />
+      <workItem from="1574963133745" duration="43000" />
+      <workItem from="1574963525583" duration="4313000" />
+      <workItem from="1574971550169" duration="816000" />
+      <workItem from="1575012631270" duration="283000" />
+      <workItem from="1575031192413" duration="82000" />
+      <workItem from="1575044614209" duration="372000" />
+      <workItem from="1575046296444" duration="24000" />
+      <workItem from="1575050891665" duration="104000" />
+      <workItem from="1575051522106" duration="3003000" />
+      <workItem from="1575099726786" duration="147000" />
+      <workItem from="1575103449941" duration="4732000" />
+      <workItem from="1575554695276" duration="3413000" />
+      <workItem from="1575619523003" duration="9006000" />
+      <workItem from="1575737462872" duration="7075000" />
+      <workItem from="1575986298315" duration="3917000" />
+      <workItem from="1576052268703" duration="20496000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -264,7 +336,21 @@
       <option name="project" value="LOCAL" />
       <updated>1574928097885</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Error handler added">
+      <created>1574928704923</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1574928704923</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added dialogs server API">
+      <created>1575989962575</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1575989962575</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,6 +376,7 @@
     <MESSAGE value="Added update profile functional" />
     <MESSAGE value="Added captcha" />
     <MESSAGE value="Error handler added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Error handler added" />
+    <MESSAGE value="Added dialogs server API" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added dialogs server API" />
   </component>
 </project>
