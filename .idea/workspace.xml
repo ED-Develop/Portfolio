@@ -2,54 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/People.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Edit/InputItem/InputItem.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/dateFormatter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Redux/projectsReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Projects/ProjectItem/ProjectItem.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Projects/ProjectItem/ProjectItem.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/appReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/appReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/asideReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/asideReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/dialogReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/profileSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileSelector.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Aside/Aside.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Aside.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Aside/AsideContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/AsideContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/Nav/Item/Item.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Nav/Item/Item.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Aside/Nav/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Nav/Nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Aside/ProfileCard/ProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/ProfileCard/ProfileCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Aside/TopFriends/FriendItem/FriendItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/TopFriends/FriendItem/FriendItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Aside/TopFriends/TopFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/TopFriends/TopFriends.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/Dialog/Dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/Dialog/Dialog.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/DialogsItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/DialogsItems.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Input/Input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Input/Input.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/User/User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/User/User.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/User/User.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/User/User.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/About.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/About.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/Contacts/Contacts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Contacts/Contacts.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/ProfileStatus/ProfileStatus.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/About/ProfileStatus/ProfileStatus.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Album/Album.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Album/Album.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Music/Music.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/Projects.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Music/Music.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/Projects.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileHeader/ProfileHeader.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileHeader/ProfileHeader.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Projects/Projects.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Projects/Projects.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/objectHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/objectHelpers.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +53,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Edit/InputItem" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Projects/ProjectItem" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -99,19 +70,19 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Edit\InputItem" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\Contacts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\images" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\common" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\mainLink" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Projects\ProjectItem" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Edit\InputItem" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -188,8 +159,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.deploy" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.deploy" />
         <item itemvalue="Jest.length of messages should be incremented" />
         <item itemvalue="Jest.array messages will not be empty" />
         <item itemvalue="Jest.array dialogs will not be empty" />
@@ -292,7 +263,9 @@
       <workItem from="1575619523003" duration="9006000" />
       <workItem from="1575737462872" duration="7075000" />
       <workItem from="1575986298315" duration="3917000" />
-      <workItem from="1576052268703" duration="20496000" />
+      <workItem from="1576052268703" duration="27744000" />
+      <workItem from="1576142462398" duration="4378000" />
+      <workItem from="1576243323240" duration="3773000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -350,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575989962575</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changed design and fixed bags">
+      <created>1576081979491</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1576081979491</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,6 +357,7 @@
     <MESSAGE value="Added captcha" />
     <MESSAGE value="Error handler added" />
     <MESSAGE value="Added dialogs server API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added dialogs server API" />
+    <MESSAGE value="Changed design and fixed bags" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed design and fixed bags" />
   </component>
 </project>

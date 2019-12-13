@@ -7,4 +7,5 @@
 .messages h1 {
     color: #939598;
     line-height: 300px;
+    align-self: center;
 }

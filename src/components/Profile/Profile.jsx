@@ -56,10 +56,10 @@ const Profile = ({profile, uploadProfilePhoto, isUpload, startDialogs, ...props}
             <div className={style.wrapper}>
                 <div className={style.avatar}>
                     <div className={style.avatarContainer}>
-                        <img src={profile.photos.large ? profile.photos.large : userAvatar} alt="Avatar"/>
                         {props.isMyProfile && <div className={style.avatarMenu}>
                             <p onClick={showModalWindow}>&#9650; <span>Load avatar</span></p>
                         </div>}
+                        <img src={profile.photos.large ? profile.photos.large : userAvatar} alt="Avatar"/>
                     </div>
                     <h2>{profile.fullName}</h2>
                     <ProfileStatus isMyProfile={props.isMyProfile}

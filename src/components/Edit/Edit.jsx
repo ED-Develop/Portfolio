@@ -80,7 +80,7 @@ const EditForm = ({handleSubmit, ...props}) => {
 
     const contacts = (<div className={style.section}>
         {Object.keys(props.initialValues.contacts).map(item => {
-            return <InputItem name={`contacts.${item}`} label={item.slice(0, 1).toUpperCase() + item.slice(1)}
+            return <InputItem key={item} name={`contacts.${item}`} label={item.slice(0, 1).toUpperCase() + item.slice(1)}
                               customClassName='right'/>
         })}
     </div>);

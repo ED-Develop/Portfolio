@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
-import Music from "./components/Music/Music";
+import Projects from "./components/Projects/Projects";
 import AsideContainer from "./components/Aside/AsideContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -10,12 +10,12 @@ import Preloader from "./components/common/Preloader/Preloader";
 import {initializeApp, setGlobalError} from "./Redux/appReducer";
 import store from "./Redux/reduxStore";
 import withSuspense from "./hoc/withSuspense";
-import Edit from "./components/Edit/Edit";
 import ModalWindow from "./components/common/ModalWindow/ModalWindow";
 
 const DialogsContainer = React.lazy(() => import ("./components/Dialogs/DialogsContainer"));
 const Login = React.lazy(() => import ("./components/Login/Login"));
 const People = React.lazy(() => import ("./components/People/People"));
+const Edit = React.lazy(() => import ("./components/Edit/Edit"));
 
 
 class App extends Component {
@@ -76,12 +76,12 @@ const MainApp = () => {
             <AsideContainer/>
             <div className='app-content'>
                 <Switch>
-                    <Route exact path='/' render={() => <Redirect to='/profile/about'/>}/>
+                    <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/messages/:userId?' render={withSuspense(DialogsContainer)}/>
                     <Route path='/people' render={withSuspense(People)}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/edit' render={() => <Edit/>}/>
+                    <Route path='/projects' render={() => <Projects/>}/>
+                    <Route path='/edit' render={withSuspense(Edit)}/>
                 </Switch>
             </div>
         </main>

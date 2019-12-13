@@ -1,0 +1,67 @@
+.item  {
+    position: relative;
+    height: 250px;
+}
+.item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+}
+.description {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    color: white;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.7s;
+}
+.item:hover .description {
+    border-radius: 6px;
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.7s;
+}
+.description h2 {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    position: absolute;
+    margin: 0;
+    bottom: 35px;
+}
+.description > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin-top: 20px;
+}
+.description .btn {
+    width: 120px;
+    height: 35px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.description .btn a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 7px 30px;
+    border-radius: 30px;
+    border: none;
+    background-color: #8dc63f;
+    cursor: pointer;
+}
+.description .btn a:hover {
+    background-color: #7eb43c;
+}

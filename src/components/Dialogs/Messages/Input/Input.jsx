@@ -24,7 +24,7 @@ const Input = ({addMessage, userId, avatar, login}) => {
 const MessageForm = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field castomClassName={'top'} component={Textarea} validate={[maxLength50]} placeholder='Type your message...' name='messageText'/>
+            <Field customClassName={'top'} component={Textarea} validate={[maxLength50]} placeholder='Type your message...' name='messageText'/>
             <button>Send</button>
         </form>
     );

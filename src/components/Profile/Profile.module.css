@@ -9,6 +9,7 @@
 }
 .avatarContainer {
     position: relative;
+    overflow: hidden;
 }
 .avatarContainer .avatarMenu  {
     width: 100%;
@@ -17,15 +18,15 @@
     padding: 10px 20px;
     border-radius: 6px;
     position: absolute;
-    bottom: 4px;
+    bottom: -41px;
+    height: 41px;
     opacity: 0;
-    height: 1px;
-    transition: opacity 0.5s, height 0.5s cubic-bezier(0, 0, 1, 1);
+    transition: all 0.5s;
 }
 .avatarContainer:hover .avatarMenu {
-    transition: opacity 0.5s, height 0.5s cubic-bezier(0, 0, 1, 1);
     opacity: 1;
-    height: 41px;
+    bottom: 3px;
+    transition: all 0.5s;
 }
 .avatarContainer .avatarMenu p {
     color: #ebebeb;
@@ -37,7 +38,7 @@
     text-decoration: underline;
     color: #fff;
 }
-.avatar img {
+.avatar .avatarContainer img {
     width: 100%;
     border-radius: 5px;
 }
