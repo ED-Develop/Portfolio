@@ -6,11 +6,13 @@ const SET_DIALOGS = 'portfolio/dialogs/SET_DIALOGS';
 const SET_MESSAGES = 'portfolio/dialogs/SET_MESSAGES';
 
 let initialState = {
-    dialogs: [],
-    messages: []
+    dialogs: [] as Array<any>,
+    messages: [] as Array<any>
 };
 
-const dialogReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState;
+
+const dialogReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE: {
             let newMessage = {
@@ -43,40 +45,54 @@ const dialogReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessage = (messageText, userId, login) => ({type: ADD_MESSAGE, messageText, userId, login});
+type AddMessageActionType = {
+    type: typeof ADD_MESSAGE,
+    messageText: string,
+    userId: number,
+    login: string
+}
 
-export const setDialogs = (dialogs) => {
+export const addMessage = (messageText: string, userId: number, login: string): AddMessageActionType => {
+    return {type: ADD_MESSAGE, messageText, userId, login}
+};
+
+type SetDialogsActionType = {
+    type: typeof SET_DIALOGS,
+    dialogs: Array<any>
+}
+
+export const setDialogs = (dialogs: Array<any>): SetDialogsActionType => {
     return {
         type: SET_DIALOGS,
         dialogs
     }
 };
 
-export const setMessages = (messages) => {
+type SetMessagesActionType = {
+    type: typeof SET_MESSAGES,
+    messages: Array<any>
+}
+
+export const setMessages = (messages: Array<any>): SetMessagesActionType => {
     return {
         type: SET_MESSAGES,
         messages
     }
 };
 
-
-export const startDialogs = (userId) => async (dispatch) => {
+export const startDialogs = (userId: number) => async (dispatch: any) => {
     await dialogsAPI.startDialog(userId);
     dispatch(toggleIsSuccess(true));
 };
 
-export const getDialogs = () => async (dispatch) => {
+export const getDialogs = () => async (dispatch: any) => {
     dispatch(toggleIsFetching(true));
     const data = await dialogsAPI.getDialogs();
     dispatch(setDialogs(data));
     dispatch(toggleIsFetching(false));
 };
 
-/*export const sendMessage = (userId, message) => async (dispatch) => {
-    await dialogsAPI.sendMessage(userId, message);
-};*/
-
-export const getMessages = (userId) => async (dispatch) => {
+export const getMessages = (userId: number) => async (dispatch: any) => {
     dispatch(toggleIsFetching(true));
     await dialogsAPI.getMessages(userId);
     dispatch(toggleIsFetching(false));

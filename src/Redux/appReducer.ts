@@ -6,7 +6,15 @@ const UPLOAD_IN_PROGRESS = 'portfolio/app/UPLOAD_IN_PROGRESS';
 const SET_GLOBAL_ERROR = 'portfolio/app/SET_GLOBAL_ERROR';
 const TOGGLE_IS_SUCCESS = 'portfolio/app/TOGGLE_IS_SUCCESS';
 
-let initialState = {
+type InitialStateType = {
+    initialized: boolean,
+    isFetching: boolean,
+    isUpload: boolean,
+    globalError: any,
+    isSuccess: boolean
+}
+
+let initialState: InitialStateType = {
     initialized: false,
     isFetching: false,
     isUpload: false,
@@ -14,7 +22,7 @@ let initialState = {
     isSuccess: false
 };
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -50,42 +58,70 @@ const appReducer = (state = initialState, action) => {
     }
 };
 
-const intialezedSuccess = () => {
+type IntialezedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS;
+}
+
+const intialezedSuccess = (): IntialezedSuccessActionType => {
     return {
         type: INITIALIZED_SUCCESS
     }
 };
 
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(auth());
 
-    Promise.all([promise]).then( () => {
+    Promise.all([promise]).then(() => {
         dispatch(intialezedSuccess());
     })
 };
-export const toggleIsFetching = (isFetching) => {
+
+type ToggleIsFetchingActionType = {
+    type: typeof TOGGLE_IS_FETCHING,
+    isFetching: boolean
+}
+
+export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => {
     return {
         type: TOGGLE_IS_FETCHING,
         isFetching
     }
 };
-export const uploadInProgress = (isUpload) => {
+
+type UploadInProgressActionType = {
+    type: typeof UPLOAD_IN_PROGRESS,
+    isUpload: boolean
+}
+
+export const uploadInProgress = (isUpload: boolean): UploadInProgressActionType => {
     return {
         type: UPLOAD_IN_PROGRESS,
         isUpload
     }
 };
 
-export const setGlobalError = (globalError) => {
+type SetGlobalErrorActionType = {
+    type: typeof SET_GLOBAL_ERROR,
+    globalError: any
+}
+
+export const setGlobalError = (globalError: any): SetGlobalErrorActionType => {
     return {
         type: SET_GLOBAL_ERROR,
         globalError
     }
 };
 
-export const toggleIsSuccess = (isSuccess) => {
+type ToggleIsSuccessActionType = {
+    type: typeof TOGGLE_IS_SUCCESS,
+    payload: {
+        isSuccess: boolean
+    }
+}
+
+export const toggleIsSuccess = (isSuccess: boolean): ToggleIsSuccessActionType => {
     return {
-        type:TOGGLE_IS_SUCCESS,
+        type: TOGGLE_IS_SUCCESS,
         payload: {
             isSuccess
         }

@@ -1,3 +1,11 @@
+type ProjectType = {
+    name: string,
+    type: string,
+    technologies: string,
+    logo: string,
+    link: string
+}
+
 const initialState = {
     projects: [
         {
@@ -14,10 +22,12 @@ const initialState = {
             logo: 'https://pbs.twimg.com/media/DT-MU2QW4AE3hEO.jpg',
             link: 'https://ed-develop.github.io/sport-hold/'
         }
-    ]
+    ] as Array<ProjectType>
 };
 
-const projectsReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState;
+
+const projectsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         default: return state;
     }

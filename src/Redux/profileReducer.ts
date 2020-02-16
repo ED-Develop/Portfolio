@@ -2,6 +2,7 @@ import {profileAPI} from "../api/api";
 import {toggleIsFetching, uploadInProgress} from "./appReducer";
 import {getOwnerProfileData, setProfileData} from "./authReducer";
 import {stopSubmit} from "redux-form";
+import {PhotosType, ProfileType} from "../types/types";
 
 const ADD_POST = 'portfolio/profile/ADD-POST';
 const SET_USER_PROFILE = 'portfolio/profile/SET-USER-PROFILE';
@@ -11,6 +12,12 @@ const INCREMENTED_LIKE = 'portfolio/profile/INCREMENTED_LIKE';
 const UPLOAD_PROFILE_PHOTO_SUCCESS = 'portfolio/profile/UPLOAD_PROFILE_PHOTO_SUCCESS';
 const UPDATE_PROFILE_DATA_SUCCESS = 'portfolio/profile/UPDATE_PROFILE_DATA_SUCCESS';
 
+type PostType = {
+    id: number,
+    date: string,
+    likeCount: number,
+    postText: string
+}
 
 let initialState = {
     postData: [
@@ -37,15 +44,16 @@ let initialState = {
             postText: "It'style my first post"
 
         }
-    ],
-    postTextValue: '',
-    profile: null,
-    status: '',
+    ] as Array<PostType>,
+    profile: null as ProfileType | null,
+    status: '' as string,
     followed: true,
     isUpdateSuccess: false
 };
 
-const profileReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState;
+
+const profileReducer = (state = initialState, action:any): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -57,7 +65,6 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postData: [newPost, ...state.postData],
-                postTextValue: ''
             };
         case SET_USER_PROFILE: {
             return {
@@ -98,7 +105,7 @@ const profileReducer = (state = initialState, action) => {
                     photos: {
                         ...action.photos
                     }
-                }
+                } as ProfileType
             }
         }
         case UPDATE_PROFILE_DATA_SUCCESS: {
@@ -112,50 +119,86 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addPost = (post) => ({type: ADD_POST, post: post});
+type AddPostActionType = {
+    type: typeof ADD_POST,
+    post: string
+}
 
-export const deletePost = (postId) => ({
+export const addPost = (post: string): AddPostActionType => ({type: ADD_POST, post});
+
+
+type DeletePostActionType = {
+    type: typeof DELETE_POST,
+    postId: number
+}
+
+export const deletePost = (postId: number): DeletePostActionType => ({
     type: DELETE_POST,
     postId
 });
 
-export const incrementedLike = (postId) => {
+type IncrementedLikeActionType = {
+    type: typeof INCREMENTED_LIKE,
+    postId: number
+}
+
+export const incrementedLike = (postId: number): IncrementedLikeActionType => {
     return {
         type: INCREMENTED_LIKE,
         postId
     }
 };
 
-export const setUserProfile = (profile) => {
+type SetUserProfileActionType = {
+    type: typeof SET_USER_PROFILE,
+    profile: ProfileType
+}
+
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => {
     return {
         type: SET_USER_PROFILE,
         profile
     }
 };
 
-const setProfileStatus = (status) => {
+type SetProfileStatusActionType = {
+    type: typeof SET_PROFILE_STATUS,
+    status: string
+}
+
+const setProfileStatus = (status: string): SetProfileStatusActionType => {
     return {
         type: SET_PROFILE_STATUS,
         status
     }
 };
 
-const uploadProfilePhotoSuccess = (photos) => {
+type UploadProfilePhotoSuccess = {
+    type: typeof UPLOAD_PROFILE_PHOTO_SUCCESS,
+    photos: PhotosType
+}
+
+const uploadProfilePhotoSuccess = (photos: PhotosType): UploadProfilePhotoSuccess => {
     return {
         type: UPLOAD_PROFILE_PHOTO_SUCCESS,
         photos
     }
 };
 
-export const updateProfileDataSuccess = (isUpdateSuccess) => {
+type UpdateProfileDataSuccess = {
+    type: typeof UPDATE_PROFILE_DATA_SUCCESS,
+    isUpdateSuccess: boolean
+}
+
+export const updateProfileDataSuccess = (isUpdateSuccess: boolean): UpdateProfileDataSuccess => {
     return {
         type: UPDATE_PROFILE_DATA_SUCCESS,
         isUpdateSuccess
     }
 };
 
-export const getUserProfile = (userId) => {
-    return async (dispatch) => {
+export const getUserProfile = (userId: number) => {
+    return async (dispatch: any) => {
         dispatch(toggleIsFetching(true));
         let data = await profileAPI.getUserProfile(userId);
         dispatch(setUserProfile(data));
@@ -163,14 +206,14 @@ export const getUserProfile = (userId) => {
     }
 };
 
-export const getProfileStatus = (userId) => {
-    return async (dispatch) => {
+export const getProfileStatus = (userId: number) => {
+    return async (dispatch: any) => {
         let response = await profileAPI.getProfileStatus(userId);
         dispatch(setProfileStatus(response.data));
     }
 };
-export const updateProfileStatus = (status) => {
-    return async (dispatch) => {
+export const updateProfileStatus = (status: string) => {
+    return async (dispatch: any) => {
         let response = await profileAPI.updateProfileStatus(status);
         if (response.data.resultCode === 0) {
             dispatch(setProfileStatus(status));
@@ -178,18 +221,18 @@ export const updateProfileStatus = (status) => {
     }
 };
 
-export const uploadProfilePhoto = (photoFile) => {
-    return async (dispatch) => {
+export const uploadProfilePhoto = (photoFile: string) => {
+    return async (dispatch: any, getState: any) => {
         dispatch(uploadInProgress(true));
         let photos = await profileAPI.uploadProfilePhoto((photoFile));
         dispatch(uploadProfilePhotoSuccess(photos));
-        dispatch(setProfileData(photos));
+        dispatch(setProfileData(photos, getState().auth.login));
         dispatch(uploadInProgress(false));
     };
 };
 
-export const updateProfileData = (profileData) => {
-    return async (dispatch, getState) => {
+export const updateProfileData = (profileData: any) => {
+    return async (dispatch: any, getState: any) => {
         dispatch(updateProfileDataSuccess(false));
         let data = await profileAPI.updateProfileData(profileData);
         let userId = getState().auth.userId;
@@ -197,14 +240,19 @@ export const updateProfileData = (profileData) => {
             dispatch(updateProfileDataSuccess(true));
             dispatch(getOwnerProfileData(userId));
         } else {
-            let errorItems = data.messages.map( message => {
+            let errorItems = data.messages.map( (message:any) => {
                 let start = message.indexOf('>') + 1;
                 let item = message.slice(start, message.indexOf(')',start));
                 return item[0].toLowerCase() + item.slice(1);
             });
-            let errors = {"contacts": {} };
 
-            errorItems.forEach( item => {
+            type Errors = {
+                contacts: any
+            }
+
+            let errors: Errors = {"contacts": {} };
+
+            errorItems.forEach( (item:string) => {
                 errors["contacts"][item] = 'Invalid url format';
             } );
             dispatch(stopSubmit('edit', errors));
