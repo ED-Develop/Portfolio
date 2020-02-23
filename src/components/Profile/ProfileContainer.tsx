@@ -8,16 +8,49 @@ import {
     updateProfileStatus,
     uploadProfilePhoto
 } from "../../Redux/profileReducer";
-import {Redirect, withRouter} from "react-router-dom";
+import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {startDialogs} from "../../Redux/dialogReducer";
+import {ProfileType} from "../../types/types";
+import {AppStateType} from "../../Redux/reduxStore";
 
+type MapStatePropsType = {
+    profile: ProfileType
+    myId: number
+    isFetching: boolean
+    status: string
+    isAuth: boolean
+    isUpload: boolean
+    followed: boolean
+    isUpdateSuccess: boolean
+    isSuccess: boolean
+}
 
-class ProfileContainer extends React.Component {
+type MapDispatchPropsType = {
+    getUserProfile: (userId: number) => void
+    getProfileStatus: (userId: number) => void
+    updateProfileDataSuccess: (isUpdateSuccess: boolean) => void
+    updateProfileStatus: (status: string) => void
+    uploadProfilePhoto: (photoFile: any) => void
+    startDialogs: (userId: number) => void
+}
+
+type ParamsType = {
+    userId?: string
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<ParamsType>
+
+type StateType = {
+    isMyProfile: any
+    userId: number
+}
+
+class ProfileContainer extends React.Component<PropsType, StateType> {
     state = {
         isMyProfile: false,
-        userId: +this.props.match.params.userId || this.props.myId
+        userId: this.props.match.params.userId ? +this.props.match.params.userId : this.props.myId
     };
 
     toggleIsMyProfile = () => {
@@ -26,7 +59,7 @@ class ProfileContainer extends React.Component {
         }
     };
 
-    loadProfile = (userId) => {
+    loadProfile = (userId: number) => {
         this.props.getUserProfile(userId);
         this.props.getProfileStatus(userId);
     };
@@ -44,7 +77,7 @@ class ProfileContainer extends React.Component {
         }
     };
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
         //load new profile
         if (prevState.userId !== this.state.userId) {
             this.loadProfile(this.state.userId);
@@ -59,7 +92,8 @@ class ProfileContainer extends React.Component {
         }
         //change state if browser address bar changed
         if (prevProps.match.params.userId !== this.props.match.params.userId) {
-            this.setState({userId: this.props.match.params.userId || this.props.myId});
+            this.setState({userId: this.props.match.params.userId ? +this.props.match.params.userId
+                    : this.props.myId});
         }
 
     }
@@ -79,7 +113,7 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         profile: state.profile.profile,
         myId: state.auth.userId,
@@ -93,7 +127,8 @@ let mapStateToProps = (state) => {
     };
 };
 
-export default compose(connect(mapStateToProps, {
+// @ts-ignore
+export default compose(connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps, {
         getUserProfile, getProfileStatus, updateProfileDataSuccess,
         updateProfileStatus, uploadProfilePhoto, startDialogs
     }),

@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './Post.module.css'
+import {PostType} from "../../../../types/types";
 
-const Post = ({post, deletePost, incrementedLike,login, avatar, isMyProfile}) => {
+type PropsType = {
+    post: PostType,
+    deletePost: (postId: number) => void
+    incrementedLike: (postId: number) => void
+    avatar: string
+    login: string | null
+    isMyProfile: boolean
+}
+
+const Post: FC<PropsType> = ({post, deletePost, incrementedLike,login, avatar,
+                                 isMyProfile}) => {
     const onDeletePost = () => {
         deletePost(post.id);
     };

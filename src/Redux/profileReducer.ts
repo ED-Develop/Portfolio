@@ -2,7 +2,7 @@ import {profileAPI} from "../api/api";
 import {toggleIsFetching, uploadInProgress} from "./appReducer";
 import {getOwnerProfileData, setProfileData} from "./authReducer";
 import {stopSubmit} from "redux-form";
-import {PhotosType, ProfileType} from "../types/types";
+import {PhotosType, PostType, ProfileType} from "../types/types";
 
 const ADD_POST = 'portfolio/profile/ADD-POST';
 const SET_USER_PROFILE = 'portfolio/profile/SET-USER-PROFILE';
@@ -12,12 +12,6 @@ const INCREMENTED_LIKE = 'portfolio/profile/INCREMENTED_LIKE';
 const UPLOAD_PROFILE_PHOTO_SUCCESS = 'portfolio/profile/UPLOAD_PROFILE_PHOTO_SUCCESS';
 const UPDATE_PROFILE_DATA_SUCCESS = 'portfolio/profile/UPDATE_PROFILE_DATA_SUCCESS';
 
-type PostType = {
-    id: number,
-    date: string,
-    likeCount: number,
-    postText: string
-}
 
 let initialState = {
     postData: [
@@ -221,7 +215,7 @@ export const updateProfileStatus = (status: string) => {
     }
 };
 
-export const uploadProfilePhoto = (photoFile: string) => {
+export const uploadProfilePhoto = (photoFile: any) => {
     return async (dispatch: any, getState: any) => {
         dispatch(uploadInProgress(true));
         let photos = await profileAPI.uploadProfilePhoto((photoFile));

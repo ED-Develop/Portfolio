@@ -1,10 +1,4 @@
-type ProjectType = {
-    name: string,
-    type: string,
-    technologies: string,
-    logo: string,
-    link: string
-}
+import {ProjectType} from "../types/types";
 
 const initialState = {
     projects: [

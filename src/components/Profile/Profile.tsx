@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import style from "./Profile.module.css";
-import {NavLink} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import userAvatar from "../../assets/images/user.png";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
@@ -12,8 +11,24 @@ import noo from "../../assets/images/noo.png";
 import Contacts from "./Contacts/Contacts";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import ModalWindow from "../common/ModalWindow/ModalWindow";
+import {ProfileType} from "../../types/types";
+import {NavLink} from "react-router-dom";
 
-const Profile = ({profile, uploadProfilePhoto, isUpload, startDialogs, ...props}) => {
+type PropsType = {
+    profile: ProfileType
+    isUpload: boolean
+    userId: number
+    status: string
+    isAuth: boolean
+    isMyProfile: any
+    followed: boolean
+
+    uploadProfilePhoto: (photo: any) => void
+    startDialogs: (userId: number) => void
+    updateProfileStatus: (status: string) => void
+}
+
+const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDialogs, ...props}) => {
     let [isModal, setIsModal] = useState(false);
 
     const showModalWindow = () => {
@@ -22,8 +37,8 @@ const Profile = ({profile, uploadProfilePhoto, isUpload, startDialogs, ...props}
     const hideModalWindow = () => {
         setIsModal(false);
     };
-    const onPhotoSelected = (e) => {
-        if (e.target.files.length) {
+    const onPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
             uploadProfilePhoto(e.target.files[0]);
             setIsModal(false);
         }

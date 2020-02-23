@@ -2,18 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/UsersReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/UsersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/appReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/appReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/asideReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/asideReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/authReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/dialogReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/profileReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/projectsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/projectsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/profileSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileSelector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/projectsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/projectsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/usersSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/usersSelector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Contacts/Contacts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Contacts/Contacts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPost.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/Post/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/Post/Post.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Projects/ProjectItem/ProjectItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/ProjectItem/ProjectItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Projects/Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/Projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +273,8 @@
       <workItem from="1576679495655" duration="309000" />
       <workItem from="1576681317615" duration="54000" />
       <workItem from="1581270769566" duration="1046000" />
-      <workItem from="1581838499311" duration="11951000" />
+      <workItem from="1581838499311" duration="12896000" />
+      <workItem from="1582461970447" duration="18283000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -345,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581271763511</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Migration reducer from TypeScript">
+      <created>1581854713252</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1581854713252</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,36 +390,37 @@
     <MESSAGE value="Changed design and fixed bags" />
     <MESSAGE value="Added projects list" />
     <MESSAGE value="Add Type Script" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Type Script" />
+    <MESSAGE value="Migration reducer from TypeScript" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migration reducer from TypeScript" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1581271760625">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1581854709542">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581271760625" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1581850161661">
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581854709542" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1582486068254">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1581850161661" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1581850161660">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1582486068254">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1581850161660" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1581850161660">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1582486068254">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1581850161660" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1581850161660">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1582486068254">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1581850161660" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1581839741714">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1581839741714" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1581271768248">
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1581854747842">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581271768248" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581854747842" />
   </component>
 </project>

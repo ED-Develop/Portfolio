@@ -15,6 +15,7 @@ export type ProfileType = {
     userId: string,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
+    aboutMe: string,
     fullName: string,
     contacts: ContactsType,
     photos: PhotosType
@@ -29,4 +30,19 @@ export type ContactsType = {
     website: string,
     youtube: string,
     mainLink: string
+}
+
+export type PostType = {
+    id: number,
+    date: string,
+    likeCount: number,
+    postText: string
+}
+
+export type ProjectType = {
+    name: string,
+    type: string,
+    technologies: string,
+    logo: string,
+    link: string
 }
