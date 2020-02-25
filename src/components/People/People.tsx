@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './People.module.css';
 import Search from "../common/Search/Search";
 import UserListContainer from "./UsersList/UsersListContainer";
 import {connect} from "react-redux";
 import {searchUsers} from "../../Redux/UsersReducer";
+import {AppStateType} from "../../Redux/reduxStore";
 
-const People = (props) => {
-    const onSearch = (formData) => {
+type MapDispatchPropsType = {
+    searchUsers: (userName: string) => void
+}
+
+const People: FC<MapDispatchPropsType> = (props) => {
+    const onSearch = (formData: any) => {
         props.searchUsers(formData.search);
     };
 
@@ -18,10 +23,9 @@ const People = (props) => {
     )
 };
 
-let mapStateToProps = (state) => {
-    return {
-
-    }
+let mapStateToProps = (state: AppStateType): any => {
+    return {}
 };
 
-export default connect(mapStateToProps, {searchUsers})(People);
+export default connect<any, MapDispatchPropsType, never, AppStateType>(mapStateToProps,
+    {searchUsers})(People);

@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './Header.module.css'
 import Logo from "./Logo/Logo";
 import {NavLink} from "react-router-dom";
 
-const Header = ({logout, isAuth}) => {
-    let onLogout = (event) => {
-        event.preventDefault();
+type PropsType = {
+    logout: () => void
+    isAuth: boolean
+}
+
+const Header: FC<PropsType> = ({logout, isAuth}) => {
+    let onLogout = (e: React.MouseEvent) => {
+        e.preventDefault();
         logout();
     };
+
     return (
         <header className={style.header}>
             <div className={style.headerContainer}>

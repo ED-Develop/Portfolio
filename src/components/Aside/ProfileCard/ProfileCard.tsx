@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './ProfileCard.module.css';
 import defaultAvatar from '../../../assets/images/user.png';
 import followersIcon from '../../../assets/images/People.png';
 
-const ProfileCard = ({avatar, login}) => {
+type PropsType = {
+    avatar: string | null
+    login: string | null
+}
+
+const ProfileCard: FC<PropsType> = ({avatar, login}) => {
     return (
         <div className={style.card}>
             <img className={style.profileAvatar} src={avatar || defaultAvatar} alt="avatar"/>

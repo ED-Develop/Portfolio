@@ -16,8 +16,8 @@ import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../Redux/reduxStore";
 
 type MapStatePropsType = {
-    profile: ProfileType
-    myId: number
+    profile: ProfileType | null
+    myId: number | null
     isFetching: boolean
     status: string
     isAuth: boolean
@@ -43,8 +43,8 @@ type ParamsType = {
 type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<ParamsType>
 
 type StateType = {
-    isMyProfile: any
-    userId: number
+    isMyProfile: boolean
+    userId: number | null
 }
 
 class ProfileContainer extends React.Component<PropsType, StateType> {
@@ -54,7 +54,7 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
     };
 
     toggleIsMyProfile = () => {
-        if (+this.state.userId === this.props.myId && !this.state.isMyProfile) {
+        if (this.state.userId === this.props.myId && !this.state.isMyProfile) {
             this.setState({isMyProfile: true});
         }
     };
@@ -69,8 +69,9 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
             this.props.history.push('/login');
         }
 
-        this.loadProfile(this.state.userId);
-
+        if (this.state.userId) {
+            this.loadProfile(this.state.userId);
+        }
 
         if (this.props.isUpdateSuccess) {
             this.props.updateProfileDataSuccess(false);
@@ -79,7 +80,7 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
 
     componentDidUpdate(prevProps: PropsType, prevState: StateType) {
         //load new profile
-        if (prevState.userId !== this.state.userId) {
+        if (prevState.userId !== this.state.userId && this.state.userId) {
             this.loadProfile(this.state.userId);
         }
 
@@ -113,7 +114,7 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
     }
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         profile: state.profile.profile,
         myId: state.auth.userId,
@@ -127,7 +128,6 @@ let mapStateToProps = (state: AppStateType) => {
     };
 };
 
-// @ts-ignore
 export default compose(connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps, {
         getUserProfile, getProfileStatus, updateProfileDataSuccess,
         updateProfileStatus, uploadProfilePhoto, startDialogs

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './Nav.module.css';
 import Item from "./Item/Item";
 
-const Nav = () => {
+const Nav: FC = () => {
     return (
         <nav className={style.nav}>
             <ul className={style.navbar}>

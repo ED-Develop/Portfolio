@@ -15,9 +15,9 @@ import {ProfileType} from "../../types/types";
 import {NavLink} from "react-router-dom";
 
 type PropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     isUpload: boolean
-    userId: number
+    userId: number | null
     status: string
     isAuth: boolean
     isMyProfile: any
@@ -45,7 +45,9 @@ const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDia
     };
 
     const onWriteMessage = () => {
-        startDialogs(props.userId);
+        if (props.userId) {
+            startDialogs(props.userId);
+        }
     };
 
     let modalWindow = (<ModalWindow hideModalWindow={hideModalWindow}

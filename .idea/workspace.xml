@@ -3,23 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/profileSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileSelector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/projectsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/projectsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/usersSelector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/usersSelector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Contacts/Contacts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Contacts/Contacts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPost.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPost.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostForm/MyPostForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/Post/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/Post/Post.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileStatus/ProfileStatus.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Projects/ProjectItem/ProjectItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/ProjectItem/ProjectItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Projects/Projects.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/Projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/Aside.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Aside.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/AsideContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/AsideContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/Nav/Item/Item.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Nav/Item/Item.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/Nav/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/Nav/Nav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/ProfileCard/ProfileCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/ProfileCard/ProfileCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/TopFriends/FriendItem/FriendItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/TopFriends/FriendItem/FriendItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Aside/TopFriends/TopFriends.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Aside/TopFriends/TopFriends.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/HeaderContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Logo/Logo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Logo/Logo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/People.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersListContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersListContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/Search/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Search/Search.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,19 +83,19 @@
     <property name="ts.external.directory.path" value="E:\React\Projects\01-first-project\react-lessons-1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\images" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\common" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\mainLink" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Projects\ProjectItem" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Edit\InputItem" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\images" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\common" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\mainLink" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.length of messages should be incremented">
@@ -274,7 +276,8 @@
       <workItem from="1576681317615" duration="54000" />
       <workItem from="1581270769566" duration="1046000" />
       <workItem from="1581838499311" duration="12896000" />
-      <workItem from="1582461970447" duration="18283000" />
+      <workItem from="1582461970447" duration="18452000" />
+      <workItem from="1582608885379" duration="5785000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -360,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581854713252</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Profile and Project pages from TypeScript">
+      <created>1582486858223</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1582486858223</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,6 +390,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Added file test.js" />
     <MESSAGE value="Deploy project" />
     <MESSAGE value="Added upload photo" />
@@ -391,36 +403,41 @@
     <MESSAGE value="Added projects list" />
     <MESSAGE value="Add Type Script" />
     <MESSAGE value="Migration reducer from TypeScript" />
-    <option name="LAST_COMMIT_MESSAGE" value="Migration reducer from TypeScript" />
+    <MESSAGE value="Profile and Project pages from TypeScript" />
+    <option name="LAST_COMMIT_MESSAGE" value="Profile and Project pages from TypeScript" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1581854709542">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1582486854270">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1581854709542" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1582486068254">
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1582486854270" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1582613221992">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1582486068254">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582613221992" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1582613221991">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1582486068254">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582613221991" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1582613221991">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1582486068254">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582613221991" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1582613221992">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582486068254" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582613221992" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1581839741714">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1581839741714" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1581854747842">
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1582486896219">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1581854747842" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1582486896219" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1582612400598">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1582612400598" />
   </component>
 </project>

@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import style from './TopFriends.module.css';
 import FriendItem from "./FriendItem/FriendItem";
+import {UserType} from "../../../types/types";
 
-class TopFriends extends Component {
+type PropsType = {
+    friends: Array<UserType>,
+    getFriends: () => void
+}
+
+class TopFriends extends Component<PropsType> {
     componentDidMount() {
         this.props.getFriends();
     }

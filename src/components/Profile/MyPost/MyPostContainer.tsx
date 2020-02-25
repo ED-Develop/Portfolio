@@ -22,7 +22,7 @@ type OwnPropsType = {
     isMyProfile: boolean
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         postData: getPosts(state),
         avatar: state.profile.profile ? state.profile.profile.photos.small : null,

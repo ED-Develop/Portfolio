@@ -1,14 +1,29 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './Login.module.css';
 import LoginReduxForm from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
 import {auth, login} from "../../Redux/authReducer";
 import {Redirect} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
+import {AppStateType} from "../../Redux/reduxStore";
+import {LoginFormData} from "../../types/types";
+
+type MapStatePropsType = {
+    isAuth: boolean
+    isFetching: boolean
+    captchaURL: string | null
+}
+
+type MapDispatchPropsType = {
+    login: (formData: LoginFormData) => void
+    auth: () => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType
 
 
-const Login = ({login, isAuth, isFetching, captchaURL}) => {
-    const onSubmit = (formData) => {
+const Login: FC<PropsType> = ({login, isAuth, isFetching, captchaURL}) => {
+    const onSubmit = (formData: LoginFormData) => {
         login(formData);
     };
     if (isAuth) {
@@ -40,12 +55,13 @@ const Login = ({login, isAuth, isFetching, captchaURL}) => {
     )
 };
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         isAuth: state.auth.isAuth,
-        isFetching: state.peoplePage.isFetching,
+        isFetching: state.app.isFetching,
         captchaURL: state.auth.captchaURL
     }
 };
 
-export default connect(mapStateToProps, {login, auth})(Login);
+export default connect<MapStatePropsType, MapDispatchPropsType, never, AppStateType>(mapStateToProps,
+    {login, auth})(Login);
