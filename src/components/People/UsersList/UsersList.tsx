@@ -3,6 +3,7 @@ import style from './UsersList.module.css';
 import User from "./User/User";
 import Paginator from "../../common/Paginator/Paginator";
 import {UserType} from "../../../types/types";
+import {follow} from "../../../Redux/UsersReducer";
 
 type PropsType = {
     usersData: Array<UserType>
@@ -12,6 +13,8 @@ type PropsType = {
     totalCount: number
     followingInProgress: Array<number>
     onSetCurrentPage: (currentPage: number) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
 }
 
 
@@ -24,14 +27,12 @@ const UserList: FC<PropsType> = ({
     return (
         <div>
             <Paginator portionSize={portionSize} onSetCurrentPage={onSetCurrentPage} currentPage={currentPage}
-                       startPage={startPage} totalCount={totalCount} count={count}/>
+                        totalCount={totalCount} count={count}/>
             <div className={style.wrapper}>
                 {usersData
                     .map((user) => {
-                        return <User key={user.id} id={user.id} status={user.status} profileImageUrl={user.photos.large}
-                                     avatarUrl={user.photos.small}
-                                     name={user.name}
-                                     activity={'user.activity'} followed={user.followed} {...props}/>
+                        return <User key={user.id} user={user} follow={props.follow} unFollow={props.unFollow}
+                                     followingInProgress={props.followingInProgress}/>
                     })}
             </div>
         </div>

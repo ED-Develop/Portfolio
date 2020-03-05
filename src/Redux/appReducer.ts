@@ -1,4 +1,6 @@
 import {auth} from "./authReducer";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./reduxStore";
 
 const INITIALIZED_SUCCESS = 'portfolio/app/INITIALIZED_SUCCESS';
 const TOGGLE_IS_FETCHING = 'portfolio/app/TOGGLE-IS-FETCHING';
@@ -22,7 +24,10 @@ let initialState: InitialStateType = {
     isSuccess: false
 };
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+type ActionsTypes = IntialezedSuccessActionType | ToggleIsFetchingActionType | UploadInProgressActionType
+    | SetGlobalErrorActionType | ToggleIsSuccessActionType;
+
+const appReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case INITIALIZED_SUCCESS:
             return {
@@ -58,6 +63,8 @@ const appReducer = (state = initialState, action: any): InitialStateType => {
     }
 };
 
+//actions
+
 type IntialezedSuccessActionType = {
     type: typeof INITIALIZED_SUCCESS;
 }
@@ -66,14 +73,6 @@ const intialezedSuccess = (): IntialezedSuccessActionType => {
     return {
         type: INITIALIZED_SUCCESS
     }
-};
-
-export const initializeApp = () => (dispatch: any) => {
-    let promise = dispatch(auth());
-
-    Promise.all([promise]).then(() => {
-        dispatch(intialezedSuccess());
-    })
 };
 
 type ToggleIsFetchingActionType = {
@@ -126,6 +125,18 @@ export const toggleIsSuccess = (isSuccess: boolean): ToggleIsSuccessActionType =
             isSuccess
         }
     }
+};
+
+// thunks
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+
+export const initializeApp = (): ThunkType => async (dispatch) => {
+    let promise = dispatch(auth());
+
+    Promise.all([promise]).then(() => {
+        dispatch(intialezedSuccess());
+    })
 };
 
 export default appReducer;

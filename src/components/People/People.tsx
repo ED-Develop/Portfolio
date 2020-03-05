@@ -27,5 +27,5 @@ let mapStateToProps = (state: AppStateType): any => {
     return {}
 };
 
-export default connect<any, MapDispatchPropsType, never, AppStateType>(mapStateToProps,
+export default connect<any, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
     {searchUsers})(People);

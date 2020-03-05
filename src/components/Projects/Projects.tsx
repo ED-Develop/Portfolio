@@ -13,7 +13,7 @@ type PropsType = {
 const Projects: FC<PropsType> = ({projects}) => {
     return (
         <div className={style.container}>
-            <SearchForm handleSubmit={() => alert('Search')} placeholder={'Search Projects'}/>
+            <SearchForm placeholder={'Search Projects'}/>
             <div className={style.wrapper}>
                <div className={style.projectsList}>
                    {projects.map( item => {

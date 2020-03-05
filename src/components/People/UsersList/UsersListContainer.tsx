@@ -75,5 +75,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 
-export default compose(connect<MapStatePropsType, MapDispatchPropsType, never, AppStateType>(mapStateToProps,
+export default compose(connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
     {follow, unFollow, getUsers}))(UserListContainer);
