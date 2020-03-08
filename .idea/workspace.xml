@@ -2,15 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/hoc/withAuthRedirect.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/api-types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/UsersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/usersReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/appReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/appReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/asideReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/asideReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/authReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/authReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/dialogReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Redux/usersSelector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/usersSelector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/Dialog/Dialog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/Dialog/Dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/DialogsItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsItems/DialogsItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Input/Input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Input/Input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/Messages.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/MyMessages/MyMessages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/MyMessages/MyMessages.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Messages/YourMessages/YourMessages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Messages/YourMessages/YourMessages.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit/InputItem/InputItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/InputItem/InputItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Error/Error.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Error/Error.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/HeaderContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/People/People.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/People.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/User/User.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/User/User.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersListContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersListContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Projects/Projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Projects/Projects.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/Paginator/Paginator.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Paginator/Paginator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/ModalWindow/ModalWindow.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/ModalWindow/ModalWindow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/Preloader/Preloader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/Preloader/Preloader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hoc/withAuthRedirect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hoc/withSuspense.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hoc/withSuspense.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dateFormatter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dateFormatter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/objectHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/objectHelpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/paginator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/paginator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/validators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/validators.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,7 +303,9 @@
       <workItem from="1583094417254" duration="270000" />
       <workItem from="1583437066159" duration="266000" />
       <workItem from="1583437615169" duration="239000" />
-      <workItem from="1583438942142" duration="3220000" />
+      <workItem from="1583438942142" duration="3365000" />
+      <workItem from="1583598108426" duration="965000" />
+      <workItem from="1583645554540" duration="27625000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -373,11 +405,23 @@
       <option name="project" value="LOCAL" />
       <updated>1582614770183</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Redux thunk from TypeScript">
+      <created>1583442237866</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1583442237866</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/App.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -408,37 +452,50 @@
     <MESSAGE value="Migration reducer from TypeScript" />
     <MESSAGE value="Profile and Project pages from TypeScript" />
     <MESSAGE value="Aside, Header, Login pages from TypeScript" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aside, Header, Login pages from TypeScript" />
+    <MESSAGE value="Redux thunk from TypeScript" />
+    <option name="LAST_COMMIT_MESSAGE" value="Redux thunk from TypeScript" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1582614765397">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1583442234007">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1582614765397" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1583439048315">
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1583442234007" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1583598150474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583439048315" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1583439048314">
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1583598150474" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1583695819191">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1583439048314" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1583439048313">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1583695819191" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1583695819191">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1583439048313" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1583439048315">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1583695819191" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1583695819191">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1583439048315" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1583695819191" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1583695819191">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1583695819191" />
+    <state x="472" y="75" key="RollbackChangesDialog" timestamp="1583695731765">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="472" y="75" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1583695731765" />
     <state x="184" y="7" key="SettingsEditor" timestamp="1583439119788">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583439119788" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1582614796901">
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1583442269325">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1582614796901" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1583442269325" />
+    <state x="380" y="0" width="606" height="728" key="find.popup" timestamp="1583692814355">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="380" y="0" width="606" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1583692814355" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1583093544068">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

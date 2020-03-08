@@ -2,7 +2,7 @@ import {createSelector} from "reselect";
 import {AppStateType} from "./reduxStore";
 
 export const getUsersDataSelector = (state: AppStateType) => {
-    return state.peoplePage.usersData;
+    return state.people.usersData;
 };
 
 export const getUsersData = createSelector(getUsersDataSelector, (users) => {
@@ -10,19 +10,19 @@ export const getUsersData = createSelector(getUsersDataSelector, (users) => {
 });
 
 export const getCount = (state: AppStateType) => {
-    return state.peoplePage.count;
+    return state.people.count;
 };
 
 export const getCurrentPage = (state: AppStateType) => {
-    return state.peoplePage.currentPage;
+    return state.people.currentPage;
 };
 
 export const getStartPage = (state: AppStateType) => {
-    return state.peoplePage.startPage;
+    return state.people.startPage;
 };
 
 export const getTotalCount = (state: AppStateType) => {
-    return state.peoplePage.totalCount;
+    return state.people.totalCount;
 };
 
 export const getIsFetching = (state: AppStateType) => {
@@ -30,6 +30,6 @@ export const getIsFetching = (state: AppStateType) => {
 };
 
 export const getFollowingInProgress = (state: AppStateType) => {
-    return state.peoplePage.followingInProgress;
+    return state.people.followingInProgress;
 };
 

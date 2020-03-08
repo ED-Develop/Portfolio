@@ -1,5 +1,7 @@
 import {dialogsAPI} from "../api/api";
-import {toggleIsFetching, toggleIsSuccess} from "./appReducer";
+import {toggleIsFetching, ToggleIsFetchingActionType, toggleIsSuccess, ToggleIsSuccessActionType} from "./appReducer";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./reduxStore";
 
 const ADD_MESSAGE = 'portfolio/dialogs/ADD-MESSAGE';
 const SET_DIALOGS = 'portfolio/dialogs/SET_DIALOGS';
@@ -12,7 +14,9 @@ let initialState = {
 
 type InitialStateType = typeof initialState;
 
-const dialogReducer = (state = initialState, action: any): InitialStateType => {
+type ActionsTypes = AddMessageActionType | SetDialogsActionType | SetMessagesActionType;
+
+const dialogReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_MESSAGE: {
             let newMessage = {
@@ -44,6 +48,8 @@ const dialogReducer = (state = initialState, action: any): InitialStateType => {
             return state;
     }
 };
+
+// actions
 
 type AddMessageActionType = {
     type: typeof ADD_MESSAGE,
@@ -80,19 +86,24 @@ export const setMessages = (messages: Array<any>): SetMessagesActionType => {
     }
 };
 
-export const startDialogs = (userId: number) => async (dispatch: any) => {
+// thunks
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes | ToggleIsFetchingActionType
+    | ToggleIsSuccessActionType>;
+
+export const startDialogs = (userId: number): ThunkType => async (dispatch) => {
     await dialogsAPI.startDialog(userId);
     dispatch(toggleIsSuccess(true));
 };
 
-export const getDialogs = () => async (dispatch: any) => {
+export const getDialogs = (): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     const data = await dialogsAPI.getDialogs();
     dispatch(setDialogs(data));
     dispatch(toggleIsFetching(false));
 };
 
-export const getMessages = (userId: number) => async (dispatch: any) => {
+export const getMessages = (userId: number): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     await dialogsAPI.getMessages(userId);
     dispatch(toggleIsFetching(false));

@@ -1,8 +1,8 @@
-export const dateFormatter = (date) => {
+export const dateFormatter = (date: string) => {
     let dateStart = new Date(date);
     dateStart.setHours(dateStart.getHours() + 2);
     let dateNow = Date.now();
-    let difference = (dateNow - dateStart) / 3600000;
+    let difference = (dateNow - +dateStart) / 3600000;
 
     if (difference <= 0.01) {
         return 'a min ago';

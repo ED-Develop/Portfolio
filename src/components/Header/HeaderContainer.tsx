@@ -28,5 +28,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 };
 
-export default connect<MapStatePropsType, MapDispatchPropsType, never, AppStateType>(mapStateToProps,
+export default connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps,
     {logout})(HeaderContainer);

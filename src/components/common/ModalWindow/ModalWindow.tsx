@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './ModalWindow.module.css';
 
-const ModalWindow = ({modalTitle, children,footerDescription, hideModalWindow}) => {
+type PropsType = {
+    modalTitle: string
+    children: React.ReactElement
+    footerDescription?: string
+    hideModalWindow: () => void
+}
+
+const ModalWindow: FC<PropsType> = ({modalTitle, children,footerDescription, hideModalWindow}) => {
     const onModalClose = () => {
         hideModalWindow();
     };

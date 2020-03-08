@@ -9,7 +9,8 @@ type PropsType = {
     captchaURL: string | null
 }
 
-const LoginForm: FC<any & InjectedFormProps<LoginFormData, PropsType>> = (props) => {
+const LoginForm: FC<PropsType & InjectedFormProps<LoginFormData, PropsType>> = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={style.field}>

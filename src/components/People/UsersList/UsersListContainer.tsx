@@ -1,9 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-    follow, getUsers,
-    unFollow
-} from "../../../Redux/UsersReducer";
 import UserList from './UsersList';
 import Preloader from "../../common/Preloader/Preloader";
 import {compose} from "redux";
@@ -17,6 +13,7 @@ import {
 } from "../../../Redux/usersSelector";
 import {UserType} from "../../../types/types";
 import {AppStateType} from "../../../Redux/reduxStore";
+import {follow, getUsers, unFollow} from "../../../Redux/usersReducer";
 
 type MapStatePropsType = {
     usersData: Array<UserType>

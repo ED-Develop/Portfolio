@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, FC} from 'react';
 import style from './Edit.module.css';
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsControls/FormsControls";
 import {connect} from "react-redux";
 import {getUserProfile, updateProfileData} from "../../Redux/profileReducer";
@@ -10,24 +10,43 @@ import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import InputItem from "./InputItem/InputItem";
 import Preloader from "../common/Preloader/Preloader";
+import {LoginFormData, ProfileType} from "../../types/types";
+import {AppStateType} from "../../Redux/reduxStore";
 
-class Edit extends Component {
+type MapStatePropsType = {
+    isUpdateSuccess: boolean
+    profile: ProfileType | null
+    userId: number | null
+}
+
+type MapDispatchPropsType = {
+    updateProfileData: (profileData: ProfileType) => void
+    getUserProfile: (userId: number) => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+type StateType = {
+    show: Array<string>
+}
+
+class Edit extends Component<PropsType, StateType> {
     state = {
         show: ['main']
     };
 
     componentDidMount() {
-        if (!this.props.profile) {
+        if (!this.props.profile && this.props.userId) {
             this.props.getUserProfile(this.props.userId);
         }
     }
 
-    onSubmit = (formData) => {
+    onSubmit = (formData: ProfileType) => {
         console.log(formData);
         this.props.updateProfileData(formData);
     };
 
-    showElement = (elementName) => {
+    showElement = (elementName: string) => {
         this.setState((prevState) => {
             if (prevState.show.some(item => item === elementName)) {
                 if (prevState.show.length > 1) {
@@ -59,7 +78,13 @@ class Edit extends Component {
     }
 }
 
-const EditForm = ({handleSubmit, ...props}) => {
+type FormPropsType = {
+    show: Array<string>
+    initialValues: ProfileType
+    showElement: (elementName: string) => void
+}
+
+const EditForm: FC<FormPropsType & InjectedFormProps<ProfileType, FormPropsType>> = ({handleSubmit, ...props}) => {
 
     const main = (<div className={style.section}>
         <InputItem name='fullName' label='Login' customClassName='right' validate={[required]}/>
@@ -102,9 +127,9 @@ const EditForm = ({handleSubmit, ...props}) => {
     )
 };
 
-const EditReduxForm = reduxForm({form: 'edit'})(EditForm);
+const EditReduxForm = reduxForm<ProfileType, FormPropsType>({form: 'edit'})(EditForm);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         isUpdateSuccess: state.profile.isUpdateSuccess,
         profile: state.profile.profile,
@@ -112,4 +137,5 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default compose(connect(mapStateToProps, {updateProfileData, getUserProfile}), withAuthRedirect)(Edit);
+export default compose(connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps,
+    {updateProfileData, getUserProfile}), withAuthRedirect)(Edit);

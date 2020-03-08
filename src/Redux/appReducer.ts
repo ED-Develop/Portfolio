@@ -75,7 +75,7 @@ const intialezedSuccess = (): IntialezedSuccessActionType => {
     }
 };
 
-type ToggleIsFetchingActionType = {
+export type ToggleIsFetchingActionType = {
     type: typeof TOGGLE_IS_FETCHING,
     isFetching: boolean
 }
@@ -87,7 +87,7 @@ export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionTyp
     }
 };
 
-type UploadInProgressActionType = {
+export type UploadInProgressActionType = {
     type: typeof UPLOAD_IN_PROGRESS,
     isUpload: boolean
 }
@@ -111,7 +111,7 @@ export const setGlobalError = (globalError: any): SetGlobalErrorActionType => {
     }
 };
 
-type ToggleIsSuccessActionType = {
+export type ToggleIsSuccessActionType = {
     type: typeof TOGGLE_IS_SUCCESS,
     payload: {
         isSuccess: boolean

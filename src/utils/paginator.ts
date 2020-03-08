@@ -1,4 +1,4 @@
-export const calcStartPage = (startPage, totalPages, portionSize, currentPage) => {
+export const calcStartPage = (startPage: number, totalPages: number, portionSize: number, currentPage: number) => {
 
     if (currentPage >= totalPages && totalPages != 0) {
         startPage = totalPages - portionSize;

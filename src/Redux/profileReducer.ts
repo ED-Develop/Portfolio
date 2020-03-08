@@ -1,8 +1,17 @@
 import {profileAPI} from "../api/api";
-import {toggleIsFetching, uploadInProgress} from "./appReducer";
-import {getOwnerProfileData, setProfileData} from "./authReducer";
-import {stopSubmit} from "redux-form";
+import {
+    toggleIsFetching,
+    ToggleIsFetchingActionType,
+    ToggleIsSuccessActionType,
+    uploadInProgress,
+    UploadInProgressActionType
+} from "./appReducer";
+import {getOwnerProfileData, setProfileData, SetProfileDataActionType} from "./authReducer";
+import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./reduxStore";
+import {ResultCodesEnum} from "../types/api-types";
 
 const ADD_POST = 'portfolio/profile/ADD-POST';
 const SET_USER_PROFILE = 'portfolio/profile/SET-USER-PROFILE';
@@ -47,7 +56,10 @@ let initialState = {
 
 type InitialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action:any): InitialStateType => {
+type ActionsTypes = AddPostActionType | DeletePostActionType | IncrementedLikeActionType | SetUserProfileActionType
+    | SetProfileStatusActionType | UploadProfilePhotoSuccessActionType | UpdateProfileDataSuccessActionType
+
+const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -113,6 +125,8 @@ const profileReducer = (state = initialState, action:any): InitialStateType => {
     }
 };
 
+// actions
+
 type AddPostActionType = {
     type: typeof ADD_POST,
     post: string
@@ -167,90 +181,91 @@ const setProfileStatus = (status: string): SetProfileStatusActionType => {
     }
 };
 
-type UploadProfilePhotoSuccess = {
+type UploadProfilePhotoSuccessActionType = {
     type: typeof UPLOAD_PROFILE_PHOTO_SUCCESS,
     photos: PhotosType
 }
 
-const uploadProfilePhotoSuccess = (photos: PhotosType): UploadProfilePhotoSuccess => {
+const uploadProfilePhotoSuccess = (photos: PhotosType): UploadProfilePhotoSuccessActionType => {
     return {
         type: UPLOAD_PROFILE_PHOTO_SUCCESS,
         photos
     }
 };
 
-type UpdateProfileDataSuccess = {
+type UpdateProfileDataSuccessActionType = {
     type: typeof UPDATE_PROFILE_DATA_SUCCESS,
     isUpdateSuccess: boolean
 }
 
-export const updateProfileDataSuccess = (isUpdateSuccess: boolean): UpdateProfileDataSuccess => {
+export const updateProfileDataSuccess = (isUpdateSuccess: boolean): UpdateProfileDataSuccessActionType => {
     return {
         type: UPDATE_PROFILE_DATA_SUCCESS,
         isUpdateSuccess
     }
 };
 
-export const getUserProfile = (userId: number) => {
-    return async (dispatch: any) => {
-        dispatch(toggleIsFetching(true));
-        let data = await profileAPI.getUserProfile(userId);
-        dispatch(setUserProfile(data));
-        dispatch(toggleIsFetching(false));
+// thunks
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes | ToggleIsFetchingActionType
+    | ToggleIsSuccessActionType | UploadInProgressActionType | SetProfileDataActionType | FormAction>;
+
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    let data = await profileAPI.getUserProfile(userId);
+    dispatch(setUserProfile(data));
+    dispatch(toggleIsFetching(false));
+};
+
+export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
+    let status = await profileAPI.getProfileStatus(userId);
+
+    dispatch(setProfileStatus(status));
+};
+export const updateProfileStatus = (status: string): ThunkType => async (dispatch) => {
+    let resultCode = await profileAPI.updateProfileStatus(status);
+
+    if (resultCode === ResultCodesEnum.Success) {
+        dispatch(setProfileStatus(status));
     }
 };
 
-export const getProfileStatus = (userId: number) => {
-    return async (dispatch: any) => {
-        let response = await profileAPI.getProfileStatus(userId);
-        dispatch(setProfileStatus(response.data));
-    }
-};
-export const updateProfileStatus = (status: string) => {
-    return async (dispatch: any) => {
-        let response = await profileAPI.updateProfileStatus(status);
-        if (response.data.resultCode === 0) {
-            dispatch(setProfileStatus(status));
-        }
-    }
+export const uploadProfilePhoto = (photoFile: any): ThunkType => async (dispatch, getState) => {
+    dispatch(uploadInProgress(true));
+    let photos = await profileAPI.uploadProfilePhoto((photoFile));
+
+    dispatch(uploadProfilePhotoSuccess(photos));
+    dispatch(setProfileData(photos, getState().auth.login));
+    dispatch(uploadInProgress(false));
 };
 
-export const uploadProfilePhoto = (photoFile: any) => {
-    return async (dispatch: any, getState: any) => {
-        dispatch(uploadInProgress(true));
-        let photos = await profileAPI.uploadProfilePhoto((photoFile));
-        dispatch(uploadProfilePhotoSuccess(photos));
-        dispatch(setProfileData(photos, getState().auth.login));
-        dispatch(uploadInProgress(false));
-    };
-};
+export const updateProfileData = (profileData: ProfileType): ThunkType => async (dispatch, getState) => {
+    dispatch(updateProfileDataSuccess(false));
+    let response = await profileAPI.updateProfileData(profileData);
 
-export const updateProfileData = (profileData: any) => {
-    return async (dispatch: any, getState: any) => {
-        dispatch(updateProfileDataSuccess(false));
-        let data = await profileAPI.updateProfileData(profileData);
+    if (response.resultCode === ResultCodesEnum.Success) {
         let userId = getState().auth.userId;
-        if (data.resultCode === 0) {
-            dispatch(updateProfileDataSuccess(true));
-            dispatch(getOwnerProfileData(userId));
-        } else {
-            let errorItems = data.messages.map( (message:any) => {
-                let start = message.indexOf('>') + 1;
-                let item = message.slice(start, message.indexOf(')',start));
-                return item[0].toLowerCase() + item.slice(1);
-            });
 
-            type Errors = {
-                contacts: any
-            }
+        if (userId) dispatch(getOwnerProfileData(userId));
 
-            let errors: Errors = {"contacts": {} };
+        dispatch(updateProfileDataSuccess(true));
+    } else {
+        let errorItems = response.messages.map((message: any) => {
+            let start = message.indexOf('>') + 1;
+            let item = message.slice(start, message.indexOf(')', start));
+            return item[0].toLowerCase() + item.slice(1);
+        });
 
-            errorItems.forEach( (item:string) => {
-                errors["contacts"][item] = 'Invalid url format';
-            } );
-            dispatch(stopSubmit('edit', errors));
+        type Errors = {
+            contacts: any
         }
+
+        let errors: Errors = {"contacts": {}};
+
+        errorItems.forEach((item: string) => {
+            errors["contacts"][item] = 'Invalid url format';
+        });
+        dispatch(stopSubmit('edit', errors));
     }
 };
 

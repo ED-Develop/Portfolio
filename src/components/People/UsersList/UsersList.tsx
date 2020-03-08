@@ -3,7 +3,6 @@ import style from './UsersList.module.css';
 import User from "./User/User";
 import Paginator from "../../common/Paginator/Paginator";
 import {UserType} from "../../../types/types";
-import {follow} from "../../../Redux/UsersReducer";
 
 type PropsType = {
     usersData: Array<UserType>

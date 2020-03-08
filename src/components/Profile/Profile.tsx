@@ -53,12 +53,14 @@ const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDia
     let modalWindow = (<ModalWindow hideModalWindow={hideModalWindow}
                                     footerDescription={'If you are having trouble downloading, try choosing a smaller photo.'}
                                     modalTitle={'Upload new photo'}>
-        <div className={style.modalDescription}>
-            <div>It will be easier for friends to recognize you if you upload your real photo.</div>
-            <div>You can upload a JPG, GIF or PNG image.</div>
-        </div>
-        <div className={style.inputFile}>
-            <input onChange={onPhotoSelected} type='file'/>
+        <div>
+            <div className={style.modalDescription}>
+                <div>It will be easier for friends to recognize you if you upload your real photo.</div>
+                <div>You can upload a JPG, GIF or PNG image.</div>
+            </div>
+            <div className={style.inputFile}>
+                <input onChange={onPhotoSelected} type='file'/>
+            </div>
         </div>
     </ModalWindow>);
 
