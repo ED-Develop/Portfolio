@@ -1,12 +1,18 @@
 import React, {FC} from 'react';
 import style from './FormsControls.module.css';
-import {WrappedFieldProps} from "redux-form";
+import {Field, WrappedFieldProps} from "redux-form";
+import {required, ValidatorsType} from "../../../utils/validators";
 
 type PropsType = {
     customClassName: string
 }
 
-export const Input: FC<PropsType & WrappedFieldProps> = ({input, meta, customClassName, ...props}) => {
+export const Input: FC<PropsType & WrappedFieldProps> = ({
+                                                             input,
+                                                             meta,
+                                                             customClassName,
+                                                             ...props
+                                                         }) => {
     let hasError = meta.error && meta.touched;
 
     return (
@@ -17,7 +23,12 @@ export const Input: FC<PropsType & WrappedFieldProps> = ({input, meta, customCla
     )
 };
 
-export const Textarea: FC<PropsType & WrappedFieldProps> = ({input, meta, customClassName,  ...props}) => {
+export const Textarea: FC<PropsType & WrappedFieldProps> = ({
+                                                                input,
+                                                                meta,
+                                                                customClassName,
+                                                                ...props
+                                                            }) => {
     let hasError = meta.error && meta.touched;
     return (
         <div className={hasError ? style.error : ''}>
@@ -26,3 +37,16 @@ export const Textarea: FC<PropsType & WrappedFieldProps> = ({input, meta, custom
         </div>
     )
 };
+
+
+export function createField<ForkKeysType extends string>(component: FC<PropsType & WrappedFieldProps> | string,
+                                                         name: ForkKeysType,
+                                                         validators?: Array<ValidatorsType>,
+                                                         type?: string,
+                                                         placeholder?: string,
+                                                         customClassName?: string) {
+    return (
+        <Field validate={validators} customClassName={customClassName} component={component} name={name}
+               placeholder={placeholder} type={type}/>
+    )
+}

@@ -1,3 +1,5 @@
+export type ValidatorsType = (values: string) => string | undefined
+
 export const required = (values: string) => {
     if (values) {
         return undefined
