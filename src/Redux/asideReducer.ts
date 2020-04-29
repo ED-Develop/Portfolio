@@ -1,23 +1,18 @@
 import {usersAPI} from "../api/api";
 import {UserType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./reduxStore";
+import {AppStateType, CommonThunkType, InferActionsTypes} from "./reduxStore";
 
-const SET_FRIENDS = 'portfolio/aside/SET_FRIENDS';
-
-type InitialStateType = {
-    friends: Array<UserType>
-}
-
-let initialState: InitialStateType = {
-    friends: []
+const initialState = {
+    friends: [] as Array<UserType>
 };
 
-type ActionsTypes = SetFriendsActionType;
+type InitialStateType = typeof initialState;
+type AsideActionsTypes = InferActionsTypes<typeof asideActions>;
 
-const asideReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const asideReducer = (state = initialState, action: AsideActionsTypes): InitialStateType => {
     switch (action.type) {
-        case SET_FRIENDS: {
+        case "portfolio/aside/SET_FRIENDS": {
             return {
                 ...state,
                 friends: [...action.friends]
@@ -31,27 +26,19 @@ const asideReducer = (state = initialState, action: ActionsTypes): InitialStateT
 
 //actions
 
-type SetFriendsActionType = {
-    type: typeof SET_FRIENDS,
-    friends: Array<any>
-}
-
-const setFriends = (friends: Array<UserType>): SetFriendsActionType => {
-    return {
-        type: SET_FRIENDS,
-        friends
-    }
+export const asideActions = {
+    setFriends: (friends: Array<UserType>) => ({type: 'portfolio/aside/SET_FRIENDS', friends} as const),
 };
 
 //thunks
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+type ThunkType = CommonThunkType<AsideActionsTypes>;
 
 export const getFriends = (): ThunkType => async (dispatch) => {
     const response = await usersAPI.getUsers(6, 1);
     const data = await usersAPI.getUsers(6, Math.ceil(response.totalCount / 6) - 1);
 
-    dispatch(setFriends(data.items));
+    dispatch(asideActions.setFriends(data.items));
 };
 
 export default asideReducer;

@@ -7,7 +7,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import Preloader from "./components/common/Preloader/Preloader";
-import {initializeApp, setGlobalError} from "./Redux/appReducer";
+import {appActions, initializeApp} from "./Redux/appReducer";
 import store, {AppStateType} from "./Redux/reduxStore";
 import withSuspense from "./hoc/withSuspense";
 import ModalWindow from "./components/common/ModalWindow/ModalWindow";
@@ -80,7 +80,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 };
 
 const AppConnected = connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps,
-    {initializeApp, setGlobalError})(AppContainer);
+    {initializeApp, setGlobalError: appActions.setGlobalError})(AppContainer);
 
 
 const MainApp = () => {

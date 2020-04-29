@@ -128,8 +128,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 
-export default compose(connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps, {
-        getUserProfile, getProfileStatus, updateProfileDataSuccess,
-        updateProfileStatus, uploadProfilePhoto, startDialogs
-    }),
-    withRouter)(ProfileContainer);
+export default connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps, {
+    getUserProfile, getProfileStatus, updateProfileDataSuccess,
+    updateProfileStatus, uploadProfilePhoto, startDialogs
+})(withRouter(ProfileContainer));

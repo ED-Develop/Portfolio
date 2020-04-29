@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import style from './LoginForm.module.css';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {email, required} from "../../../utils/validators";
 import {createField, Input} from "../../common/FormsControls/FormsControls";
 import {LoginFormData} from "../../../types/types";

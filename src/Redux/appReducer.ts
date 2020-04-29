@@ -1,58 +1,30 @@
 import {auth} from "./authReducer";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./reduxStore";
+import {AppStateType, CommonThunkType, InferActionsTypes} from "./reduxStore";
 
-const INITIALIZED_SUCCESS = 'portfolio/app/INITIALIZED_SUCCESS';
-const TOGGLE_IS_FETCHING = 'portfolio/app/TOGGLE-IS-FETCHING';
-const UPLOAD_IN_PROGRESS = 'portfolio/app/UPLOAD_IN_PROGRESS';
-const SET_GLOBAL_ERROR = 'portfolio/app/SET_GLOBAL_ERROR';
-const TOGGLE_IS_SUCCESS = 'portfolio/app/TOGGLE_IS_SUCCESS';
-
-type InitialStateType = {
-    initialized: boolean,
-    isFetching: boolean,
-    isUpload: boolean,
-    globalError: any,
-    isSuccess: boolean
-}
-
-let initialState: InitialStateType = {
+let initialState = {
     initialized: false,
     isFetching: false,
     isUpload: false,
-    globalError: null,
+    globalError: null as any,
     isSuccess: false
 };
 
-type ActionsTypes = IntialezedSuccessActionType | ToggleIsFetchingActionType | UploadInProgressActionType
-    | SetGlobalErrorActionType | ToggleIsSuccessActionType;
+type InitialStateType = typeof initialState;
 
-const appReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+export type AppActionsTypes = InferActionsTypes<typeof appActions>;
+
+const appReducer = (state = initialState, action: AppActionsTypes): InitialStateType => {
     switch (action.type) {
-        case INITIALIZED_SUCCESS:
+        case "portfolio/app/INITIALIZED_SUCCESS":
             return {
                 ...state,
                 initialized: true
             };
-        case TOGGLE_IS_FETCHING: {
-            return {
-                ...state,
-                isFetching: action.isFetching
-            }
-        }
-        case UPLOAD_IN_PROGRESS: {
-            return {
-                ...state,
-                isUpload: action.isUpload
-            }
-        }
-        case SET_GLOBAL_ERROR: {
-            return {
-                ...state,
-                globalError: action.globalError
-            }
-        }
-        case TOGGLE_IS_SUCCESS: {
+        case "portfolio/app/TOGGLE-IS-FETCHING":
+        case "portfolio/app/TOGGLE_IS_SUCCESS":
+        case "portfolio/app/SET_GLOBAL_ERROR":
+        case "portfolio/app/UPLOAD_IN_PROGRESS": {
             return {
                 ...state,
                 ...action.payload
@@ -65,77 +37,23 @@ const appReducer = (state = initialState, action: ActionsTypes): InitialStateTyp
 
 //actions
 
-type IntialezedSuccessActionType = {
-    type: typeof INITIALIZED_SUCCESS;
-}
-
-const intialezedSuccess = (): IntialezedSuccessActionType => {
-    return {
-        type: INITIALIZED_SUCCESS
-    }
-};
-
-export type ToggleIsFetchingActionType = {
-    type: typeof TOGGLE_IS_FETCHING,
-    isFetching: boolean
-}
-
-export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => {
-    return {
-        type: TOGGLE_IS_FETCHING,
-        isFetching
-    }
-};
-
-export type UploadInProgressActionType = {
-    type: typeof UPLOAD_IN_PROGRESS,
-    isUpload: boolean
-}
-
-export const uploadInProgress = (isUpload: boolean): UploadInProgressActionType => {
-    return {
-        type: UPLOAD_IN_PROGRESS,
-        isUpload
-    }
-};
-
-type SetGlobalErrorActionType = {
-    type: typeof SET_GLOBAL_ERROR,
-    globalError: any
-}
-
-export const setGlobalError = (globalError: any): SetGlobalErrorActionType => {
-    return {
-        type: SET_GLOBAL_ERROR,
-        globalError
-    }
-};
-
-export type ToggleIsSuccessActionType = {
-    type: typeof TOGGLE_IS_SUCCESS,
-    payload: {
-        isSuccess: boolean
-    }
-}
-
-export const toggleIsSuccess = (isSuccess: boolean): ToggleIsSuccessActionType => {
-    return {
-        type: TOGGLE_IS_SUCCESS,
-        payload: {
-            isSuccess
-        }
-    }
+export const appActions = {
+    initializedSuccess: () => ({type: 'portfolio/app/INITIALIZED_SUCCESS'} as const),
+    toggleIsFetching: (isFetching: boolean) => ({type: 'portfolio/app/TOGGLE-IS-FETCHING', payload: {isFetching}} as const),
+    uploadInProgress: (isUpload: boolean) => ({type: 'portfolio/app/UPLOAD_IN_PROGRESS', payload: {isUpload}} as const),
+    setGlobalError: (globalError: any) => ({type: 'portfolio/app/SET_GLOBAL_ERROR', payload: {globalError}} as const),
+    toggleIsSuccess: (isSuccess: boolean) => ({type: 'portfolio/app/TOGGLE_IS_SUCCESS', payload: {isSuccess}} as const),
 };
 
 // thunks
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+type ThunkType = CommonThunkType<AppActionsTypes>;
 
 export const initializeApp = (): ThunkType => async (dispatch) => {
     let promise = dispatch(auth());
 
     Promise.all([promise]).then(() => {
-        dispatch(intialezedSuccess());
+        dispatch(appActions.initializedSuccess());
     })
 };
 

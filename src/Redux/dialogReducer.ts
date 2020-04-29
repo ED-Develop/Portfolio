@@ -1,24 +1,20 @@
 import {dialogsAPI} from "../api/api";
-import {toggleIsFetching, ToggleIsFetchingActionType, toggleIsSuccess, ToggleIsSuccessActionType} from "./appReducer";
+import {appActions, AppActionsTypes} from "./appReducer";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./reduxStore";
+import {AppStateType, CommonThunkType, InferActionsTypes} from "./reduxStore";
 
-const ADD_MESSAGE = 'portfolio/dialogs/ADD-MESSAGE';
-const SET_DIALOGS = 'portfolio/dialogs/SET_DIALOGS';
-const SET_MESSAGES = 'portfolio/dialogs/SET_MESSAGES';
-
-let initialState = {
+const initialState = {
     dialogs: [] as Array<any>,
     messages: [] as Array<any>
 };
 
 type InitialStateType = typeof initialState;
 
-type ActionsTypes = AddMessageActionType | SetDialogsActionType | SetMessagesActionType;
+type DialogsActionsTypes = InferActionsTypes<typeof dialogsActions>;
 
-const dialogReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const dialogReducer = (state = initialState, action: DialogsActionsTypes): InitialStateType => {
     switch (action.type) {
-        case ADD_MESSAGE: {
+        case "portfolio/dialogs/ADD-MESSAGE": {
             let newMessage = {
                 id: `${state.messages.length ? +state.messages[state.messages.length - 1].id + 1 : 1}`,
                 userId: action.userId,
@@ -32,13 +28,13 @@ const dialogReducer = (state = initialState, action: ActionsTypes): InitialState
                 messages: [...state.messages, newMessage]
             };
         }
-        case SET_DIALOGS: {
+        case "portfolio/dialogs/SET_DIALOGS": {
             return {
                 ...state,
                 dialogs: [...action.dialogs]
             }
         }
-        case SET_MESSAGES: {
+        case "portfolio/dialogs/SET_MESSAGES": {
             return {
                 ...state,
                 messages: [...action.messages]
@@ -51,62 +47,38 @@ const dialogReducer = (state = initialState, action: ActionsTypes): InitialState
 
 // actions
 
-type AddMessageActionType = {
-    type: typeof ADD_MESSAGE,
-    messageText: string,
-    userId: number,
-    login: string
-}
-
-export const addMessage = (messageText: string, userId: number, login: string): AddMessageActionType => {
-    return {type: ADD_MESSAGE, messageText, userId, login}
+export const dialogsActions = {
+    addMessage: (messageText: string, userId: number, login: string) => ({
+        type: 'portfolio/dialogs/ADD-MESSAGE',
+        messageText,
+        userId,
+        login
+    } as const),
+    setDialogs: (dialogs: Array<any>) => ({type: 'portfolio/dialogs/SET_DIALOGS', dialogs} as const),
+    setMessages: (messages: Array<any>) => ({type: 'portfolio/dialogs/SET_MESSAGES', messages} as const),
 };
 
-type SetDialogsActionType = {
-    type: typeof SET_DIALOGS,
-    dialogs: Array<any>
-}
-
-export const setDialogs = (dialogs: Array<any>): SetDialogsActionType => {
-    return {
-        type: SET_DIALOGS,
-        dialogs
-    }
-};
-
-type SetMessagesActionType = {
-    type: typeof SET_MESSAGES,
-    messages: Array<any>
-}
-
-export const setMessages = (messages: Array<any>): SetMessagesActionType => {
-    return {
-        type: SET_MESSAGES,
-        messages
-    }
-};
 
 // thunks
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes | ToggleIsFetchingActionType
-    | ToggleIsSuccessActionType>;
+type ThunkType = CommonThunkType<DialogsActionsTypes | AppActionsTypes>
 
 export const startDialogs = (userId: number): ThunkType => async (dispatch) => {
     await dialogsAPI.startDialog(userId);
-    dispatch(toggleIsSuccess(true));
+    dispatch(appActions.toggleIsSuccess(true));
 };
 
 export const getDialogs = (): ThunkType => async (dispatch) => {
-    dispatch(toggleIsFetching(true));
+    dispatch(appActions.toggleIsFetching(true));
     const data = await dialogsAPI.getDialogs();
-    dispatch(setDialogs(data));
-    dispatch(toggleIsFetching(false));
+    dispatch(dialogsActions.setDialogs(data));
+    dispatch(appActions.toggleIsFetching(false));
 };
 
 export const getMessages = (userId: number): ThunkType => async (dispatch) => {
-    dispatch(toggleIsFetching(true));
+    dispatch(appActions.toggleIsFetching(true));
     await dialogsAPI.getMessages(userId);
-    dispatch(toggleIsFetching(false));
+    dispatch(appActions.toggleIsFetching(false));
 };
 
 export default dialogReducer;
