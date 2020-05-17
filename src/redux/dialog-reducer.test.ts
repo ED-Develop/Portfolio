@@ -1,4 +1,5 @@
-import dialogReducer, {addMessage, setDialogs, setMessages} from "./dialogReducer";
+import dialogReducer, {dialogsActions} from "./dialog-reducer";
+const {setMessages, addMessage, setDialogs} = dialogsActions;
 
 const state = {
     dialogs: [],

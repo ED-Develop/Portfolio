@@ -10,10 +10,10 @@ import {
     getStartPage,
     getTotalCount,
     getUsersData
-} from "../../../Redux/usersSelector";
+} from "../../../redux/users-selector";
 import {UserType} from "../../../types/types";
-import {AppStateType} from "../../../Redux/reduxStore";
-import {follow, getUsers, unFollow} from "../../../Redux/usersReducer";
+import {AppStateType} from "../../../redux/store";
+import {follow, getUsers, unFollow} from "../../../redux/users-reducer";
 
 type MapStatePropsType = {
     usersData: Array<UserType>

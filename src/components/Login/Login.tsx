@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import style from './Login.module.css';
 import LoginReduxForm from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
-import {auth, login} from "../../Redux/authReducer";
+import {auth, login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
-import {AppStateType} from "../../Redux/reduxStore";
+import {AppStateType} from "../../redux/store";
 import {LoginFormData} from "../../types/types";
 
 type MapStatePropsType = {

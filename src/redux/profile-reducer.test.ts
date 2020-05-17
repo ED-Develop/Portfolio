@@ -1,10 +1,12 @@
-import profileReducer, {addPost, deletePost, incrementedLike} from "./profileReducer";
+import profileReducer, {profileActions} from "./profile-reducer";
+import {PostType, ProfileType} from "../types/types";
 
+const {addPost, deletePost, incrementedLike} = profileActions;
 
 let state = {
     postData: [
         {
-            id: '3',
+            id: 3,
             date: '10/20/2019',
             likeCount: 15,
             postText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut\n' +
@@ -14,19 +16,23 @@ let state = {
                 'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
         },
         {
-            id: '2',
+            id: 2,
             date: '10/20/2019',
             likeCount: 54,
             postText: 'I learn React JS'
         },
         {
-            id: '1',
+            id: 1,
             date: '10/20/2019',
             likeCount: 24,
             postText: "It'style my first post"
 
         }
-    ],
+    ] as Array<PostType>,
+    profile: null as ProfileType | null,
+    status: '' as string,
+    followed: true,
+    isUpdateSuccess: false
 };
 
 it('length of post should be incremented', () => {

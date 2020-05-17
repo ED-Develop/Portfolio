@@ -4,7 +4,7 @@ import style from './Projects.module.css';
 import ProjectItem from "./ProjectItem/ProjectItem";
 import {connect} from "react-redux";
 import {ProjectType} from "../../types/types";
-import {AppStateType} from "../../Redux/reduxStore";
+import {AppStateType} from "../../redux/store";
 
 type PropsType = {
     projects: Array<ProjectType>

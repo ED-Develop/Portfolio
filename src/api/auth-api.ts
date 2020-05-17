@@ -12,12 +12,12 @@ export type LoginResponseType = {
 
 type LoginResultCode = ResultCodesEnum | ResultCodesForCaptchaEnum;
 
-export const authAPI = {
+export const authApi = {
     authMe() {
         return instance.get<BaseResponseType<AuthMeResponseType>>('auth/me')
             .then(response => response.data);
     },
-    login(email: string, password: string, rememberMe: boolean, captcha: string) {
+    login(email: string, password: string, rememberMe: boolean, captcha?: string) {
         return instance.post<BaseResponseType<LoginResponseType, LoginResultCode>>('auth/login', {
             email,
             password,

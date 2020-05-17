@@ -1,13 +1,13 @@
 import React from 'react';
-import {dialogsActions, getDialogs, getMessages} from "../../Redux/dialogReducer";
+import {dialogsActions, getDialogs, getMessages} from "../../redux/dialog-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {appActions} from "../../Redux/appReducer";
+import {appActions} from "../../redux/app-reducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
-import {AppStateType} from "../../Redux/reduxStore";
+import {AppStateType} from "../../redux/store";
 
 const {addMessage} = dialogsActions;
 const {toggleIsSuccess} = appActions;

@@ -5,7 +5,7 @@ const initialState = {
         {
             name: 'Online store',
             type: 'SPA',
-            technologies: 'React/Redux',
+            technologies: 'React/redux',
             logo: 'https://us.123rf.com/450wm/natalypaint/natalypaint1704/natalypaint170400066/77108225-web-banner-online-store-with-shopping-bags-concept-online-shopping.jpg?ver=6',
             link: 'https://ed-develop.github.io/online-store/'
         },
@@ -19,12 +19,13 @@ const initialState = {
     ] as Array<ProjectType>
 };
 
-type InitialStateType = typeof initialState;
-
 const projectsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
-        default: return state;
+        default:
+            return state;
     }
 };
+
+type InitialStateType = typeof initialState;
 
 export default projectsReducer;

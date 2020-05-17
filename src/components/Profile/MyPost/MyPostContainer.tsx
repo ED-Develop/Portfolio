@@ -1,10 +1,10 @@
 import React from 'react';
-import {profileActions} from "../../../Redux/profileReducer";
+import {profileActions} from "../../../redux/profile-reducer";
 import MyPost from "./MyPost";
 import {connect} from "react-redux";
-import {getPosts} from "../../../Redux/profileSelector";
+import {getPosts} from "../../../redux/profile-selector";
 import {PostType} from "../../../types/types";
-import {AppStateType} from "../../../Redux/reduxStore";
+import {AppStateType} from "../../../redux/store";
 
 const {addPost, deletePost, incrementedLike} = profileActions;
 

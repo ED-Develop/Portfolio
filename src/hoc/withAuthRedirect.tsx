@@ -1,7 +1,7 @@
 import React, {Component, FC} from 'react';
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {AppStateType} from "../Redux/reduxStore";
+import {AppStateType} from "../redux/store";
 
 type InjectedProps = {
     isAuth: boolean

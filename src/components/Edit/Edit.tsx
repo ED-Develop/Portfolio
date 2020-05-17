@@ -3,7 +3,7 @@ import style from './Edit.module.css';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormsControls/FormsControls";
 import {connect} from "react-redux";
-import {getUserProfile, updateProfileData} from "../../Redux/profileReducer";
+import {getUserProfile, updateProfileData} from "../../redux/profile-reducer";
 import {Redirect} from "react-router-dom";
 import {required} from "../../utils/validators";
 import {compose} from "redux";
@@ -11,7 +11,7 @@ import withAuthRedirect from "../../hoc/withAuthRedirect";
 import InputItem from "./InputItem/InputItem";
 import Preloader from "../common/Preloader/Preloader";
 import {ProfileType} from "../../types/types";
-import {AppStateType} from "../../Redux/reduxStore";
+import {AppStateType} from "../../redux/store";
 
 
 type MapStatePropsType = {

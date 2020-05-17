@@ -7,12 +7,12 @@ import {
     profileActions,
     updateProfileStatus,
     uploadProfilePhoto
-} from "../../Redux/profileReducer";
+} from "../../redux/profile-reducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
-import {startDialogs} from "../../Redux/dialogReducer";
+import {startDialogs} from "../../redux/dialog-reducer";
 import {ProfileType} from "../../types/types";
-import {AppStateType} from "../../Redux/reduxStore";
+import {AppStateType} from "../../redux/store";
 
 const {updateProfileDataSuccess} = profileActions;
 

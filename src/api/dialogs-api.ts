@@ -1,6 +1,6 @@
 import {instance} from "./api";
 
-export const dialogsAPI = {
+export const dialogsApi = {
     startDialog(userId: number) {
         return instance.put(`dialogs/${userId}`);
     },

@@ -7,7 +7,7 @@ export type UsersResponseType = {
     error: string
 }
 
-export const usersAPI = {
+export const usersApi = {
     getUsers(count: number, currentPage: number) {
         return instance.get<UsersResponseType>(`users?count=${count}&page=${currentPage}`)
             .then(response => response.data)

@@ -5,7 +5,7 @@ export type ProfilePhotoResponseType = {
     photos: PhotosType
 }
 
-export const profileAPI = {
+export const profileApi = {
     getUserProfile(userId: number) {
         return instance.get<ProfileType>(`profile/${userId}`)
             .then(response => response.data);
@@ -18,7 +18,7 @@ export const profileAPI = {
         return instance.put<BaseResponseType>(`profile/status`, {status})
             .then(response => response.data.resultCode);
     },
-    uploadProfilePhoto(photoFile: any) {
+    uploadProfilePhoto(photoFile: File) {
         let formData = new FormData();
         formData.append("image", photoFile);
 

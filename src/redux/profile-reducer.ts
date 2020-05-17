@@ -1,10 +1,9 @@
-import {appActions, AppActionsTypes} from "./appReducer";
-import {getOwnerProfileData, authActions, AuthActionsTypes} from "./authReducer";
+import {appActions, AppActionsTypes} from "./app-reducer";
+import {getOwnerProfileData, authActions, AuthActionsTypes} from "./auth-reducer";
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, CommonThunkType, InferActionsTypes} from "./reduxStore";
-import {profileAPI} from "../api/profileApi";
+import {CommonThunkType, InferActionsTypes} from "./store";
+import {profileApi} from "../api/profile-api";
 import {ResultCodesEnum} from "../api/api";
 
 const initialState = {
@@ -39,39 +38,34 @@ const initialState = {
     isUpdateSuccess: false
 };
 
-type InitialStateType = typeof initialState;
-
-type ProfileActionsTypes = InferActionsTypes<typeof profileActions>;
-
 const profileReducer = (state = initialState, action: ProfileActionsTypes): InitialStateType => {
     switch (action.type) {
-        case "portfolio/profile/SET-USER-PROFILE":
-        case "portfolio/profile/SET_PROFILE_STATUS":
-        case "portfolio/profile/UPDATE_PROFILE_DATA_SUCCESS": {
+        case "PORTFOLIO/PROFILE/SET-USER-PROFILE":
+        case "PORTFOLIO/PROFILE/SET_PROFILE_STATUS":
+        case "PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS":
             return {
                 ...state,
                 ...action.payload
 
-            }
-        }
-        case "portfolio/profile/ADD-POST":
+            };
+        case "PORTFOLIO/PROFILE/ADD-POST":
             let newPost = {
                 id: state.postData[0].id + 1,
                 date: '10/21/2019',
                 likeCount: 0,
                 postText: action.post
             };
+
             return {
                 ...state,
                 postData: [newPost, ...state.postData],
             };
-        case "portfolio/profile/DELETE_POST": {
+        case "PORTFOLIO/PROFILE/DELETE_POST":
             return {
                 ...state,
                 postData: state.postData.filter((post) => post.id != action.postId)
-            }
-        }
-        case "portfolio/profile/INCREMENTED_LIKE": {
+            };
+        case "PORTFOLIO/PROFILE/INCREMENTED_LIKE":
             return {
                 ...state,
                 postData: state.postData.map((post) => {
@@ -81,9 +75,8 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
                         return post;
                     }
                 })
-            }
-        }
-        case "portfolio/profile/UPLOAD_PROFILE_PHOTO_SUCCESS": {
+            };
+        case "PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS":
             return {
                 ...state,
                 profile: {
@@ -92,8 +85,7 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
                         ...action.photos
                     }
                 } as ProfileType
-            }
-        }
+            };
         default:
             return state;
     }
@@ -102,48 +94,46 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
 // actions
 
 export const profileActions = {
-    addPost: (post: string) => ({type: 'portfolio/profile/ADD-POST', post} as const),
-    deletePost: (postId: number) => ({type: 'portfolio/profile/DELETE_POST', postId} as const),
-    incrementedLike: (postId: number) => ({type: 'portfolio/profile/INCREMENTED_LIKE', postId} as const),
-    setUserProfile: (profile: ProfileType) => ({type: 'portfolio/profile/SET-USER-PROFILE', payload: {profile}} as const),
-    setProfileStatus: (status: string) => ({type: 'portfolio/profile/SET_PROFILE_STATUS', payload: {status}} as const),
+    addPost: (post: string) => ({type: 'PORTFOLIO/PROFILE/ADD-POST', post} as const),
+    deletePost: (postId: number) => ({type: 'PORTFOLIO/PROFILE/DELETE_POST', postId} as const),
+    incrementedLike: (postId: number) => ({type: 'PORTFOLIO/PROFILE/INCREMENTED_LIKE', postId} as const),
+    setUserProfile: (profile: ProfileType) => ({type: 'PORTFOLIO/PROFILE/SET-USER-PROFILE', payload: {profile}} as const),
+    setProfileStatus: (status: string) => ({type: 'PORTFOLIO/PROFILE/SET_PROFILE_STATUS', payload: {status}} as const),
     uploadProfilePhotoSuccess: (photos: PhotosType) => ({
-        type: 'portfolio/profile/UPLOAD_PROFILE_PHOTO_SUCCESS',
+        type: 'PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS',
         photos
     } as const),
     updateProfileDataSuccess: (isUpdateSuccess: boolean) => ({
-        type: 'portfolio/profile/UPDATE_PROFILE_DATA_SUCCESS',
+        type: 'PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS',
         payload: {isUpdateSuccess}
     } as const)
 };
 
 // thunks
 
-type ThunkType = CommonThunkType<ProfileActionsTypes | FormAction | AuthActionsTypes | AppActionsTypes>
-
 export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     dispatch(appActions.toggleIsFetching(true));
-    let data = await profileAPI.getUserProfile(userId);
+    let data = await profileApi.getUserProfile(userId);
     dispatch(profileActions.setUserProfile(data));
     dispatch(appActions.toggleIsFetching(false));
 };
 
 export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
-    let status = await profileAPI.getProfileStatus(userId);
+    let status = await profileApi.getProfileStatus(userId);
 
     dispatch(profileActions.setProfileStatus(status));
 };
 export const updateProfileStatus = (status: string): ThunkType => async (dispatch) => {
-    let resultCode = await profileAPI.updateProfileStatus(status);
+    let resultCode = await profileApi.updateProfileStatus(status);
 
     if (resultCode === ResultCodesEnum.Success) {
         dispatch(profileActions.setProfileStatus(status));
     }
 };
 
-export const uploadProfilePhoto = (photoFile: any): ThunkType => async (dispatch, getState) => {
+export const uploadProfilePhoto = (photoFile: File): ThunkType => async (dispatch, getState) => {
     dispatch(appActions.uploadInProgress(true));
-    let photos = await profileAPI.uploadProfilePhoto((photoFile));
+    let photos = await profileApi.uploadProfilePhoto((photoFile));
 
     dispatch(profileActions.uploadProfilePhotoSuccess(photos));
     dispatch(authActions.setProfileData(photos, getState().auth.login));
@@ -152,7 +142,7 @@ export const uploadProfilePhoto = (photoFile: any): ThunkType => async (dispatch
 
 export const updateProfileData = (profileData: ProfileType): ThunkType => async (dispatch, getState) => {
     dispatch(profileActions.updateProfileDataSuccess(false));
-    let response = await profileAPI.updateProfileData(profileData);
+    let response = await profileApi.updateProfileData(profileData);
 
     if (response.resultCode === ResultCodesEnum.Success) {
         let userId = getState().auth.userId;
@@ -179,5 +169,9 @@ export const updateProfileData = (profileData: ProfileType): ThunkType => async 
         dispatch(stopSubmit('edit', errors));
     }
 };
+
+type InitialStateType = typeof initialState;
+type ProfileActionsTypes = InferActionsTypes<typeof profileActions>;
+type ThunkType = CommonThunkType<ProfileActionsTypes | FormAction | AuthActionsTypes | AppActionsTypes>
 
 export default profileReducer;

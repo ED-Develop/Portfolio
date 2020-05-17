@@ -1,8 +1,8 @@
 import React from 'react';
 import Aside from "./Aside";
 import {connect} from "react-redux";
-import {getFriends} from "../../Redux/asideReducer";
-import {AppStateType} from "../../Redux/reduxStore";
+import {getFriends} from "../../redux/aside-reducer";
+import {AppStateType} from "../../redux/store";
 import {UserType} from "../../types/types";
 
 type MapStatePropsType = {
