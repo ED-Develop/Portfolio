@@ -1,10 +1,12 @@
 import React from 'react';
-import {addPost, deletePost, incrementedLike} from "../../../Redux/profileReducer";
+import {profileActions} from "../../../Redux/profileReducer";
 import MyPost from "./MyPost";
 import {connect} from "react-redux";
 import {getPosts} from "../../../Redux/profileSelector";
 import {PostType} from "../../../types/types";
 import {AppStateType} from "../../../Redux/reduxStore";
+
+const {addPost, deletePost, incrementedLike} = profileActions;
 
 type MapStatePropsType = {
     postData: Array<PostType>

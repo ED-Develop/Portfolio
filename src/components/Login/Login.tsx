@@ -63,5 +63,5 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 };
 
-export default connect<MapStatePropsType, MapDispatchPropsType, never, AppStateType>(mapStateToProps,
+export default connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
     {login, auth})(Login);

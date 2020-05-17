@@ -1,7 +1,7 @@
-import {usersAPI} from "../api/api";
 import {UserType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, CommonThunkType, InferActionsTypes} from "./reduxStore";
+import {usersAPI} from "../api/usersApi";
 
 const initialState = {
     friends: [] as Array<UserType>

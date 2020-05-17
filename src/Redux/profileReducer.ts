@@ -1,11 +1,11 @@
-import {profileAPI} from "../api/api";
 import {appActions, AppActionsTypes} from "./appReducer";
 import {getOwnerProfileData, authActions, AuthActionsTypes} from "./authReducer";
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, CommonThunkType, InferActionsTypes} from "./reduxStore";
-import {ResultCodesEnum} from "../types/api-types";
+import {profileAPI} from "../api/profileApi";
+import {ResultCodesEnum} from "../api/api";
 
 const initialState = {
     postData: [

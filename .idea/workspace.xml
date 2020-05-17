@@ -2,21 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76d5474e-a76f-46a0-bfbe-368740babd1d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/api/authApi.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/dialogsApi.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/profileApi.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/securityApi.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/usersApi.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MainRoutes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/appReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/appReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/asideReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/asideReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/authReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/authReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/dialogReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/dialogReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/profileReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/profileSelector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/profileSelector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/reduxStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/reduxStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Redux/usersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/usersReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Redux/usersSelector.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Redux/usersSelector.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/LoginForm/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit/Edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit/Edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/People/UsersList/UsersListContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/People/UsersList/UsersListContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPost/MyPostContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/ProfileContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hoc/withSuspense.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hoc/withSuspense.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hoc/withAuthRedirect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hoc/withAuthRedirect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/api-types.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +38,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -57,11 +66,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="jsx.switch.disabled" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/api/securityApi.ts" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -78,19 +88,26 @@
     <property name="ts.external.directory.path" value="E:\React\Projects\01-first-project\react-lessons-1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Projects\ProjectItem" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Edit\InputItem" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
-      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\images" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\common" />
       <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\assets\mainLink" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="E:\React\Projects\01-first-project\react-lessons-1\src\api\securityApi.ts" />
+      <recent name="E:\React\Projects\01-first-project\react-lessons-1\src\api\profileApi.ts" />
+      <recent name="E:\React\Projects\01-first-project\react-lessons-1\src\api\authApi.ts" />
+      <recent name="E:\React\Projects\01-first-project\react-lessons-1\src\api\usersApi.ts" />
+      <recent name="E:\React\Projects\01-first-project\react-lessons-1\src\api\api.ts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Projects\ProjectItem" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Edit\InputItem" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\Redux" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile\About\ProfileStatus" />
+      <recent name="D:\React\Projects\01-first-project\react-lessons-1\src\components\Profile" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.renders without crashing">
@@ -289,7 +306,12 @@
       <workItem from="1588062223114" duration="2873000" />
       <workItem from="1588080766676" duration="968000" />
       <workItem from="1588081768376" duration="10561000" />
-      <workItem from="1588136942958" duration="6633000" />
+      <workItem from="1588136942958" duration="28988000" />
+      <workItem from="1588181113679" duration="9000" />
+      <workItem from="1588185977710" duration="226000" />
+      <workItem from="1588188562606" duration="1004000" />
+      <workItem from="1588223689637" duration="41000" />
+      <workItem from="1589701711040" duration="4922000" />
     </task>
     <task id="LOCAL-00001" summary="Added file test.js">
       <created>1574064014065</created>
@@ -410,7 +432,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584392961961</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Refactor reducers">
+      <created>1588144279555</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1588144279555</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -448,36 +477,52 @@
     <MESSAGE value="Redux thunk from TypeScript" />
     <MESSAGE value="Login form refactor" />
     <MESSAGE value="App refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="App refactor" />
+    <MESSAGE value="Refactor reducers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor reducers" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1584392958961">
+    <state x="457" y="167" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588188895353">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="457" y="167" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588188895353" />
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1588144276491">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1588144276491" />
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584392958961" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1584392980110">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1589703600229">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1589703600229" />
+    <state x="523" y="106" key="FileChooserDialogImpl" timestamp="1589702759981">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="523" y="106" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1589702759981" />
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588188628193" />
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584392980110" />
-    <state width="1345" height="163" key="GridCell.Tab.0.bottom" timestamp="1588093075156">
+    <state width="1345" height="163" key="GridCell.Tab.0.bottom" timestamp="1589704137526">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588093075156" />
+    <state width="1345" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1589704137526" />
+    <state width="1345" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588180801373" />
     <state width="1345" height="151" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1584393197177" />
-    <state width="1345" height="163" key="GridCell.Tab.0.center" timestamp="1588093075155">
+    <state width="1345" height="163" key="GridCell.Tab.0.center" timestamp="1589704137525">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="163" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588093075155" />
+    <state width="1345" height="163" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1589704137525" />
+    <state width="1345" height="163" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588180801371" />
     <state width="1345" height="151" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1584393197177" />
-    <state width="1345" height="163" key="GridCell.Tab.0.left" timestamp="1588093075155">
+    <state width="1345" height="163" key="GridCell.Tab.0.left" timestamp="1589704137525">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="163" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588093075155" />
+    <state width="1345" height="163" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1589704137525" />
+    <state width="1345" height="163" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588180801370" />
     <state width="1345" height="151" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1584393197177" />
-    <state width="1345" height="163" key="GridCell.Tab.0.right" timestamp="1588093075155">
+    <state width="1345" height="163" key="GridCell.Tab.0.right" timestamp="1589704137526">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="163" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588093075155" />
+    <state width="1345" height="163" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1589704137526" />
+    <state width="1345" height="163" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588180801372" />
     <state width="1345" height="151" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1584393197177" />
     <state x="472" y="75" key="RollbackChangesDialog" timestamp="1583695731765">
       <screen x="0" y="0" width="1366" height="728" />
@@ -487,9 +532,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="7" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1583439119788" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1584392965381">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1588188826189">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588188826189" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1588144291260">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1588144291260" />
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584392965381" />
     <state x="380" y="0" width="606" height="728" key="find.popup" timestamp="1583692814355">
       <screen x="0" y="0" width="1366" height="728" />
@@ -499,5 +549,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1583093544068" />
+    <state x="346" y="49" key="search.everywhere.popup" timestamp="1588188820002">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" key="search.everywhere.popup/0.0.1366.728/1366.0.1366.728@0.0.1366.728" timestamp="1588188820002" />
   </component>
 </project>

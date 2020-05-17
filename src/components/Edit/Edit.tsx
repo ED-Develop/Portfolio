@@ -10,8 +10,9 @@ import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import InputItem from "./InputItem/InputItem";
 import Preloader from "../common/Preloader/Preloader";
-import {LoginFormData, ProfileType} from "../../types/types";
+import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../Redux/reduxStore";
+
 
 type MapStatePropsType = {
     isUpdateSuccess: boolean
@@ -24,7 +25,11 @@ type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void
 }
 
-type PropsType = MapStatePropsType & MapDispatchPropsType;
+type Auth = {
+    isAuth: boolean
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & Auth;
 
 type StateType = {
     show: Array<string>
@@ -105,7 +110,8 @@ const EditForm: FC<FormPropsType & InjectedFormProps<ProfileType, FormPropsType>
 
     const contacts = (<div className={style.section}>
         {Object.keys(props.initialValues.contacts).map(item => {
-            return <InputItem key={item} name={`contacts.${item}`} label={item.slice(0, 1).toUpperCase() + item.slice(1)}
+            return <InputItem key={item} name={`contacts.${item}`}
+                              label={item.slice(0, 1).toUpperCase() + item.slice(1)}
                               customClassName='right'/>
         })}
     </div>);
@@ -137,5 +143,11 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 };
 
-export default compose(connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps,
-    {updateProfileData, getUserProfile}), withAuthRedirect)(Edit);
+
+export default compose<PropsType>(
+    withAuthRedirect,
+    connect<MapStatePropsType, MapDispatchPropsType, { isAuth: boolean }, AppStateType>(mapStateToProps, {
+        getUserProfile,
+        updateProfileData
+    }),
+)(Edit);

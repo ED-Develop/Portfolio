@@ -1,10 +1,10 @@
-import {usersAPI} from "../api/api";
 import {updateObjectInArray} from "../utils/objectHelpers";
 import {appActions, AppActionsTypes} from "./appReducer";
 import {UserType} from "../types/types";
 import {CommonThunkType, InferActionsTypes} from "./reduxStore";
 import {Dispatch} from "redux";
-import {ResultCodesEnum} from "../types/api-types";
+import {usersAPI} from "../api/usersApi";
+import {ResultCodesEnum} from "../api/api";
 
 const initialState = {
     usersData: [] as Array<UserType>,

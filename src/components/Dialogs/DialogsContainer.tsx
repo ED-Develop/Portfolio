@@ -1,13 +1,16 @@
 import React from 'react';
-import {addMessage, getDialogs, getMessages} from "../../Redux/dialogReducer";
+import {dialogsActions, getDialogs, getMessages} from "../../Redux/dialogReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {toggleIsSuccess} from "../../Redux/appReducer";
+import {appActions} from "../../Redux/appReducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../Redux/reduxStore";
+
+const {addMessage} = dialogsActions;
+const {toggleIsSuccess} = appActions;
 
 type MapStateToPropsType = {
     messages: Array<any>
@@ -68,6 +71,9 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     };
 };
 
-export default compose(connect<MapStateToPropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps,
+export default compose<PropsType>(
+    connect<MapStateToPropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
     {addMessage, getMessages, toggleIsSuccess, getDialogs}),
-    withAuthRedirect, withRouter)(DialogsContainer);
+    withAuthRedirect,
+    withRouter
+)(DialogsContainer);

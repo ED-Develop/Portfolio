@@ -4,16 +4,17 @@ import {connect} from "react-redux";
 import {
     getProfileStatus,
     getUserProfile,
-    updateProfileDataSuccess,
+    profileActions,
     updateProfileStatus,
     uploadProfilePhoto
 } from "../../Redux/profileReducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
-import {compose} from "redux";
 import {startDialogs} from "../../Redux/dialogReducer";
 import {ProfileType} from "../../types/types";
 import {AppStateType} from "../../Redux/reduxStore";
+
+const {updateProfileDataSuccess} = profileActions;
 
 type MapStatePropsType = {
     profile: ProfileType | null
