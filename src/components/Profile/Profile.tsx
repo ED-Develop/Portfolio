@@ -50,24 +50,26 @@ const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDia
         }
     };
 
-    let modalWindow = (<ModalWindow hideModalWindow={hideModalWindow}
-                                    footerDescription={'If you are having trouble downloading, try choosing a smaller photo.'}
-                                    modalTitle={'Upload new photo'}>
-        <div>
-            <div className={style.modalDescription}>
-                <div>It will be easier for friends to recognize you if you upload your real photo.</div>
-                <div>You can upload a JPG, GIF or PNG image.</div>
+    const modalWindow = (
+        <ModalWindow
+            hideModalWindow={hideModalWindow}
+            footerDescription={'If you are having trouble downloading, try choosing a smaller photo.'}
+            modalTitle={'Upload new photo'}
+        >
+            <div>
+                <div className={style.modalDescription}>
+                    <div>It will be easier for friends to recognize you if you upload your real photo.</div>
+                    <div>You can upload a JPG, GIF or PNG image.</div>
+                </div>
+                <div className={style.inputFile}>
+                    <input onChange={onPhotoSelected} type='file'/>
+                </div>
             </div>
-            <div className={style.inputFile}>
-                <input onChange={onPhotoSelected} type='file'/>
-            </div>
-        </div>
-    </ModalWindow>);
+        </ModalWindow>
+    );
 
+    if (!profile) return <Preloader/>;
 
-    if (!profile) {
-        return <Preloader/>
-    }
     return (
         <div>
             {isUpload && <Preloader/>}
@@ -81,10 +83,13 @@ const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDia
                         <img src={profile.photos.large ? profile.photos.large : userAvatar} alt="Avatar"/>
                     </div>
                     <h2>{profile.fullName}</h2>
-                    <ProfileStatus isMyProfile={props.isMyProfile}
-                                   updateProfileStatus={props.updateProfileStatus} status={props.status}/>
+                    <ProfileStatus
+                        isMyProfile={props.isMyProfile}
+                        updateProfileStatus={props.updateProfileStatus}
+                        status={props.status}
+                    />
                     {!props.isMyProfile && <div className={style.btn}>
-                        <button  onClick={onWriteMessage}>Write message</button>
+                        <button onClick={onWriteMessage}>Write message</button>
                     </div>}
                 </div>
                 <div className={style.info}>

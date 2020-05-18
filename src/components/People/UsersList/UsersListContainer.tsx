@@ -48,31 +48,33 @@ class UserListContainer extends React.Component<PropsType> {
         return (
             <div>
                 {this.props.isFetching && <Preloader/>}
-                <UserList usersData={this.props.usersData} count={this.props.count}
-                          currentPage={this.props.currentPage} totalCount={this.props.totalCount}
-                          follow={this.props.follow} unFollow={this.props.unFollow}
-                          onSetCurrentPage={this.onSetCurrentPage}
-                          followingInProgress={this.props.followingInProgress}
-                          startPage={this.props.startPage}/>
+                <UserList
+                    usersData={this.props.usersData}
+                    count={this.props.count}
+                    currentPage={this.props.currentPage}
+                    totalCount={this.props.totalCount}
+                    follow={this.props.follow}
+                    unFollow={this.props.unFollow}
+                    onSetCurrentPage={this.onSetCurrentPage}
+                    followingInProgress={this.props.followingInProgress}
+                    startPage={this.props.startPage}
+                />
             </div>
         );
     }
-
 }
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {
-        usersData: getUsersData(state),
-        count: getCount(state),
-        currentPage: getCurrentPage(state),
-        startPage: getStartPage(state),
-        totalCount: getTotalCount(state),
-        isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
-    };
-};
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    usersData: getUsersData(state),
+    count: getCount(state),
+    currentPage: getCurrentPage(state),
+    startPage: getStartPage(state),
+    totalCount: getTotalCount(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state)
+});
 
 export default compose(
-    connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
         {follow, unFollow, getUsers})
 )(UserListContainer);

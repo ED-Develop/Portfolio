@@ -17,26 +17,31 @@ type PropsType = {
 }
 
 
-const UserList: FC<PropsType> = ({
-                                     usersData, totalCount, count, startPage,
-                                     onSetCurrentPage, currentPage, ...props
-                                 }) => {
-    let [portionSize] = useState(4);
+const UserList: FC<PropsType> = ({usersData, totalCount, count, startPage, onSetCurrentPage, currentPage, ...props}) => {
+    const [portionSize] = useState(4);
 
     return (
         <div>
-            <Paginator portionSize={portionSize} onSetCurrentPage={onSetCurrentPage} currentPage={currentPage}
-                        totalCount={totalCount} count={count}/>
+            <Paginator
+                portionSize={portionSize}
+                onSetCurrentPage={onSetCurrentPage}
+                currentPage={currentPage}
+                totalCount={totalCount}
+                count={count}
+            />
             <div className={style.wrapper}>
-                {usersData
-                    .map((user) => {
-                        return <User key={user.id} user={user} follow={props.follow} unFollow={props.unFollow}
-                                     followingInProgress={props.followingInProgress}/>
-                    })}
+                {
+                    usersData.map((user) => <User
+                        key={user.id}
+                        user={user}
+                        follow={props.follow}
+                        unFollow={props.unFollow}
+                        followingInProgress={props.followingInProgress}
+                    />)
+                }
             </div>
         </div>
     )
 };
-
 
 export default UserList;

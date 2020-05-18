@@ -16,9 +16,9 @@ type PropsType = {
 }
 
 const Contacts: FC<PropsType> = ({contacts}) => {
-    let ContactElements = [];
+    const ContactElements = [];
     let Img = null;
-    console.log(contacts);
+
     for (let contact in contacts) {
         switch (contact) {
             case 'facebook':
@@ -48,6 +48,7 @@ const Contacts: FC<PropsType> = ({contacts}) => {
             default:
                 alert('sdadsda');
         }
+
         ContactElements.push(<a key={contact} href={contact}>{Img}</a>)
     }
     return (

@@ -8,8 +8,7 @@ type InjectedProps = {
 }
 
 function withAuthRedirect<P extends InjectedProps> (Component: React.ComponentType<P>){
-
-    let mapStateToProps = (state: AppStateType) => {
+    const mapStateToProps = (state: AppStateType) => {
         return {
             isAuth: state.auth.isAuth
         }
@@ -23,8 +22,7 @@ function withAuthRedirect<P extends InjectedProps> (Component: React.ComponentTy
         return <Component {...props as P}/>
     };
 
-
-    return connect<MapStatePropsType, never, P, AppStateType>(mapStateToProps)(RedirectComponent);
+    return connect<MapStatePropsType, {}, P, AppStateType>(mapStateToProps)(RedirectComponent);
 }
 
 export default withAuthRedirect;

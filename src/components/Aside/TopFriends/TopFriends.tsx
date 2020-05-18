@@ -14,7 +14,7 @@ class TopFriends extends Component<PropsType> {
     }
 
     render() {
-        let {friends} = this.props;
+        const {friends} = this.props;
 
         return (
             <div className={style.container}>
@@ -22,8 +22,13 @@ class TopFriends extends Component<PropsType> {
                     <a href="#">My friends</a>
                 </div>
                 <div className={style.items}>
-                    {friends.map(friend => <FriendItem key={friend.id} avatar={friend.photos.small}
-                                                       name={friend.name} id={friend.id}/>)}
+                    {
+                        friends.map(friend => <FriendItem
+                            key={friend.id}
+                            avatar={friend.photos.small}
+                            name={friend.name} id={friend.id}
+                        />)
+                    }
                 </div>
             </div>
         );

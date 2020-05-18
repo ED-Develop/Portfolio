@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import style from './Input.module.css'
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../../../common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createField, GetObjectsKeys, Textarea} from "../../../common/FormsControls/FormsControls";
 import {maxLength} from "../../../../utils/validators";
 import defaultAvatar from '../../../../assets/images/user.png';
 
-let maxLength50 = maxLength(50);
+const maxLength50 = maxLength(50);
 
 type PropsType = {
     userId: number | null
@@ -13,9 +13,9 @@ type PropsType = {
     login: string | null
     addMessage: (messageText: string, userId: number, login: string) => void
 }
-const Input: FC<PropsType> = ({addMessage, userId, avatar, login}) => {
 
-    let onAddMessage = (formData: FormData) => {
+const Input: FC<PropsType> = ({addMessage, userId, avatar, login}) => {
+    const onAddMessage = (formData: DialogsFormData) => {
         if (userId && login) {
             addMessage(formData.messageText, userId, login);
         }
@@ -29,20 +29,27 @@ const Input: FC<PropsType> = ({addMessage, userId, avatar, login}) => {
     );
 };
 
-type FormData = {
+type DialogsFormData = {
     messageText: string
 }
+type DialogsFormDataKeys = GetObjectsKeys<DialogsFormData>
 
-const MessageForm: FC<InjectedFormProps<FormData>> = ({handleSubmit}) => {
+const MessageForm: FC<InjectedFormProps<DialogsFormData>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field customClassName={'top'} component={Textarea} validate={[maxLength50]}
-                   placeholder='Type your message...' name='messageText'/>
+            {createField<DialogsFormDataKeys>({
+                component: Textarea,
+                name: "messageText",
+                type: 'text',
+                customClassName: 'top',
+                placeholder: 'Type your message...',
+                validators: [maxLength50]
+            })}
             <button>Send</button>
         </form>
     );
 };
 
-let MessageReduxForm = reduxForm<FormData>({form: 'message'})(MessageForm);
+const MessageReduxForm = reduxForm<DialogsFormData>({form: 'message'})(MessageForm);
 
 export default Input;

@@ -13,12 +13,10 @@ type MapStatePropsType = {
     isFetching: boolean
     captchaURL: string | null
 }
-
 type MapDispatchPropsType = {
     login: (formData: LoginFormData) => void
     auth: () => void
 }
-
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
 
@@ -26,6 +24,7 @@ const Login: FC<PropsType> = ({login, isAuth, isFetching, captchaURL}) => {
     const onSubmit = (formData: LoginFormData) => {
         login(formData);
     };
+
     if (isAuth) {
         return <Redirect to='/'/>
     }
@@ -55,13 +54,11 @@ const Login: FC<PropsType> = ({login, isAuth, isFetching, captchaURL}) => {
     )
 };
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {
-        isAuth: state.auth.isAuth,
-        isFetching: state.app.isFetching,
-        captchaURL: state.auth.captchaURL
-    }
-};
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    isAuth: state.auth.isAuth,
+    isFetching: state.app.isFetching,
+    captchaURL: state.auth.captchaURL
+});
 
 export default connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
     {login, auth})(Login);

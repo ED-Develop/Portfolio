@@ -9,7 +9,7 @@ type PropsType = {
 }
 
 const Header: FC<PropsType> = ({logout, isAuth}) => {
-    let onLogout = (e: React.MouseEvent) => {
+    const onLogout = (e: React.MouseEvent) => {
         e.preventDefault();
         logout();
     };

@@ -19,14 +19,12 @@ type MapDispatchPropsType = {
 type OwnPropsType = any
 
 
-let mapStateToProps=(state: AppStateType): MapStatePropsType => {
-    return {
-        friends: state.aside.friends,
-        isAuth: state.auth.isAuth,
-        login: state.auth.login,
-        avatar: state.auth.photos.small
-    };
-};
+const mapStateToProps=(state: AppStateType): MapStatePropsType => ({
+    friends: state.aside.friends,
+    isAuth: state.auth.isAuth,
+    login: state.auth.login,
+    avatar: state.auth.photos.small
+});
 
 const AsideContainer = connect<MapStatePropsType, MapDispatchPropsType,OwnPropsType , AppStateType>(mapStateToProps,
     {getFriends})(Aside);

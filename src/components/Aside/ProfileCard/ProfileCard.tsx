@@ -13,7 +13,9 @@ const ProfileCard: FC<PropsType> = ({avatar, login}) => {
         <div className={style.card}>
             <img className={style.profileAvatar} src={avatar || defaultAvatar} alt="avatar"/>
             <a href='#'>{login}</a>
-            <div className={style.followers}><img src={followersIcon} alt="followers"/>1,223 followers</div>
+            <div className={style.followers}>
+                <img src={followersIcon} alt="followers"/>1,223 followers
+            </div>
         </div>
     );
 };

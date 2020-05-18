@@ -5,15 +5,9 @@ import ProfileContainer from "./Profile/ProfileContainer";
 import Projects from "./Projects/Projects";
 import withSuspense from "../hoc/withSuspense";
 
-const DialogsContainer = withSuspense(React.lazy((): Promise<any> => {
-    return import ("../components/Dialogs/DialogsContainer");
-}));
-const People = withSuspense(React.lazy((): Promise<any> => {
-    return import ("../components/People/People");
-}));
-const Edit = withSuspense(React.lazy((): Promise<any> => {
-    return import ("../components/Edit/Edit");
-}));
+const DialogsContainer = withSuspense(React.lazy(() => import ("../components/Dialogs/DialogsContainer")));
+const People = withSuspense(React.lazy(() =>  import ("./People/PeopleContainer")));
+const Edit = withSuspense(React.lazy(() => import ("../components/Edit/Edit")));
 
 const MainRoutes = () => {
     return (

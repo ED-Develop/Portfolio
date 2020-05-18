@@ -16,19 +16,15 @@ const Projects: FC<PropsType> = ({projects}) => {
             <SearchForm placeholder={'Search Projects'}/>
             <div className={style.wrapper}>
                <div className={style.projectsList}>
-                   {projects.map( item => {
-                       return <ProjectItem project={item}/>
-                   })}
+                   {projects.map( item => <ProjectItem project={item}/>)}
                </div>
             </div>
         </div>
     )
 };
 
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        projects: state.projects.projects
-    }
-};
+const mapStateToProps = (state: AppStateType) => ({
+    projects: state.projects.projects
+});
 
 export default connect(mapStateToProps, {})(Projects);

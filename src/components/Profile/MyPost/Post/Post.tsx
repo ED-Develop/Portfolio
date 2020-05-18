@@ -11,14 +11,10 @@ type PropsType = {
     isMyProfile: boolean
 }
 
-const Post: FC<PropsType> = ({post, deletePost, incrementedLike,login, avatar,
-                                 isMyProfile}) => {
-    const onDeletePost = () => {
-        deletePost(post.id);
-    };
-    const onIncrementedLike = () => {
-        incrementedLike(post.id);
-    };
+const Post: FC<PropsType> = ({post, deletePost, incrementedLike, login, avatar, isMyProfile}) => {
+    const onDeletePost = () => deletePost(post.id);
+
+    const onIncrementedLike = () => incrementedLike(post.id);
 
     return (
         <div className={s.post}>
@@ -38,8 +34,11 @@ const Post: FC<PropsType> = ({post, deletePost, incrementedLike,login, avatar,
                             <div className={s.activity}>2 min ago</div>
                         </div>
                         <div className={s.like}>
-                            <img onClick={onIncrementedLike} src="https://www.rubbishclearancebournemouth.co.uk/img/green-facebook-thumbs-up.png"
-                                 alt="like"/>
+                            <img
+                                onClick={onIncrementedLike}
+                                src="https://www.rubbishclearancebournemouth.co.uk/img/green-facebook-thumbs-up.png"
+                                alt="like"
+                            />
                             <span>{post.likeCount}</span>
                         </div>
                     </div>
@@ -51,4 +50,5 @@ const Post: FC<PropsType> = ({post, deletePost, incrementedLike,login, avatar,
         </div>
     );
 };
+
 export default Post;

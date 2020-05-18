@@ -19,10 +19,16 @@ const Dialogs: FC<PropsType> = ({dialogs, ...props}) => {
             <Search placeholder='Search dialog'/>
             <div className={style.container}>
                 <DialogsItems dialogs={dialogs}/>
-                <Messages messages={props.messages} addMessage={props.addMessage} avatar={props.avatar}
-                          login={props.login} userId={props.userId}/>
+                <Messages
+                    messages={props.messages}
+                    addMessage={props.addMessage}
+                    avatar={props.avatar}
+                    login={props.login}
+                    userId={props.userId}
+                />
             </div>
         </div>
     );
 };
+
 export default Dialogs;

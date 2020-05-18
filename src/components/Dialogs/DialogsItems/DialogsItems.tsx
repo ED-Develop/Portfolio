@@ -6,17 +6,12 @@ type PropsType = {
     dialogs: Array<any>
 }
 
-const DialogsItems: FC<PropsType> = (props) => {
-    let dialogElemnts = props.dialogs
-        .map(dialog => {
-            console.log(dialog);
-            return <Dialog key={dialog.id} dialog={dialog}/>
-        });
-
+const DialogsItems: FC<PropsType> = ({dialogs}) => {
     return (
         <div className={style.items}>
-            {dialogElemnts}
+            {dialogs.map(dialog => <Dialog key={dialog.id} dialog={dialog}/>)}
         </div>
     );
 };
+
 export default DialogsItems;

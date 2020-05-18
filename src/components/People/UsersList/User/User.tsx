@@ -11,18 +11,19 @@ type PropsType = {
     followingInProgress: Array<number>
 }
 
-const User:FC<PropsType> = ({user, follow, unFollow, followingInProgress}) => {
-    let onFollow = () => {
+const User: FC<PropsType> = ({user, follow, unFollow, followingInProgress}) => {
+    const onFollow = () => {
         follow(user.id);
     };
 
-    let onUnfollow = () => {
+    const onUnfollow = () => {
         unFollow(user.id);
     };
+
     return (
         <div className={style.user}>
             <div className={style.userAvatar}>
-                <img src= {user.photos.large || defaultAvatar}  alt="avatar"/>
+                <img src={user.photos.large || defaultAvatar} alt="avatar"/>
             </div>
             <div className={style.userDescription}>
                 <div className={style.info}>
@@ -30,11 +31,21 @@ const User:FC<PropsType> = ({user, follow, unFollow, followingInProgress}) => {
                     <p>{user.status}</p>
                 </div>
                 <div>
-                    {user.followed
-                        ? <button disabled={followingInProgress.some((idInArr:number) => idInArr === user.id)}
-                                  onClick={onUnfollow}>Unfollow</button>
-                        : <button disabled={followingInProgress.some((idInArr:number) => idInArr === user.id)}
-                                  onClick={onFollow}>Follow</button>}
+                    {
+                        user.followed
+                            ? <button
+                                disabled={followingInProgress.some((idInArr: number) => idInArr === user.id)}
+                                onClick={onUnfollow}
+                            >
+                                Unfollow
+                            </button>
+                            : <button
+                                disabled={followingInProgress.some((idInArr: number) => idInArr === user.id)}
+                                onClick={onFollow}
+                            >
+                                Follow
+                            </button>
+                    }
                 </div>
             </div>
         </div>

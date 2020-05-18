@@ -13,8 +13,7 @@ type PropsType = {
     getFriends: () => void
 }
 
-const Aside: FC<PropsType> = ({avatar, login,
-                                  isAuth, friends, getFriends}) => {
+const Aside: FC<PropsType> = ({avatar, login, isAuth, friends, getFriends}) => {
         return (
             <aside className={style.aside}>
                 {isAuth && <ProfileCard avatar={avatar} login={login}/>}

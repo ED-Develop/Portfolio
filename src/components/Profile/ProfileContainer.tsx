@@ -94,40 +94,43 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
         }
         //change state if browser address bar changed
         if (prevProps.match.params.userId !== this.props.match.params.userId) {
-            this.setState({userId: this.props.match.params.userId ? +this.props.match.params.userId
-                    : this.props.myId});
+            this.setState({
+                userId: this.props.match.params.userId ? +this.props.match.params.userId
+                    : this.props.myId
+            });
         }
-
     }
 
     render() {
-        if (this.props.isSuccess) {
-            return <Redirect to={`/messages/${this.state.userId}`}/>
-        } else if (this.props.isFetching) {
-            return <Preloader/>
-        } else {
-            return <Profile uploadProfilePhoto={this.props.uploadProfilePhoto} startDialogs={this.props.startDialogs}
-                            updateProfileStatus={this.props.updateProfileStatus} status={this.props.status}
-                            isAuth={this.props.isAuth} userId={this.state.userId}
-                            isMyProfile={this.state.isMyProfile}
-                            profile={this.props.profile} isUpload={this.props.isUpload} followed={this.props.followed}/>
-        }
+        if (this.props.isSuccess) return <Redirect to={`/messages/${this.state.userId}`}/>;
+        if (this.props.isFetching) return <Preloader/>;
+
+        return <Profile
+            uploadProfilePhoto={this.props.uploadProfilePhoto}
+            startDialogs={this.props.startDialogs}
+            updateProfileStatus={this.props.updateProfileStatus}
+            status={this.props.status}
+            isAuth={this.props.isAuth}
+            userId={this.state.userId}
+            isMyProfile={this.state.isMyProfile}
+            profile={this.props.profile}
+            isUpload={this.props.isUpload}
+            followed={this.props.followed}
+        />
     }
 }
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => {
-    return {
-        profile: state.profile.profile,
-        myId: state.auth.userId,
-        isFetching: state.app.isFetching,
-        status: state.profile.status,
-        isAuth: state.auth.isAuth,
-        isUpload: state.app.isUpload,
-        followed: state.profile.followed,
-        isUpdateSuccess: state.profile.isUpdateSuccess,
-        isSuccess: state.app.isSuccess
-    };
-};
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    profile: state.profile.profile,
+    myId: state.auth.userId,
+    isFetching: state.app.isFetching,
+    status: state.profile.status,
+    isAuth: state.auth.isAuth,
+    isUpload: state.app.isUpload,
+    followed: state.profile.followed,
+    isUpdateSuccess: state.profile.isUpdateSuccess,
+    isSuccess: state.app.isSuccess
+});
 
 export default connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps, {
     getUserProfile, getProfileStatus, updateProfileDataSuccess,

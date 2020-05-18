@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {dialogsActions, getDialogs, getMessages} from "../../redux/dialog-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -53,27 +53,35 @@ class DialogsContainer extends React.Component<PropsType> {
 
         if (this.props.isFetching) return <Preloader/>;
         return (
-            <Dialogs userId={userId} login={login} avatar={avatar} addMessage={addMessage}
-                     dialogs={dialogs} messages={messages}/>
+            <Dialogs
+                userId={userId}
+                login={login}
+                avatar={avatar}
+                addMessage={addMessage}
+                dialogs={dialogs}
+                messages={messages}
+            />
 
         )
     }
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        messages: state.dialogs.messages,
-        dialogs: state.dialogs.dialogs,
-        avatar: state.auth.photos.small,
-        login: state.auth.login,
-        userId: state.auth.userId,
-        isFetching: state.app.isFetching
-    };
-};
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    messages: state.dialogs.messages,
+    dialogs: state.dialogs.dialogs,
+    avatar: state.auth.photos.small,
+    login: state.auth.login,
+    userId: state.auth.userId,
+    isFetching: state.app.isFetching
+});
 
-export default compose<PropsType>(
-    connect<MapStateToPropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
-    {addMessage, getMessages, toggleIsSuccess, getDialogs}),
+export default compose<ComponentType>(
+    connect<MapStateToPropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+        addMessage,
+        getMessages,
+        toggleIsSuccess,
+        getDialogs
+    }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer);

@@ -10,7 +10,7 @@ type MapDispatchPropsType = {
     searchUsers: (userName: string) => void
 }
 
-const People: FC<MapDispatchPropsType> = (props) => {
+const PeopleContainer: FC<MapDispatchPropsType> = (props) => {
     const onSearch = (formData: any) => {
         props.searchUsers(formData.search);
     };
@@ -23,9 +23,6 @@ const People: FC<MapDispatchPropsType> = (props) => {
     )
 };
 
-let mapStateToProps = (state: AppStateType): any => {
-    return {}
-};
 
-export default connect<any, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
-    {searchUsers})(People);
+export default connect<{}, MapDispatchPropsType, {}, AppStateType>(() => ({}),
+    {searchUsers})(PeopleContainer);
