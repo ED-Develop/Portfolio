@@ -1,6 +1,9 @@
 import React, {FC} from 'react';
-import style from "./search.module.css";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import style from "./Search.module.css";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createField, GetObjectsKeys} from "../FormsControls/FormsControls";
+import {Input} from "antd";
+import {SearchOutlined} from "@ant-design/icons/lib";
 
 type PropsType = {
     placeholder: string
@@ -10,15 +13,24 @@ type FormDataType = {
     search: string
 }
 
-let SearchForm: FC<any & InjectedFormProps<FormDataType, PropsType>> = ({handleSubmit, placeholder}) => {
+type SearchFormDataKeysType = GetObjectsKeys<FormDataType>
+
+const SearchForm: FC<PropsType & InjectedFormProps<FormDataType, PropsType>> = ({handleSubmit, placeholder}) => {
     return (
         <form className={style.search} onSubmit={handleSubmit}>
-            <Field component={'input'} placeholder={placeholder} type="text" name='search'/>
-            <button>Search</button>
+            {createField<SearchFormDataKeysType>({
+                placeholder,
+                name: 'search',
+                component: (props) => <Input
+                    size="large" {...props}
+                    prefix={<SearchOutlined />}
+                    className={style.searchInput}
+                />
+            })}
         </form>
     );
 };
 
-let ReduxSearchForm = reduxForm<FormDataType, PropsType>({form: 'search'})(SearchForm);
+const ReduxSearchForm = reduxForm<FormDataType, PropsType>({form: 'search'})(SearchForm);
 
 export default ReduxSearchForm;

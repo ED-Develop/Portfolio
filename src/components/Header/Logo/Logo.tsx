@@ -1,12 +1,28 @@
 import React, {FC} from 'react';
 import style from './Logo.module.css';
 import {NavLink} from "react-router-dom";
+import logo from '../../../assets/images/logo.png'
+// @ts-ignore
+import Burger from 'react-css-burger';
 
-const Logo: FC = () => {
+type PropsType = {
+    toggleIsAsideCollapsed: () => void
+    isAsideCollapsed: boolean
+}
+
+const Logo: FC<PropsType> = ({toggleIsAsideCollapsed, isAsideCollapsed}) => {
     return (
         <div className={style.logo}>
-            <img src="https://www.logogenie.net/download/preview/medium/3589659" alt="Logo"/>
-            <span className={style.logo_name}><NavLink to="/">PortFolio</NavLink></span>
+            <Burger
+                active={!isAsideCollapsed}
+                burger="arrow"
+                color="#b5b5b5"
+                hoverOpacity={0.8}
+                scale={0.8}
+                style={{margin: 0, marginRight: '15px'}}
+                onClick={toggleIsAsideCollapsed}
+            />
+            <NavLink to="/"><img src={logo} alt="Logo"/></NavLink>
         </div>
     )
 };

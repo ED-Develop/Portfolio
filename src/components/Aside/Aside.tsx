@@ -1,25 +1,20 @@
 import React, {FC} from 'react';
 import style from './Aside.module.css';
 import Nav from "./Nav/Nav";
-import ProfileCard from "./ProfileCard/ProfileCard";
-import TopFriends from "./TopFriends/TopFriends";
-import {UserType} from "../../types/types";
+import {Layout} from "antd";
+
+const {Sider} = Layout;
 
 type PropsType = {
-    avatar: string | null
-    login: string | null
-    isAuth: boolean
-    friends: Array<UserType>
-    getFriends: () => void
+    isAuth: boolean,
+    collapsed: boolean
 }
 
-const Aside: FC<PropsType> = ({avatar, login, isAuth, friends, getFriends}) => {
+const Aside: FC<PropsType> = ({isAuth, collapsed}) => {
         return (
-            <aside className={style.aside}>
-                {isAuth && <ProfileCard avatar={avatar} login={login}/>}
-                <Nav/>
-                {isAuth && <TopFriends getFriends={getFriends} friends={friends}/>}
-            </aside>
+            <Sider theme='light' width='20.8%' className={style.aside} collapsed={collapsed} collapsedWidth={'16.6%'}>
+                <Nav collapsed={collapsed}/>
+            </Sider>
         )
 };
 

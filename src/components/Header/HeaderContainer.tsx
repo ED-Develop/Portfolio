@@ -7,23 +7,30 @@ import {AppStateType} from "../../redux/store";
 type MapStatePropsType = {
     isAuth: boolean
     login: string | null
+    avatar: string | null
 }
 
 type MapDispatchPropsType = {
     logout: () => void
 }
 
-type PropsType = MapStatePropsType & MapDispatchPropsType
+type OwnProps = {
+    toggleIsAsideCollapsed: () => void
+    isAsideCollapsed: boolean
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnProps
 
 class HeaderContainer extends React.Component<PropsType> {
  render() {
-        return (<Header {...this.props}/>);
+        return <Header {...this.props}/>
     }
 }
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
-    login: state.auth.login
+    login: state.auth.login,
+    avatar: state.auth.photos.small
 });
 
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,

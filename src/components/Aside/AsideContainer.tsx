@@ -3,30 +3,20 @@ import Aside from "./Aside";
 import {connect} from "react-redux";
 import {getFriends} from "../../redux/aside-reducer";
 import {AppStateType} from "../../redux/store";
-import {UserType} from "../../types/types";
 
 type MapStatePropsType = {
-    friends: Array<UserType>
     isAuth: boolean
-    login: string | null
-    avatar: string | null
 }
 
 type MapDispatchPropsType = {
     getFriends: () => void
 }
 
-type OwnPropsType = any
-
-
-const mapStateToProps=(state: AppStateType): MapStatePropsType => ({
-    friends: state.aside.friends,
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
-    login: state.auth.login,
-    avatar: state.auth.photos.small
 });
 
-const AsideContainer = connect<MapStatePropsType, MapDispatchPropsType,OwnPropsType , AppStateType>(mapStateToProps,
+const AsideContainer = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
     {getFriends})(Aside);
 
 export default AsideContainer;

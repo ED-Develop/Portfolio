@@ -67,7 +67,8 @@ export function createField<N extends string>(options: CreateFieldOptionsType<N>
         <Field
             validate={validators}
             customClassName={customClassName}
-            component={component} name={name}
+            component={component}
+            name={name}
             placeholder={placeholder}
             type={type}
         />

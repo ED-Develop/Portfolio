@@ -1,21 +1,22 @@
+@import '~antd/dist/antd.css';
+
 body {
   margin: 0;
   padding: 0;
 }
 
-.app-main {
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: 2.2fr 8fr;
-  grid-column-gap: 20px;
-}
-.app-container {
-  padding-top: 0.1px;
+body .app-container {
+  font-family: 'Open Sans', sans-serif;
 }
 
+.app-main {
+  padding-top: 64px;
+}
+
+.app-content {
+  background-color: #fff;
+  padding: 0 37px;
+}
 
 ::-webkit-scrollbar-button {
   background-image: url('');

@@ -18,8 +18,18 @@ type MapDispatchPropsType = {
     setGlobalError: (globalError: any) => void
 }
 type AppPropsType = MapStatePropsType & MapDispatchPropsType;
+type LocalStateType = {
+    isAsideCollapsed: boolean
+}
 
-class AppContainer extends Component<AppPropsType> {
+class AppContainer extends Component<AppPropsType, LocalStateType> {
+    constructor(props: AppPropsType) {
+        super(props);
+        this.state = {
+            isAsideCollapsed: false
+        }
+    }
+
     catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
         this.props.setGlobalError(promiseRejectionEvent);
     };
@@ -37,8 +47,14 @@ class AppContainer extends Component<AppPropsType> {
         window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
     }
 
-    render() {
+    toggleIsAsideCollapsed = () => {
+        this.setState(state => ({
+            ...state,
+            isAsideCollapsed: !state.isAsideCollapsed
+        }))
+    };
 
+    render() {
         if (!this.props.initialized) {
             return <Preloader/>
         }
@@ -52,10 +68,13 @@ class AppContainer extends Component<AppPropsType> {
         return (
             <div className="app-container">
                 {this.props.globalError && Modal}
-                <HeaderContainer/>
+                <HeaderContainer
+                    toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
+                    isAsideCollapsed={this.state.isAsideCollapsed}
+                />
                 <Switch>
                     <Route path='/login' render={() => <Login/>}/>
-                    <Route path='/' render={() => <MainRoutes/>}/>
+                    <Route path='/' render={() => <MainRoutes isAsideCollapsed={this.state.isAsideCollapsed}/>}/>
                 </Switch>
             </div>
         );

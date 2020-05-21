@@ -3,3 +3,36 @@ ul {
     margin: 0;
     padding: 0;
 }
+
+.item img {
+    width: 26px;
+    height: 26px;
+    display: block;
+    margin-right: 15px;
+}
+
+.item__link {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #202124;
+    border-radius: 8px;
+}
+
+.item__link_small {
+    width: 65px;
+    justify-content: center;
+}
+
+.item__link_small img {
+    margin: 0;
+}
+
+.item__link:hover,
+.activeLink {
+    color: #1a73e8;
+    background-color: #e8f0fe;
+}

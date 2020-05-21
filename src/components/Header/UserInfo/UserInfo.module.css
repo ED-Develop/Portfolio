@@ -1,0 +1,35 @@
+.userInfo {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.userInfoItem {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.userInfoItem:not(.userAvatar):hover {
+    background-color: #f1f3f4;
+}
+
+.userInfoImage {
+    width: 26px;
+    height: 26px;
+}
+
+.userAvatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.userInfoItem.userAvatar  {
+    width: auto;
+    height: auto;
+}

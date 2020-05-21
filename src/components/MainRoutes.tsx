@@ -4,16 +4,22 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import ProfileContainer from "./Profile/ProfileContainer";
 import Projects from "./Projects/Projects";
 import withSuspense from "../hoc/withSuspense";
+import {Layout} from "antd";
 
+const {Content} = Layout;
 const DialogsContainer = withSuspense(React.lazy(() => import ("../components/Dialogs/DialogsContainer")));
-const People = withSuspense(React.lazy(() =>  import ("./People/PeopleContainer")));
+const People = withSuspense(React.lazy(() => import ("./People/PeopleContainer")));
 const Edit = withSuspense(React.lazy(() => import ("../components/Edit/Edit")));
 
-const MainRoutes = () => {
+type PropsType = {
+    isAsideCollapsed: boolean
+}
+
+const MainRoutes: React.FC<PropsType> = ({isAsideCollapsed}) => {
     return (
-        <main className='app-main'>
-            <AsideContainer/>
-            <div className='app-content'>
+        <Layout className='app-main'>
+            <AsideContainer collapsed={isAsideCollapsed}/>
+            <Content className='app-content'>
                 <Switch>
                     <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
@@ -22,8 +28,8 @@ const MainRoutes = () => {
                     <Route path='/projects' render={() => <Projects/>}/>
                     <Route path='/edit' render={() => <Edit/>}/>
                 </Switch>
-            </div>
-        </main>
+            </Content>
+        </Layout>
     )
 };
 
