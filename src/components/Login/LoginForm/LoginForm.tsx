@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import style from './LoginForm.module.css';
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {email, required} from "../../../utils/validators";
-import {createField, CreateFieldOptionsType, GetObjectsKeys, Input} from "../../common/FormsControls/FormsControls";
+import {createField, CreateFieldOptionsType, GetObjectsKeys, CustomInput} from "../../common/FormsControls/FormsControls";
 import {LoginFormData} from "../../../types/types";
 
 type PropsType = {
@@ -11,8 +11,8 @@ type PropsType = {
 type LoginFormDataKeysType = GetObjectsKeys<LoginFormData>;
 
 const loginFieldsData: Array<CreateFieldOptionsType<LoginFormDataKeysType>> = [
-    {name: 'email', placeholder: 'Your Email', validators: [email, required], component: Input},
-    {name: 'password', placeholder: 'Password', type: 'password', validators: [required], component: Input},
+    {name: 'email', placeholder: 'Your Email', validators: [email, required], component: CustomInput},
+    {name: 'password', placeholder: 'Password', type: 'password', validators: [required], component: CustomInput},
     {name: 'rememberMe', type: 'checkbox', label: 'remember me', labelContainer: true, component: 'input'}
 ];
 
@@ -40,7 +40,7 @@ const LoginForm: FC<PropsType & InjectedFormProps<LoginFormData, PropsType>> = (
             {props.captchaURL && <div className={style.captcha}>
                 <img src={props.captchaURL} alt="captcha"/>
                 {createField<LoginFormDataKeysType>({
-                    component: Input,
+                    component: CustomInput,
                     name: "captcha",
                     validators: [required],
                     placeholder: 'Symbols from image',

@@ -2,12 +2,13 @@ import React, {ComponentType, FC} from 'react';
 import style from './FormsControls.module.css';
 import {Field, WrappedFieldProps} from "redux-form";
 import {ValidatorsType} from "../../../utils/validators";
+import { Input } from 'antd';
 
 export type CustomFieldPropsType = {
     customClassName: string
 }
 
-export const Input: FC<CustomFieldPropsType & WrappedFieldProps> = ({
+export const CustomInput: FC<CustomFieldPropsType & WrappedFieldProps> = ({
                                                              input,
                                                              meta,
                                                              customClassName,
@@ -18,7 +19,7 @@ export const Input: FC<CustomFieldPropsType & WrappedFieldProps> = ({
     return (
         <div className={hasError ? style.error : ''}>
             {hasError && <div className={style.description + ' ' + style[customClassName]}>{meta.error}</div>}
-            <input  {...props} {...input}/>
+            <Input  {...props} {...input}/>
         </div>
     )
 };
@@ -31,15 +32,15 @@ export const Textarea: FC<CustomFieldPropsType & WrappedFieldProps> = ({
                                                             }) => {
     let hasError = meta.error && meta.touched;
     return (
-        <div className={hasError ? style.error : ''}>
+        <div className={`${style.customTextarea} ${hasError ? style.error : ''}`}>
             {hasError && <div className={style.descriptionTextarea + ' ' + style[customClassName]}>{meta.error}</div>}
-            <textarea  {...props} {...input}/>
+            <Input.TextArea {...props} {...input}/>
         </div>
     )
 };
 
-export type CreateFieldOptionsType<ForkKeysType> = {
-    component: ComponentType<CustomFieldPropsType & WrappedFieldProps> | string,
+export type CreateFieldOptionsType<ForkKeysType, P = {}> = {
+    component: ComponentType<CustomFieldPropsType & WrappedFieldProps & P> | string,
     name: ForkKeysType,
     validators?: Array<ValidatorsType>,
     type?: string,
@@ -48,9 +49,10 @@ export type CreateFieldOptionsType<ForkKeysType> = {
     label?: string,
     labelAppend?: boolean,
     labelContainer?: boolean
+    props?: P
 }
 
-export function createField<N extends string>(options: CreateFieldOptionsType<N>) {
+export function createField<N extends string, P extends {[key: string]: any} = {} >(options: CreateFieldOptionsType<N, P>) {
     const {
         component,
         name,
@@ -60,7 +62,8 @@ export function createField<N extends string>(options: CreateFieldOptionsType<N>
         customClassName = 'left',
         label,
         labelAppend,
-        labelContainer
+        labelContainer,
+        props
     } = options;
 
     const field = (
@@ -71,6 +74,7 @@ export function createField<N extends string>(options: CreateFieldOptionsType<N>
             name={name}
             placeholder={placeholder}
             type={type}
+            {...props}
         />
     );
 

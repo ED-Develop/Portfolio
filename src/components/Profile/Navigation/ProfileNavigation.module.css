@@ -1,0 +1,56 @@
+.profile__navigation {
+    height: 63px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #efefef;
+    box-shadow: 0 6px 17px -12px #c4c4c4;
+    margin-bottom: 25px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 15px;
+    color: #545454;
+    font-size: 15px;
+    font-weight: 600;
+    position: relative;
+}
+
+.link:hover {
+    color: #3e416d;
+}
+
+.nav {
+    display: flex;
+    height: 100%;
+}
+
+.link.activeLink {
+    color: #1a73e8;
+}
+
+
+.link.activeLink::after {
+    content: '';
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: #1a73e8;
+}
+
+.navBtns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navBtns button {
+    width: 165px;
+    height: 40px;
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}

@@ -24,6 +24,7 @@ const Nav: FC<PropsType> = ({collapsed}) => {
                 {
                     navItem.map(item => (
                         <NavItem
+                            key={item.title}
                             name={item.title}
                             icon={item.icon}
                             href={item.href}

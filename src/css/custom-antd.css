@@ -1,0 +1,43 @@
+.ant-btn {
+    border-radius: 6px;
+}
+
+.ant-btn-primary {
+    background-color: #377dff;
+    border-color: #377dff;
+}
+
+.ant-btn-primary:hover {
+    background-color: #1a73e8;
+    border-color: #1a73e8;
+}
+
+
+/*comments*/
+
+.ant-comment-content-author {
+    margin: 0;
+}
+
+.ant-comment-actions {
+    margin-top: 3px;
+}
+
+.ant-comment-inner {
+    padding-bottom: 0;
+}
+
+
+/*popup*/
+
+.ant-popover-inner {
+    padding: 8px;
+    border-radius: 8px;
+    color: #666;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ant-popover-inner-content {
+    padding: 0;
+    min-width: 200px;
+}

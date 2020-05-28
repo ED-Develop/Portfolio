@@ -1,7 +1,7 @@
 import profileReducer, {profileActions} from "./profile-reducer";
 import {PostType, ProfileType} from "../types/types";
 
-const {addPost, deletePost, incrementedLike} = profileActions;
+const {addPost, deletePostSuccess, incrementedLike} = profileActions;
 
 let state = {
     postData: [
@@ -52,7 +52,7 @@ it('text of post should be "hello"', () => {
 });
 
 it('length of post should be decremented', () => {
-    let action = deletePost(1);
+    let action = deletePostSuccess(1);
 
     let newState = profileReducer(state, action);
 

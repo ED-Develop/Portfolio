@@ -18,7 +18,7 @@ const Logo: FC<PropsType> = ({toggleIsAsideCollapsed, isAsideCollapsed}) => {
                 burger="arrow"
                 color="#b5b5b5"
                 hoverOpacity={0.8}
-                scale={0.8}
+                scale={0.7}
                 style={{margin: 0, marginRight: '15px'}}
                 onClick={toggleIsAsideCollapsed}
             />

@@ -1,0 +1,41 @@
+.profile__status {
+    text-align: center;
+}
+
+.profile__status input {
+    width: 0;
+    min-width: 300px;
+    max-width: 100%;
+    font-size: 14px;
+    background-color: #f1f3f4;
+    border-radius: 6px;
+    border: none;
+    box-shadow: none;
+}
+
+.statusText {
+    color: #9c9c9c;
+    font-size: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.editBtn {
+    display: inline-block;
+    color: #267be9;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.profile__title {
+    min-height: 90px;
+}
+
+.profile__title h1 {
+    text-align: center;
+    font-size: 29px;
+    color: #464646;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+    font-weight: 600;
+}

@@ -1,0 +1,49 @@
+.post__form {
+    padding: 16px 16px 10px;
+    box-shadow: 0px 1px 9px -2px #d2d2d2;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.field {
+    display: flex;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ebebee;
+}
+
+.field img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: block;
+    margin-right: 15px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+}
+
+.buttons button {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.accessBtn {
+    width: 82px;
+    height: 37px;
+    border-color: #e6e6e6 !important;
+    border-radius: 37px;
+    color: #a3abb2;
+}
+
+.accessBtn:hover {
+    background-color: #ced4da;
+    color: #212529;
+}
+
+.shareBtn {
+    width: 115px;
+    height: 40px;
+}

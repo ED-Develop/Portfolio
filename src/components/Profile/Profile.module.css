@@ -1,6 +1,4 @@
 .wrapper {
-    width: 85%;
-    margin: auto;
     display: grid;
     grid-template-columns: 4fr 8fr;
     grid-column-gap: 70px;

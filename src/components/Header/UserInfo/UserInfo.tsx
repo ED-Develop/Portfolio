@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from "./UserInfo.module.css";
 import UserInfoItem from "./UserInfoItem";
 import bell from '../../../assets/images/bell.svg';
@@ -10,11 +10,23 @@ type PropsType = {
 }
 
 const UserInfo: React.FC<PropsType> = ({avatar}) => {
-    const [infoItems] = useState([
+    const [infoItems, setInfoItems] = useState([
         {id: 0, icon: chat},
         {id: 1, icon: bell},
         {id: 2, icon: avatar ? avatar : defaultAvatar, isAvatar: true}
     ]);
+
+    useEffect(() => {
+        setInfoItems((infoItems) => {
+            return infoItems.map(item => {
+                if (item.isAvatar) {
+                    return {...item, icon: avatar ? avatar : defaultAvatar};
+                }
+
+                return item;
+            })
+        })
+    }, [avatar]);
 
     return (
         <div className={style.userInfo}>

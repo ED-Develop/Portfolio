@@ -34,10 +34,43 @@ export type ContactsType = {
 }
 
 export type PostType = {
-    id: number,
-    date: string,
-    likeCount: number,
-    postText: string
+    postId: string,
+    date: string | number,
+    user: PostUserType
+    content: TPostContent
+    statistic: TPostStatistic
+    comments: Array<TPostComments>
+}
+
+export type PostUserType = {
+    fullName: string | null
+    id: number | null
+    photos: PhotosType
+}
+
+export type TPostContent = {
+    text?: string
+    photos: Array<any>
+    video?: string
+}
+
+export type TPostStatistic = {
+    liked: Array<number>
+    comments: number
+    shared: number
+    saved: number
+}
+
+export type TPostComments = {
+    id: number
+    user: PostUserType
+    content: string
+    date: string
+}
+
+export type TPostFormData = {
+    text: string
+    photos: Array<File>
 }
 
 export type ProjectType = {

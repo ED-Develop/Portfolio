@@ -1,40 +1,17 @@
 import {appActions, AppActionsTypes} from "./app-reducer";
-import {getOwnerProfileData, authActions, AuthActionsTypes} from "./auth-reducer";
-import {FormAction, stopSubmit} from "redux-form";
-import {PhotosType, PostType, ProfileType} from "../types/types";
+import {authActions, AuthActionsTypes, getOwnerProfileData} from "./auth-reducer";
+import {arrayPush, FormAction, stopSubmit} from "redux-form";
+import {PhotosType, PostType, ProfileType, TPostFormData} from "../types/types";
 import {CommonThunkType, InferActionsTypes} from "./store";
 import {profileApi} from "../api/profile-api";
 import {ResultCodesEnum} from "../api/api";
+import {postApi, postStorage, TCreatePostPayload} from "../api/firebase/posts-api";
 
 const initialState = {
-    postData: [
-        {
-            id: 3,
-            date: '10/20/2019',
-            likeCount: 15,
-            postText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut\n' +
-                'labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco\n' +
-                'laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in\n' +
-                'voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat\n' +
-                'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
-        },
-        {
-            id: 2,
-            date: '10/20/2019',
-            likeCount: 54,
-            postText: 'I learn React JS'
-        },
-        {
-            id: 1,
-            date: '10/20/2019',
-            likeCount: 24,
-            postText: "It'style my first post"
-
-        }
-    ] as Array<PostType>,
+    postData: [] as Array<PostType>,
     profile: null as ProfileType | null,
     status: '' as string,
-    followed: true,
+    followed: false,
     isUpdateSuccess: false
 };
 
@@ -49,31 +26,29 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
 
             };
         case "PORTFOLIO/PROFILE/ADD-POST":
-            let newPost = {
-                id: state.postData[0].id + 1,
-                date: '10/21/2019',
-                likeCount: 0,
-                postText: action.post
-            };
-
             return {
                 ...state,
-                postData: [newPost, ...state.postData],
+                postData: [action.post, ...state.postData],
             };
         case "PORTFOLIO/PROFILE/DELETE_POST":
             return {
                 ...state,
-                postData: state.postData.filter((post) => post.id != action.postId)
+                postData: state.postData.filter((post) => post.postId !== action.postId)
             };
-        case "PORTFOLIO/PROFILE/INCREMENTED_LIKE":
+        case "PORTFOLIO/PROFILE/CHANGE_POST_LIKE":
             return {
                 ...state,
                 postData: state.postData.map((post) => {
-                    if (post.id == action.postId) {
-                        return {...post, likeCount: post.likeCount + 1};
-                    } else {
-                        return post;
+                    if (post.postId === action.payload.postId) {
+                        return {
+                            ...post,
+                            statistic: {
+                                ...post.statistic,
+                                liked: [...action.payload.liked]
+                            }
+                        };
                     }
+                    return post;
                 })
             };
         case "PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS":
@@ -86,6 +61,11 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
                     }
                 } as ProfileType
             };
+        case "PORTFOLIO/PROFILE/SET-POSTS":
+            return {
+                ...state,
+                postData: [...action.payload]
+            };
         default:
             return state;
     }
@@ -94,10 +74,19 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
 // actions
 
 export const profileActions = {
-    addPost: (post: string) => ({type: 'PORTFOLIO/PROFILE/ADD-POST', post} as const),
-    deletePost: (postId: number) => ({type: 'PORTFOLIO/PROFILE/DELETE_POST', postId} as const),
-    incrementedLike: (postId: number) => ({type: 'PORTFOLIO/PROFILE/INCREMENTED_LIKE', postId} as const),
-    setUserProfile: (profile: ProfileType) => ({type: 'PORTFOLIO/PROFILE/SET-USER-PROFILE', payload: {profile}} as const),
+    addPost: (post: PostType) => ({type: 'PORTFOLIO/PROFILE/ADD-POST', post} as const),
+    deletePostSuccess: (postId: string) => ({type: 'PORTFOLIO/PROFILE/DELETE_POST', postId} as const),
+    changeLikeSuccess: (liked: Array<number>, postId: string) => ({
+        type: 'PORTFOLIO/PROFILE/CHANGE_POST_LIKE',
+        payload: {
+            liked,
+            postId
+        }
+    } as const),
+    setUserProfile: (profile: ProfileType) => ({
+        type: 'PORTFOLIO/PROFILE/SET-USER-PROFILE',
+        payload: {profile}
+    } as const),
     setProfileStatus: (status: string) => ({type: 'PORTFOLIO/PROFILE/SET_PROFILE_STATUS', payload: {status}} as const),
     uploadProfilePhotoSuccess: (photos: PhotosType) => ({
         type: 'PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS',
@@ -106,10 +95,77 @@ export const profileActions = {
     updateProfileDataSuccess: (isUpdateSuccess: boolean) => ({
         type: 'PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS',
         payload: {isUpdateSuccess}
-    } as const)
+    } as const),
+    setPosts: (posts: Array<PostType>) => ({type: 'PORTFOLIO/PROFILE/SET-POSTS', payload: posts} as const),
 };
 
 // thunks
+
+export const addPost = (postContent: TPostFormData): ThunkType => async (dispatch, getState) => {
+    const state = getState();
+
+    const newPost: TCreatePostPayload = {
+        date: new Date().toLocaleDateString(),
+        user: {
+            fullName: state.auth.login,
+            id: state.auth.userId,
+            photos: state.auth.photos,
+        },
+        content: {
+            text: postContent.text,
+            photos: postContent.photos,
+        },
+        statistic: {
+            liked: [],
+            comments: 0,
+            shared: 0,
+            saved: 0
+        },
+        comments: []
+    };
+
+    /*const response = await postApi.create<TCreatePostPayload, TCreatePostResponse>(newPost);
+
+    dispatch(profileActions.addPost({postId: response.name, ...newPost}));*/
+};
+
+export const uploadFile = (file: File): ThunkType => async (dispatch) => {
+    const fileLink = await postStorage.upload(file);
+    dispatch(arrayPush('myPost', 'photos', fileLink));
+};
+
+export const getPosts = (): ThunkType => async (dispatch) => {
+    const posts = await postApi.getPosts() as Array<PostType>;
+    dispatch(profileActions.setPosts(posts));
+};
+
+export const deletePost = (postId: string): ThunkType => async (dispatch) => {
+    const response = await postApi.delete(postId);
+
+    if (response === null) {
+        dispatch(profileActions.deletePostSuccess(postId));
+    }
+};
+
+export const changePostLike = (postId: string): ThunkType => async (dispatch, getState) => {
+    const state = getState();
+    const userId = state.auth.userId;
+    const currentPost = state.profile.postData.find(post => post.postId === postId);
+
+    if (userId && currentPost) {
+        let liked: Array<number>;
+
+        if (!currentPost.statistic.liked.includes(userId)) {
+            liked = [...currentPost.statistic.liked, userId];
+        } else {
+            liked = currentPost.statistic.liked.filter(id => id !== userId);
+        }
+
+        const response = await postApi.changeLike(liked, postId);
+
+        dispatch(profileActions.changeLikeSuccess(response.liked || [], postId));
+    }
+};
 
 export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     dispatch(appActions.toggleIsFetching(true));

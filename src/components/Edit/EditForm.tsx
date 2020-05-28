@@ -7,7 +7,7 @@ import {required} from "../../utils/validators";
 import {
     createField, CreateFieldOptionsType,
     GetObjectsKeys,
-    Input,
+    CustomInput,
     Textarea
 } from "../common/FormsControls/FormsControls";
 
@@ -19,7 +19,7 @@ type FormPropsType = {
 type EditFormDataKeysType = GetObjectsKeys<ProfileType>;
 
 const editFieldsData: Array<CreateFieldOptionsType<EditFormDataKeysType>> = [
-    {name: 'fullName', label: 'Login:', validators: [required], component: Input},
+    {name: 'fullName', label: 'Login:', validators: [required], component: CustomInput},
     {name: 'aboutMe', label: 'About me:', validators: [required], component: Textarea},
     {name: 'lookingForAJob', label: 'Looking for a job', component: 'input', type: 'checkbox', labelAppend: true},
     {name: 'lookingForAJobDescription', label: 'My professional skills:', validators: [required], component: Textarea}
