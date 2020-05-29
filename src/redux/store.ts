@@ -8,6 +8,7 @@ import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
 import appReducer from "./app-reducer";
 import projectsReducer from "./projects-reducer";
+import timelineReducer from "./timeline/timeline-reducer";
 
 const rootReducer = combineReducers({
     profile: profileReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     form: formReducer,
     app: appReducer,
-    projects: projectsReducer
+    projects: projectsReducer,
+    timeline: timelineReducer
 });
 
 type RootReducerType = typeof rootReducer

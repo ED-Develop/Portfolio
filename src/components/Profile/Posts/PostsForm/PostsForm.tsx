@@ -1,26 +1,49 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import style from './PostForm.module.css';
-import {InjectedFormProps, reduxForm, reset} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, GetObjectsKeys, Textarea} from "../../../common/FormsControls/FormsControls";
-import {maxLength} from "../../../../utils/validators";
 import {Button} from "antd";
 import s from "../Posts.module.css";
 import defaultAvatar from "../../../../assets/images/user.png";
 import UploadInput, {UploadInputPropsType} from "./UploadInput";
-import {TPostFormData} from "../../../../types/types";
+import {TPostFormData, TUploadedFile} from "../../../../types/types";
 
-const maxLength50 = maxLength(50);
-
-type PropsType = {
+export type PostsFormPropsType = {
     firstName: string | null
     avatar: string | null
     uploadFile: (file: File) => void
+    uploadedFiles: Array<TUploadedFile>
+    removeUploadedFile: (fileName: string) => void
+    cancelUploading: (formName: string, fieldName: string, urlFile?: string) => void
+    deleteFile: (fileUrl: string) => void
 }
 
 type PostFormDataKeysType = GetObjectsKeys<TPostFormData>;
 
-const PostsForm: FC<PropsType & InjectedFormProps<TPostFormData, PropsType>> = (props) => {
-    const {handleSubmit, firstName, avatar, uploadFile} = props;
+const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostFormData, PostsFormPropsType>> = (props) => {
+    const {
+        handleSubmit,
+        firstName,
+        avatar,
+        uploadFile,
+        uploadedFiles,
+        removeUploadedFile,
+        submitSucceeded,
+        cancelUploading,
+        deleteFile
+    } = props;
+
+    const [isUploading, setIsUploading] = useState(false);
+
+    useEffect(() => {
+        if (submitSucceeded) {
+            props.reset();
+        }
+    }, [submitSucceeded]);
+
+    const toggleIsUploading = (isUploading: boolean) => {
+        setIsUploading(isUploading)
+    };
 
     return (
         <form onSubmit={handleSubmit} className={style.post__form}>
@@ -29,7 +52,6 @@ const PostsForm: FC<PropsType & InjectedFormProps<TPostFormData, PropsType>> = (
                 {createField<PostFormDataKeysType>({
                     component: Textarea,
                     customClassName: 'top',
-                    validators: [maxLength50],
                     name: 'text',
                     placeholder: `What's your mind? ${firstName}!`
                 })}
@@ -39,23 +61,34 @@ const PostsForm: FC<PropsType & InjectedFormProps<TPostFormData, PropsType>> = (
                     component: UploadInput,
                     name: 'photos',
                     props: {
-                        uploadFile
+                        uploadFile,
+                        uploadedFiles,
+                        removeUploadedFile,
+                        submitSucceeded,
+                        cancelUploading,
+                        toggleIsUploading,
+                        isUploading,
+                        deleteFile
                     }
                 })}
-                <Button className={style.accessBtn}>Access</Button>
-                <Button type='primary' className={style.shareBtn} htmlType='submit'>Share</Button>
+                <Button
+                    type='primary'
+                    className={style.shareBtn}
+                    htmlType='submit'
+                    disabled={isUploading}
+                >
+                    Share
+                </Button>
             </div>
         </form>
     );
 };
 
-export default reduxForm<TPostFormData, PropsType>({
+export default reduxForm<TPostFormData, PostsFormPropsType>({
     form: 'myPost',
-    onSubmitSuccess: (result, dispatch) => {
-        dispatch(reset('myPost'))
-    },
     initialValues: {
         text: '',
         photos: []
-    }
+    },
+    destroyOnUnmount: false
 })(PostsForm);

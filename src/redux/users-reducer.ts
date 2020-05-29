@@ -1,4 +1,4 @@
-import {updateObjectInArray} from "../utils/objectHelpers";
+import {updateObjectInArray} from "../utils/helpers";
 import {appActions, AppActionsTypes} from "./app-reducer";
 import {UserType} from "../types/types";
 import {CommonThunkType, InferActionsTypes} from "./store";

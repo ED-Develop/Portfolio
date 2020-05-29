@@ -1,3 +1,5 @@
+import {UploadStatus} from "../redux/timeline/timeline-reducer";
+
 export type UserType = {
     id: number,
     name: string,
@@ -86,4 +88,10 @@ export type LoginFormData = {
     password: string
     rememberMe: boolean
     captcha?: string
+}
+
+export type TUploadedFile = {
+    status: UploadStatus
+    fileName: string
+    fileUrl: string
 }
