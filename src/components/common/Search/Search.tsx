@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import style from "./Search.module.css";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, GetObjectsKeys} from "../FormsControls/FormsControls";
+import {createField, CustomInput, GetObjectsKeys} from "../FormsControls/FormsControls";
 import {Input} from "antd";
 import {SearchOutlined} from "@ant-design/icons/lib";
 
@@ -21,11 +21,12 @@ const SearchForm: FC<PropsType & InjectedFormProps<FormDataType, PropsType>> = (
             {createField<SearchFormDataKeysType>({
                 placeholder,
                 name: 'search',
-                component: (props) => <Input
-                    size="large" {...props}
-                    prefix={<SearchOutlined />}
-                    className={style.searchInput}
-                />
+                component: CustomInput,
+                props: {
+                    size: "large",
+                    prefix: <SearchOutlined/>,
+                    className: style.searchInput
+                }
             })}
         </form>
     );

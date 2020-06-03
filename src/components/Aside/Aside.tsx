@@ -10,7 +10,7 @@ type PropsType = {
     collapsed: boolean
 }
 
-const Aside: FC<PropsType> = ({isAuth, collapsed}) => {
+const Aside: FC<PropsType> = ({collapsed}) => {
         return (
             <Sider theme='light' width='20.8%' className={style.aside} collapsed={collapsed} collapsedWidth={'16.6%'}>
                 <Affix offsetTop={65}>

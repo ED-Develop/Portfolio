@@ -2,23 +2,25 @@ import React from 'react';
 import Posts from "./Posts";
 import {connect} from "react-redux";
 import {getFirstName} from "../../../redux/profile-selector";
-import {PostType, TPostFormData, TUploadedFile} from "../../../types/types";
+import {TPostModel, TPostFormData, TUploadedFile} from "../../../types/types";
 import {AppStateType} from "../../../redux/store";
 import {
+    addComment,
     addPost,
     cancelUploading,
-    changePostLike,
+    changePostLike, deleteComment,
     deleteFile,
-    deletePost,
+    deletePost, editComment,
     getPosts,
-    timelineActions,
+    timelineActions, toggleDisabledComments,
     uploadFile
 } from "../../../redux/timeline/timeline-reducer";
+import {destroy} from "redux-form";
 
 const {removeUploadedFile} = timelineActions;
 
 type MapStatePropsType = {
-    postData: Array<PostType>
+    postData: Array<TPostModel>
     avatar: string | null
     firstName: string | null
     userId: number | null
@@ -34,6 +36,11 @@ type MapDispatchPropsType = {
     removeUploadedFile: (fileName: string) => void
     cancelUploading: (formName: string, fieldName: string, urlFile?: string) => void
     deleteFile: (fileUrl: string) => void
+    addComment: (postId: string, content: string, formName: string) => void
+    editComment: (postId: string, content: string, formName: string, commentId: string) => void
+    deleteComment: (postId: string, commentId: string) => void
+    destroy: (formName: string) => void
+    toggleDisabledComments: (postId: string, isDisabled: boolean) => void
 }
 
 type OwnPropsType = {
@@ -69,5 +76,10 @@ export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, Ap
         getPosts,
         removeUploadedFile,
         cancelUploading,
-        deleteFile
+        deleteFile,
+        addComment,
+        deleteComment,
+        destroy,
+        editComment,
+        toggleDisabledComments
     })(PostsContainer);

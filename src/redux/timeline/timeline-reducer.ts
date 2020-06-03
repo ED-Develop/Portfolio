@@ -1,12 +1,19 @@
-import {PostType, TPostFormData, TUploadedFile} from "../../types/types";
+import {TPostModel, TPostComment, TPostFormData, TUploadedFile} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector, stopSubmit} from "redux-form";
 import {AppActionsTypes} from "../app-reducer";
-import {postApi, postStorage, TCreatePostPayload, TCreatePostResponse} from "../../api/firebase/posts-api";
-import {parseContent} from "../../utils/helpers";
+import {
+    postApi,
+    postStorage,
+    TCreateCommentPayload,
+    TCreatePostPayload,
+    TCreateResponse
+} from "../../api/firebase/posts-api";
+import {parseContent, updateObjectInArray} from "../../utils/helpers";
+import {validateForm} from "../common";
 
 const initialState = {
-    postData: [] as Array<PostType>,
+    postData: [] as Array<TPostModel>,
     uploadedFiles: [] as Array<TUploadedFile>
 };
 
@@ -53,13 +60,80 @@ const timelineReducer = (state = initialState, action: TimelineActionsTypes): In
                 ...state,
                 uploadedFiles: state.uploadedFiles.filter(file => file.fileName !== action.payload.fileName)
             };
+        case "PORTFOLIO/PROFILE/ADD_COMMENT_SUCCESS":
+            return {
+                ...state,
+                postData: state.postData.map(post => {
+                    if (post.postId === action.payload.postId) {
+                        return {
+                            ...post,
+                            comments: [...post.comments, action.payload.comment],
+                            statistic: {
+                                ...post.statistic,
+                                comments: ++post.comments.length
+                            }
+                        };
+                    }
+                    return post;
+                })
+            };
+        case "PORTFOLIO/PROFILE/CHANGE_COMMENT_SUCCESS":
+            const {commentId, content} = action.payload;
+            return {
+                ...state,
+                postData: state.postData.map(post => {
+                    if (post.postId === action.payload.postId) {
+                        return {
+                            ...post,
+                            comments: updateObjectInArray<TPostComment, string>(
+                                post.comments,
+                                commentId,
+                                "id",
+                                {content}
+                            )
+                        };
+                    }
+
+                    return post;
+                })
+            };
+        case "PORTFOLIO/PROFILE/DELETE_COMMENT_SUCCESS":
+            return {
+                ...state,
+                postData: state.postData.map(post => {
+                    if (post.postId === action.payload.postId) {
+                        return {
+                            ...post,
+                            comments: post.comments.filter(comment => comment.id !== action.payload.commentId),
+                            statistic: {
+                                ...post.statistic,
+                                comments: --post.comments.length
+                            }
+                        };
+                    }
+
+                    return post;
+                })
+            };
+        case "PORTFOLIO/PROFILE/TOGGLE_DISABLED_COMMENTS_SUCCESS":
+            const {postId, isDisabled} = action.payload;
+
+            return {
+                ...state,
+                postData: updateObjectInArray<TPostModel, string>(
+                    state.postData,
+                    postId,
+                    "postId",
+                    {isDisabledComments: isDisabled}
+                )
+            };
         default:
             return state;
     }
 };
 
 export const timelineActions = {
-    addPost: (post: PostType) => ({type: 'PORTFOLIO/PROFILE/ADD-POST', post} as const),
+    addPost: (post: TPostModel) => ({type: 'PORTFOLIO/PROFILE/ADD-POST', post} as const),
     deletePostSuccess: (postId: string) => ({type: 'PORTFOLIO/PROFILE/DELETE_POST', postId} as const),
     changeLikeSuccess: (liked: Array<number>, postId: string) => ({
         type: 'PORTFOLIO/PROFILE/CHANGE_POST_LIKE',
@@ -68,7 +142,7 @@ export const timelineActions = {
             postId
         }
     } as const),
-    setPosts: (posts: Array<PostType>) => ({type: 'PORTFOLIO/PROFILE/SET-POSTS', payload: posts} as const),
+    setPosts: (posts: Array<TPostModel>) => ({type: 'PORTFOLIO/PROFILE/SET-POSTS', payload: posts} as const),
     pushUploadedFile: (uploadedFile: TUploadedFile) => ({
         type: 'PORTFOLIO/PROFILE/PUSH_UPLOADED_FILE',
         payload: {uploadedFile}
@@ -76,15 +150,29 @@ export const timelineActions = {
     removeUploadedFile: (fileName: string) => ({
         type: 'PORTFOLIO/PROFILE/REMOVE_UPLOADED_FILE',
         payload: {fileName}
+    } as const),
+    addCommentSuccess: (postId: string, comment: TPostComment) => ({
+        type: 'PORTFOLIO/PROFILE/ADD_COMMENT_SUCCESS',
+        payload: {postId, comment}
+    } as const),
+    changeCommentSuccess: (postId: string, commentId: string, content: string) => ({
+        type: 'PORTFOLIO/PROFILE/CHANGE_COMMENT_SUCCESS',
+        payload: {postId, commentId, content}
+    } as const),
+    deleteCommentSuccess: (postId: string, commentId: string) => ({
+        type: 'PORTFOLIO/PROFILE/DELETE_COMMENT_SUCCESS',
+        payload: {postId, commentId}
+    } as const),
+    toggleDisabledCommentsSuccess: (postId: string, isDisabled: boolean) => ({
+        type: 'PORTFOLIO/PROFILE/TOGGLE_DISABLED_COMMENTS_SUCCESS',
+        payload: {postId, isDisabled}
     } as const)
 };
 
 // thunks
 
 export const addPost = (postData: TPostFormData, formName: string): ThunkType => async (dispatch, getState) => {
-    if (!postData.photos.length && !postData.text) {
-        dispatch(stopSubmit(formName, {_error: 'Empty post content'}));
-    } else {
+    if (validateForm(() => !(!postData.photos.length && !postData.text), formName, dispatch)) {
         const state = getState();
         const postContent = parseContent(postData.text);
 
@@ -106,10 +194,11 @@ export const addPost = (postData: TPostFormData, formName: string): ThunkType =>
                 shared: 0,
                 saved: 0
             },
+            isDisabledComments: false,
             comments: []
         };
 
-        const response = await postApi.create<TCreatePostPayload, TCreatePostResponse>(newPost);
+        const response = await postApi.create<TCreatePostPayload, TCreateResponse>(newPost);
 
         dispatch(timelineActions.addPost({postId: response.name, ...newPost}));
     }
@@ -163,9 +252,10 @@ export const cancelUploading = (formName: string, fieldName: string, urlFile?: s
 };
 
 export const getPosts = (): ThunkType => async (dispatch) => {
-    const posts = await postApi.getPosts() as Array<PostType>;
+    const posts = await postApi.getPosts() as Array<TPostModel>;
     dispatch(timelineActions.setPosts(posts));
 };
+
 export const deletePost = (postId: string): ThunkType => async (dispatch, getState) => {
     const response = await postApi.delete(postId);
 
@@ -194,6 +284,58 @@ export const changePostLike = (postId: string): ThunkType => async (dispatch, ge
         const response = await postApi.changeLike(liked, postId);
 
         dispatch(timelineActions.changeLikeSuccess(response.liked || [], postId));
+    }
+};
+
+export const addComment = (postId: string, content: string, formName: string): ThunkType => {
+    return async (dispatch, getState) => {
+        if (validateForm(() => !!content, formName, dispatch)) {
+            const state = getState();
+
+            const newComment: TCreateCommentPayload = {
+                content,
+                user: {
+                    id: state.auth.userId,
+                    fullName: state.auth.login,
+                    photos: state.auth.photos,
+                },
+                date: new Date().toLocaleDateString()
+            };
+
+            const result = await postApi.createComment(newComment, postId);
+
+            if (result) {
+                dispatch(timelineActions.addCommentSuccess(postId, {id: result.name, ...newComment}));
+            }
+        }
+    };
+};
+
+export const editComment = (postId: string, content: string, formName: string, commentId: string): ThunkType => {
+    return async (dispatch) => {
+        if (validateForm(() => !!content, formName, dispatch)) {
+            const result = await postApi.editComment<string>(content, postId, commentId);
+
+            if (result) {
+                dispatch(timelineActions.changeCommentSuccess(postId, commentId, result.content));
+            }
+        }
+    };
+};
+
+export const deleteComment = (postId: string, commentId: string): ThunkType => async (dispatch) => {
+    const result = await postApi.deleteComment(postId, commentId);
+
+    if (result === null) {
+        dispatch(timelineActions.deleteCommentSuccess(postId, commentId));
+    }
+};
+
+export const toggleDisabledComments = (postId: string, isDisabled: boolean): ThunkType => async (dispatch) => {
+    const result = await postApi.toggleDisabledComments(isDisabled, postId);
+
+    if (result) {
+        dispatch(timelineActions.toggleDisabledCommentsSuccess(postId, result.isDisabledComments));
     }
 };
 

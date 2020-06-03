@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import style from './Post.module.css';
-import {PostType} from "../../../../types/types";
+import {TPostModel} from "../../../../types/types";
 import like from '../../../../assets/images/reactions_like.png';
 import love from '../../../../assets/images/reactions_love.png';
 import Statistic from "./Statistic";
@@ -10,18 +10,24 @@ import PostHeading from "./PostHeading";
 import PostContent from "./PostContent";
 
 type PropsType = {
-    post: PostType,
+    post: TPostModel,
     deletePost: (postId: string) => void
     changePostLike: (postId: string) => void
     avatar: string
-    login: string | null
     isMyProfile: boolean
     userId: number | null
+    addComment: (postId: string, content: string, formName: string) => void
+    editComment: (postId: string, content: string, formName: string, commentId: string) => void
+    deleteComment: (postId: string, commentId: string) => void
+    destroy: (formName: string) => void
+    toggleDisabledComments: (postId: string, isDisabled: boolean) => void
+    startEditing: (post: TPostModel) => void
 }
 
-const Post: FC<PropsType> = ({post, deletePost, changePostLike, login, avatar, userId}) => {
+const Post: FC<PropsType> = ({post, deletePost, changePostLike, avatar, userId, addComment, deleteComment, ...props}) => {
     const onDeletePost = () => deletePost(post.postId || '');
     const onIncrementLike = () => changePostLike(post.postId);
+    const editPost = () => props.startEditing(post);
 
     return (
         <div className={style.posts_post}>
@@ -31,6 +37,10 @@ const Post: FC<PropsType> = ({post, deletePost, changePostLike, login, avatar, u
                 user={post.user.fullName}
                 isPostOwner={userId === post.user.id}
                 onDeletePost={onDeletePost}
+                toggleDisabledComments={props.toggleDisabledComments}
+                postId={post.postId}
+                isDisabledComments={post.isDisabledComments}
+                startEditing={editPost}
             />
             <PostContent content={post.content}/>
             <div className={style.feedback}>
@@ -46,7 +56,18 @@ const Post: FC<PropsType> = ({post, deletePost, changePostLike, login, avatar, u
                 <p>{post.statistic.comments} Comments</p>
             </div>
             <Statistic statistic={post.statistic}/>
-            <Comments comments={post.comments} avatar={avatar} userId={userId}/>
+            {!post.isDisabledComments && (
+                <Comments
+                    comments={post.comments}
+                    avatar={avatar}
+                    userId={userId}
+                    sendComment={addComment}
+                    postId={post.postId}
+                    deleteComment={deleteComment}
+                    destroy={props.destroy}
+                    editComment={props.editComment}
+                />
+            )}
         </div>
     );
 };

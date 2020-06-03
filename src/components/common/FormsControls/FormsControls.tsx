@@ -1,23 +1,27 @@
-import React, {ComponentType, FC} from 'react';
+import React, {ComponentType, FC, MutableRefObject, useEffect, useRef} from 'react';
 import style from './FormsControls.module.css';
 import {Field, WrappedFieldProps} from "redux-form";
 import {ValidatorsType} from "../../../utils/validators";
-import { Input } from 'antd';
+import {Input} from 'antd';
+import TextArea from "antd/lib/input/TextArea";
 
 export type CustomFieldPropsType = {
     customClassName: string
+    className?: string
+    isFocus?: boolean
+    toggleIsFocus?: (isFocus?: boolean) => void
 }
 
 export const CustomInput: FC<CustomFieldPropsType & WrappedFieldProps> = ({
-                                                             input,
-                                                             meta,
-                                                             customClassName,
-                                                             ...props
-                                                         }) => {
+                                                                              input,
+                                                                              meta,
+                                                                              customClassName,
+                                                                              ...props
+                                                                          }) => {
     let hasError = meta.error && meta.touched;
 
     return (
-        <div className={hasError ? style.error : ''}>
+        <div className={`${hasError ? style.error : ''} `}>
             {hasError && <div className={style.description + ' ' + style[customClassName]}>{meta.error}</div>}
             <Input  {...props} {...input}/>
         </div>
@@ -25,21 +29,42 @@ export const CustomInput: FC<CustomFieldPropsType & WrappedFieldProps> = ({
 };
 
 export const Textarea: FC<CustomFieldPropsType & WrappedFieldProps> = ({
-                                                                input,
-                                                                meta,
-                                                                customClassName,
-                                                                ...props
-                                                            }) => {
-    let hasError = meta.error && meta.touched;
+                                                                           input,
+                                                                           meta,
+                                                                           customClassName,
+                                                                           className,
+                                                                           isFocus,
+                                                                           toggleIsFocus,
+                                                                           ...props
+                                                                       }) => {
+    const hasError = meta.error && meta.touched;
+    const textAreaElement = useRef<TextArea>(null);
+
+    useEffect(() => {
+        if (textAreaElement.current && isFocus) {
+            textAreaElement.current.focus();
+        }
+    }, [isFocus, textAreaElement]);
+
+    const handleBlur = () => {
+        if (toggleIsFocus) {
+            toggleIsFocus(false);
+        }
+    };
+
     return (
-        <div className={`${style.customTextarea} ${hasError ? style.error : ''}`}>
+        <div className={`${style.customTextarea} ${hasError ? style.error : ''} ${className}`}>
             {hasError && <div className={style.descriptionTextarea + ' ' + style[customClassName]}>{meta.error}</div>}
-            <Input.TextArea {...props} {...input}/>
+            <Input.TextArea
+                {...props} {...input}
+                ref={textAreaElement}
+                onBlur={handleBlur}
+            />
         </div>
     )
 };
 
-export type CreateFieldOptionsType<ForkKeysType, P = {}> = {
+export type CreateFieldOptionsType<ForkKeysType, P = {}, RE extends HTMLElement | null = null> = {
     component: ComponentType<CustomFieldPropsType & WrappedFieldProps & P> | string,
     name: ForkKeysType,
     validators?: Array<ValidatorsType>,
@@ -50,9 +75,10 @@ export type CreateFieldOptionsType<ForkKeysType, P = {}> = {
     labelAppend?: boolean,
     labelContainer?: boolean
     props?: P
+    ref?: (element: MutableRefObject<RE>) => void
 }
 
-export function createField<N extends string, P extends {[key: string]: any} = {} >(options: CreateFieldOptionsType<N, P>) {
+export function createField<N extends string, P extends { [key: string]: any } = {}>(options: CreateFieldOptionsType<N, P>) {
     const {
         component,
         name,

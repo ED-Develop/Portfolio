@@ -1,5 +1,5 @@
 import profileReducer, {profileActions} from "./profile-reducer";
-import {PostType, ProfileType} from "../types/types";
+import {TPostModel, ProfileType} from "../types/types";
 
 const {addPost, deletePostSuccess, incrementedLike} = profileActions;
 
@@ -28,7 +28,7 @@ let state = {
             postText: "It'style my first post"
 
         }
-    ] as Array<PostType>,
+    ] as Array<TPostModel>,
     profile: null as ProfileType | null,
     status: '' as string,
     followed: true,

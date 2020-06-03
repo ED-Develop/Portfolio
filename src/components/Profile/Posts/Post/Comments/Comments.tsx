@@ -1,61 +1,92 @@
-import React from "react";
+import React, {useState} from "react";
 import style from './Comments.module.css';
-import {Comment} from "antd";
-import {TPostComments} from "../../../../../types/types";
-import {BugOutlined, DeleteOutlined, EditOutlined, LikeOutlined} from "@ant-design/icons/lib";
-import CommentsForm from "./CommentsForm";
-import PopUpMenu from "../../../../common/PopUpMenu/PopUpMenu";
+import {TPostComment} from "../../../../../types/types";
+import CommentsForm, {CommentsFormPropsType, TCommentsFormData} from "./CommentsForm";
+import {Dispatch} from "redux";
+import {DecoratedFormProps} from "redux-form/lib/reduxForm";
+import CustomComment from "./CustomComment";
 
 type PropsType = {
-    comments: Array<TPostComments>
+    comments: Array<TPostComment>
     avatar: string
     userId: number | null
+    sendComment: (postId: string, content: string, formName: string) => void
+    editComment: (postId: string, content: string, formName: string, commentId: string) => void
+    postId: string
+    deleteComment: (postId: string, commentId: string) => void
+    destroy: (formName: string) => void
 }
 
-const Comments: React.FC<PropsType> = ({comments, avatar, userId}) => {
-    const ownerCommentMenu = (
-        <>
-            <li><EditOutlined className={style.popUpIcon}/> Edit</li>
-            <li className={style.deletePost}><DeleteOutlined className={style.popUpIcon}/> Delete</li>
-        </>
-    );
+const Comments: React.FC<PropsType> = ({comments, avatar, userId, sendComment, postId, deleteComment, destroy, ...props}) => {
+    const [editingComment, setEditingComment] = useState<TPostComment | null>(null);
+    const [isInputFocus, toggleIsInputFocus] = useState(false);
+    const [initialFormValue, setInitialFormValue] = useState<TCommentsFormData>();
+    const FORM_NAME = `comments__${postId}`;
 
-    const commentMenu = (
-        <>
-            <li><BugOutlined className={style.popUpIcon}/> Complain</li>
-        </>
-    );
+    const startEditing = (comment: TPostComment) => {
+        if (!editingComment || editingComment.id !== comment.id) {
+            setEditingComment(comment);
+        }
+
+        toggleIsInputFocus(true);
+    };
+
+    const replyComment = (userName: string) => {
+        toggleIsInputFocus(true);
+        setInitialFormValue(() => ({comment: `"@${userName}" `}));
+    };
+
+    const disableInputFocus = () => toggleIsInputFocus(false);
+
+    const resetForm = () => {
+        disableInputFocus();
+        setEditingComment(null);
+        destroy(FORM_NAME);
+        setInitialFormValue(() => void 0);
+    };
+
+    const onSubmit = (
+        formData: TCommentsFormData,
+        dispatch: Dispatch,
+        {form}: DecoratedFormProps<TCommentsFormData, CommentsFormPropsType>
+    ) => {
+
+        if (form && editingComment) {
+            props.editComment(postId, formData.comment, form, editingComment.id);
+        } else if (form) {
+            sendComment(postId, formData.comment, form);
+        }
+
+        if (editingComment || initialFormValue) {
+            resetForm();
+        }
+    };
 
     return (
         <div className={style.post__comments}>
             <ul className={style.commentsList}>
                 {comments && comments.map(comment => (
-                    <li key={comment.id} className={style.comment}>
-                        <Comment
-                            content={
-                                <div className={style.contentContainer}>
-                                    <div className={style.content}>
-                                        <h5 className={style.user}>{comment.user.fullName}</h5>
-                                        <p>{comment.content}</p>
-                                    </div>
-                                    <PopUpMenu placement='topRight'>
-                                        {userId === comment.user.id ? ownerCommentMenu : commentMenu}
-                                    </PopUpMenu>
-                                </div>
-                            }
-                            avatar={comment.user.photos.small}
-                            actions={
-                                [
-                                    <span className={style.like}><span><LikeOutlined/></span> Like</span>,
-                                    <span className={style.replay}>Replay</span>,
-                                    <span className={style.date}>{comment.date}</span>
-                                ]
-                            }
-                        />
-                    </li>
+                    <CustomComment
+                        key={comment.id}
+                        comment={comment}
+                        userId={userId}
+                        deleteComment={deleteComment}
+                        postId={postId}
+                        startEditing={startEditing}
+                        replyComment={replyComment}
+                    />
                 ))}
             </ul>
-            <CommentsForm avatar={avatar}/>
+            <CommentsForm
+                avatar={avatar}
+                onSubmit={onSubmit}
+                initialValues={editingComment ? {comment: editingComment?.content} : initialFormValue}
+                editMode={!!editingComment}
+                disableInputFocus={disableInputFocus}
+                cancelEditing={resetForm}
+                isInputFocus={isInputFocus}
+                form={FORM_NAME}
+            />
         </div>
     )
 };

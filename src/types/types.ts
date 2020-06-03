@@ -35,13 +35,14 @@ export type ContactsType = {
     mainLink: string
 }
 
-export type PostType = {
+export type TPostModel = {
     postId: string,
     date: string | number,
     user: PostUserType
     content: TPostContent
     statistic: TPostStatistic
-    comments: Array<TPostComments>
+    isDisabledComments: boolean
+    comments: Array<TPostComment>
 }
 
 export type PostUserType = {
@@ -63,8 +64,8 @@ export type TPostStatistic = {
     saved: number
 }
 
-export type TPostComments = {
-    id: number
+export type TPostComment = {
+    id: string
     user: PostUserType
     content: string
     date: string

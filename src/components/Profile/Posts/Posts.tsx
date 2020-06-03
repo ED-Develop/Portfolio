@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import style from './Posts.module.css';
 import Post from "./Post/Post";
 import MyPostForm, {PostsFormPropsType} from "./PostsForm/PostsForm";
 import defaultAvatar from '../../../assets/images/user.png';
-import {PostType, TPostFormData} from "../../../types/types";
+import {TPostFormData, TPostModel} from "../../../types/types";
 import {Col} from "antd";
 import {PostsPropsType} from "./PostsContainer";
 import {Dispatch} from "redux";
@@ -11,7 +11,24 @@ import {DecoratedFormProps} from "redux-form/lib/reduxForm";
 
 const Posts: FC<PostsPropsType> = React.memo((
     {changePostLike, deletePost, postData, addPost, avatar, isMyProfile, firstName, userId, uploadFile, ...props}) => {
-    const onSubmit = (formData: TPostFormData, dispatch: Dispatch, props: DecoratedFormProps<TPostFormData, PostsFormPropsType>) => {
+    const [editingPost, setEditingPost] = useState<TPostModel | null>(null);
+    const [isInputFocus, toggleIsInputFocus] = useState(false);
+
+    const startEditing = (post: TPostModel) => {
+        if (!editingPost || editingPost.postId !== post.postId) {
+            setEditingPost(post);
+        }
+
+        toggleIsInputFocus(true);
+    };
+
+    const disableInputFocus = () => toggleIsInputFocus(false);
+
+    const onSubmit = (
+        formData: TPostFormData,
+        dispatch: Dispatch,
+        props: DecoratedFormProps<TPostFormData, PostsFormPropsType>
+    ) => {
         if (props.form) {
             addPost(formData, props.form);
         }
@@ -29,19 +46,26 @@ const Posts: FC<PostsPropsType> = React.memo((
                     removeUploadedFile={props.removeUploadedFile}
                     cancelUploading={props.cancelUploading}
                     deleteFile={props.deleteFile}
+                    isInputFocus={isInputFocus}
+                    disableInputFocus={disableInputFocus}
                 />
             </div>}
             {
-                postData.map((post: PostType) => (
+                postData.map((post: TPostModel) => (
                     <Post
                         key={post.postId}
                         isMyProfile={isMyProfile}
                         avatar={avatar || defaultAvatar}
-                        login={firstName}
                         post={post}
                         changePostLike={changePostLike}
                         deletePost={deletePost}
                         userId={userId}
+                        addComment={props.addComment}
+                        deleteComment={props.deleteComment}
+                        destroy={props.destroy}
+                        editComment={props.editComment}
+                        toggleDisabledComments={props.toggleDisabledComments}
+                        startEditing={startEditing}
                     />
                 ))
             }
