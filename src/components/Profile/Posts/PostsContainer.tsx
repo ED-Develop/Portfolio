@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Posts from "./Posts";
 import {connect} from "react-redux";
 import {getFirstName} from "../../../redux/profile-selector";
-import {TPostModel, TPostFormData, TUploadedFile} from "../../../types/types";
+import {TPostModel, TPostFormData, TUploadedFile, TPostContent} from "../../../types/types";
 import {AppStateType} from "../../../redux/store";
 import {
     addComment,
@@ -10,12 +10,15 @@ import {
     cancelUploading,
     changePostLike, deleteComment,
     deleteFile,
-    deletePost, editComment,
+    deletePost, editComment, editPost,
     getPosts,
     timelineActions, toggleDisabledComments,
     uploadFile
 } from "../../../redux/timeline/timeline-reducer";
 import {destroy} from "redux-form";
+import {Dispatch} from "redux";
+import {DecoratedFormProps} from "redux-form/lib/reduxForm";
+import {PostsFormPropsType} from "./PostsForm/PostsForm";
 
 const {removeUploadedFile} = timelineActions;
 
@@ -29,6 +32,7 @@ type MapStatePropsType = {
 
 type MapDispatchPropsType = {
     addPost: (post: TPostFormData, formName: string) => void
+    editPost: (postData: TPostContent, formName: string, postId: string) => void
     deletePost: (postId: string) => void
     changePostLike: (postId: string) => void
     getPosts: () => void
@@ -49,15 +53,61 @@ type OwnPropsType = {
 
 export type PostsPropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
-class PostsContainer extends React.Component<PostsPropsType> {
-    componentDidMount() {
-        this.props.getPosts();
-    }
+const PostsContainer: React.FC<PostsPropsType> = (props) => {
+    const {addPost, getPosts, editPost, ...restProps} = props;
+    const [editingPost, setEditingPost] = useState<TPostModel | null>(null);
+    const [isInputFocus, toggleIsInputFocus] = useState(false);
 
-    render() {
-        return <Posts {...this.props}/>
-    }
-}
+    useEffect(() => {
+        getPosts();
+    }, []);
+
+    const startEditing = (post: TPostModel) => {
+        if (!editingPost || editingPost.postId !== post.postId) {
+            setEditingPost(post);
+        }
+
+        toggleIsInputFocus(true);
+    };
+
+    const removeEditingPostVideoLink = () => {
+        if (editingPost) {
+            setEditingPost({...editingPost, content: {...editingPost?.content, video: ''}})
+        }
+    };
+
+    const disableInputFocus = () => toggleIsInputFocus(false);
+
+    const resetForm = () => {
+        disableInputFocus();
+        setEditingPost(null);
+    };
+
+    const submitForm = (
+        formData: TPostFormData,
+        dispatch: Dispatch,
+        {form}: DecoratedFormProps<TPostFormData, PostsFormPropsType>
+    ) => {
+        if (editingPost && form) {
+            editPost({...formData, video: editingPost.content.video}, form, editingPost.postId);
+            resetForm();
+        } else if (form) {
+            addPost(formData, form);
+        }
+    };
+
+    return <Posts
+        {...restProps}
+        isInputFocus={isInputFocus}
+        startEditing={startEditing}
+        disableInputFocus={disableInputFocus}
+        formInitialValue={editingPost?.content}
+        submitForm={submitForm}
+        editMode={!!editingPost}
+        cancelEditing={resetForm}
+        removeEditingPostVideoLink={removeEditingPostVideoLink}
+    />
+};
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     postData: state.timeline.postData,
@@ -81,5 +131,6 @@ export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, Ap
         deleteComment,
         destroy,
         editComment,
-        toggleDisabledComments
+        toggleDisabledComments,
+        editPost
     })(PostsContainer);

@@ -1,44 +1,49 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import style from './Posts.module.css';
 import Post from "./Post/Post";
 import MyPostForm, {PostsFormPropsType} from "./PostsForm/PostsForm";
 import defaultAvatar from '../../../assets/images/user.png';
-import {TPostFormData, TPostModel} from "../../../types/types";
+import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../../types/types";
 import {Col} from "antd";
-import {PostsPropsType} from "./PostsContainer";
 import {Dispatch} from "redux";
 import {DecoratedFormProps} from "redux-form/lib/reduxForm";
 
-const Posts: FC<PostsPropsType> = React.memo((
-    {changePostLike, deletePost, postData, addPost, avatar, isMyProfile, firstName, userId, uploadFile, ...props}) => {
-    const [editingPost, setEditingPost] = useState<TPostModel | null>(null);
-    const [isInputFocus, toggleIsInputFocus] = useState(false);
+type PropsType = {
+    postData: Array<TPostModel>
+    avatar: string | null
+    firstName: string | null
+    userId: number | null
+    isMyProfile: boolean
+    isInputFocus: boolean
+    editMode: boolean
+    formInitialValue?: TPostContent
+    uploadedFiles: Array<TUploadedFile>
+    submitForm: (formData: TPostFormData, dispatch: Dispatch, props: DecoratedFormProps<TPostFormData, PostsFormPropsType>) => void
+    deletePost: (postId: string) => void
+    changePostLike: (postId: string) => void
+    uploadFile: (file: File) => void
+    removeUploadedFile: (fileName: string) => void
+    cancelUploading: (formName: string, fieldName: string, urlFile?: string) => void
+    deleteFile: (fileUrl: string) => void
+    addComment: (postId: string, content: string, formName: string) => void
+    editComment: (postId: string, content: string, formName: string, commentId: string) => void
+    deleteComment: (postId: string, commentId: string) => void
+    destroy: (formName: string) => void
+    toggleDisabledComments: (postId: string, isDisabled: boolean) => void
+    disableInputFocus: () => void
+    startEditing: (post: TPostModel) => void
+    cancelEditing: () => void
+    removeEditingPostVideoLink: () => void
+}
 
-    const startEditing = (post: TPostModel) => {
-        if (!editingPost || editingPost.postId !== post.postId) {
-            setEditingPost(post);
-        }
-
-        toggleIsInputFocus(true);
-    };
-
-    const disableInputFocus = () => toggleIsInputFocus(false);
-
-    const onSubmit = (
-        formData: TPostFormData,
-        dispatch: Dispatch,
-        props: DecoratedFormProps<TPostFormData, PostsFormPropsType>
-    ) => {
-        if (props.form) {
-            addPost(formData, props.form);
-        }
-    };
+const Posts: FC<PropsType> = React.memo((
+    {changePostLike, deletePost, postData, submitForm, avatar, isMyProfile, firstName, userId, uploadFile, ...props}) => {
 
     return (
         <Col span={15} className={style.container}>
             {isMyProfile && <div className={style.inputField}>
                 <MyPostForm
-                    onSubmit={onSubmit}
+                    onSubmit={submitForm}
                     avatar={avatar}
                     firstName={firstName}
                     uploadFile={uploadFile}
@@ -46,8 +51,12 @@ const Posts: FC<PostsPropsType> = React.memo((
                     removeUploadedFile={props.removeUploadedFile}
                     cancelUploading={props.cancelUploading}
                     deleteFile={props.deleteFile}
-                    isInputFocus={isInputFocus}
-                    disableInputFocus={disableInputFocus}
+                    isInputFocus={props.isInputFocus}
+                    disableInputFocus={props.disableInputFocus}
+                    initialValues={props.formInitialValue}
+                    editMode={props.editMode}
+                    cancelEditing={props.cancelEditing}
+                    removeEditingPostVideoLink={props.removeEditingPostVideoLink}
                 />
             </div>}
             {
@@ -65,7 +74,7 @@ const Posts: FC<PostsPropsType> = React.memo((
                         destroy={props.destroy}
                         editComment={props.editComment}
                         toggleDisabledComments={props.toggleDisabledComments}
-                        startEditing={startEditing}
+                        startEditing={props.startEditing}
                     />
                 ))
             }

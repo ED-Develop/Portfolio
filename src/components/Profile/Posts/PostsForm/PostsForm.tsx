@@ -5,26 +5,30 @@ import {createField, GetObjectsKeys, Textarea} from "../../../common/FormsContro
 import {Button} from "antd";
 import s from "../Posts.module.css";
 import defaultAvatar from "../../../../assets/images/user.png";
-import UploadInput, {UploadInputPropsType} from "./UploadInput";
-import {TPostFormData, TUploadedFile} from "../../../../types/types";
+import UploadInput, {UploadInputPropsType} from "../../../common/FormsControls/UploadInput/UploadInput";
+import {TPostContent, TUploadedFile} from "../../../../types/types";
 import {useClearFormAfterSubmit} from "../../../../hook/useClearFormeAfterSubmit";
 import {useScrollToRef} from "../../../../hook/useScrollToRef";
+import EditingInfo from "../../../common/FormsControls/EditingInfo/EditingInfo";
 
 export type PostsFormPropsType = {
     firstName: string | null
     avatar: string | null
     isInputFocus: boolean
+    editMode: boolean
     uploadFile: (file: File) => void
     uploadedFiles: Array<TUploadedFile>
     removeUploadedFile: (fileName: string) => void
     cancelUploading: (formName: string, fieldName: string, urlFile?: string) => void
     deleteFile: (fileUrl: string) => void
     disableInputFocus: () => void
+    cancelEditing: () => void
+    removeEditingPostVideoLink: () => void
 }
 
-type PostFormDataKeysType = GetObjectsKeys<TPostFormData>;
+type PostFormDataKeysType = GetObjectsKeys<TPostContent>;
 
-const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostFormData, PostsFormPropsType>> = (props) => {
+const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostContent, PostsFormPropsType>> = (props) => {
     const {
         handleSubmit,
         firstName,
@@ -34,7 +38,11 @@ const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostFormData, PostsF
         removeUploadedFile,
         submitSucceeded,
         cancelUploading,
-        deleteFile
+        deleteFile,
+        initialValues,
+        editMode,
+        cancelEditing,
+        removeEditingPostVideoLink
     } = props;
 
     const formElement = useRef<HTMLFormElement>(null);
@@ -49,6 +57,16 @@ const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostFormData, PostsF
 
     return (
         <form ref={formElement} onSubmit={handleSubmit} className={style.post__form}>
+            {editMode && initialValues.text && (
+                <EditingInfo
+                    handleCancelEditing={cancelEditing}
+                    textContent={initialValues.text}
+                    filesCount={initialValues.photos?.length}
+                    videoLink={initialValues.video}
+                    className={style.editingInfo}
+                    removeVideoLink={removeEditingPostVideoLink}
+                />
+            )}
             <div className={style.field}>
                 <img className={s.avatar} src={avatar || defaultAvatar} alt="avatar"/>
                 {createField<PostFormDataKeysType>({
@@ -74,7 +92,8 @@ const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostFormData, PostsF
                         cancelUploading,
                         toggleIsUploading,
                         isUploading,
-                        deleteFile
+                        deleteFile,
+                        initialValue: initialValues.photos
                     }
                 })}
                 <Button
@@ -90,11 +109,12 @@ const PostsForm: FC<PostsFormPropsType & InjectedFormProps<TPostFormData, PostsF
     );
 };
 
-export default reduxForm<TPostFormData, PostsFormPropsType>({
+export default reduxForm<TPostContent, PostsFormPropsType>({
     form: 'myPost',
     initialValues: {
         text: '',
         photos: []
     },
-    destroyOnUnmount: false
+    destroyOnUnmount: false,
+    enableReinitialize: true
 })(PostsForm);

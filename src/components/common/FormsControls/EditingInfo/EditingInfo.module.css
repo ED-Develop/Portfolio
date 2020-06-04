@@ -1,0 +1,60 @@
+.editField {
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 45px;
+    background-color: #f8f8f8;
+    color: #666;
+    font-size: 15px;
+    position: relative;
+    display: flex;
+}
+
+.editField__link {
+    margin-bottom: 5px;
+    padding: 5px 0;
+}
+
+.assetsIcon {
+    margin-right: 5px;
+}
+
+.editField__link a {
+    color: #1890ff;
+}
+
+.editField p {
+    margin: 0;
+}
+
+.editIcon {
+    font-size: 20px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconClose {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
+}
+
+.iconClose:hover {
+    color: #000;
+}
+
+.iconDelete {
+    margin-left: 10px;
+    opacity: 0;
+}
+
+.editField__link:hover .iconDelete {
+    opacity: 1;
+}
+
+.editField__link:hover {
+
+}

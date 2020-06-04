@@ -28,3 +28,9 @@ export const findReply = (string: string) => {
         content: string.replace(replyRegExp, '')
     }
 };
+
+export const findFileName = (string: string) => {
+    return string
+        .replace(/^https:[^]+%\d\w/i, '')
+        .replace(/\?[^]+/, '');
+};

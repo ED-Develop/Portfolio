@@ -52,8 +52,8 @@ export type PostUserType = {
 }
 
 export type TPostContent = {
-    text?: string
-    photos: Array<any>
+    text: string
+    photos: Array<string>
     video?: string
 }
 
@@ -73,7 +73,7 @@ export type TPostComment = {
 
 export type TPostFormData = {
     text: string
-    photos: Array<File>
+    photos: Array<string>
 }
 
 export type ProjectType = {

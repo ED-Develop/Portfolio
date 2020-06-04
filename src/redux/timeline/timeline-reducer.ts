@@ -1,4 +1,4 @@
-import {TPostModel, TPostComment, TPostFormData, TUploadedFile} from "../../types/types";
+import {TPostModel, TPostComment, TPostFormData, TUploadedFile, TPostContent} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector, stopSubmit} from "redux-form";
 import {AppActionsTypes} from "../app-reducer";
@@ -23,6 +23,16 @@ const timelineReducer = (state = initialState, action: TimelineActionsTypes): In
             return {
                 ...state,
                 postData: [action.post, ...state.postData],
+            };
+        case "PORTFOLIO/PROFILE/EDIT_POST_SUCCESS":
+            return {
+                ...state,
+                postData: updateObjectInArray<TPostModel, string>(
+                    state.postData,
+                    action.payload.postId,
+                    "postId",
+                    {content: action.payload.content}
+                )
             };
         case "PORTFOLIO/PROFILE/DELETE_POST":
             return {
@@ -134,6 +144,10 @@ const timelineReducer = (state = initialState, action: TimelineActionsTypes): In
 
 export const timelineActions = {
     addPost: (post: TPostModel) => ({type: 'PORTFOLIO/PROFILE/ADD-POST', post} as const),
+    editPostSuccess: (content: TPostContent, postId: string) => ({
+        type: 'PORTFOLIO/PROFILE/EDIT_POST_SUCCESS',
+        payload: {content, postId}
+    } as const),
     deletePostSuccess: (postId: string) => ({type: 'PORTFOLIO/PROFILE/DELETE_POST', postId} as const),
     changeLikeSuccess: (liked: Array<number>, postId: string) => ({
         type: 'PORTFOLIO/PROFILE/CHANGE_POST_LIKE',
@@ -172,6 +186,7 @@ export const timelineActions = {
 // thunks
 
 export const addPost = (postData: TPostFormData, formName: string): ThunkType => async (dispatch, getState) => {
+    debugger
     if (validateForm(() => !(!postData.photos.length && !postData.text), formName, dispatch)) {
         const state = getState();
         const postContent = parseContent(postData.text);
@@ -201,6 +216,27 @@ export const addPost = (postData: TPostFormData, formName: string): ThunkType =>
         const response = await postApi.create<TCreatePostPayload, TCreateResponse>(newPost);
 
         dispatch(timelineActions.addPost({postId: response.name, ...newPost}));
+    }
+};
+
+export const editPost = (postContent: TPostContent, formName: string, postId: string): ThunkType => async (dispatch) => {
+    if (validateForm(
+        () => !(!postContent.photos && !postContent.text && !postContent.video
+            || postContent.photos && !postContent.photos.length && !postContent.text && !postContent.video),
+        formName,
+        dispatch
+    )) {
+        let content = postContent;
+
+        if (!postContent.video) {
+            content = {...parseContent(postContent.text), photos: postContent.photos};
+        }
+
+        const result = await postApi.editPost(content, postId);
+
+        if (result) {
+            dispatch(timelineActions.editPostSuccess(result.content, postId));
+        }
     }
 };
 

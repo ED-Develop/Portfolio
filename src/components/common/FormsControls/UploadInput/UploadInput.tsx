@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
+import style from './UploadInput.module.css';
 import {Button, Upload} from 'antd';
-import {UploadOutlined} from '@ant-design/icons';
 import {WrappedFieldProps} from "redux-form";
-import {CustomFieldPropsType} from "../../../common/FormsControls/FormsControls";
+import {CustomFieldPropsType} from "../FormsControls";
 import {RcCustomRequestOptions, UploadChangeParam, UploadFile} from "antd/lib/upload/interface";
 import {TUploadedFile} from "../../../../types/types";
 import {UploadStatus} from "../../../../redux/timeline/timeline-reducer";
+import {findFileName} from "../../../../utils/helpers";
+import uploadIcon from '../../../../assets/images/photo.png';
 
 export type UploadInputPropsType = {
     uploadFile: (file: File) => void
@@ -16,6 +18,7 @@ export type UploadInputPropsType = {
     toggleIsUploading: (isUploading: boolean) => void
     isUploading: boolean
     deleteFile: (fileUrl: string) => void
+    initialValue?: Array<string>
 }
 
 type TUploadSubscriber = {
@@ -46,6 +49,20 @@ const UploadInput: React.FC<CustomFieldPropsType & WrappedFieldProps & UploadInp
             })
         })
     };
+
+    // set initial value
+    useEffect(() => {
+        if (props.initialValue) {
+            setFileList(props.initialValue.map((value, index) => ({
+                uid: `${index}`,
+                name: findFileName(value),
+                status: "done",
+                url: value,
+                type: 'image/png',
+                size: 1
+            })))
+        }
+    }, [props.initialValue]);
 
     // watch uploading process
     useEffect(() => {
@@ -96,10 +113,14 @@ const UploadInput: React.FC<CustomFieldPropsType & WrappedFieldProps & UploadInp
     const handleChange = (info: UploadChangeParam) => setFileList([...info.fileList]);
 
     const handleRemove = (removingFile: UploadFile) => {
-        const removingFileURl = uploadSubscribers.find(({file}) => file.name === removingFile.name)?.fileUrl;
+        if (props.initialValue && removingFile.url) {
+            cancelUploading(props.meta.form, props.input.name, removingFile.url);
+        } else {
+            const removingFileURl = uploadSubscribers.find(({file}) => file.name === removingFile.name)?.fileUrl;
 
-        if (removingFileURl) {
-            cancelUploading(props.meta.form, props.input.name, removingFileURl);
+            if (removingFile) {
+                cancelUploading(props.meta.form, props.input.name, removingFileURl || void 0);
+            }
         }
     };
 
@@ -111,8 +132,8 @@ const UploadInput: React.FC<CustomFieldPropsType & WrappedFieldProps & UploadInp
             onChange={handleChange}
             onRemove={handleRemove}
         >
-            <Button>
-                <UploadOutlined/> Upload
+            <Button type='link' className={style.uploadButton}>
+                <img src={uploadIcon} alt="upload icon"/> Photo
             </Button>
         </Upload>
     )

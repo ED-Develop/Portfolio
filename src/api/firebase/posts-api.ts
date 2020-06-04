@@ -1,5 +1,5 @@
 import {FirebaseAPI} from "./firebase";
-import {TPostModel, TPostComment} from "../../types/types";
+import {TPostModel, TPostComment, TPostContent} from "../../types/types";
 import StorageAPI from "./storage";
 
 export type TCreateResponse = {
@@ -24,6 +24,10 @@ type TEditCommentResponse = {
 
 type TToggleDisabledComment = {
     isDisabledComments: boolean
+}
+
+type TEditPost = {
+    content: TPostContent
 }
 
 class PostsApi extends FirebaseAPI {
@@ -56,6 +60,10 @@ class PostsApi extends FirebaseAPI {
                 })
                 .reverse() as Array<TPostModel>
         })
+    }
+
+    editPost(content: TPostContent, postId: string) {
+        return this.update<TEditPost, TEditPost>({content}, `/${postId}`);
     }
 
     changeLike(payload: Array<number>, postId: string) {

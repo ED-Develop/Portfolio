@@ -8,6 +8,7 @@ import {InjectedFormProps, reduxForm} from "redux-form";
 import {useClearFormAfterSubmit} from "../../../../../hook/useClearFormeAfterSubmit";
 import {useScrollToRef} from "../../../../../hook/useScrollToRef";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons/lib";
+import EditingInfo from "../../../../common/FormsControls/EditingInfo/EditingInfo";
 
 export type CommentsFormPropsType = {
     avatar: string
@@ -33,17 +34,10 @@ const CommentsForm: React.FC<PropsType> = ({handleSubmit, avatar, submitSucceede
 
     return (
         <>
-            {editMode && (
-                <div className={style.editField}>
-                    <Tooltip title='Cancel editing'>
-                        <CloseOutlined className={style.iconClose} onClick={handleCancelEditing}/>
-                    </Tooltip>
-                    <div className={style.editIcon}>
-                        <EditOutlined/>
-                    </div>
-                    <p>{props.initialValues.comment}</p>
-                </div>
-            )}
+            {editMode && props.initialValues.comment && <EditingInfo
+                handleCancelEditing={handleCancelEditing}
+                textContent={props.initialValues.comment}
+            />}
             <form ref={formElement} className={style.comments__form} onSubmit={handleSubmit}>
                 <img className={style.avatar} src={avatar || defaultAvatar} alt="avatar"/>
                 {createField<CommentsFormKeys>({
