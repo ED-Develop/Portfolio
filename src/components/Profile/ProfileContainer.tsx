@@ -7,17 +7,17 @@ import {
     profileActions,
     updateProfileStatus,
     uploadProfilePhoto
-} from "../../redux/profile-reducer";
+} from "../../redux/porfile/profile-reducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {startDialogs} from "../../redux/dialog-reducer";
-import {ProfileType} from "../../types/types";
+import {TProfileModel} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 
 const {updateProfileDataSuccess} = profileActions;
 
 type MapStatePropsType = {
-    profile: ProfileType | null
+    profile: TProfileModel | null
     myId: number | null
     isFetching: boolean
     status: string

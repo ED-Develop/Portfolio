@@ -11,13 +11,13 @@ type PropsType = {
 }
 
 const Aside: FC<PropsType> = ({collapsed}) => {
-        return (
-            <Sider theme='light' width='20.8%' className={style.aside} collapsed={collapsed} collapsedWidth={'16.6%'}>
-                <Affix offsetTop={65}>
-                    <Nav collapsed={collapsed}/>
-                </Affix>
-            </Sider>
-        )
+    return (
+        <Sider theme='light' width='20.8%' className={style.aside} collapsed={collapsed} collapsedWidth={'16.6%'}>
+            <Affix offsetTop={80}>
+                <Nav collapsed={collapsed}/>
+            </Affix>
+        </Sider>
+    )
 };
 
 export default Aside;

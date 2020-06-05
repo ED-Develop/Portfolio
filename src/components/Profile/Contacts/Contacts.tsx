@@ -9,10 +9,10 @@ import twitter from '../../../assets/images/twitter.jpg';
 import vk from '../../../assets/images/vk.png';
 import youtube from '../../../assets/images/youtube.png';
 import contact from '../../../assets/images/contact.png';
-import {ContactsType} from "../../../types/types";
+import {TContacts} from "../../../types/types";
 
 type PropsType = {
-    contacts: ContactsType
+    contacts: TContacts
 }
 
 const Contacts: FC<PropsType> = ({contacts}) => {

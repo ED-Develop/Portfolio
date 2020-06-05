@@ -11,7 +11,7 @@ type PropsType = {
 
 const ProfileNavigation: React.FC<PropsType> = ({isMyProfile, followed}) => {
     const navItems = [
-        {title: 'Posts', href: '/profile/posts'},
+        {title: 'Timeline', href: '/profile/timeline'},
         {title: 'About', href: '/profile/about'},
         {title: 'Friends', href: '/profile/friends'},
         {title: 'Photos', href: '/profile/photos'},

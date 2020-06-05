@@ -1,8 +1,8 @@
 import {BaseResponseType, instance} from "./api";
-import {UserType} from "../types/types";
+import {TUserModel} from "../types/types";
 
 export type UsersResponseType = {
-    items: Array<UserType>
+    items: Array<TUserModel>
     totalCount: number
     error: string
 }
@@ -11,6 +11,10 @@ export const usersApi = {
     getUsers(count: number, currentPage: number) {
         return instance.get<UsersResponseType>(`users?count=${count}&page=${currentPage}`)
             .then(response => response.data)
+    },
+    getFriends(count: number) {
+        return instance.get<UsersResponseType>(`users?count=${count}&friend=true`)
+            .then(response => response.data);
     },
     searchUsers(userName: string) {
         return instance.get<UsersResponseType>(`users?term=${userName}`)
@@ -23,5 +27,5 @@ export const usersApi = {
     unFollow(id: number) {
         return instance.delete<BaseResponseType>(`follow/${id}`)
             .then(response => response.data.resultCode)
-    }
+    },
 };

@@ -1,10 +1,10 @@
-import {UserType} from "../types/types";
+import {TUserModel} from "../types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, CommonThunkType, InferActionsTypes} from "./store";
 import {usersApi} from "../api/users-api";
 
 const initialState = {
-    friends: [] as Array<UserType>
+    friends: [] as Array<TUserModel>
 };
 
 const asideReducer = (state = initialState, action: AsideActionsTypes): InitialStateType => {
@@ -23,7 +23,7 @@ const asideReducer = (state = initialState, action: AsideActionsTypes): InitialS
 //actions
 
 export const asideActions = {
-    setFriends: (friends: Array<UserType>) => ({type: 'PORTFOLIO/ASIDE/SET_FRIENDS', friends} as const),
+    setFriends: (friends: Array<TUserModel>) => ({type: 'PORTFOLIO/ASIDE/SET_FRIENDS', friends} as const),
 };
 
 //thunks

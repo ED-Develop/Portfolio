@@ -1,13 +1,13 @@
-import {appActions, AppActionsTypes} from "./app-reducer";
-import {authActions, AuthActionsTypes, getOwnerProfileData} from "./auth-reducer";
+import {appActions, AppActionsTypes} from "../app-reducer";
+import {authActions, AuthActionsTypes, getOwnerProfileData} from "../auth-reducer";
 import {FormAction, stopSubmit} from "redux-form";
-import {PhotosType, ProfileType} from "../types/types";
-import {CommonThunkType, InferActionsTypes} from "./store";
-import {profileApi} from "../api/profile-api";
-import {ResultCodesEnum} from "../api/api";
+import {PhotosType, TProfileModel} from "../../types/types";
+import {CommonThunkType, InferActionsTypes} from "../store";
+import {profileApi} from "../../api/profile-api";
+import {ResultCodesEnum} from "../../api/api";
 
 const initialState = {
-    profile: null as ProfileType | null,
+    profile: null as TProfileModel | null,
     status: '' as string,
     followed: false,
     isUpdateSuccess: false,
@@ -31,7 +31,7 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
                     photos: {
                         ...action.photos
                     }
-                } as ProfileType
+                } as TProfileModel
             };
         default:
             return state;
@@ -41,7 +41,7 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): Init
 // actions
 
 export const profileActions = {
-    setUserProfile: (profile: ProfileType) => ({
+    setUserProfile: (profile: TProfileModel) => ({
         type: 'PORTFOLIO/PROFILE/SET-USER-PROFILE',
         payload: {profile}
     } as const),
@@ -87,7 +87,7 @@ export const uploadProfilePhoto = (photoFile: File): ThunkType => async (dispatc
     dispatch(appActions.uploadInProgress(false));
 };
 
-export const updateProfileData = (profileData: ProfileType): ThunkType => async (dispatch, getState) => {
+export const updateProfileData = (profileData: TProfileModel): ThunkType => async (dispatch, getState) => {
     dispatch(profileActions.updateProfileDataSuccess(false));
     let response = await profileApi.updateProfileData(profileData);
 

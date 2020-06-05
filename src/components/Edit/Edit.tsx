@@ -1,23 +1,23 @@
 import React, {Component, ComponentType} from 'react';
 import style from './Edit.module.css';
 import {connect} from "react-redux";
-import {getUserProfile, updateProfileData} from "../../redux/profile-reducer";
+import {getUserProfile, updateProfileData} from "../../redux/porfile/profile-reducer";
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import Preloader from "../common/Preloader/Preloader";
-import {ProfileType} from "../../types/types";
+import {TProfileModel} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 import EditForm from "./EditForm";
 
 type MapStatePropsType = {
     isUpdateSuccess: boolean
-    profile: ProfileType | null
+    profile: TProfileModel | null
     userId: number | null
 }
 
 type MapDispatchPropsType = {
-    updateProfileData: (profileData: ProfileType) => void
+    updateProfileData: (profileData: TProfileModel) => void
     getUserProfile: (userId: number) => void
 }
 
@@ -42,7 +42,7 @@ class Edit extends Component<PropsType, StateType> {
         }
     }
 
-    onSubmit = (formData: ProfileType) => this.props.updateProfileData(formData);
+    onSubmit = (formData: TProfileModel) => this.props.updateProfileData(formData);
 
     showElement = (elementName: string) => {
         this.setState((prevState) => {

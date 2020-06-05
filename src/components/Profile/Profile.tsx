@@ -1,25 +1,16 @@
 import React, {FC, useState} from 'react';
 import style from "./Profile.module.css";
 import Preloader from "../common/Preloader/Preloader";
-import userAvatar from "../../assets/images/user.png";
-import ProfileStatus from "./ProfileTitle/ProfileStatus";
-import information from "../../assets/images/Information.png";
-import edit from "../../assets/images/edit.png";
-import work from "../../assets/images/work.png";
-import ok from "../../assets/images/OK.png";
-import noo from "../../assets/images/noo.png";
-import Contacts from "./Contacts/Contacts";
 import PostsContainer from "./Posts/PostsContainer";
 import ModalWindow from "../common/ModalWindow/ModalWindow";
-import {ProfileType} from "../../types/types";
-import {NavLink} from "react-router-dom";
+import {TProfileModel} from "../../types/types";
 import ProfileBanner from "./ProfileBanner/ProfileBanner";
 import ProfileTitle from "./ProfileTitle/ProfileTitle";
 import ProfileNavigation from "./Navigation/ProfileNavigation";
-import {Col, Row} from "antd";
+import {Redirect, Route, Switch} from "react-router-dom";
 
 type PropsType = {
-    profile: ProfileType
+    profile: TProfileModel
     isUpload: boolean
     userId: number | null
     status: string
@@ -92,9 +83,11 @@ const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDia
                 updateProfileStatus={props.updateProfileStatus}
             />
             <ProfileNavigation isMyProfile={props.isMyProfile} followed={props.followed}/>
-            <Row>
-                <PostsContainer isMyProfile={props.isMyProfile}/>
-            </Row>
+            <Switch>
+                <Redirect exact from='/profile' to='/profile/timeline'/>
+                <Route path='/profile/:userId?/timeline'
+                       render={() => <PostsContainer isMyProfile={props.isMyProfile}/>}/>
+            </Switch>
 
         </div>
     )

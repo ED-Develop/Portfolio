@@ -2,10 +2,10 @@ import React, {FC, useState} from 'react';
 import style from './UsersList.module.css';
 import User from "./User/User";
 import Paginator from "../../common/Paginator/Paginator";
-import {UserType} from "../../../types/types";
+import {TUserModel} from "../../../types/types";
 
 type PropsType = {
-    usersData: Array<UserType>
+    usersData: Array<TUserModel>
     count: number
     currentPage: number
     startPage: number

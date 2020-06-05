@@ -21,7 +21,7 @@ const MainRoutes: React.FC<PropsType> = ({isAsideCollapsed}) => {
             <AsideContainer collapsed={isAsideCollapsed}/>
             <Content className='app-content'>
                 <Switch>
-                    <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
+                    <Redirect exact from='/' to='/profile'/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/messages/:userId?' render={() => <DialogsContainer/>}/>
                     <Route path='/people' render={() => <People/>}/>

@@ -1,13 +1,13 @@
-import {updateObjectInArray} from "../utils/helpers";
-import {appActions, AppActionsTypes} from "./app-reducer";
-import {UserType} from "../types/types";
-import {CommonThunkType, InferActionsTypes} from "./store";
+import {updateObjectInArray} from "../../utils/helpers";
+import {appActions, AppActionsTypes} from "../app-reducer";
+import {ArgumentTypes, TUserModel} from "../../types/types";
+import {CommonThunkType, InferActionsTypes} from "../store";
 import {Dispatch} from "redux";
-import {usersApi} from "../api/users-api";
-import {ResultCodesEnum} from "../api/api";
+import {usersApi, UsersResponseType} from "../../api/users-api";
+import {ResultCodesEnum} from "../../api/api";
 
 const initialState = {
-    usersData: [] as Array<UserType>,
+    usersData: [] as Array<TUserModel>,
     count: 6,
     currentPage: 1,
     startPage: 1,
@@ -58,7 +58,7 @@ export const userActions = {
         type: 'PORTFOLIO/USERS/UN-FOLLOW',
         payload: {userId, followed: false}
     } as const),
-    setUsers: (users: Array<UserType>) => ({
+    setUsers: (users: Array<TUserModel>) => ({
         type: 'PORTFOLIO/USERS/SET-USERS',
         payload: {usersData: users}
     } as const),
@@ -79,21 +79,33 @@ export const userActions = {
 
 //thunks
 
-export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch) => {
-    dispatch(appActions.toggleIsFetching(true));
-    let data = await usersApi.getUsers(count, currentPage);
+const getUsersFlow = async <F extends Function>(
+    apiMethod: (...args: Array<any>) => Promise<UsersResponseType>,
+    dispatch: Dispatch,
+    ...apiArgs: ArgumentTypes<F>
+) => {
+    const data = await apiMethod(...apiArgs);
 
     dispatch(userActions.setUsers(data.items));
     dispatch(userActions.setTotalCount(data.totalCount));
+
+    return data;
+};
+
+export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch) => {
+    dispatch(appActions.toggleIsFetching(true));
+    await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, currentPage);
     dispatch(appActions.toggleIsFetching(false));
     dispatch(userActions.setCurrentPage(currentPage));
 };
 
+export const getFriends = (count: number): ThunkType => async (dispatch) => {
+    await getUsersFlow<typeof usersApi.getFriends>(usersApi.getFriends, dispatch, count);
+};
+
 export const searchUsers = (userName: string): ThunkType => async (dispatch) => {
     dispatch(appActions.toggleIsFetching(true));
-    let data = await usersApi.searchUsers(userName);
-
-    dispatch(userActions.setUsers(data.items));
+    await getUsersFlow<typeof usersApi.searchUsers>(usersApi.searchUsers, dispatch, userName);
     dispatch(appActions.toggleIsFetching(false));
 };
 

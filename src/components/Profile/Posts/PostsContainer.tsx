@@ -1,24 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import Posts from "./Posts";
 import {connect} from "react-redux";
-import {getFirstName} from "../../../redux/profile-selector";
-import {TPostModel, TPostFormData, TUploadedFile, TPostContent} from "../../../types/types";
+import {getFirstName} from "../../../redux/porfile/profile-selector";
+import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../../types/types";
 import {AppStateType} from "../../../redux/store";
 import {
     addComment,
     addPost,
     cancelUploading,
-    changePostLike, deleteComment,
+    changePostLike,
+    deleteComment,
     deleteFile,
-    deletePost, editComment, editPost,
+    deletePost,
+    editComment,
+    editPost,
     getPosts,
-    timelineActions, toggleDisabledComments,
+    timelineActions,
+    toggleDisabledComments,
     uploadFile
 } from "../../../redux/timeline/timeline-reducer";
 import {destroy} from "redux-form";
 import {Dispatch} from "redux";
 import {DecoratedFormProps} from "redux-form/lib/reduxForm";
 import {PostsFormPropsType} from "./PostsForm/PostsForm";
+import {getAboutProfileInfo, TAboutProfile} from "../../../redux/timeline/timeline-selector";
+import {getFriends} from "../../../redux/users/users-reducer";
+import {getFriendsTitles, TFriendsTitle} from "../../../redux/users/users-selector";
 
 const {removeUploadedFile} = timelineActions;
 
@@ -28,6 +35,9 @@ type MapStatePropsType = {
     firstName: string | null
     userId: number | null
     uploadedFiles: Array<TUploadedFile>
+    aboutProfile: TAboutProfile | null
+    friends: Array<TFriendsTitle>
+    friendsCount: number
 }
 
 type MapDispatchPropsType = {
@@ -45,6 +55,7 @@ type MapDispatchPropsType = {
     deleteComment: (postId: string, commentId: string) => void
     destroy: (formName: string) => void
     toggleDisabledComments: (postId: string, isDisabled: boolean) => void
+    getFriends: (count: number) => void
 }
 
 type OwnPropsType = {
@@ -54,12 +65,13 @@ type OwnPropsType = {
 export type PostsPropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
 const PostsContainer: React.FC<PostsPropsType> = (props) => {
-    const {addPost, getPosts, editPost, ...restProps} = props;
+    const {addPost, getPosts, editPost, getFriends, ...restProps} = props;
     const [editingPost, setEditingPost] = useState<TPostModel | null>(null);
     const [isInputFocus, toggleIsInputFocus] = useState(false);
 
     useEffect(() => {
         getPosts();
+        getFriends(6);
     }, []);
 
     const startEditing = (post: TPostModel) => {
@@ -115,6 +127,9 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     firstName: getFirstName(state),
     userId: state.auth.userId,
     uploadedFiles: state.timeline.uploadedFiles,
+    aboutProfile: getAboutProfileInfo(state),
+    friends: getFriendsTitles(state),
+    friendsCount: state.people.totalCount
 });
 
 export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps,
@@ -132,5 +147,6 @@ export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, Ap
         destroy,
         editComment,
         toggleDisabledComments,
-        editPost
+        editPost,
+        getFriends
     })(PostsContainer);

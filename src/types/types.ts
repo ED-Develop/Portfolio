@@ -1,6 +1,8 @@
 import {UploadStatus} from "../redux/timeline/timeline-reducer";
 
-export type UserType = {
+export type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
+
+export type TUserModel = {
     id: number,
     name: string,
     status: string,
@@ -9,29 +11,29 @@ export type UserType = {
 }
 
 export type PhotosType = {
-    small: string | null,
+    small: string | null
     large: string | null
 }
 
 
-export type ProfileType = {
-    userId: string,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    aboutMe: string,
-    fullName: string,
-    contacts: ContactsType,
+export type TProfileModel = {
+    userId: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    aboutMe: string
+    fullName: string
+    contacts: TContacts
     photos: PhotosType
 };
 
-export type ContactsType = {
-    github: string,
-    vk: string,
-    facebook: string,
-    instagram: string,
-    twitter: string,
-    website: string,
-    youtube: string,
+export type TContacts = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
     mainLink: string
 }
 

@@ -34,3 +34,6 @@ export const findFileName = (string: string) => {
         .replace(/^https:[^]+%\d\w/i, '')
         .replace(/\?[^]+/, '');
 };
+
+
+export const formatName = (string: string) => string.replace(/[_-]/g, ' ');

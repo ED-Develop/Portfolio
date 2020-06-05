@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import style from './TopFriends.module.css';
 import FriendItem from "./FriendItem/FriendItem";
-import {UserType} from "../../../types/types";
+import {TUserModel} from "../../../types/types";
 
 type PropsType = {
-    friends: Array<UserType>,
+    friends: Array<TUserModel>,
     getFriends: () => void
 }
 

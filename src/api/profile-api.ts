@@ -1,4 +1,4 @@
-import {PhotosType, ProfileType} from "../types/types";
+import {PhotosType, TProfileModel} from "../types/types";
 import {BaseResponseType, instance} from "./api";
 
 export type ProfilePhotoResponseType = {
@@ -7,7 +7,7 @@ export type ProfilePhotoResponseType = {
 
 export const profileApi = {
     getUserProfile(userId: number) {
-        return instance.get<ProfileType>(`profile/${userId}`)
+        return instance.get<TProfileModel>(`profile/${userId}`)
             .then(response => response.data);
     },
     getProfileStatus(userId: number) {
@@ -29,8 +29,8 @@ export const profileApi = {
         })
             .then(response => response.data.data.photos);
     },
-    updateProfileData(profileData: ProfileType) {
-        return instance.put<BaseResponseType<ProfileType>>(`profile`, profileData)
+    updateProfileData(profileData: TProfileModel) {
+        return instance.put<BaseResponseType<TProfileModel>>(`profile`, profileData)
             .then(response => response.data)
     }
 };

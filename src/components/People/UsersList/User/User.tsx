@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import style from './User.module.css';
 import {NavLink} from "react-router-dom";
 import defaultAvatar from '../../../../assets/images/user.png'
-import {UserType} from "../../../../types/types";
+import {TUserModel} from "../../../../types/types";
 
 type PropsType = {
-    user: UserType
+    user: TUserModel
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     followingInProgress: Array<number>

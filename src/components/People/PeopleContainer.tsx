@@ -3,7 +3,7 @@ import style from './People.module.css';
 import Search from "../common/Search/Search";
 import UserListContainer from "./UsersList/UsersListContainer";
 import {connect} from "react-redux";
-import {searchUsers} from "../../redux/users-reducer";
+import {searchUsers} from "../../redux/users/users-reducer";
 import {AppStateType} from "../../redux/store";
 
 type MapDispatchPropsType = {

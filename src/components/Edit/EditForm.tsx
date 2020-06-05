@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {ProfileType} from "../../types/types";
+import {TProfileModel} from "../../types/types";
 import style from "./Edit.module.css";
 import InputItem from "./InputItem/InputItem";
 import {required} from "../../utils/validators";
@@ -13,10 +13,10 @@ import {
 
 type FormPropsType = {
     show: Array<string>
-    initialValues: ProfileType
+    initialValues: TProfileModel
     showElement: (elementName: string) => void
 }
-type EditFormDataKeysType = GetObjectsKeys<ProfileType>;
+type EditFormDataKeysType = GetObjectsKeys<TProfileModel>;
 
 const editFieldsData: Array<CreateFieldOptionsType<EditFormDataKeysType>> = [
     {name: 'fullName', label: 'Login:', validators: [required], component: CustomInput},
@@ -25,7 +25,7 @@ const editFieldsData: Array<CreateFieldOptionsType<EditFormDataKeysType>> = [
     {name: 'lookingForAJobDescription', label: 'My professional skills:', validators: [required], component: Textarea}
 ];
 
-const EditForm: FC<FormPropsType & InjectedFormProps<ProfileType, FormPropsType>> = ({handleSubmit, ...props}) => {
+const EditForm: FC<FormPropsType & InjectedFormProps<TProfileModel, FormPropsType>> = ({handleSubmit, ...props}) => {
     const mainForm = (
         <div className={style.section}>
             {editFieldsData.map(field => {
@@ -74,4 +74,4 @@ const EditForm: FC<FormPropsType & InjectedFormProps<ProfileType, FormPropsType>
     )
 };
 
-export default reduxForm<ProfileType, FormPropsType>({form: 'edit'})(EditForm);
+export default reduxForm<TProfileModel, FormPropsType>({form: 'edit'})(EditForm);
