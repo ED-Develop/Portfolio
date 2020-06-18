@@ -1,6 +1,6 @@
-import React, {FC, useEffect} from 'react';
+import React, {ComponentType, FC, useEffect} from 'react';
 import {connect} from "react-redux";
-import {follow, getUsers, unFollow, userActions} from "../../redux/users/users-reducer";
+import {follow, getAllUsers, getFriends, getUsers, unFollow, userActions} from "../../redux/users/users-reducer";
 import {AppStateType} from "../../redux/store";
 import {TUserModel} from "../../types/types";
 import {
@@ -13,6 +13,8 @@ import {
     getUsersData
 } from "../../redux/users/users-selector";
 import People from "./People";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 const {setPageSize} = userActions;
 
@@ -31,21 +33,43 @@ type MapDispatchPropsType = {
     unFollow: (userId: number) => void
     getUsers: (count: number, currentPage: number) => void
     setPageSize: (pageSize: number) => void
+    getAllUsers: (count: number, currentPage: number) => void
+    getFriends: (count: number, currentPage: number) => void
 }
 
-type PropsType = MapStatePropsType & MapDispatchPropsType;
+enum PeopleFilterEnum {
+    New = 'new',
+    Friends = 'friends'
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<{ filter: PeopleFilterEnum }>;
 
 const PeopleContainer: FC<PropsType> = (props) => {
-    const {...restProps} = props;
+    const {match, history, location, staticContext, ...restProps} = props;
+    const filter: PeopleFilterEnum = match.params.filter;
+
+    const getUsers = (filter: string, pageSize: number, currentPage: number) => {
+        if (filter === PeopleFilterEnum.New) {
+            props.getUsers(pageSize, currentPage);
+        } else if (filter === PeopleFilterEnum.Friends) {
+            props.getFriends(pageSize, currentPage);
+        } else {
+            props.getAllUsers(pageSize, currentPage);
+        }
+    }
 
     useEffect(() => {
-        props.getUsers(props.count, props.currentPage);
+        getUsers(filter, props.count, props.currentPage);
     }, []);
 
-    const getCurrentPageUsers = (currentPage: number) => props.getUsers(props.count, currentPage);
+    useEffect(() => {
+        getUsers(filter, props.count, props.currentPage);
+    }, [filter]);
+
+    const getCurrentPageUsers = (currentPage: number) => getUsers(filter, props.count, currentPage);
 
     const changePageSize = (currentPage: number, pageSize: number) => {
-        props.getUsers(pageSize, currentPage)
+        getUsers(filter, pageSize, currentPage);
         props.setPageSize(pageSize);
     };
 
@@ -66,10 +90,12 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     followingInProgress: getFollowingInProgress(state)
 });
 
-export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
+export default compose<ComponentType>(withRouter, connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
     {
         follow,
         getUsers,
+        getAllUsers,
         unFollow,
-        setPageSize
-    })(PeopleContainer);
+        setPageSize,
+        getFriends,
+    }))(PeopleContainer);

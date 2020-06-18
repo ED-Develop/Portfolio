@@ -12,10 +12,11 @@ const initialState = {
     currentPage: 1,
     startPage: 1,
     totalCount: 0,
-    followingInProgress: [] as Array<number> //Array of user ids
+    followingInProgress: [] as Array<number>, //Array of user ids
+    paginationValues: null as Map<number, number> | null
 };
 
-const usersReducer = (state = initialState, action: UserActionsTypes): InitialStateType => {
+const usersReducer = (state = initialState, action: UserActionsTypes): TUsersInitialState => {
     switch (action.type) {
         case "PORTFOLIO/USERS/FOLLOW":
         case "PORTFOLIO/USERS/UN-FOLLOW":
@@ -36,12 +37,17 @@ const usersReducer = (state = initialState, action: UserActionsTypes): InitialSt
                 ...state,
                 ...action.payload
             };
+        case "PORTFOLIO/USERS/SET_PAGINATION_VALUES":
+            return {
+                ...state,
+                paginationValues: new Map(action.payload.paginationValues)
+            }
         case "PORTFOLIO/USERS/TOGGLE_FOLLOWING_PROGRESS":
             return {
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             };
         default:
             return state;
@@ -80,6 +86,10 @@ export const userActions = {
         isFetching,
         userId
     } as const),
+    setPaginationValues: (paginationValues: Map<number, number>) => ({
+        type: 'PORTFOLIO/USERS/SET_PAGINATION_VALUES',
+        payload: {paginationValues}
+    } as const)
 };
 
 //thunks
@@ -97,15 +107,62 @@ const getUsersFlow = async <F extends Function>(
     return data;
 };
 
-export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch, getState) => {
+export const getAllUsers = (count: number, currentPage: number): ThunkType => async (dispatch, getState) => {
+    dispatch(appActions.toggleIsFetching(true));
+    const peopleState = getState().people;
+    const paginationValues = new Map<number, number>();
+
+    if (!peopleState.paginationValues || count !== peopleState.count) {
+        let totalCount;
+
+        if (!peopleState.totalCount) {
+            const data = await usersApi.getUsers(count, peopleState.currentPage);
+            totalCount = data.totalCount;
+
+            dispatch(userActions.setTotalCount(data.totalCount));
+        } else {
+            totalCount = peopleState.totalCount
+        }
+
+        let index = 1;
+
+        for (let i = Math.floor(totalCount / count); i >= 0; i--) {
+            if (i === 0) {
+                paginationValues.set(index, 1);
+            } else {
+                paginationValues.set(index, i);
+            }
+
+            index++;
+        }
+
+        dispatch(userActions.setPaginationValues(paginationValues));
+    }
+
+    const loadedPage = peopleState.paginationValues && count === peopleState.count
+        ? peopleState.paginationValues.get(currentPage)
+        : paginationValues.get(currentPage);
+
+    if (loadedPage) {
+        await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, loadedPage);
+        dispatch(userActions.setCurrentPage(currentPage));
+    }
+
+    dispatch(appActions.toggleIsFetching(false));
+}
+
+export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch) => {
     dispatch(appActions.toggleIsFetching(true));
     await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, currentPage);
     dispatch(appActions.toggleIsFetching(false));
     dispatch(userActions.setCurrentPage(currentPage));
 };
 
-export const getFriends = (count: number): ThunkType => async (dispatch) => {
-    await getUsersFlow<typeof usersApi.getFriends>(usersApi.getFriends, dispatch, count);
+export const getFriends = (count: number, currentPage?: number): ThunkType => async (dispatch) => {
+    dispatch(appActions.toggleIsFetching(true));
+    await getUsersFlow<typeof usersApi.getFriends>(usersApi.getFriends, dispatch, count, currentPage);
+    dispatch(appActions.toggleIsFetching(false));
+    if (currentPage) dispatch(userActions.setCurrentPage(currentPage)); //todo make currentPage required
 };
 
 export const searchUsers = (userName: string): ThunkType => async (dispatch) => {
@@ -134,7 +191,7 @@ export const unFollow = (userId: number) => (dispatch: any) => {
     followUnfollowFlow(usersApi.unFollow.bind(usersApi), dispatch, userId, userActions.unFollowSuccess);
 };
 
-type InitialStateType = typeof initialState;
+export type TUsersInitialState = typeof initialState;
 type UserActionsTypes = InferActionsTypes<typeof userActions>;
 type ThunkType = CommonThunkType<UserActionsTypes | AppActionsTypes>;
 

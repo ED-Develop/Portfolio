@@ -1,0 +1,1 @@
+export type NumberMap = {[key: number]: number};

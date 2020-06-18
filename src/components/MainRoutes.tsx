@@ -24,7 +24,7 @@ const MainRoutes: React.FC<PropsType> = ({isAsideCollapsed}) => {
                     <Redirect exact from='/' to='/profile'/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/messages/:userId?' render={() => <DialogsContainer/>}/>
-                    <Route path='/people' render={() => <People/>}/>
+                    <Route path='/people/:filter?' render={() => <People/>}/>
                     <Route path='/projects' render={() => <Projects/>}/>
                     <Route path='/edit' render={() => <Edit/>}/>
                 </Switch>

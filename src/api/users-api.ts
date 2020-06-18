@@ -12,8 +12,9 @@ export const usersApi = {
         return instance.get<UsersResponseType>(`users?count=${count}&page=${currentPage}`)
             .then(response => response.data)
     },
-    getFriends(count: number) {
-        return instance.get<UsersResponseType>(`users?count=${count}&friend=true`)
+    getFriends(count: number, currentPage?: number) {
+        return instance
+            .get<UsersResponseType>(`users?count=${count}${currentPage ? `&page=${currentPage}` : ''}&friend=true`)
             .then(response => response.data);
     },
     searchUsers(userName: string) {

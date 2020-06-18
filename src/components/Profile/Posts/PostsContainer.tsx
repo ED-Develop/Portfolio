@@ -55,7 +55,7 @@ type MapDispatchPropsType = {
     deleteComment: (postId: string, commentId: string) => void
     destroy: (formName: string) => void
     toggleDisabledComments: (postId: string, isDisabled: boolean) => void
-    getFriends: (count: number) => void
+    getFriends: (count: number, currentPage?: number) => void
 }
 
 type OwnPropsType = {
