@@ -1,46 +1,31 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import style from './UsersList.module.css';
 import User from "./User/User";
-import Paginator from "../../common/Paginator/Paginator";
 import {TUserModel} from "../../../types/types";
+import {Row} from "antd";
 
 type PropsType = {
     usersData: Array<TUserModel>
-    count: number
-    currentPage: number
-    startPage: number
-    totalCount: number
     followingInProgress: Array<number>
-    onSetCurrentPage: (currentPage: number) => void
     follow: (userId: number) => void
     unFollow: (userId: number) => void
 }
 
-
-const UserList: FC<PropsType> = ({usersData, totalCount, count, startPage, onSetCurrentPage, currentPage, ...props}) => {
-    const [portionSize] = useState(4);
-
+const UserList: FC<PropsType> = ({usersData, ...props}) => {
     return (
-        <div>
-            <Paginator
-                portionSize={portionSize}
-                onSetCurrentPage={onSetCurrentPage}
-                currentPage={currentPage}
-                totalCount={totalCount}
-                count={count}
-            />
-            <div className={style.wrapper}>
-                {
-                    usersData.map((user) => <User
+        <Row gutter={30} className={style.wrapper}>
+            {
+                usersData.map((user) => (
+                    <User
                         key={user.id}
                         user={user}
                         follow={props.follow}
                         unFollow={props.unFollow}
                         followingInProgress={props.followingInProgress}
-                    />)
-                }
-            </div>
-        </div>
+                    />
+                ))
+            }
+        </Row>
     )
 };
 

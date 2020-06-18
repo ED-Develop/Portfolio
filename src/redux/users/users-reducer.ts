@@ -8,7 +8,7 @@ import {ResultCodesEnum} from "../../api/api";
 
 const initialState = {
     usersData: [] as Array<TUserModel>,
-    count: 6,
+    count: 15,
     currentPage: 1,
     startPage: 1,
     totalCount: 0,
@@ -31,6 +31,7 @@ const usersReducer = (state = initialState, action: UserActionsTypes): InitialSt
         case "PORTFOLIO/USERS/SET-USERS":
         case "PORTFOLIO/USERS/SET-CURRENT-PAGE":
         case "PORTFOLIO/USERS/SET-TOTAL-COUNT":
+        case "PORTFOLIO/USERS/SET_PAGE_SIZE":
             return {
                 ...state,
                 ...action.payload
@@ -70,6 +71,10 @@ export const userActions = {
         type: 'PORTFOLIO/USERS/SET-TOTAL-COUNT',
         payload: {totalCount}
     } as const),
+    setPageSize: (count: number) => ({
+        type: 'PORTFOLIO/USERS/SET_PAGE_SIZE',
+        payload: {count}
+    } as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) => ({
         type: 'PORTFOLIO/USERS/TOGGLE_FOLLOWING_PROGRESS',
         isFetching,
@@ -92,7 +97,7 @@ const getUsersFlow = async <F extends Function>(
     return data;
 };
 
-export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch) => {
+export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch, getState) => {
     dispatch(appActions.toggleIsFetching(true));
     await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, currentPage);
     dispatch(appActions.toggleIsFetching(false));

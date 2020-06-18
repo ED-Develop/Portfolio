@@ -7,11 +7,24 @@ import {TooltipPlacement} from "antd/lib/tooltip";
 type PropsType = {
     className?: string
     placement?: TooltipPlacement
+    buttons?: Array<React.ReactElement>
 }
 
-const PopUpMenu: React.FC<PropsType> = ({children, className, placement}) => {
+const PopUpMenu: React.FC<PropsType> = ({children, className, placement, buttons}) => {
+    let content;
+
+    if (buttons) {
+        content = (
+            <ul className={style.popUpMenu}>
+                {buttons.map(button => <li className={style.itemBtn}>{button}</li>)}
+            </ul>
+        )
+    } else {
+        content = <ul className={style.popUpMenu}>{children}</ul>;
+    }
+
     return (
-        <Popover content={<ul className={style.popUpMenu}>{children}</ul>} placement={placement}>
+        <Popover content={content} placement={placement}>
             <MoreOutlined rotate={90} className={`${style.popUpBtn} ${className}`}/>
         </Popover>
     )

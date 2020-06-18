@@ -1,28 +1,75 @@
-import React, {FC} from 'react';
-import style from './People.module.css';
-import Search from "../common/Search/Search";
-import UserListContainer from "./UsersList/UsersListContainer";
+import React, {FC, useEffect} from 'react';
 import {connect} from "react-redux";
-import {searchUsers} from "../../redux/users/users-reducer";
+import {follow, getUsers, unFollow, userActions} from "../../redux/users/users-reducer";
 import {AppStateType} from "../../redux/store";
+import {TUserModel} from "../../types/types";
+import {
+    getCount,
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getStartPage,
+    getTotalCount,
+    getUsersData
+} from "../../redux/users/users-selector";
+import People from "./People";
 
-type MapDispatchPropsType = {
-    searchUsers: (userName: string) => void
+const {setPageSize} = userActions;
+
+type MapStatePropsType = {
+    usersData: Array<TUserModel>
+    count: number
+    currentPage: number
+    startPage: number
+    totalCount: number
+    isFetching: boolean
+    followingInProgress: Array<number>
 }
 
-const PeopleContainer: FC<MapDispatchPropsType> = (props) => {
-    const onSearch = (formData: any) => {
-        props.searchUsers(formData.search);
+type MapDispatchPropsType = {
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
+    getUsers: (count: number, currentPage: number) => void
+    setPageSize: (pageSize: number) => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+const PeopleContainer: FC<PropsType> = (props) => {
+    const {...restProps} = props;
+
+    useEffect(() => {
+        props.getUsers(props.count, props.currentPage);
+    }, []);
+
+    const getCurrentPageUsers = (currentPage: number) => props.getUsers(props.count, currentPage);
+
+    const changePageSize = (currentPage: number, pageSize: number) => {
+        props.getUsers(pageSize, currentPage)
+        props.setPageSize(pageSize);
     };
 
-    return (
-        <div className={style.container}>
-            <Search onSubmit={onSearch} placeholder='Search user'/>
-            <UserListContainer/>
-        </div>
-    )
+    return <People
+        {...restProps}
+        getCurrentPageUsers={getCurrentPageUsers}
+        changePageSize={changePageSize}
+    />
 };
 
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    usersData: getUsersData(state),
+    count: getCount(state),
+    currentPage: getCurrentPage(state),
+    startPage: getStartPage(state),
+    totalCount: getTotalCount(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state)
+});
 
-export default connect<{}, MapDispatchPropsType, {}, AppStateType>(() => ({}),
-    {searchUsers})(PeopleContainer);
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
+    {
+        follow,
+        getUsers,
+        unFollow,
+        setPageSize
+    })(PeopleContainer);

@@ -17,6 +17,7 @@ import {
 import {TAboutProfile} from "../../../../redux/timeline/timeline-selector";
 import {TContacts} from "../../../../types/types";
 import {Button} from "antd";
+import {NavLink} from "react-router-dom";
 
 type PropsType = {
     aboutProfile: TAboutProfile
@@ -89,7 +90,7 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}}
                     })
                 }
             </div>
-            <Button className='btn btn-light-primary'>Edit</Button>
+            <NavLink to='/edit' className='btn btn-light-primary'>Edit</NavLink>
         </div>
     )
 };

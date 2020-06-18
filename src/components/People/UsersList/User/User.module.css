@@ -1,22 +1,31 @@
 .user {
     display: flex;
-    box-sizing: border-box;
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e0e0e0;
 }
+
+.userAvatar {
+    width: 70px;
+    min-width: 70px;
+    height: 70px;
+}
+
 .userAvatar img {
-    width: 100px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     display: block;
-    margin: auto;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, .04);
 }
+
 .userDescription {
-    margin-left: 30px;
+    margin-left: 10px;
     display: flex;
     justify-content: space-between;
     flex-basis: 100%;
+    padding: 10px 0;
 }
+
 .userDescription button {
     width: 110px;
     font-size: 16px;
@@ -37,9 +46,11 @@
     font-size: 14px;
 }
 .userDescription .name {
-    font-size: 18px;
-    color: #2c2c2c;
-    font-weight: bold;
+    font-size: 17px;
+    line-height: 24px;
+    color: #545454;
+    font-weight: 600;
+    text-transform: capitalize;
     text-decoration: none;
 }
 .userDescription .name:hover {
@@ -48,4 +59,18 @@
 
 .search button:hover {
     background-color: #229ace;
+}
+
+.removeBtn {
+    color: #de4437 !important;
+}
+
+.removeBtn:hover {
+    color: #de4437 !important;
+}
+
+.menuItems button {
+    padding: 0;
+    height: auto;
+    color: inherit !important;
 }

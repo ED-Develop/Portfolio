@@ -1,8 +1,8 @@
 import React from "react";
 import style from './ProfileNavigation.module.css';
 import {Button, Col, Row} from "antd";
-import {NavLink} from "react-router-dom";
 import {CloseOutlined, MessageOutlined, PlusOutlined} from "@ant-design/icons/lib";
+import TabsNavigation from "../../common/TabsNavigation/TabsNavigation";
 
 type PropsType = {
     isMyProfile: boolean
@@ -20,16 +20,7 @@ const ProfileNavigation: React.FC<PropsType> = ({isMyProfile, followed}) => {
     return (
         <Row className={style.profile__navigation}>
             <Col span={15} className={style.nav}>
-                {navItems.map(item => (
-                    <NavLink
-                        key={item.title}
-                        to={item.href}
-                        activeClassName={style.activeLink}
-                        className={style.link}
-                    >
-                        {item.title}
-                    </NavLink>
-                ))}
+                <TabsNavigation navItems={navItems}/>
             </Col>
             <Col span={9} className={style.navBtns}>
                 {!isMyProfile && (

@@ -1,4 +1,25 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: calc(100vh - 79px);
     padding-top: 20px;
+    padding-bottom: 50px;
     position: relative;
+}
+
+.heading {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.heading h1 {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    justify-self: end;
 }
