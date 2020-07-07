@@ -1,4 +1,8 @@
-import usersReducer, {TUsersInitialState, userActions} from "./users-reducer";
+import usersReducer, {getUsers, TUsersInitialState, userActions} from "./users-reducer";
+import {usersApi, UsersResponseType} from "../../api/users-api";
+import {appActions} from "../app-reducer";
+
+jest.mock('../../api/users-api');
 
 describe('Users Reducer: ', () => {
     const user = {id: 1, followed: false, name: 'Test', photos: {large: null, small: null}, status: 'test'}
@@ -14,7 +18,7 @@ describe('Users Reducer: ', () => {
             startPage: 1,
             totalCount: 0
         }
-    })
+    });
 
     test('user should be followed', () => {
         const action = userActions.followSuccess(1);
@@ -58,5 +62,46 @@ describe('Users Reducer: ', () => {
         expect(newState.count).toBe(30);
     });
 
-    test('')
+    describe('Thunks:', () => {
+        const dispatchMock = jest.fn();
+        const getStateMock = jest.fn();
+
+        const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
+
+        beforeEach(() => {
+            dispatchMock.mockClear();
+            getStateMock.mockClear();
+        });
+
+        test('Get users', async () => {
+            const thunk = getUsers(4, 1);
+            const response: UsersResponseType = {
+                error: '',
+                items: [
+                    {...user},
+                    {...user, id: 2},
+                    {...user, id: 3},
+                    {...user, id: 4}
+                ],
+                totalCount: 500
+            };
+
+            const users = [
+                {...user},
+                {...user, id: 2},
+                {...user, id: 3},
+                {...user, id: 4}
+            ]
+
+            usersApiMock.getUsers.mockReturnValue(Promise.resolve(response));
+            await thunk(dispatchMock, getStateMock, {});
+
+            expect(dispatchMock).toBeCalledTimes(5);
+            expect(dispatchMock).toHaveBeenNthCalledWith(1, appActions.toggleIsFetching(true));
+            expect(dispatchMock).toHaveBeenNthCalledWith(2, userActions.setUsers(users));
+            expect(dispatchMock).toHaveBeenNthCalledWith(3, userActions.setTotalCount(500));
+            expect(dispatchMock).toHaveBeenNthCalledWith(4, appActions.toggleIsFetching(false));
+            expect(dispatchMock).toHaveBeenNthCalledWith(5, userActions.setCurrentPage(1));
+        });
+    });
 });
