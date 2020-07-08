@@ -32,6 +32,13 @@ describe('Users Reducer: ', () => {
         }
     });
 
+    test('should return initial state', () => {
+        // @ts-ignore
+        const newState = usersReducer(state, {type: 'FAKE'});
+
+        expect(newState).toEqual(state);
+    });
+
     test('user should be followed', () => {
         const action = userActions.followSuccess(1);
         const newState = usersReducer({...state, usersData: [user]}, action);
@@ -72,6 +79,34 @@ describe('Users Reducer: ', () => {
         const newState = usersReducer(state, action);
 
         expect(newState.count).toBe(30);
+    });
+
+    test('Pagination values should be Map', () => {
+        const map = new Map<number, number>([[1, 2], [2, 1]]);
+        const action = userActions.setPaginationValues(map);
+        const newState = usersReducer(state, action);
+
+        expect(newState.paginationValues).toEqual(map);
+    });
+
+    describe('Following in progress: ', () => {
+        test('should remove id 2 from array', () => {
+            const arrIds = [1, 2, 3];
+            const action = userActions.toggleFollowingProgress(false, 2);
+            const newState = usersReducer({...state, followingInProgress: arrIds}, action);
+
+            expect(newState.followingInProgress.length).toBe(arrIds.length - 1);
+            expect(newState.followingInProgress).not.toContain(2);
+        });
+
+        test('should add id 2 to array', () => {
+            const arrIds = [1, 3];
+            const action = userActions.toggleFollowingProgress(true, 2);
+            const newState = usersReducer({...state, followingInProgress: arrIds}, action);
+
+            expect(newState.followingInProgress.length).toBe(arrIds.length + 1);
+            expect(newState.followingInProgress).toContain(2);
+        });
     });
 
     describe('Thunks:', () => {
