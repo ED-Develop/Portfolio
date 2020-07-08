@@ -22,7 +22,7 @@ const Friends: React.FC<PropsType> = ({friendsCount, friends}) => {
                 <Row gutter={15}>
                     {
                         friends.map(friend => (
-                            <Col span={8}>
+                            <Col span={8} key={friend.id}>
                                 <NavLink to={`/profile/${friend.id}/timeline`} className={style.friends__item}>
                                     <div>
                                         <AvatarImage imgUrl={friend.photos.small}/>
@@ -35,7 +35,9 @@ const Friends: React.FC<PropsType> = ({friendsCount, friends}) => {
                         ))
                     }
                 </Row>
-                <Button className='btn btn-light-dark'>See All</Button>
+                <NavLink to='/people/friends'>
+                    <Button className='btn btn-light-dark'>See All</Button>
+                </NavLink>
             </div>
         </Affix>
     )

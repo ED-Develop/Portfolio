@@ -16,7 +16,7 @@ const PopUpMenu: React.FC<PropsType> = ({children, className, placement, buttons
     if (buttons) {
         content = (
             <ul className={style.popUpMenu}>
-                {buttons.map(button => <li className={style.itemBtn}>{button}</li>)}
+                {buttons.map((button, index) => <li key={index} className={style.itemBtn}>{button}</li>)}
             </ul>
         )
     } else {

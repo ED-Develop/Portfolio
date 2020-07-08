@@ -12,12 +12,12 @@ import {usersApi, UsersResponseType} from "../../api/users-api";
 import {appActions} from "../app-reducer";
 import {configureActions, mockStore} from "../../utils/test/mock-store";
 import {ResultCodesEnum} from "../../api/api";
+import {user, users} from "../../utils/test/models";
 
 jest.mock('../../api/users-api');
 const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
 
 describe('Users Reducer: ', () => {
-    const user = {id: 1, followed: false, name: 'Test', photos: {large: null, small: null}, status: 'test'}
     let state: TUsersInitialState;
 
     beforeEach(() => {
@@ -110,13 +110,6 @@ describe('Users Reducer: ', () => {
     });
 
     describe('Thunks:', () => {
-        const users = [
-            {...user},
-            {...user, id: 2},
-            {...user, id: 3},
-            {...user, id: 4}
-        ];
-
         const response: UsersResponseType = {
             error: '',
             items: users,

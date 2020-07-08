@@ -10,14 +10,6 @@ export const getUsersData = createSelector(getUsers, (users) => {
 
 export type TFriendsTitle = Omit<Omit<TUserModel, 'status'>, 'followed'>
 
-export const getFriendsTitles = createSelector(getUsers, (users): Array<TFriendsTitle> => {
-    return users.map(user => ({
-        id: user.id,
-        name: user.name,
-        photos: user.photos
-    }));
-});
-
 export const getCount = (state: AppStateType) => state.people.count;
 export const getCurrentPage = (state: AppStateType) => state.people.currentPage;
 export const getStartPage = (state: AppStateType) => state.people.startPage;

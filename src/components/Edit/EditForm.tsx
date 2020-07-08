@@ -30,7 +30,7 @@ const EditForm: FC<FormPropsType & InjectedFormProps<TProfileModel, FormPropsTyp
         <div className={style.section}>
             {editFieldsData.map(field => {
                 return (
-                    <div className={field.type === 'checkbox' ? style.checkboxBlock : style.inputBlock}>
+                    <div className={field.type === 'checkbox' ? style.checkboxBlock : style.inputBlock} key={field.name}>
                         {createField<EditFormDataKeysType>({
                             name: field.name,
                             component: field.component,

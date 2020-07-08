@@ -1,23 +1,28 @@
 import {appActions, AppActionsTypes} from "../app-reducer";
 import {authActions, AuthActionsTypes, getOwnerProfileData} from "../auth-reducer";
 import {FormAction, stopSubmit} from "redux-form";
-import {PhotosType, TProfileModel} from "../../types/types";
+import {PhotosType, TProfileModel, TUserModel} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {profileApi} from "../../api/profile-api";
 import {ResultCodesEnum} from "../../api/api";
+import {usersApi} from "../../api/users-api";
 
 const initialState = {
     profile: null as TProfileModel | null,
     status: '' as string,
     followed: false,
     isUpdateSuccess: false,
+    friends: [] as Array<TUserModel>,
+    friendsCount: 0
 };
 
-const profileReducer = (state = initialState, action: ProfileActionsTypes): InitialStateType => {
+const profileReducer = (state = initialState, action: ProfileActionsTypes): TProfileInitialState => {
     switch (action.type) {
         case "PORTFOLIO/PROFILE/SET-USER-PROFILE":
         case "PORTFOLIO/PROFILE/SET_PROFILE_STATUS":
         case "PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS":
+        case "PORTFOLIO/PROFILE/SET_FRIENDS":
+        case "PORTFOLIO/PROFILE/SET_FRIENDS_COUNT":
             return {
                 ...state,
                 ...action.payload
@@ -53,6 +58,14 @@ export const profileActions = {
     updateProfileDataSuccess: (isUpdateSuccess: boolean) => ({
         type: 'PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS',
         payload: {isUpdateSuccess}
+    } as const),
+    setFriends: (friends: Array<TUserModel>) => ({
+        type: 'PORTFOLIO/PROFILE/SET_FRIENDS',
+        payload: {friends}
+    } as const),
+    setFriendsCount: (friendsCount: number) => ({
+        type: 'PORTFOLIO/PROFILE/SET_FRIENDS_COUNT',
+        payload: {friendsCount}
     } as const),
 };
 
@@ -117,7 +130,16 @@ export const updateProfileData = (profileData: TProfileModel): ThunkType => asyn
     }
 };
 
-type InitialStateType = typeof initialState;
+export const getFriends = (): ThunkType => async (dispatch) => {
+    dispatch(appActions.toggleIsFetching(true));
+    const data = await usersApi.getFriends(6, 1);
+
+    dispatch(profileActions.setFriends(data.items));
+    dispatch(profileActions.setFriendsCount(data.totalCount));
+    dispatch(appActions.toggleIsFetching(false));
+}
+
+export type TProfileInitialState = typeof initialState;
 type ProfileActionsTypes = InferActionsTypes<typeof profileActions>;
 type ThunkType = CommonThunkType<ProfileActionsTypes | FormAction | AuthActionsTypes | AppActionsTypes>
 

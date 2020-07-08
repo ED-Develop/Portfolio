@@ -16,8 +16,8 @@ import {
 } from "@ant-design/icons/lib";
 import {TAboutProfile} from "../../../../redux/timeline/timeline-selector";
 import {TContacts} from "../../../../types/types";
-import {Button} from "antd";
 import {NavLink} from "react-router-dom";
+import {Button} from "antd";
 
 type PropsType = {
     aboutProfile: TAboutProfile
@@ -60,7 +60,7 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}}
             <div className={style.about}>
                 {
                     Object.keys(profileInfo).map(key => (
-                        <div className={style.about__item}>
+                        <div className={style.about__item} key={key}>
                             <span className={style.icon}>{aboutIcons[key as keyof TAboutIcon]}</span>
                             {profileInfo[key as keyof typeof profileInfo]}
                         </div>
@@ -80,6 +80,7 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}}
                                     href={contact}
                                     className={`${style.icon} ${style.icon_big}`}
                                     style={{color: iconObj.color}}
+                                    key={key}
                                 >
                                     {iconObj.icon}
                                 </a>
@@ -90,7 +91,9 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}}
                     })
                 }
             </div>
-            <NavLink to='/edit' className='btn btn-light-primary'>Edit</NavLink>
+            <NavLink to='/edit'>
+                <Button className='btn btn-light-primary'>Edit</Button>
+            </NavLink>
         </div>
     )
 };

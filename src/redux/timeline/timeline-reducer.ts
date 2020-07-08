@@ -1,6 +1,6 @@
-import {TPostModel, TPostComment, TPostFormData, TUploadedFile, TPostContent} from "../../types/types";
+import {TPostComment, TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
-import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector, stopSubmit} from "redux-form";
+import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector} from "redux-form";
 import {AppActionsTypes} from "../app-reducer";
 import {
     postApi,
@@ -17,7 +17,7 @@ const initialState = {
     uploadedFiles: [] as Array<TUploadedFile>
 };
 
-const timelineReducer = (state = initialState, action: TimelineActionsTypes): InitialStateType => {
+const timelineReducer = (state = initialState, action: TimelineActionsTypes): TTimelineInitialState => {
     switch (action.type) {
         case "PORTFOLIO/PROFILE/ADD-POST":
             return {
@@ -375,7 +375,7 @@ export const toggleDisabledComments = (postId: string, isDisabled: boolean): Thu
     }
 };
 
-type InitialStateType = typeof initialState;
+export type TTimelineInitialState = typeof initialState;
 type TimelineActionsTypes = InferActionsTypes<typeof timelineActions>;
 type ThunkType = CommonThunkType<TimelineActionsTypes | FormAction | AppActionsTypes>
 

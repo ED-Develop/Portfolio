@@ -133,6 +133,10 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 });
 
 export default connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps, {
-    getUserProfile, getProfileStatus, updateProfileDataSuccess,
-    updateProfileStatus, uploadProfilePhoto, startDialogs
+    getUserProfile,
+    getProfileStatus,
+    updateProfileDataSuccess,
+    updateProfileStatus,
+    uploadProfilePhoto,
+    startDialogs
 })(withRouter(ProfileContainer));

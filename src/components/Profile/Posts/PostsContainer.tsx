@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Posts from "./Posts";
 import {connect} from "react-redux";
-import {getFirstName} from "../../../redux/porfile/profile-selector";
+import {getFirstName, getFriendsTitles} from "../../../redux/porfile/profile-selector";
 import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../../types/types";
 import {AppStateType} from "../../../redux/store";
 import {
@@ -24,8 +24,8 @@ import {Dispatch} from "redux";
 import {DecoratedFormProps} from "redux-form/lib/reduxForm";
 import {PostsFormPropsType} from "./PostsForm/PostsForm";
 import {getAboutProfileInfo, TAboutProfile} from "../../../redux/timeline/timeline-selector";
-import {getFriends} from "../../../redux/users/users-reducer";
-import {getFriendsTitles, TFriendsTitle} from "../../../redux/users/users-selector";
+import {TFriendsTitle} from "../../../redux/users/users-selector";
+import {getFriends} from "../../../redux/porfile/profile-reducer";
 
 const {removeUploadedFile} = timelineActions;
 
@@ -55,7 +55,7 @@ type MapDispatchPropsType = {
     deleteComment: (postId: string, commentId: string) => void
     destroy: (formName: string) => void
     toggleDisabledComments: (postId: string, isDisabled: boolean) => void
-    getFriends: (count: number, currentPage?: number) => void
+    getFriends: () => void
 }
 
 type OwnPropsType = {
@@ -70,8 +70,13 @@ const PostsContainer: React.FC<PostsPropsType> = (props) => {
     const [isInputFocus, toggleIsInputFocus] = useState(false);
 
     useEffect(() => {
-        getPosts();
-        getFriends(6);
+        if (!props.postData.length) {
+            getPosts();
+        }
+
+        if (!props.friends.length) {
+            getFriends();
+        }
     }, []);
 
     const startEditing = (post: TPostModel) => {
@@ -129,7 +134,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     uploadedFiles: state.timeline.uploadedFiles,
     aboutProfile: getAboutProfileInfo(state),
     friends: getFriendsTitles(state),
-    friendsCount: state.people.totalCount
+    friendsCount: state.profile.friendsCount
 });
 
 export default connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps,
