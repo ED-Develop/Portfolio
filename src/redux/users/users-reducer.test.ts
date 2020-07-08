@@ -1,8 +1,10 @@
 import usersReducer, {getUsers, TUsersInitialState, userActions} from "./users-reducer";
 import {usersApi, UsersResponseType} from "../../api/users-api";
 import {appActions} from "../app-reducer";
+import {mockStore} from "../../utils/test/mock-store";
 
 jest.mock('../../api/users-api');
+const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
 
 describe('Users Reducer: ', () => {
     const user = {id: 1, followed: false, name: 'Test', photos: {large: null, small: null}, status: 'test'}
@@ -22,7 +24,7 @@ describe('Users Reducer: ', () => {
 
     test('user should be followed', () => {
         const action = userActions.followSuccess(1);
-        const newState = usersReducer({...state, usersData: [user]}, action)
+        const newState = usersReducer({...state, usersData: [user]}, action);
 
         expect(newState.usersData.find(user => user.id = 1)?.followed).toBeTruthy();
     });
@@ -63,29 +65,13 @@ describe('Users Reducer: ', () => {
     });
 
     describe('Thunks:', () => {
-        const dispatchMock = jest.fn();
-        const getStateMock = jest.fn();
 
-        const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
 
         beforeEach(() => {
-            dispatchMock.mockClear();
-            getStateMock.mockClear();
+            mockStore.clearActions();
         });
 
         test('Get users', async () => {
-            const thunk = getUsers(4, 1);
-            const response: UsersResponseType = {
-                error: '',
-                items: [
-                    {...user},
-                    {...user, id: 2},
-                    {...user, id: 3},
-                    {...user, id: 4}
-                ],
-                totalCount: 500
-            };
-
             const users = [
                 {...user},
                 {...user, id: 2},
@@ -93,15 +79,22 @@ describe('Users Reducer: ', () => {
                 {...user, id: 4}
             ]
 
-            usersApiMock.getUsers.mockReturnValue(Promise.resolve(response));
-            await thunk(dispatchMock, getStateMock, {});
+            const response: UsersResponseType = {
+                error: '',
+                items: users,
+                totalCount: 500
+            };
 
-            expect(dispatchMock).toBeCalledTimes(5);
-            expect(dispatchMock).toHaveBeenNthCalledWith(1, appActions.toggleIsFetching(true));
-            expect(dispatchMock).toHaveBeenNthCalledWith(2, userActions.setUsers(users));
-            expect(dispatchMock).toHaveBeenNthCalledWith(3, userActions.setTotalCount(500));
-            expect(dispatchMock).toHaveBeenNthCalledWith(4, appActions.toggleIsFetching(false));
-            expect(dispatchMock).toHaveBeenNthCalledWith(5, userActions.setCurrentPage(1));
+            usersApiMock.getUsers.mockReturnValue(Promise.resolve(response));
+            await mockStore.dispatch(getUsers(4, 1));
+            const actions = mockStore.getActions();
+
+            expect(actions.length).toBe(5);
+            expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
+            expect(actions[1]).toEqual(userActions.setUsers(users));
+            expect(actions[2]).toEqual(userActions.setTotalCount(500));
+            expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
+            expect(actions[4]).toEqual(userActions.setCurrentPage(1));
         });
     });
 });
