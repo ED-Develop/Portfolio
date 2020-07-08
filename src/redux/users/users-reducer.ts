@@ -158,6 +158,8 @@ export const getUsers = (count: number, currentPage: number): ThunkType => async
     dispatch(userActions.setCurrentPage(currentPage));
 };
 
+//todo combine this thunks
+
 export const getFriends = (count: number, currentPage?: number): ThunkType => async (dispatch) => {
     dispatch(appActions.toggleIsFetching(true));
     await getUsersFlow<typeof usersApi.getFriends>(usersApi.getFriends, dispatch, count, currentPage);
@@ -184,11 +186,11 @@ const followUnfollowFlow = async (apiMethod: (userId: number) => Promise<number>
 };
 
 export const follow = (userId: number): ThunkType => async (dispatch) => {
-    followUnfollowFlow(usersApi.follow.bind(usersApi), dispatch, userId, userActions.followSuccess);
+    return await followUnfollowFlow(usersApi.follow.bind(usersApi), dispatch, userId, userActions.followSuccess);
 };
 
-export const unFollow = (userId: number) => (dispatch: any) => {
-    followUnfollowFlow(usersApi.unFollow.bind(usersApi), dispatch, userId, userActions.unFollowSuccess);
+export const unFollow = (userId: number) => async (dispatch: any) => {
+    return await followUnfollowFlow(usersApi.unFollow.bind(usersApi), dispatch, userId, userActions.unFollowSuccess);
 };
 
 export type TUsersInitialState = typeof initialState;

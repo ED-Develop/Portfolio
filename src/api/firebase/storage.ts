@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import 'firebase/storage';
 
 class StorageAPI {
     protected storage: firebase.storage.Storage;

@@ -1,7 +1,17 @@
-import usersReducer, {getUsers, TUsersInitialState, userActions} from "./users-reducer";
+import usersReducer, {
+    follow,
+    getAllUsers,
+    getFriends,
+    getUsers,
+    searchUsers,
+    TUsersInitialState,
+    unFollow,
+    userActions
+} from "./users-reducer";
 import {usersApi, UsersResponseType} from "../../api/users-api";
 import {appActions} from "../app-reducer";
-import {mockStore} from "../../utils/test/mock-store";
+import {configureActions, mockStore} from "../../utils/test/mock-store";
+import {ResultCodesEnum} from "../../api/api";
 
 jest.mock('../../api/users-api');
 const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
@@ -65,36 +75,89 @@ describe('Users Reducer: ', () => {
     });
 
     describe('Thunks:', () => {
+        const users = [
+            {...user},
+            {...user, id: 2},
+            {...user, id: 3},
+            {...user, id: 4}
+        ];
 
+        const response: UsersResponseType = {
+            error: '',
+            items: users,
+            totalCount: 4
+        };
 
         beforeEach(() => {
             mockStore.clearActions();
+            usersApiMock.getUsers.mockClear();
         });
 
         test('Get users', async () => {
-            const users = [
-                {...user},
-                {...user, id: 2},
-                {...user, id: 3},
-                {...user, id: 4}
-            ]
+            const getActions = configureActions<typeof getUsers, any>(4, 1);
+            const actions = await getActions(usersApiMock.getUsers, response, mockStore, getUsers, 5);
 
-            const response: UsersResponseType = {
-                error: '',
-                items: users,
-                totalCount: 500
-            };
-
-            usersApiMock.getUsers.mockReturnValue(Promise.resolve(response));
-            await mockStore.dispatch(getUsers(4, 1));
-            const actions = mockStore.getActions();
-
-            expect(actions.length).toBe(5);
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(userActions.setUsers(users));
-            expect(actions[2]).toEqual(userActions.setTotalCount(500));
+            expect(actions[2]).toEqual(userActions.setTotalCount(4));
             expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
             expect(actions[4]).toEqual(userActions.setCurrentPage(1));
         });
+
+        test('Get friends', async () => {
+            const getActions = configureActions<typeof getFriends, any>(1, 1);
+            const actions = await getActions(usersApiMock.getFriends, response, mockStore, getFriends, 5);
+
+            expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
+            expect(actions[1]).toEqual(userActions.setUsers(users));
+            expect(actions[2]).toEqual(userActions.setTotalCount(4));
+            expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
+            expect(actions[4]).toEqual(userActions.setCurrentPage(1));
+        });
+
+        test('Get all users', async () => {
+            const getActions = configureActions<typeof getAllUsers>(4, 1);
+            const actions = await getActions(usersApiMock.getUsers, response, mockStore, getAllUsers, 7);
+
+            expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
+            expect(actions[1]).toEqual(userActions.setTotalCount(4));
+            expect(actions[2]).toEqual(userActions.setPaginationValues(new Map([[1, 1], [2, 1]])));
+            expect(actions[3]).toEqual(userActions.setUsers(users));
+            expect(actions[4]).toEqual(userActions.setTotalCount(4));
+            expect(actions[5]).toEqual(userActions.setCurrentPage(1));
+            expect(actions[6]).toEqual(appActions.toggleIsFetching(false));
+        });
+
+        test('Search users', async () => {
+            const getActions = configureActions<typeof searchUsers>('Test');
+            const actions = await getActions(usersApiMock.searchUsers, response, mockStore, searchUsers, 4);
+
+            expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
+            expect(actions[1]).toEqual(userActions.setUsers(users));
+            expect(actions[2]).toEqual(userActions.setTotalCount(4));
+            expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
+        });
+
+        describe('follow flow: ', () => {
+            const resultCode = ResultCodesEnum.Success;
+
+            test('Follow', async () => {
+                const getActions = configureActions<typeof follow>(1);
+                const actions = await getActions(usersApiMock.follow, resultCode, mockStore, follow, 3);
+
+                expect(actions[0]).toEqual(userActions.toggleFollowingProgress(true, 1));
+                expect(actions[1]).toEqual(userActions.followSuccess(1));
+                expect(actions[2]).toEqual(userActions.toggleFollowingProgress(false, 1));
+            });
+
+            test('Un follow', async () => {
+                const getActions = configureActions<typeof unFollow>(1);
+                const actions = await getActions(usersApiMock.unFollow, resultCode, mockStore, unFollow, 3);
+
+                expect(actions[0]).toEqual(userActions.toggleFollowingProgress(true, 1));
+                expect(actions[1]).toEqual(userActions.unFollowSuccess(1));
+                expect(actions[2]).toEqual(userActions.toggleFollowingProgress(false, 1));
+            });
+        })
     });
 });
