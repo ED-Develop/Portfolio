@@ -3,7 +3,6 @@ import usersReducer, {
     getAllUsers,
     getFriends,
     getUsers,
-    searchUsers,
     TUsersInitialState,
     unFollow,
     userActions
@@ -154,16 +153,6 @@ describe('Users Reducer: ', () => {
             expect(actions[4]).toEqual(userActions.setTotalCount(4));
             expect(actions[5]).toEqual(userActions.setCurrentPage(1));
             expect(actions[6]).toEqual(appActions.toggleIsFetching(false));
-        });
-
-        test('Search users', async () => {
-            const getActions = configureActions<typeof searchUsers>('Test');
-            const actions = await getActions(usersApiMock.searchUsers, response, mockStore, searchUsers, 4);
-
-            expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
-            expect(actions[1]).toEqual(userActions.setUsers(users));
-            expect(actions[2]).toEqual(userActions.setTotalCount(4));
-            expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
         });
 
         describe('follow flow: ', () => {

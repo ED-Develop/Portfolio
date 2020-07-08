@@ -167,12 +167,6 @@ export const getFriends = (count: number, currentPage?: number): ThunkType => as
     if (currentPage) dispatch(userActions.setCurrentPage(currentPage)); //todo make currentPage required
 };
 
-export const searchUsers = (userName: string): ThunkType => async (dispatch) => {
-    dispatch(appActions.toggleIsFetching(true));
-    await getUsersFlow<typeof usersApi.searchUsers>(usersApi.searchUsers, dispatch, userName);
-    dispatch(appActions.toggleIsFetching(false));
-};
-
 const followUnfollowFlow = async (apiMethod: (userId: number) => Promise<number>,
                                   dispatch: Dispatch<UserActionsTypes>, userId: number,
                                   actionCreator: (userId: number) => UserActionsTypes) => {

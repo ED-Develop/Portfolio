@@ -51,6 +51,11 @@ describe('Profile reducer', () => {
             totalCount: 4
         };
 
+        beforeEach(() => {
+            mockStore.clearActions();
+
+        })
+
         test('Get friends', async () => {
             const actions = await configureActions()(usersApiMock.getFriends, response, mockStore, getFriends, 4);
 

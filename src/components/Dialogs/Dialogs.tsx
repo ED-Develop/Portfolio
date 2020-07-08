@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import style from './Dialogs.module.css';
 import DialogsItems from "./DialogsItems/DialogsItems";
 import Messages from "./Messages/Messages";
-import Search from "../common/Search/Search";
+import Search from "../Header/Search/Search";
 
 type PropsType = {
     messages: Array<any>
@@ -16,7 +16,6 @@ type PropsType = {
 const Dialogs: FC<PropsType> = ({dialogs, ...props}) => {
     return (
         <div className={style.dialogs}>
-            <Search placeholder='Search dialog'/>
             <div className={style.container}>
                 <DialogsItems dialogs={dialogs}/>
                 <Messages

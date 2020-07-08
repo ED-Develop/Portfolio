@@ -9,6 +9,7 @@ import {reducer as formReducer} from 'redux-form'
 import appReducer from "./app-reducer";
 import projectsReducer from "./projects-reducer";
 import timelineReducer from "./timeline/timeline-reducer";
+import searchReducer from "./search/search-reducer";
 
 const rootReducer = combineReducers({
     profile: profileReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     form: formReducer,
     app: appReducer,
     projects: projectsReducer,
-    timeline: timelineReducer
+    timeline: timelineReducer,
+    search: searchReducer
 });
 
 type RootReducerType = typeof rootReducer

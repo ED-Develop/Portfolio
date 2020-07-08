@@ -12,6 +12,7 @@
 
 .headerContainer {
     background-color: #fff;
+    overflow-x: visible !important;
 }
 
 .auth .login {
