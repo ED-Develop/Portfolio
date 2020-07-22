@@ -74,7 +74,15 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
                 />
                 <Switch>
                     <Route path='/login' render={() => <Login/>}/>
-                    <Route path='/' render={() => <MainRoutes isAsideCollapsed={this.state.isAsideCollapsed}/>}/>
+                    <Route
+                        path='/'
+                        render={() => (
+                            <MainRoutes
+                                isAsideCollapsed={this.state.isAsideCollapsed}
+                                isFetching={this.props.isFetching}
+                            />
+                        )}
+                    />
                 </Switch>
             </div>
         );
@@ -84,7 +92,8 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
 const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
     initialized: state.app.initialized,
-    globalError: state.app.globalError
+    globalError: state.app.globalError,
+    isFetching: state.app.isFetching
 });
 
 const AppConnected = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,

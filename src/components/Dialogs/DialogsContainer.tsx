@@ -51,7 +51,8 @@ class DialogsContainer extends React.Component<PropsType> {
             return <Redirect to={`/messages/${this.props.dialogs[0].id}`}/>
         }
 
-        if (this.props.isFetching) return <Preloader/>;
+        if (this.props.isFetching) return null;
+
         return (
             <Dialogs
                 userId={userId}

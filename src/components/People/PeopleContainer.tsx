@@ -73,6 +73,8 @@ const PeopleContainer: FC<PropsType> = (props) => {
         props.setPageSize(pageSize);
     };
 
+    if (props.isFetching) return null;
+
     return <People
         {...restProps}
         getCurrentPageUsers={getCurrentPageUsers}

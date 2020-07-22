@@ -64,7 +64,7 @@ class Edit extends Component<PropsType, StateType> {
 
         if (isUpdateSuccess) return <Redirect to='/profile/about'/>;
 
-        if (!profile) return <Preloader/>;
+        if (!profile) return null;
 
         return (
             <div className={style.wrapper}>

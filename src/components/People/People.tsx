@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./People.module.css";
-import Preloader from "../common/Preloader/Preloader";
 import UserList from "./UsersList/UsersList";
 import {TUserModel} from "../../types/types";
 import Heading from "./Heading/Heading";
@@ -23,7 +22,6 @@ type PropsType = {
 const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, getCurrentPageUsers, ...props}) => {
     return (
         <div className={style.container}>
-            {isFetching && <Preloader/>}
             <div>
                 <Heading/>
                 <UserList

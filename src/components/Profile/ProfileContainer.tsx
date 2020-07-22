@@ -103,7 +103,7 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
 
     render() {
         if (this.props.isSuccess) return <Redirect to={`/messages/${this.state.userId}`}/>;
-        if (this.props.isFetching || !this.props.profile) return <Preloader/>;
+        if (this.props.isFetching || !this.props.profile) return null;
 
         return <Profile
             uploadProfilePhoto={this.props.uploadProfilePhoto}
