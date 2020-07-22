@@ -17,8 +17,8 @@ export const usersApi = {
             .get<UsersResponseType>(`users?count=${count}${currentPage ? `&page=${currentPage}` : ''}&friend=true`)
             .then(response => response.data);
     },
-    searchUsers(userName: string) {
-        return instance.get<UsersResponseType>(`users?term=${userName}`)
+    searchUsers(userName: string, count: number = 10, currentPage: number = 1) {
+        return instance.get<UsersResponseType>(`users?term=${userName}&count=${count}&page=${currentPage}`)
             .then(response => response.data)
     },
     follow(id: number) {

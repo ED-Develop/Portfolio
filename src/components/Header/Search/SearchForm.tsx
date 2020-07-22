@@ -1,13 +1,14 @@
 import React, {FC} from "react";
 import style from "./Search.module.css";
 import {createField, CustomInput, GetObjectsKeys} from "../../common/FormsControls/FormsControls";
-import {SearchOutlined} from "@ant-design/icons/lib";
+import {LoadingOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {InjectedFormProps, reduxForm} from "redux-form";
 
 type PropsType = {
     placeholder: string
+    isSearchFetching: boolean
     showSearchList: () => void
-    hideSearchList: () => void
+    handleBlur: () => void
 }
 
 export type TSearchFormData = {
@@ -26,11 +27,11 @@ const SearchForm: FC<PropsType & InjectedFormProps<TSearchFormData, PropsType>> 
                     component: CustomInput,
                     props: {
                         size: "large",
-                        prefix: <SearchOutlined/>,
+                        prefix: props.isSearchFetching ? <LoadingOutlined/> : <SearchOutlined/>,
                         className: style.searchInput,
                         onFocus: props.showSearchList,
-                        onBlur: props.hideSearchList,
-                        autoComplete: 'off'
+                        onBlur: props.handleBlur,
+                        autoComplete: 'off',
                     }
                 })}
             </form>
@@ -38,6 +39,4 @@ const SearchForm: FC<PropsType & InjectedFormProps<TSearchFormData, PropsType>> 
     )
 }
 
-export default reduxForm<TSearchFormData, PropsType>({
-    form: 'search'
-})(SearchForm);
+export default reduxForm<TSearchFormData, PropsType>({})(SearchForm);

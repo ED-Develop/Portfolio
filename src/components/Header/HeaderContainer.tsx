@@ -3,19 +3,28 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {logout} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/store";
-import {searchItems} from "../../redux/search/search-reducer";
+import {cashSelectedItem, restoreSearchList, searchActions, searchItems} from "../../redux/search/search-reducer";
 import {TUserModel} from "../../types/types";
+import {reset} from "redux-form";
+
+const {setSearchString} = searchActions;
 
 type MapStatePropsType = {
     isAuth: boolean
     login: string | null
     avatar: string | null
     searchResults: Array<TUserModel>
+    isSearchFetching: boolean
+    searchString: string
 }
 
 type MapDispatchPropsType = {
     logout: () => void
-    searchItems: (string: string) => void
+    searchItems: (string: string, next?: boolean) => void,
+    restoreSearchList: () => void
+    cashSelectedItem: (item: TUserModel) => void
+    setSearchString: (string: string) => void
+    reset: (formName: string) => void
 }
 
 type OwnProps = {
@@ -33,8 +42,10 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
     avatar: state.auth.photos.small,
-    searchResults: state.search.searchItems
+    searchResults: state.search.searchItems,
+    isSearchFetching: state.search.isSearchFetching,
+    searchString: state.search.searchString,
 });
 
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
-    {logout, searchItems})(HeaderContainer);
+    {logout, searchItems, restoreSearchList, cashSelectedItem, setSearchString, reset})(HeaderContainer);

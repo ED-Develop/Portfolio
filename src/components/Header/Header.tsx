@@ -12,14 +12,20 @@ const {Content, Sider} = Layout;
 type PropsType = {
     logout: () => void
     isAuth: boolean
+    searchString: string
+    isSearchFetching: boolean
     avatar: string | null
     toggleIsAsideCollapsed: () => void
     isAsideCollapsed: boolean
     searchResults: Array<TUserModel>
-    searchItems: (string: string) => void
+    searchItems: (string: string, next?: boolean) => void,
+    restoreSearchList: () => void
+    cashSelectedItem: (item: TUserModel) => void
+    setSearchString: (string: string) => void
+    reset: (formName: string) => void
 }
 
-const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, isAsideCollapsed, searchItems, searchResults}) => {
+const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, isAsideCollapsed, searchItems, searchResults, ...props}) => {
     const onLogout = (e: React.MouseEvent) => {
         e.preventDefault();
         logout();
@@ -34,7 +40,16 @@ const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, isAsideC
                 <Content className={style.headerContainer}>
                     <Row>
                         <Col span={14}>
-                            <Search searchItems={searchItems} searchResults={searchResults}/>
+                            <Search
+                                searchItems={searchItems}
+                                searchResults={searchResults}
+                                searchString={props.searchString}
+                                restoreSearchList={props.restoreSearchList}
+                                cashSelectedItem={props.cashSelectedItem}
+                                isSearchFetching={props.isSearchFetching}
+                                setSearchString={props.setSearchString}
+                                reset={props.reset}
+                            />
                         </Col>
                         <Col span={6} offset={4}>
                             <UserInfo avatar={avatar}/>

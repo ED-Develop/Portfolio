@@ -4,5 +4,6 @@ export const users = [
     {...user},
     {...user, id: 2},
     {...user, id: 3},
-    {...user, id: 4}
+    {...user, id: 4},
+    {...user, id: 5}
 ];

@@ -7,5 +7,13 @@
     "totalCount": 0,
     "followingInProgress": [],
     "paginationValues": null
+  },
+  "search": {
+    "searchString": "",
+    "searchItems": [],
+    "isSearchFetching": false,
+    "totalCount": 15,
+    "currentPage": 1,
+    "count": 5
   }
 }
