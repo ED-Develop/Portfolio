@@ -4,6 +4,7 @@ import SearchForm, {TSearchFormData} from "./SearchForm";
 import SearchList from "./SearchList";
 import {TUserModel} from "../../../types/types";
 import {debounce} from 'lodash';
+import Fade from "../../common/Animations/Fade";
 
 type PropsType = {
     searchResults: Array<TUserModel>
@@ -66,8 +67,8 @@ const Search: FC<PropsType> = ({searchItems, searchResults, restoreSearchList, c
                 isSearchFetching={isSearchFetching}
                 form={FORM_NAME}
             />
-            {
-                isSearchList && <SearchList
+            <Fade inProp={isSearchList} duration={200}>
+                <SearchList
                     title={isInputEmpty ? 'Recent Searches' : 'Search results'}
                     results={searchResults}
                     isInputFocus={isInputFocus}
@@ -78,7 +79,7 @@ const Search: FC<PropsType> = ({searchItems, searchResults, restoreSearchList, c
                     searchString={props.searchString}
                     selectItem={selectItem}
                 />
-            }
+            </Fade>
         </div>
     );
 };

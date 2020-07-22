@@ -4,7 +4,7 @@
     height: 4px;
     background-color: #B3E5FC;
     position: fixed;
-    z-index: 100;
+    z-index: 50;
     top: 64px;
 }
 

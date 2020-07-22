@@ -66,6 +66,7 @@ const SearchList: React.FC<PropsType> = ({title, results, isInputFocus, hideSear
 
     return (
         <div className={style.searchList} ref={ref}>
+
             <h5 className={style.search__title}>{title}</h5>
             <ul>
                 {

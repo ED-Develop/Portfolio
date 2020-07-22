@@ -52,7 +52,7 @@
     overflow: auto;
     position: absolute;
     right: 0;
-    z-index: 100;
+    z-index: 200;
     background-color: #fff;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
