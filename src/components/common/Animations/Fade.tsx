@@ -21,7 +21,7 @@ const Fade: React.FC<PropsType> = ({inProp, duration = 300, children}) => {
 
     return (
         <div>
-            <Transition in={inProp} timeout={duration}>
+            <Transition in={inProp} timeout={duration} unmountOnExit>
                 {(state: keyof typeof transitionStyles) => (
                     <div style={{
                         ...defaultStyle,

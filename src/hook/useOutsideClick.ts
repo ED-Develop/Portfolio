@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 
-export const useOutsideClick = <R extends Node, C extends Function = Function>(callback: C, deps = [] as Array<any>) => {
+export const useOutsideClick = <R extends Node, C extends Function = Function>(callback: C, deps: Array<any>) => {
     const ref = useRef<R>(null);
 
     const handleClick = (e: Event) => {

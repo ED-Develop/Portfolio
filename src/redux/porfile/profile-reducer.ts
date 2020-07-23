@@ -92,11 +92,12 @@ export const updateProfileStatus = (status: string): ThunkType => async (dispatc
 };
 
 export const uploadProfilePhoto = (photoFile: File): ThunkType => async (dispatch, getState) => {
+    const authState = getState().auth;
     dispatch(appActions.uploadInProgress(true));
-    let photos = await profileApi.uploadProfilePhoto((photoFile));
+    const photos = await profileApi.uploadProfilePhoto((photoFile));
 
     dispatch(profileActions.uploadProfilePhotoSuccess(photos));
-    dispatch(authActions.setProfileData(photos, getState().auth.login));
+    dispatch(authActions.setProfileData(photos, authState.login, authState.status));
     dispatch(appActions.uploadInProgress(false));
 };
 

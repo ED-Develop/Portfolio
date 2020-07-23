@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import {HashRouter, Route, Switch} from "react-router-dom";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import {appActions, initializeApp} from "./redux/app-reducer";
@@ -68,10 +67,6 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
         return (
             <div className="app-container">
                 {this.props.globalError && Modal}
-                <HeaderContainer
-                    toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
-                    isAsideCollapsed={this.state.isAsideCollapsed}
-                />
                 <Switch>
                     <Route path='/login' render={() => <Login/>}/>
                     <Route
@@ -80,6 +75,7 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
                             <MainRoutes
                                 isAsideCollapsed={this.state.isAsideCollapsed}
                                 isFetching={this.props.isFetching}
+                                toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
                             />
                         )}
                     />

@@ -12,6 +12,7 @@
     margin-left: 12px;
     cursor: pointer;
     border-radius: 50%;
+    position: relative;
 }
 
 .userInfoItem:not(.userAvatar):hover {
@@ -29,7 +30,93 @@
     border-radius: 50%;
 }
 
-.userInfoItem.userAvatar  {
+.userInfoItem.userAvatar {
     width: auto;
     height: auto;
+}
+
+.userInfo__dropdown {
+    width: 340px;
+    background-color: #fff;
+    position: absolute;
+    top: 100%;
+    right: -30px;
+    z-index: 100;
+    color: #666;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.userInfo__menu {
+    padding: 7px 12px;
+}
+
+.profileCard {
+    display: flex;
+    min-height: 73px;
+    border-bottom: 1px solid #ebebee;
+}
+
+.profileCard__avatar {
+    width: 55px;
+    height: 55px;
+    margin-right: 17px;
+}
+
+.profileCard__avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.profileCard h3 {
+    font-size: 19px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.profileCard p {
+    font-size: 13px;
+    margin: 0;
+}
+
+.menuItem .btn {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 6px;
+    height: 48px;
+    align-items: center;
+    color: #4b4b4b;
+    font-weight: 600;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.userMenu {
+    padding: 6px 0;
+}
+
+.menuItem {
+    margin-bottom: 2px;
+}
+
+.menuItem .btn:hover {
+    background-color: #f1f3f4;;
+}
+
+.menuIcon {
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f3f4;
+    border-radius: 50%;
+    margin-right: 14px;
+    font-size: 18px;
+}
+
+.btn__content {
+    display: flex;
 }

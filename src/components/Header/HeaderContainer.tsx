@@ -16,6 +16,8 @@ type MapStatePropsType = {
     searchResults: Array<TUserModel>
     isSearchFetching: boolean
     searchString: string
+    userName: string | null
+    userStatus: string | null
 }
 
 type MapDispatchPropsType = {
@@ -45,6 +47,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     searchResults: state.search.searchItems,
     isSearchFetching: state.search.isSearchFetching,
     searchString: state.search.searchString,
+    userName: state.auth.login,
+    userStatus: state.auth.status
 });
 
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,

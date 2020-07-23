@@ -7,10 +7,11 @@ import {authApi} from "../api/auth-api";
 import {securityApi} from "../api/security-api";
 import {ResultCodesEnum, ResultCodesForCaptchaEnum} from "../api/api";
 
-let initialState = {
+const initialState = {
     userId: null as number | null,
     login: null as string | null,
     email: null as string | null,
+    status: null as string | null,
     isAuth: false,
     photos: {} as PhotosType,
     captchaURL: null as string | null
@@ -21,8 +22,7 @@ const authReducer = (state = initialState, action: AuthActionsTypes): InitialSta
         case "PORTFOLIO/AUTH/SET_PROFILE_DATA":
             return {
                 ...state,
-                login: action.login,
-                photos: {...action.photos}
+                ...action.payload
             };
         case "PORTFOLIO/AUTH/SET_CAPTCHA_URL":
         case "PORTFOLIO/AUTH/SET_USER_DATA":
@@ -42,10 +42,9 @@ export const authActions = {
         type: 'PORTFOLIO/AUTH/SET_USER_DATA',
         payload: {userId, login, email, isAuth}
     } as const),
-    setProfileData: (photos: PhotosType, login: string | null) => ({
+    setProfileData: (photos: PhotosType, login: string | null, status: string | null) => ({
         type: 'PORTFOLIO/AUTH/SET_PROFILE_DATA',
-        photos,
-        login
+        payload: {photos, login, status}
     } as const),
     setCaptchaUrl: (captchaURL: string | null) => ({
         type: 'PORTFOLIO/AUTH/SET_CAPTCHA_URL',
@@ -56,9 +55,10 @@ export const authActions = {
 // thunks
 
 export const getOwnerProfileData = (userId: number): ThunkType => async (dispatch) => {
-    let data = await profileApi.getUserProfile(userId);
+    const data = await profileApi.getUserProfile(userId);
+    const status = await profileApi.getProfileStatus(userId);
 
-    dispatch(authActions.setProfileData(data.photos, data.fullName));
+    dispatch(authActions.setProfileData(data.photos, data.fullName, status));
 };
 
 

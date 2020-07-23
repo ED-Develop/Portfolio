@@ -13,6 +13,8 @@ type PropsType = {
     logout: () => void
     isAuth: boolean
     searchString: string
+    userName: string | null
+    userStatus: string | null
     isSearchFetching: boolean
     avatar: string | null
     toggleIsAsideCollapsed: () => void
@@ -26,11 +28,6 @@ type PropsType = {
 }
 
 const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, isAsideCollapsed, searchItems, searchResults, ...props}) => {
-    const onLogout = (e: React.MouseEvent) => {
-        e.preventDefault();
-        logout();
-    };
-
     return (
         <header className={style.header}>
             <Layout>
@@ -52,20 +49,16 @@ const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, isAsideC
                             />
                         </Col>
                         <Col span={6} offset={4}>
-                            <UserInfo avatar={avatar}/>
+                            <UserInfo
+                                avatar={avatar}
+                                userName={props.userName}
+                                userStatus={props.userStatus}
+                                logout={logout}
+                            />
                         </Col>
                     </Row>
                 </Content>
             </Layout>
-
-            {/*<div className={style.headerContainer}>
-
-                <div className={style.auth}>
-                    {isAuth
-                        ? <a href='#' onClick={onLogout} className={style.login}>Logout</a>
-                        : <NavLink className={style.login} to='/login'>Login</NavLink>}
-                </div>
-            </div>*/}
         </header>
     )
 };
