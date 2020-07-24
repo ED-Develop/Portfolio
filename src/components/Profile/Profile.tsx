@@ -1,13 +1,12 @@
-import React, {FC, useState} from 'react';
-import style from "./Profile.module.css";
-import Preloader from "../common/Preloader/Preloader";
+import React, {FC, useEffect} from 'react';
 import PostsContainer from "./Posts/PostsContainer";
-import ModalWindow from "../common/ModalWindow/ModalWindow";
 import {TProfileModel} from "../../types/types";
 import ProfileBanner from "./ProfileBanner/ProfileBanner";
 import ProfileTitle from "./ProfileTitle/ProfileTitle";
 import ProfileNavigation from "./Navigation/ProfileNavigation";
 import {Redirect, Route, Switch} from "react-router-dom";
+import UploadModal from "./ProfileBanner/UploadModal";
+import {TUploadModal} from "./ProfileContainer";
 
 type PropsType = {
     profile: TProfileModel
@@ -15,69 +14,49 @@ type PropsType = {
     userId: number | null
     status: string
     isAuth: boolean
-    isMyProfile: any
+    isMyProfile: boolean
     followed: boolean
-
-    uploadProfilePhoto: (photo: any) => void
+    uploadPhoto: (photo: File) => void
     startDialogs: (userId: number) => void
     updateProfileStatus: (status: string) => void
+    isUploadModal: 'avatar' | 'banner' | null
+    setIsUploadModal: (type: TUploadModal) => void
 }
 
-const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDialogs, ...props}) => {
-    let [isModal, setIsModal] = useState(false);
+const Profile: FC<PropsType> = ({profile, uploadPhoto, isUpload, startDialogs, ...props}) => {
+    const hideModalWindow = () => props.setIsUploadModal(null);
 
-    const showModalWindow = () => {
-        setIsModal(true);
-    };
-    const hideModalWindow = () => {
-        setIsModal(false);
-    };
-    const onPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            uploadProfilePhoto(e.target.files[0]);
-            setIsModal(false);
-        }
-    };
-
-    const onWriteMessage = () => {
-        if (props.userId) {
-            startDialogs(props.userId);
-        }
-    };
-
-    const modalWindow = (
-        <ModalWindow
-            hideModalWindow={hideModalWindow}
-            footerDescription={'If you are having trouble downloading, try choosing a smaller photo.'}
-            modalTitle={'Upload new photo'}
-        >
-            <div>
-                <div className={style.modalDescription}>
-                    <div>It will be easier for friends to recognize you if you upload your real photo.</div>
-                    <div>You can upload a JPG, GIF or PNG image.</div>
-                </div>
-                <div className={style.inputFile}>
-                    <input onChange={onPhotoSelected} type='file'/>
-                </div>
-            </div>
-        </ModalWindow>
-    );
-
-    const {photos, fullName} = profile;
-
-    if (!profile) return <Preloader/>;
+    useEffect(() => {
+        if (!isUpload) hideModalWindow();
+    }, [isUpload]);
 
     return (
         <div>
-            {isUpload && <Preloader/>}
-            {isModal && modalWindow}
+            {props.isUploadModal && (
+                <UploadModal
+                    isUpload={isUpload}
+                    handleOk={hideModalWindow}
+                    handleCancel={hideModalWindow}
+                    uploadPhoto={uploadPhoto}
+                    entity={props.isUploadModal}
+                >
+                    <p>
+                        {
+                            props.isUploadModal === 'avatar'
+                                ? 'It will be easier for friends to recognize you if you upload your real photo.'
+                                : 'Make your profile more interesting. Just upload banner photo.'
+                        }
+                    </p>
+                    <p>You can upload a JPG, GIF or PNG image.</p>
+                </UploadModal>
+            )}
             <ProfileBanner
-                avatar={photos.large}
-                showModalWindow={showModalWindow}
+                avatar={profile.photos.large}
                 isMyProfile={props.isMyProfile}
+                setIsUploadModal={props.setIsUploadModal}
             />
             <ProfileTitle
-                fullName={fullName}
+                fullName={profile.fullName}
                 status={props.status}
                 isMyProfile={props.isMyProfile}
                 updateProfileStatus={props.updateProfileStatus}
@@ -85,8 +64,10 @@ const Profile: FC<PropsType> = ({profile, uploadProfilePhoto, isUpload, startDia
             <ProfileNavigation isMyProfile={props.isMyProfile} followed={props.followed}/>
             <Switch>
                 <Redirect exact from='/profile' to='/profile/timeline'/>
-                <Route path='/profile/:userId?/timeline'
-                       render={() => <PostsContainer isMyProfile={props.isMyProfile}/>}/>
+                <Route
+                    path='/profile/:userId?/timeline'
+                    render={() => <PostsContainer isMyProfile={props.isMyProfile}/>}
+                />
             </Switch>
 
         </div>

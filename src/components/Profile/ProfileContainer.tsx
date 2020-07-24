@@ -8,8 +8,7 @@ import {
     updateProfileStatus,
     uploadProfilePhoto
 } from "../../redux/porfile/profile-reducer";
-import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
-import Preloader from "../common/Preloader/Preloader";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {startDialogs} from "../../redux/dialog-reducer";
 import {TProfileModel} from "../../types/types";
 import {AppStateType} from "../../redux/store";
@@ -41,17 +40,21 @@ type ParamsType = {
     userId?: string
 }
 
+export type TUploadModal = 'avatar' | 'banner' | null;
+
 type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<ParamsType>
 
 type StateType = {
     isMyProfile: boolean
-    userId: number | null
+    userId: number | null,
+    isUploadModal: TUploadModal
 }
 
 class ProfileContainer extends React.Component<PropsType, StateType> {
     state = {
         isMyProfile: false,
-        userId: this.props.match.params.userId ? +this.props.match.params.userId : this.props.myId
+        userId: this.props.match.params.userId ? +this.props.match.params.userId : this.props.myId,
+        isUploadModal: null
     };
 
     toggleIsMyProfile = () => {
@@ -64,6 +67,21 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
         this.props.getUserProfile(userId);
         this.props.getProfileStatus(userId);
     };
+
+    uploadPhoto = (file: File) => {
+        const key = this.state.isUploadModal === 'avatar'
+            ? 'uploadProfilePhoto'
+            : null;
+
+        if (key) this.props[key](file);
+    }
+
+    setIsUploadModal = (type: TUploadModal) => {
+        this.setState({
+            ...this.state,
+            isUploadModal: type
+        })
+    }
 
     componentDidMount() {
         if (!this.state.userId) {
@@ -106,7 +124,7 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
         if (this.props.isFetching || !this.props.profile) return null;
 
         return <Profile
-            uploadProfilePhoto={this.props.uploadProfilePhoto}
+            uploadPhoto={this.uploadPhoto}
             startDialogs={this.props.startDialogs}
             updateProfileStatus={this.props.updateProfileStatus}
             status={this.props.status}
@@ -116,6 +134,8 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
             profile={this.props.profile}
             isUpload={this.props.isUpload}
             followed={this.props.followed}
+            isUploadModal={this.state.isUploadModal}
+            setIsUploadModal={this.setIsUploadModal}
         />
     }
 }
@@ -132,7 +152,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     isSuccess: state.app.isSuccess
 });
 
-export default connect<MapStatePropsType, MapDispatchPropsType, unknown, AppStateType>(mapStateToProps, {
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
     getUserProfile,
     getProfileStatus,
     updateProfileDataSuccess,
