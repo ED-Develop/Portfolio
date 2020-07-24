@@ -20,7 +20,8 @@ import {NavLink} from "react-router-dom";
 import {Button} from "antd";
 
 type PropsType = {
-    aboutProfile: TAboutProfile
+    aboutProfile: TAboutProfile,
+    isMyProfile: boolean
 }
 
 type TAboutIcon = { [key in keyof Omit<TAboutProfile, 'contacts'>]: any };
@@ -31,7 +32,7 @@ type TContactIcon = {
     color: string
 }
 
-const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}}) => {
+const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}, isMyProfile}) => {
     const aboutIcons: TAboutIcon = {
         aboutMe: <UserOutlined/>,
         lookingForAJob: restAboutInfo.lookingForAJob ? <CheckOutlined/> : <CloseOutlined/>,
@@ -91,9 +92,11 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}}
                     })
                 }
             </div>
-            <NavLink to='/edit'>
-                <Button className='btn btn-light-primary'>Edit</Button>
-            </NavLink>
+            {isMyProfile && (
+                <NavLink to='/edit'>
+                    <Button className='btn btn-light-primary'>Edit</Button>
+                </NavLink>
+            )}
         </div>
     )
 };

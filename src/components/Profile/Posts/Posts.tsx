@@ -88,7 +88,7 @@ const Posts: FC<PropsType> = React.memo((
                 }
             </Col>
             <Col span={9}>
-                {props.aboutProfile && <About aboutProfile={props.aboutProfile}/>}
+                {props.aboutProfile && <About aboutProfile={props.aboutProfile} isMyProfile={isMyProfile}/>}
                 <Friends friends={props.friends} friendsCount={props.friendsCount}/>
             </Col>
         </Row>

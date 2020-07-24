@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
@@ -41,103 +41,77 @@ type ParamsType = {
 }
 
 export type TUploadModal = 'avatar' | 'banner' | null;
-
 type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<ParamsType>
 
-type StateType = {
-    isMyProfile: boolean
-    userId: number | null,
-    isUploadModal: TUploadModal
-}
+const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus, myId, ...props}) => {
+    const getUserId = () => {
+        const paramId = props.match.params.userId;
 
-class ProfileContainer extends React.Component<PropsType, StateType> {
-    state = {
-        isMyProfile: false,
-        userId: this.props.match.params.userId ? +this.props.match.params.userId : this.props.myId,
-        isUploadModal: null
+        return paramId && !isNaN(+paramId) ? +paramId : myId;
+    }
+
+    const [isMyProfile, setIsMyProfile] = useState(false);
+    const [userId, setUserId] = useState(getUserId());
+    const [isUploadModal, setIsUploadModal] = useState<TUploadModal>(null);
+
+    const loadProfile = (userId: number) => {
+        getUserProfile(userId);
+        getProfileStatus(userId);
     };
 
-    toggleIsMyProfile = () => {
-        if (this.state.userId === this.props.myId && !this.state.isMyProfile) {
-            this.setState({isMyProfile: true});
-        }
-    };
-
-    loadProfile = (userId: number) => {
-        this.props.getUserProfile(userId);
-        this.props.getProfileStatus(userId);
-    };
-
-    uploadPhoto = (file: File) => {
-        const key = this.state.isUploadModal === 'avatar'
+    const uploadPhoto = (file: File) => {
+        const key = isUploadModal === 'avatar'
             ? 'uploadProfilePhoto'
             : null;
 
-        if (key) this.props[key](file);
+        if (key) props[key](file);
     }
 
-    setIsUploadModal = (type: TUploadModal) => {
-        this.setState({
-            ...this.state,
-            isUploadModal: type
-        })
-    }
+    useEffect(() => {
+        if (!userId) props.history.push('/login');
 
-    componentDidMount() {
-        if (!this.state.userId) {
-            this.props.history.push('/login');
-        }
+        if (userId) loadProfile(userId);
 
-        if (this.state.userId) {
-            this.loadProfile(this.state.userId);
-        }
+        if (props.isUpdateSuccess) props.updateProfileDataSuccess(false);
+    }, []);
 
-        if (this.props.isUpdateSuccess) {
-            this.props.updateProfileDataSuccess(false);
-        }
-    };
+    useEffect(() => {
+        if (userId) loadProfile(userId);
+    }, [userId]);
 
-    componentDidUpdate(prevProps: PropsType, prevState: StateType) {
-        //load new profile
-        if (prevState.userId !== this.state.userId && this.state.userId) {
-            this.loadProfile(this.state.userId);
-        }
+    useEffect(() => {
+        setIsMyProfile(userId === myId);
+    }, [userId, myId]);
 
-        //determine whose profile it is
-        this.toggleIsMyProfile();
+    useEffect(() => {
+        if (isMyProfile && !props.isAuth) props.history.push('/login');
+    }, [isMyProfile, props.isAuth]);
 
-        // if logout, redirect to login
-        if (this.state.isMyProfile && !this.props.isAuth) {
-            this.props.history.push('/login');
-        }
-        //change state if browser address bar changed
-        if (prevProps.match.params.userId !== this.props.match.params.userId) {
-            this.setState({
-                userId: this.props.match.params.userId ? +this.props.match.params.userId
-                    : this.props.myId
-            });
-        }
-    }
+    useEffect(() => {
+        setUserId(getUserId());
+    }, [props.match.params.userId]);
 
-    render() {
-        if (this.props.isSuccess) return <Redirect to={`/messages/${this.state.userId}`}/>;
-        if (this.props.isFetching || !this.props.profile) return null;
+    useEffect(() => {
+        if (!props.isUpload) setIsUploadModal(null);
+    }, [props.isUpload]);
 
-        return <Profile
-            uploadPhoto={this.uploadPhoto}
-            startDialogs={this.props.startDialogs}
-            updateProfileStatus={this.props.updateProfileStatus}
-            status={this.props.status}
-            isAuth={this.props.isAuth}
-            userId={this.state.userId}
-            isMyProfile={this.state.isMyProfile}
-            profile={this.props.profile}
-            isUpload={this.props.isUpload}
-            followed={this.props.followed}
-            isUploadModal={this.state.isUploadModal}
-            setIsUploadModal={this.setIsUploadModal}
-        />
-    }
+    if (props.isSuccess) return <Redirect to={`/messages/${userId}`}/>;
+    if (props.isFetching || !props.profile) return null;
+
+    return <Profile
+        uploadPhoto={uploadPhoto}
+        startDialogs={props.startDialogs}
+        updateProfileStatus={props.updateProfileStatus}
+        status={props.status}
+        isAuth={props.isAuth}
+        userId={userId}
+        isMyProfile={isMyProfile}
+        profile={props.profile}
+        isUpload={props.isUpload}
+        followed={props.followed}
+        isUploadModal={isUploadModal}
+        setIsUploadModal={setIsUploadModal}
+    />
 }
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({

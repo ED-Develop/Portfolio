@@ -26,10 +26,6 @@ type PropsType = {
 const Profile: FC<PropsType> = ({profile, uploadPhoto, isUpload, startDialogs, ...props}) => {
     const hideModalWindow = () => props.setIsUploadModal(null);
 
-    useEffect(() => {
-        if (!isUpload) hideModalWindow();
-    }, [isUpload]);
-
     return (
         <div>
             {props.isUploadModal && (
