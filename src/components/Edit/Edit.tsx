@@ -1,7 +1,7 @@
 import React, {Component, ComponentType} from 'react';
 import style from './Edit.module.css';
 import {connect} from "react-redux";
-import {getUserProfile, updateProfileData} from "../../redux/porfile/profile-reducer";
+import {getUserProfile, updateProfileData} from "../../redux/profile/profile-reducer";
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";

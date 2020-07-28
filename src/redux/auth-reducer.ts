@@ -1,4 +1,3 @@
-import {appActions} from "./app-reducer";
 import {FormAction, stopSubmit} from "redux-form";
 import {LoginFormData, PhotosType} from "../types/types";
 import {CommonThunkType, InferActionsTypes} from "./store";
@@ -6,6 +5,7 @@ import {profileApi} from "../api/profile-api";
 import {authApi} from "../api/auth-api";
 import {securityApi} from "../api/security-api";
 import {ResultCodesEnum, ResultCodesForCaptchaEnum} from "../api/api";
+import {commonThunkHandler} from "./thunk-handler";
 
 const initialState = {
     userId: null as number | null,
@@ -55,56 +55,67 @@ export const authActions = {
 // thunks
 
 export const getOwnerProfileData = (userId: number): ThunkType => async (dispatch) => {
-    const data = await profileApi.getUserProfile(userId);
-    const status = await profileApi.getProfileStatus(userId);
+    await commonThunkHandler(async () => {
+        const data = await profileApi.getUserProfile(userId);
+        const status = await profileApi.getProfileStatus(userId);
 
-    dispatch(authActions.setProfileData(data.photos, data.fullName, status));
+        dispatch(authActions.setProfileData(data.photos, data.fullName, status));
+    }, dispatch);
 };
 
-
 export const auth = (): ThunkType => async (dispatch) => {
-    let data = await authApi.authMe();
+    await commonThunkHandler(async () => {
+        const data = await authApi.authMe();
 
-    if (data.resultCode === ResultCodesEnum.Success) {
-        let {id, login, email} = data.data;
+        if (data.resultCode === ResultCodesEnum.Success) {
+            const {id, login, email} = data.data;
 
-        dispatch(getOwnerProfileData(id));
-        dispatch(authActions.setUserData(id, login, email, true));
-    }
+            dispatch(getOwnerProfileData(id));
+            dispatch(authActions.setUserData(id, login, email, true));
+        }
+
+        return data;
+    }, dispatch, true);
 };
 
 export const login = (formData: LoginFormData): ThunkType => async (dispatch) => {
-    dispatch(appActions.toggleIsFetching(true));
-    let data = await authApi.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
+    await commonThunkHandler(async () => {
+        const data = await authApi.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
 
-    if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(auth());
-    } else {
-        if (data.resultCode === ResultCodesForCaptchaEnum.IsCaptcha) {
-            dispatch(getCaptchaUrl());
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(auth());
         } else {
-            let message = data.messages ? data.messages : 'Some error';
+            if (data.resultCode === ResultCodesForCaptchaEnum.IsCaptcha) {
+                dispatch(getCaptchaUrl());
+            } else {
+                const message = data.messages ? data.messages : 'Some error';
 
-            dispatch(stopSubmit('login', {_error: message}));
+                dispatch(stopSubmit('login', {_error: message}));
+            }
         }
-    }
-    dispatch(authActions.setCaptchaUrl(null));
-    dispatch(appActions.toggleIsFetching(false));
+
+        dispatch(authActions.setCaptchaUrl(null));
+    }, dispatch, true);
 };
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let resultCode = await authApi.logout();
+    await commonThunkHandler(async () => {
+        const resultCode = await authApi.logout();
 
-    if (resultCode === ResultCodesEnum.Success) {
-        dispatch(authActions.setUserData(null, null, null, false));
-        dispatch({type: 'sda'})
-    }
+        if (resultCode === ResultCodesEnum.Success) {
+            dispatch(authActions.setUserData(null, null, null, false));
+        }
+
+        return {resultCode};
+    }, dispatch, true);
 };
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
-    let data = await securityApi.captcha();
+    await commonThunkHandler(async () => {
+        const data = await securityApi.captcha();
 
-    dispatch(authActions.setCaptchaUrl(data.url));
+        dispatch(authActions.setCaptchaUrl(data.url));
+    }, dispatch);
 };
 
 type InitialStateType = typeof initialState;

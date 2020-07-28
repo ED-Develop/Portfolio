@@ -1,10 +1,11 @@
 import {updateObjectInArray} from "../../utils/helpers";
-import {appActions, AppActionsTypes} from "../app-reducer";
+import {AppActionsTypes} from "../app-reducer";
 import {ArgumentTypes, TUserModel} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {Dispatch} from "redux";
 import {usersApi, UsersResponseType} from "../../api/users-api";
 import {ResultCodesEnum} from "../../api/api";
+import {commonThunkHandler} from "../thunk-handler";
 
 const initialState = {
     usersData: [] as Array<TUserModel>,
@@ -108,83 +109,90 @@ const getUsersFlow = async <F extends Function>(
 };
 
 export const getAllUsers = (count: number, currentPage: number): ThunkType => async (dispatch, getState) => {
-    dispatch(appActions.toggleIsFetching(true));
-    const peopleState = getState().people;
-    const paginationValues = new Map<number, number>();
+    await commonThunkHandler(async () => {
+        const peopleState = getState().people;
+        const paginationValues = new Map<number, number>();
 
-    if (!peopleState.paginationValues || count !== peopleState.count) {
-        let totalCount;
+        if (!peopleState.paginationValues || count !== peopleState.count) {
+            let totalCount;
 
-        if (!peopleState.totalCount) {
-            const data = await usersApi.getUsers(count, peopleState.currentPage);
-            totalCount = data.totalCount;
+            if (!peopleState.totalCount) {
+                const data = await usersApi.getUsers(count, peopleState.currentPage);
+                totalCount = data.totalCount;
 
-            dispatch(userActions.setTotalCount(data.totalCount));
-        } else {
-            totalCount = peopleState.totalCount
-        }
-
-        let index = 1;
-
-        for (let i = Math.floor(totalCount / count); i >= 0; i--) {
-            if (i === 0) {
-                paginationValues.set(index, 1);
+                dispatch(userActions.setTotalCount(data.totalCount));
             } else {
-                paginationValues.set(index, i);
+                totalCount = peopleState.totalCount
             }
 
-            index++;
+            let index = 1;
+
+            for (let i = Math.floor(totalCount / count); i >= 0; i--) {
+                if (i === 0) {
+                    paginationValues.set(index, 1);
+                } else {
+                    paginationValues.set(index, i);
+                }
+
+                index++;
+            }
+
+            dispatch(userActions.setPaginationValues(paginationValues));
         }
 
-        dispatch(userActions.setPaginationValues(paginationValues));
-    }
+        const loadedPage = peopleState.paginationValues && count === peopleState.count
+            ? peopleState.paginationValues.get(currentPage)
+            : paginationValues.get(currentPage);
 
-    const loadedPage = peopleState.paginationValues && count === peopleState.count
-        ? peopleState.paginationValues.get(currentPage)
-        : paginationValues.get(currentPage);
-
-    if (loadedPage) {
-        await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, loadedPage);
-        dispatch(userActions.setCurrentPage(currentPage));
-    }
-
-    dispatch(appActions.toggleIsFetching(false));
+        if (loadedPage) {
+            await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, loadedPage);
+            dispatch(userActions.setCurrentPage(currentPage));
+        }
+    }, dispatch);
 }
 
 export const getUsers = (count: number, currentPage: number): ThunkType => async (dispatch) => {
-    dispatch(appActions.toggleIsFetching(true));
-    await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, currentPage);
-    dispatch(appActions.toggleIsFetching(false));
-    dispatch(userActions.setCurrentPage(currentPage));
+    await commonThunkHandler(async () => {
+        await getUsersFlow<typeof usersApi.getUsers>(usersApi.getUsers, dispatch, count, currentPage);
+        dispatch(userActions.setCurrentPage(currentPage));
+    }, dispatch);
 };
 
 //todo combine this thunks
 
 export const getFriends = (count: number, currentPage?: number): ThunkType => async (dispatch) => {
-    dispatch(appActions.toggleIsFetching(true));
-    await getUsersFlow<typeof usersApi.getFriends>(usersApi.getFriends, dispatch, count, currentPage);
-    dispatch(appActions.toggleIsFetching(false));
-    if (currentPage) dispatch(userActions.setCurrentPage(currentPage)); //todo make currentPage required
+    await commonThunkHandler(async () => {
+        await getUsersFlow<typeof usersApi.getFriends>(usersApi.getFriends, dispatch, count, currentPage);
+
+        if (currentPage) dispatch(userActions.setCurrentPage(currentPage)); //todo make currentPage required
+    }, dispatch);
 };
 
-const followUnfollowFlow = async (apiMethod: (userId: number) => Promise<number>,
-                                  dispatch: Dispatch<UserActionsTypes>, userId: number,
-                                  actionCreator: (userId: number) => UserActionsTypes) => {
-    dispatch(userActions.toggleFollowingProgress(true, userId));
-    let resultCode = await apiMethod(userId);
+const followUnfollowFlow = async (
+    apiMethod: (userId: number) => Promise<number>,
+    dispatch: Dispatch,
+    userId: number,
+    actionCreator: (userId: number) => UserActionsTypes
+) => {
+    await commonThunkHandler(async () => {
+        dispatch(userActions.toggleFollowingProgress(true, userId));
+        const resultCode = await apiMethod(userId);
 
-    if (resultCode === ResultCodesEnum.Success) {
-        dispatch(actionCreator(userId));
-    }
-    dispatch(userActions.toggleFollowingProgress(false, userId));
+        if (resultCode === ResultCodesEnum.Success) {
+            dispatch(actionCreator(userId));
+        }
+        dispatch(userActions.toggleFollowingProgress(false, userId));
+
+        return {resultCode};
+    }, dispatch, true, true);
 };
 
 export const follow = (userId: number): ThunkType => async (dispatch) => {
-    return await followUnfollowFlow(usersApi.follow.bind(usersApi), dispatch, userId, userActions.followSuccess);
+    await followUnfollowFlow(usersApi.follow.bind(usersApi), dispatch, userId, userActions.followSuccess);
 };
 
 export const unFollow = (userId: number) => async (dispatch: any) => {
-    return await followUnfollowFlow(usersApi.unFollow.bind(usersApi), dispatch, userId, userActions.unFollowSuccess);
+    await followUnfollowFlow(usersApi.unFollow.bind(usersApi), dispatch, userId, userActions.unFollowSuccess);
 };
 
 export type TUsersInitialState = typeof initialState;

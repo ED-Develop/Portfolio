@@ -127,8 +127,8 @@ describe('Users Reducer: ', () => {
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(userActions.setUsers(users));
             expect(actions[2]).toEqual(userActions.setTotalCount(4));
-            expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
-            expect(actions[4]).toEqual(userActions.setCurrentPage(1));
+            expect(actions[3]).toEqual(userActions.setCurrentPage(1));
+            expect(actions[4]).toEqual(appActions.toggleIsFetching(false));
         });
 
         test('Get friends', async () => {
@@ -138,8 +138,8 @@ describe('Users Reducer: ', () => {
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(userActions.setUsers(users));
             expect(actions[2]).toEqual(userActions.setTotalCount(4));
-            expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
-            expect(actions[4]).toEqual(userActions.setCurrentPage(1));
+            expect(actions[3]).toEqual(userActions.setCurrentPage(1));
+            expect(actions[4]).toEqual(appActions.toggleIsFetching(false));
         });
 
         test('Get all users', async () => {

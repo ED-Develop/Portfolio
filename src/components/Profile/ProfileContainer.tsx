@@ -7,7 +7,7 @@ import {
     profileActions,
     updateProfileStatus,
     uploadProfilePhoto
-} from "../../redux/porfile/profile-reducer";
+} from "../../redux/profile/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {startDialogs} from "../../redux/dialog-reducer";
 import {TProfileModel} from "../../types/types";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Posts from "./Posts";
 import {connect} from "react-redux";
-import {getFirstName, getFriendsTitles} from "../../../redux/porfile/profile-selector";
+import {getFirstName, getFriendsTitles} from "../../../redux/profile/profile-selector";
 import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../../types/types";
 import {AppStateType} from "../../../redux/store";
 import {
@@ -25,7 +25,7 @@ import {DecoratedFormProps} from "redux-form/lib/reduxForm";
 import {PostsFormPropsType} from "./PostsForm/PostsForm";
 import {getAboutProfileInfo, TAboutProfile} from "../../../redux/timeline/timeline-selector";
 import {TFriendsTitle} from "../../../redux/users/users-selector";
-import {getFriends} from "../../../redux/porfile/profile-reducer";
+import {getFriends} from "../../../redux/profile/profile-reducer";
 
 const {removeUploadedFile} = timelineActions;
 
