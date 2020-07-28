@@ -22,11 +22,11 @@ const withTryCatch: TThunkHandler = (callback, dispatch) => async () => {
     try {
         return await callback();
     } catch (e) {
-        console.log(e);
+        dispatch(appActions.setGlobalError(e));
     }
 };
 
-const withResultCodeHandling: TThunkHandler = (callback, dispatch) => async () => {
+const withResultCodeHandling: TThunkHandler = (callback) => async () => {
     const data = await callback();
 
     if (data.resultCode && data.resultCode === ResultCodesEnum.Error) {

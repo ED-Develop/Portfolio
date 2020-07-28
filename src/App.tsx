@@ -6,8 +6,8 @@ import Preloader from "./components/common/Preloader/Preloader";
 import {appActions, initializeApp} from "./redux/app-reducer";
 import store, {AppStateType} from "./redux/store";
 import withSuspense from "./hoc/withSuspense";
-import ModalWindow from "./components/common/ModalWindow/ModalWindow";
 import MainRoutes from "./components/MainRoutes";
+import ErrorAlert from "./components/common/ErrorAlert/ErrorAlert";
 
 const Login = withSuspense(React.lazy(() => import ("./components/Login/Login")));
 
@@ -54,19 +54,11 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
     };
 
     render() {
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
-
-        const Modal = (
-            <ModalWindow modalTitle='Global Error' hideModalWindow={this.hideModalWindow}>
-                <p>Oops! Some error occurred, please check your Internet connection and try again.</p>
-            </ModalWindow>
-        );
+        if (!this.props.initialized) return <Preloader/>
 
         return (
             <div className="app-container">
-                {this.props.globalError && Modal}
+                {this.props.globalError && <ErrorAlert message={this.props.globalError.message}/>}
                 <Switch>
                     <Route path='/login' render={() => <Login/>}/>
                     <Route
