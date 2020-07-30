@@ -20,7 +20,7 @@ const ProfileStatus: FC<PropsType> = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        // props.updateProfileStatus(status);
+        props.updateProfileStatus(status);
     };
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setStatus(e.target.value);

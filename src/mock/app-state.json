@@ -15,5 +15,29 @@
     "totalCount": 15,
     "currentPage": 1,
     "count": 5
+  },
+  "profile": {
+    "profile": null,
+    "status": "",
+    "followed": false,
+    "isUpdateSuccess": false,
+    "friends": [],
+    "friendsCount": 0
+  },
+  "auth": {
+    "userId": null,
+    "login": null,
+    "email": null,
+    "status": null,
+    "isAuth": false,
+    "photos": {},
+    "captchaURL": null
+  },
+  "app": {
+    "initialized": false,
+    "isFetching": false,
+    "isUpload": false,
+    "globalError": null,
+    "isSuccess": false
   }
 }

@@ -24,7 +24,7 @@ const ProfileBanner: React.FC<PropsType> = ({bannerImg, avatar, setIsUploadModal
                 setIsUploadModal={setIsUploadModal}
                 isMyProfile={isMyProfile}
             />
-            {isMyProfile && <Button onClick={handleEdit}><CameraOutlined/>Edit</Button>}
+            {isMyProfile && <Button className={style.bannerBtn} onClick={handleEdit}><CameraOutlined/>Edit</Button>}
         </div>
     )
 };

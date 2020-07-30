@@ -5,7 +5,6 @@ import {getUserProfile, updateProfileData} from "../../redux/profile/profile-red
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
-import Preloader from "../common/Preloader/Preloader";
 import {TProfileModel} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 import EditForm from "./EditForm";
