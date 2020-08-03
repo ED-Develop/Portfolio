@@ -1,7 +1,6 @@
-import {appActions, AppActionsTypes} from "./app-reducer";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType, CommonThunkType, InferActionsTypes} from "./store";
-import {dialogsApi} from "../api/dialogs-api";
+import {appActions, AppActionsTypes} from "../app/app-reducer";
+import {CommonThunkType, InferActionsTypes} from "../store";
+import {dialogsApi} from "../../api/dialogs-api";
 
 const initialState = {
     dialogs: [] as Array<any>,

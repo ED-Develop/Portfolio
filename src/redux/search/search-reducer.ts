@@ -1,6 +1,6 @@
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {TUserModel} from "../../types/types";
-import {AppActionsTypes} from "../app-reducer";
+import {AppActionsTypes} from "../app/app-reducer";
 import {usersApi} from "../../api/users-api";
 import {storage} from "../../api/local-storage/local-storage";
 

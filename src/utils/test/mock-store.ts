@@ -2,7 +2,7 @@ import configureMockStore, {MockStoreEnhanced} from 'redux-mock-store';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {AppStateType, CommonThunkType} from "../../redux/store";
 import {AnyAction} from "redux";
-import appState from "../../mock/app-state.json";
+import appState from "../../__mock__/app-state.json";
 import {ArgumentTypes} from "../../types/types";
 
 type DispatchExts = ThunkDispatch<AppStateType, void, AnyAction>;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {logout} from "../../redux/auth-reducer";
+import {logout} from "../../redux/auth/auth-reducer";
 import {AppStateType} from "../../redux/store";
 import {cashSelectedItem, restoreSearchList, searchActions, searchItems} from "../../redux/search/search-reducer";
 import {TUserModel} from "../../types/types";

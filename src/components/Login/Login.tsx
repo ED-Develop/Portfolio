@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import style from './Login.module.css';
 import LoginReduxForm from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
-import {auth, login} from "../../redux/auth-reducer";
+import {auth, login} from "../../redux/auth/auth-reducer";
 import {Redirect} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../redux/store";

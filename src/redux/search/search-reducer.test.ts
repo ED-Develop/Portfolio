@@ -10,7 +10,7 @@ import {usersApi, UsersResponseType} from "../../api/users-api";
 import {configureActions, mockStore} from "../../utils/test/mock-store";
 import {storage} from "../../api/local-storage/local-storage";
 import {TUserModel} from "../../types/types";
-import appState from '../../mock/app-state.json';
+import appState from '../../__mock__/app-state.json';
 
 jest.mock('../../api/users-api');
 jest.mock('../../api/local-storage/local-storage');
