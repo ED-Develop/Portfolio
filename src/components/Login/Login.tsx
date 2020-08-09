@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import style from './Login.module.css';
-import LoginReduxForm from "./LoginForm/LoginForm";
 import {connect} from "react-redux";
 import {auth, login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../redux/store";
 import {LoginFormData} from "../../types/types";
+import {Banner} from "./Banner/Banner";
+import {Layout} from "antd";
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -25,32 +25,12 @@ const Login: FC<PropsType> = ({login, isAuth, isFetching, captchaURL}) => {
         login(formData);
     };
 
-    if (isAuth) {
-        return <Redirect to='/'/>
-    }
+    if (isAuth) return <Redirect to='/'/>;
+
     return (
-        <div className={style.container}>
-            {isFetching && <Preloader/>}
-            <div className={style.wrapper}>
-                <div>
-                    <div className={style.description}>
-                        <h1>Find a cool job!!!</h1>
-                        <p>Portfolio is a social network that helps you get a job.</p>
-                        <p>So what are you waiting for? Start now.</p>
-                    </div>
-                </div>
-                <div>
-                    <div className={style.form}>
-                        <h3>Login</h3>
-                        <p>Log into your account</p>
-                        <LoginReduxForm captchaURL={captchaURL} onSubmit={onSubmit}/>
-                    </div>
-                    <div className={style.form_background}>
-                        <div>Login</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Layout className={style.container}>
+            <Banner/>
+        </Layout>
     )
 };
 
@@ -60,5 +40,5 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     captchaURL: state.auth.captchaURL
 });
 
-export default connect<MapStatePropsType, MapDispatchPropsType, any, AppStateType>(mapStateToProps,
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
     {login, auth})(Login);

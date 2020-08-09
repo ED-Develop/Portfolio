@@ -1,9 +1,8 @@
 .container {
-    background: linear-gradient(to right, rgba(0,0,0, 0.7) , rgba(0,0,0, 0.7)), url(https://g1.dcdn.lt/images/pix/programisiai-atakuoja-74631562.jpg) fixed no-repeat;
-    background-size: 100% 100%;
-    min-height: 900px;
-    padding-top: 50px;
+    max-width: 100vw;
+    max-height: 100vh;
 }
+
 .wrapper {
     max-width: 1200px;
     width: 100%;
@@ -12,14 +11,16 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));;
 }
+
 .wrapper > div {
     padding-top: 0.1px;
     position: relative;
 }
+
 .form_background {
     width: 85%;
     height: 390px;
-    background: linear-gradient(to right, rgba(255,255,255, 0.2) , rgba(255,255,255, 0.05));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
     position: absolute;
     left: -50px;
     top: 0;
@@ -30,6 +31,7 @@
     border-radius: 6px;
     z-index: 1;
 }
+
 .form_background div {
     transform: rotate(-90deg);
     width: 40px;
@@ -37,6 +39,7 @@
     font-size: 18px;
     color: white;
 }
+
 .form {
     width: 74%;
     height: 560px;
@@ -49,21 +52,25 @@
     z-index: 50;
     position: relative;
 }
+
 .form h3 {
     color: #27aae1;
     font-size: 24px;
     font-weight: normal;
     margin: 20px 0 10px;
 }
+
 .form p {
     margin: 0 0 10px;
 }
+
 .description {
     width: 50%;
     margin: auto;
     margin-top: 30px;
     padding: 140px 0;
 }
+
 .description h1 {
     text-align: left;
     font-family: 'Oswald', sans-serif;
@@ -73,16 +80,62 @@
     .form {
         margin: auto;
     }
+
     .form_background {
         left: 0;
         right: 0;
         margin: auto;
     }
+
     .description {
         padding: 0;
         text-align: center;
     }
+
     .description h1 {
         text-align: center;
     }
+}
+
+.landing__banner {
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.logo {
+    margin-bottom: 15px;
+}
+
+.logo img {
+    width: 140px;
+    height: 32px;
+}
+
+.title {
+    max-width: 500px;
+}
+
+.title h1 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav li {
+    margin-right: 15px;
+}
+
+.nav a {
+    color: rgba(255, 255, 255, .529411764706);
+    font-size: 15px;
 }
