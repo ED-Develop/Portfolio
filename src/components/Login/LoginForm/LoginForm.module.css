@@ -1,8 +1,13 @@
+.landing__form {
+    width: 100%;
+    margin-bottom: 24px;
+}
 
 div.field {
     width: 100%;
     margin-bottom: 10px;
 }
+
 .captcha input {
     padding: 6px 12px;
     border-radius: 30px;
@@ -10,42 +15,53 @@ div.field {
     box-sizing: border-box;
     outline: none;
 }
+
 .captcha {
     margin-bottom: 15px;
 }
+
 div.field input {
-    width: 100%;
-    padding: 6px 12px;
-    border-radius: 30px;
-    border: 1px solid #e0e0e0;
-    box-sizing: border-box;
+    height: 43px;
+    color: #666;
+    border-radius: 7px;
+    padding: 0 16px;
+    border: 1px solid #eceff5;
+    background: #F1F3F4;
     outline: none;
 }
+
+div.field input::placeholder {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+div.field input:hover {
+    border-color: #eceff5;
+}
+
+div.field input:focus {
+    border-color: #d0d0d0;
+    box-shadow: none;
+}
+
 div.remember {
-    color: #27aae1;
+    color: #6d6d6d;
     margin-bottom: 10px;
 }
-div.remember label{
+
+div.remember label {
     cursor: pointer;
 }
-div.remember input {
-    margin-right: 5px;
-    cursor: pointer;
-}
+
 .btn_login {
-    padding: 7px 25px;
-    background-color: #27aae1;
-    font-size: 16px;
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    outline: none;
-    box-shadow: 1px 1px 3px #27aae1;
+    width: 100%;
+    height: 45px;
 }
+
 .btn_login:hover {
     background-color: #26a0d7;
 }
+
 .summaryError {
     height: 50px;
     border: 1px solid red;

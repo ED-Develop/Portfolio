@@ -20,6 +20,7 @@
     "antd": "^4.4.1",
     "axios": "^0.19.2",
     "firebase": "^7.14.5",
+    "formik": "^2.1.5",
     "lodash": "^4.17.17",
     "react": "^16.13.1",
     "react-css-burger": "^0.2.0",

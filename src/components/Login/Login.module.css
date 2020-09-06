@@ -139,3 +139,38 @@
     color: rgba(255, 255, 255, .529411764706);
     font-size: 15px;
 }
+
+.sider {
+    background-color: #fff;
+}
+
+.landing__sider {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #545454;
+    padding: 0 29px;
+}
+
+.landing__sider h3 {
+    font-size: 31px;
+    font-weight: 600;
+    color: #545454;
+    text-align: center;
+}
+
+.landing__sider p {
+    font-size: 15px;
+    color: #6d6d6d;
+}
+
+.landing__sider a {
+    color: #377dff;
+}
+
+.landing__sider .forgetLink {
+    font-size: 15px;
+    color: #929292;
+}

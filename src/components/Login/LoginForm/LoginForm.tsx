@@ -1,9 +1,16 @@
 import React, {FC} from 'react';
 import style from './LoginForm.module.css';
-import {InjectedFormProps, reduxForm} from "redux-form";
-import {email, required} from "../../../utils/validators";
-import {createField, CreateFieldOptionsType, GetObjectsKeys, CustomInput} from "../../common/FormsControls/FormsControls";
-import {LoginFormData} from "../../../types/types";
+import {InjectedFormProps, reduxForm} from 'redux-form';
+import {email, required} from '../../../utils/validators';
+import {
+    createField,
+    CreateFieldOptionsType,
+    CustomCheckbox,
+    CustomInput,
+    GetObjectsKeys
+} from '../../common/FormsControls/FormsControls';
+import {LoginFormData} from '../../../types/types';
+import {Button} from 'antd';
 
 type PropsType = {
     captchaURL: string | null
@@ -11,14 +18,14 @@ type PropsType = {
 type LoginFormDataKeysType = GetObjectsKeys<LoginFormData>;
 
 const loginFieldsData: Array<CreateFieldOptionsType<LoginFormDataKeysType>> = [
-    {name: 'email', placeholder: 'Your Email', validators: [email, required], component: CustomInput},
-    {name: 'password', placeholder: 'Password', type: 'password', validators: [required], component: CustomInput},
-    {name: 'rememberMe', type: 'checkbox', label: 'remember me', labelContainer: true, component: 'input'}
+    {name: 'email', placeholder: 'Your email', validators: [email, required], component: CustomInput},
+    {name: 'password', placeholder: 'Your password', type: 'password', validators: [required], component: CustomInput},
+    {name: 'rememberMe', type: 'checkbox', label: ' Remember me', labelContainer: true, component: CustomCheckbox}
 ];
 
 const LoginForm: FC<PropsType & InjectedFormProps<LoginFormData, PropsType>> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className={style.landing__form}>
             {
                 loginFieldsData.map(field => {
                     return (
@@ -37,18 +44,20 @@ const LoginForm: FC<PropsType & InjectedFormProps<LoginFormData, PropsType>> = (
                     )
                 })
             }
-            {props.captchaURL && <div className={style.captcha}>
-                <img src={props.captchaURL} alt="captcha"/>
-                {createField<LoginFormDataKeysType>({
-                    component: CustomInput,
-                    name: "captcha",
-                    validators: [required],
-                    placeholder: 'Symbols from image',
-                    customClassName: 'captcha',
-                    type: 'text'
-                })}
-            </div>}
-            <button className={style.btn_login}>Login Now</button>
+            {
+                props.captchaURL && <div className={style.captcha}>
+                    <img src={props.captchaURL} alt="captcha"/>
+                    {createField<LoginFormDataKeysType>({
+                        component: CustomInput,
+                        name: 'captcha',
+                        validators: [required],
+                        placeholder: 'Symbols from image',
+                        customClassName: 'captcha',
+                        type: 'text'
+                    })}
+                </div>
+            }
+            <Button htmlType='submit' type='primary' className={style.btn_login}>Get Started</Button>
             {props.error && <div className={style.summaryError}>{props.error}</div>}
         </form>
     )
