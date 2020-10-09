@@ -1,11 +1,11 @@
 import {FormAction, stopSubmit} from 'redux-form';
-import {LoginFormData, PhotosType} from '../types/types';
-import {CommonThunkType, InferActionsTypes} from './store';
-import {profileApi} from '../api/profile-api';
-import {authApi} from '../api/auth-api';
-import {securityApi} from '../api/security-api';
-import {ResultCodesEnum, ResultCodesForCaptchaEnum} from '../api/api';
-import {commonThunkHandler} from './thunk-handler';
+import {LoginFormData, PhotosType} from '../../types/types';
+import {commonThunkHandler} from '../thunk-handler';
+import {profileApi} from '../../api/profile-api';
+import {authApi} from '../../api/auth-api';
+import {ResultCodesEnum, ResultCodesForCaptchaEnum} from '../../api/api';
+import {securityApi} from '../../api/security-api';
+import {CommonThunkType, InferActionsTypes} from '../store';
 
 const initialState = {
     userId: null as number | null,
