@@ -1,5 +1,5 @@
 import {updateObjectInArray} from "../../utils/helpers";
-import {AppActionsTypes} from "../app-reducer";
+import {AppActionsTypes} from "../app/app-reducer";
 import {ArgumentTypes, TUserModel} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {Dispatch} from "redux";

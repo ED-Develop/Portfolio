@@ -1,13 +1,13 @@
 import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profile/profile-reducer";
-import dialogReducer from "./dialog-reducer";
-import asideReducer from "./aside-reducer";
+import dialogReducer from "./dialogs/dialog-reducer";
+import asideReducer from "./aside/aside-reducer";
 import usersReducer from "./users/users-reducer";
-import authReducer from "./auth-reducer";
+import authReducer from "./auth/auth-reducer";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
-import appReducer from "./app-reducer";
-import projectsReducer from "./projects-reducer";
+import appReducer from "./app/app-reducer";
+import projectsReducer from "./project/projects-reducer";
 import timelineReducer from "./timeline/timeline-reducer";
 import searchReducer from "./search/search-reducer";
 

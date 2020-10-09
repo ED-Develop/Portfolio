@@ -8,7 +8,7 @@ import usersReducer, {
     userActions
 } from "./users-reducer";
 import {usersApi, UsersResponseType} from "../../api/users-api";
-import {appActions} from "../app-reducer";
+import {appActions} from "../app/app-reducer";
 import {configureActions, mockStore} from "../../utils/test/mock-store";
 import {ResultCodesEnum} from "../../api/api";
 import {user, users} from "../../utils/test/models";

@@ -1,4 +1,4 @@
-import {ProjectType} from "../types/types";
+import {ProjectType} from "../../types/types";
 
 const initialState = {
     projects: [

@@ -3,7 +3,7 @@ import './App.css';
 import {HashRouter, Route, Switch} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import Preloader from "./components/common/Preloader/Preloader";
-import {appActions, initializeApp} from "./redux/app-reducer";
+import {appActions, initializeApp} from "./redux/app/app-reducer";
 import store, {AppStateType} from "./redux/store";
 import withSuspense from "./hoc/withSuspense";
 import MainRoutes from "./components/MainRoutes";

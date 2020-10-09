@@ -9,7 +9,7 @@ import {
     uploadProfilePhoto
 } from "../../redux/profile/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {startDialogs} from "../../redux/dialog-reducer";
+import {startDialogs} from "../../redux/dialogs/dialog-reducer";
 import {TProfileModel} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 

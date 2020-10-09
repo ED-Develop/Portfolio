@@ -1,5 +1,5 @@
-import {auth} from "./auth-reducer";
-import {CommonThunkType, InferActionsTypes} from "./store";
+import {auth} from "../auth/auth-reducer";
+import {CommonThunkType, InferActionsTypes} from "../store";
 
 const initialState = {
     initialized: false,
