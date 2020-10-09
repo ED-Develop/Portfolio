@@ -1,10 +1,10 @@
 import React, {ComponentType} from 'react';
-import {dialogsActions, getDialogs, getMessages} from "../../redux/dialog-reducer";
+import {dialogsActions, getDialogs, getMessages} from "../../redux/dialogs/dialog-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import {appActions} from "../../redux/app-reducer";
+import {appActions} from "../../redux/app/app-reducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStateType} from "../../redux/store";

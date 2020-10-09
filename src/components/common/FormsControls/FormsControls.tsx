@@ -1,9 +1,9 @@
 import React, {ComponentType, FC, MutableRefObject, useEffect, useRef} from 'react';
 import style from './FormsControls.module.css';
-import {Field, WrappedFieldProps} from "redux-form";
-import {ValidatorsType} from "../../../utils/validators";
-import {Input} from 'antd';
-import TextArea from "antd/lib/input/TextArea";
+import {Field, WrappedFieldProps} from 'redux-form';
+import {ValidatorsType} from '../../../utils/validators';
+import {Checkbox, Input} from 'antd';
+import TextArea from 'antd/lib/input/TextArea';
 
 export type CustomFieldPropsType = {
     customClassName: string
@@ -64,8 +64,14 @@ export const Textarea: FC<CustomFieldPropsType & WrappedFieldProps> = ({
     )
 };
 
+export const CustomCheckbox: FC<WrappedFieldProps> = ({input, meta}) => {
+    return (
+        <Checkbox {...input}/>
+    )
+}
+
 export type CreateFieldOptionsType<ForkKeysType, P = {}, RE extends HTMLElement | null = null> = {
-    component: ComponentType<CustomFieldPropsType & WrappedFieldProps & P> | string,
+    component: ComponentType<any> | string,
     name: ForkKeysType,
     validators?: Array<ValidatorsType>,
     type?: string,

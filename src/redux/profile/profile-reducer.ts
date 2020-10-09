@@ -1,5 +1,5 @@
-import {appActions, AppActionsTypes} from "../app-reducer";
-import {authActions, AuthActionsTypes, getOwnerProfileData} from "../auth-reducer";
+import {appActions, AppActionsTypes} from "../app/app-reducer";
+import {authActions, AuthActionsTypes, getOwnerProfileData} from "../auth/auth-reducer";
 import {FormAction, stopSubmit} from "redux-form";
 import {PhotosType, TProfileModel, TUserModel} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";

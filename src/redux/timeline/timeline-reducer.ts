@@ -1,7 +1,7 @@
 import {TPostComment, TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../types/types";
 import {CommonThunkType, InferActionsTypes} from "../store";
 import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector} from "redux-form";
-import {AppActionsTypes} from "../app-reducer";
+import {AppActionsTypes} from "../app/app-reducer";
 import {
     postApi,
     postStorage,

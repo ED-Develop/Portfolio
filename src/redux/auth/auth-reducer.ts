@@ -1,11 +1,11 @@
-import {FormAction, stopSubmit} from "redux-form";
-import {LoginFormData, PhotosType} from "../types/types";
-import {CommonThunkType, InferActionsTypes} from "./store";
-import {profileApi} from "../api/profile-api";
-import {authApi} from "../api/auth-api";
-import {securityApi} from "../api/security-api";
-import {ResultCodesEnum, ResultCodesForCaptchaEnum} from "../api/api";
-import {commonThunkHandler} from "./thunk-handler";
+import {FormAction, stopSubmit} from 'redux-form';
+import {LoginFormData, PhotosType} from '../../types/types';
+import {commonThunkHandler} from '../thunk-handler';
+import {profileApi} from '../../api/profile-api';
+import {authApi} from '../../api/auth-api';
+import {ResultCodesEnum, ResultCodesForCaptchaEnum} from '../../api/api';
+import {securityApi} from '../../api/security-api';
+import {CommonThunkType, InferActionsTypes} from '../store';
 
 const initialState = {
     userId: null as number | null,
@@ -19,13 +19,13 @@ const initialState = {
 
 const authReducer = (state = initialState, action: AuthActionsTypes): InitialStateType => {
     switch (action.type) {
-        case "PORTFOLIO/AUTH/SET_PROFILE_DATA":
+        case 'PORTFOLIO/AUTH/SET_PROFILE_DATA':
             return {
                 ...state,
                 ...action.payload
             };
-        case "PORTFOLIO/AUTH/SET_CAPTCHA_URL":
-        case "PORTFOLIO/AUTH/SET_USER_DATA":
+        case 'PORTFOLIO/AUTH/SET_CAPTCHA_URL':
+        case 'PORTFOLIO/AUTH/SET_USER_DATA':
             return {
                 ...state,
                 ...action.payload
@@ -87,11 +87,11 @@ export const login = (formData: LoginFormData): ThunkType => async (dispatch) =>
         } else {
             if (data.resultCode === ResultCodesForCaptchaEnum.IsCaptcha) {
                 dispatch(getCaptchaUrl());
-            } else {
-                const message = data.messages ? data.messages : 'Some error';
-
-                dispatch(stopSubmit('login', {_error: message}));
             }
+
+            const message = data.messages ? data.messages : 'Some error';
+
+            dispatch(stopSubmit('login', {_error: message}));
         }
 
         dispatch(authActions.setCaptchaUrl(null));

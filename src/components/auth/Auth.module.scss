@@ -1,0 +1,85 @@
+.landing {
+  &__banner {
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  &__sider {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #545454;
+    padding: 0 29px;
+
+    h3 {
+      font-size: 31px;
+      font-weight: 600;
+      color: #545454;
+      text-align: center;
+    }
+
+    p {
+      font-size: 15px;
+      color: #6d6d6d;
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #377dff;
+    }
+
+    .forgetLink {
+      font-size: 15px;
+      color: #929292;
+    }
+  }
+
+  &__captcha {
+    margin-bottom: 24px;
+  }
+}
+
+
+.logo {
+  margin-bottom: 15px;
+}
+
+.logo img {
+  width: 140px;
+  height: 32px;
+}
+
+.title {
+  max-width: 500px;
+}
+
+.title h1 {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav li {
+  margin-right: 15px;
+}
+
+.nav a {
+  color: rgba(255, 255, 255, .529411764706);
+  font-size: 15px;
+}
+
+.sider {
+  background-color: #fff;
+}

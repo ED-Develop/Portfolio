@@ -1,0 +1,25 @@
+@import "src/scss/variables";
+
+.input {
+  height: 43px;
+  border-radius: 7px;
+  background-color: $input-bg;
+  padding: 0 16px;
+  border: 1px solid $input-br;
+  outline: none;
+  color: $input-tx;
+
+  &::placeholder {
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  &:hover {
+    border-color: $input-hover-br;
+  }
+
+  &:focus {
+    border-color: $input-focus-br;
+    box-shadow: none;
+  }
+}

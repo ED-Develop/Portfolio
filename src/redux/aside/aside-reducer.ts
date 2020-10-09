@@ -1,7 +1,7 @@
-import {TUserModel} from "../types/types";
+import {TUserModel} from "../../types/types";
 import {ThunkAction} from "redux-thunk";
-import {AppStateType, CommonThunkType, InferActionsTypes} from "./store";
-import {usersApi} from "../api/users-api";
+import {AppStateType, CommonThunkType, InferActionsTypes} from "../store";
+import {usersApi} from "../../api/users-api";
 
 const initialState = {
     friends: [] as Array<TUserModel>

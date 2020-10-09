@@ -2,7 +2,7 @@ import profileReducer, {getFriends, profileActions, TProfileInitialState} from "
 import {usersApi, UsersResponseType} from "../../api/users-api";
 import {users} from "../../utils/test/models";
 import {configureActions, mockStore} from "../../utils/test/mock-store";
-import {appActions} from "../app-reducer";
+import {appActions} from "../app/app-reducer";
 
 jest.mock('../../api/users-api');
 const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;

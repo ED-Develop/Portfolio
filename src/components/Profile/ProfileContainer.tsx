@@ -9,7 +9,7 @@ import {
     uploadProfilePhoto
 } from "../../redux/profile/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {startDialogs} from "../../redux/dialog-reducer";
+import {startDialogs} from "../../redux/dialogs/dialog-reducer";
 import {TProfileModel} from "../../types/types";
 import {AppStateType} from "../../redux/store";
 
@@ -68,7 +68,7 @@ const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus
     }
 
     useEffect(() => {
-        if (!userId) props.history.push('/login');
+        if (!userId) props.history.push('/auth');
 
         if (userId) loadProfile(userId);
 
@@ -84,7 +84,7 @@ const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus
     }, [userId, myId]);
 
     useEffect(() => {
-        if (isMyProfile && !props.isAuth) props.history.push('/login');
+        if (isMyProfile && !props.isAuth) props.history.push('/auth');
     }, [isMyProfile, props.isAuth]);
 
     useEffect(() => {

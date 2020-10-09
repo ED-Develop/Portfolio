@@ -20,7 +20,9 @@
     "antd": "^4.4.1",
     "axios": "^0.19.2",
     "firebase": "^7.14.5",
+    "formik": "^2.1.5",
     "lodash": "^4.17.17",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-css-burger": "^0.2.0",
     "react-dom": "^16.13.1",
@@ -38,7 +40,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
