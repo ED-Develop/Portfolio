@@ -1,5 +1,5 @@
 @import '~antd/dist/antd.css';
-@import './css/custom-antd.css';
+@import 'scss/custom-antd.css';
 
 * {
     padding: 0;

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {Transition} from 'react-transition-group';
 
 type PropsType = {

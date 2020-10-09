@@ -1,4 +1,4 @@
-import {UploadStatus} from "../redux/timeline/timeline-reducer";
+import {UploadStatus} from '../redux/timeline/timeline-reducer';
 
 export type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
 
@@ -98,3 +98,5 @@ export type TUploadedFile = {
     fileName: string
     fileUrl: string
 }
+
+export type TObject = { [key: string]: any };

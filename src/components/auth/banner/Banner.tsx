@@ -1,5 +1,5 @@
 import React, {CSSProperties} from 'react';
-import style from '../Login.module.css';
+import style from '../Auth.module.scss';
 import logo from '../../../assets/images/logo-light.png';
 import {Layout} from 'antd';
 import banner from '../../../assets/images/login-banner.jpg';

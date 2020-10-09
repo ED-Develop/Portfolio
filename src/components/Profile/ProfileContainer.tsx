@@ -68,7 +68,7 @@ const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus
     }
 
     useEffect(() => {
-        if (!userId) props.history.push('/login');
+        if (!userId) props.history.push('/auth');
 
         if (userId) loadProfile(userId);
 
@@ -84,7 +84,7 @@ const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus
     }, [userId, myId]);
 
     useEffect(() => {
-        if (isMyProfile && !props.isAuth) props.history.push('/login');
+        if (isMyProfile && !props.isAuth) props.history.push('/auth');
     }, [isMyProfile, props.isAuth]);
 
     useEffect(() => {
