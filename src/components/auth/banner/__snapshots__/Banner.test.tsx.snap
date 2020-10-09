@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner component:  Should renders correctly 1`] = `
+<div>
+  <main
+    class="ant-layout-content landing__banner"
+  >
+    <div
+      class="logo"
+    >
+      <img
+        alt="logo"
+        src="logo-light.png"
+      />
+    </div>
+    <div
+      class="title"
+    >
+      <h1>
+        Make your life more interesting with Socialite Social Network
+      </h1>
+    </div>
+    <ul
+      class="nav"
+    >
+      <li>
+        <a
+          aria-current="page"
+          class="active"
+          href="/"
+        >
+          About
+        </a>
+      </li>
+      <li>
+        <a
+          aria-current="page"
+          class="active"
+          href="/"
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+  </main>
+</div>
+`;

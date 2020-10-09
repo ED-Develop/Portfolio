@@ -19,21 +19,21 @@ export const Banner = () => {
 
     return (
         <Content className={style.landing__banner} style={styles}>
-                <div className={style.logo}>
-                    <img src={logo} alt="logo"/>
-                </div>
-                <div className={style.title}>
-                    <h1>Make your life more interesting with Socialite Social Network</h1>
-                </div>
-                <ul className={style.nav}>
-                    {
-                        links.map(link => (
-                            <li key={link.title}>
-                                <NavLink to={link.path}>{link.title}</NavLink>
-                            </li>
-                        ))
-                    }
-                </ul>
+            <div className={style.logo}>
+                <img src={logo} alt="logo"/>
+            </div>
+            <div className={style.title}>
+                <h1>Make your life more interesting with Socialite Social Network</h1>
+            </div>
+            <ul className={style.nav}>
+                {
+                    links.map(link => (
+                        <li key={link.title}>
+                            <NavLink to={link.path}>{link.title}</NavLink>
+                        </li>
+                    ))
+                }
+            </ul>
         </Content>
     )
 };

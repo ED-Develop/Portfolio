@@ -19,22 +19,23 @@ export type FieldPropsType = {
 const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldPropsType> => {
     const isError = (meta: WrappedFieldMetaProps) => meta.touched && meta.error ? 'error' : 'success';
 
-    return ({name, label, validate, ...props}) => {
+    const FieldComponent: React.FC<WrappedFieldProps & FieldPropsType> = ({meta, input, label, ...props}) => (
+        <Form.Item
+            label={label}
+            validateStatus={isError(meta)}
+            help={meta.touched && meta.error}
+        >
+            <Component {...input} {...props}/>
+        </Form.Item>
+    );
+
+    return ({name, validate, ...props}) => {
         return (
             <Field
                 name={name}
                 validate={validate}
-                component={
-                    ({meta, input}: WrappedFieldProps) => (
-                        <Form.Item
-                            label={label}
-                            validateStatus={isError(meta)}
-                            help={meta.touched && meta.error}
-                        >
-                            <Component {...input} {...props}/>
-                        </Form.Item>
-                    )
-                }
+                component={FieldComponent}
+                {...props}
             />
         )
     }

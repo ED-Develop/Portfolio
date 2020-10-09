@@ -1,15 +1,15 @@
 import React, {FC} from 'react';
-import style from './Auth.module.scss';
+import style from '../Auth.module.scss';
 import {useDispatch} from 'react-redux';
-import {login} from '../../redux/auth-reducer';
+import {login} from '../../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
-import {LoginFormData} from '../../types/types';
-import {Landing} from './landing/Landing';
-import {TField} from '../common/form/fieldsManager';
-import {email, required} from '../../utils/validators';
-import {AuthForm} from './form/AuthForm';
-import {ReduxFormInput} from '../common/form/redux-form-fields/ReduxFormFields';
-import {useSelector} from '../../hook/useSelector';
+import {LoginFormData} from '../../../types/types';
+import {Landing} from '../landing/Landing';
+import {TField} from '../../common/form/fieldsManager';
+import {email, required} from '../../../utils/validators';
+import {AuthForm} from '../form/AuthForm';
+import {ReduxFormInput} from '../../common/form/redux-form-fields/ReduxFormFields';
+import {useSelector} from '../../../hook/useSelector';
 
 const Login: FC = () => {
     const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const Login: FC = () => {
                 handleSubmit={handleSubmit}
                 formModel={formData}
                 formName='login'
+                btnText='Get Started'
             >
                 {
                     captchaURL && (

@@ -3,6 +3,8 @@
 .landing__form {
   width: 100%;
   margin-bottom: 24px;
+  padding-top: 24px;
+  position: relative;
 }
 
 .btn_login {
@@ -15,14 +17,8 @@
 }
 
 .summaryError {
-  height: 50px;
-  border: 1px solid red;
-  background-color: rgba(255, 0, 0, 0.7);
-  margin-top: 15px;
-  color: white;
-  box-sizing: border-box;
-  padding: 0 10px;
-  line-height: 50px;
-  border-radius: 6px;
-  box-shadow: 1px 1px 5px red;
+  color: $danger-tx;
+  position: absolute;
+  z-index: 100;
+  top: 0;
 }

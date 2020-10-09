@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import style from '../Auth.module.scss';
 import {Banner} from '../banner/Banner';
 import {Layout} from 'antd';
-import {LoginAside} from '../asside/Asside';
+import {LoginAside} from '../aside/Aside';
 
 export const Landing: FC = ({children}) => {
     return (

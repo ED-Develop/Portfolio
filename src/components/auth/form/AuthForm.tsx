@@ -8,19 +8,30 @@ type PropsType = {
     handleSubmit: (value: any) => void
     formModel: Array<TField<any>>
     formName: string
+    btnText?: string
 }
 
-export const AuthForm: React.FC<PropsType> = ({handleSubmit, formModel, children, formName}) => {
+export const AuthForm: React.FC<PropsType> = ({handleSubmit, formModel, children, formName, btnText}) => {
     return (
         <ReduxForm
             onSubmit={handleSubmit}
             className={style.landing__form}
             form={formName}
         >
-            {formModel.map(fieldsManager)}
-            {children}
-            <Button htmlType='submit' type='primary' className={style.btn_login}>Get Started</Button>
-            {/*{props.error && <div className={style.summaryError}>{props.error}</div>}*/}
+            {
+                ({error}) => {
+                    return (
+                        <>
+                            {error?.length && <div className={style.summaryError}>{error}!</div>}
+                            {formModel.map(fieldsManager)}
+                            {children}
+                            <Button htmlType='submit' type='primary' className={style.btn_login}>
+                                {btnText || 'Submit'}
+                            </Button>
+                        </>
+                    )
+                }
+            }
         </ReduxForm>
     )
 };

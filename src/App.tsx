@@ -9,7 +9,7 @@ import withSuspense from "./hoc/withSuspense";
 import MainRoutes from "./components/MainRoutes";
 import ErrorAlert from "./components/common/ErrorAlert/ErrorAlert";
 
-const Login = withSuspense(React.lazy(() => import ("./components/auth/Login")));
+const Login = withSuspense(React.lazy(() => import ("./components/auth/login/Login")));
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
