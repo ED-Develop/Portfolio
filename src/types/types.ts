@@ -1,4 +1,5 @@
 import {UploadStatus} from '../redux/timeline/timeline-reducer';
+import {ReactElement} from 'react';
 
 export type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
 
@@ -100,3 +101,9 @@ export type TUploadedFile = {
 }
 
 export type TObject = { [key: string]: any };
+
+export type TLink = {
+    title: string
+    href: string
+    icon?: string | ReactElement
+}

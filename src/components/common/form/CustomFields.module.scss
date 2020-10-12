@@ -1,13 +1,13 @@
-@import "src/scss/variables";
+@import "../../../scss/variables";
 
-.input {
-  height: 43px;
+.field {
   border-radius: 7px;
   background-color: $input-bg;
-  padding: 0 16px;
   border: 1px solid $input-br;
   outline: none;
   color: $input-tx;
+  padding-left: 16px;
+  padding-right: 16px;
 
   &::placeholder {
     font-size: 15px;
@@ -21,5 +21,20 @@
   &:focus {
     border-color: $input-focus-br;
     box-shadow: none;
+  }
+
+  &_input {
+    height: 43px;
+  }
+
+  &_textarea {
+    height: 86px !important;
+    resize: none;
+  }
+
+  &__label {
+    label {
+      font-size: 15px;
+    }
   }
 }

@@ -1,6 +1,6 @@
-import {AppStateType} from "../store";
-import {createSelector} from "reselect";
-import {TFriendsTitle} from "../users/users-selector";
+import {AppStateType} from '../store';
+import {createSelector} from 'reselect';
+import {TFriendsTitle} from '../users/users-selector';
 
 export const getFirstName = (state: AppStateType) => state.profile.profile
     && state.profile.profile.fullName.split(' ')[0];
@@ -14,3 +14,26 @@ export const getFriendsTitles = createSelector(getFriends, (users): Array<TFrien
         photos: user.photos
     }));
 });
+
+const getProfile = (state: AppStateType) => state.profile.profile;
+
+export const getProfileAbout = createSelector(getProfile, profile => {
+    if (profile) {
+        const {fullName, aboutMe, lookingForAJob, lookingForAJobDescription} = profile;
+
+        return {
+            fullName,
+            aboutMe,
+            lookingForAJob,
+            lookingForAJobDescription
+        }
+    }
+
+    return null;
+})
+
+export const getProfileLinks = createSelector(getProfile, profile => {
+    if (profile) return {...profile.contacts};
+
+    return null;
+})

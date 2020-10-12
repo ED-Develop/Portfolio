@@ -1,11 +1,11 @@
-import {appActions, AppActionsTypes} from "../app/app-reducer";
-import {authActions, AuthActionsTypes, getOwnerProfileData} from "../auth/auth-reducer";
-import {FormAction, stopSubmit} from "redux-form";
-import {PhotosType, TProfileModel, TUserModel} from "../../types/types";
-import {CommonThunkType, InferActionsTypes} from "../store";
-import {profileApi} from "../../api/profile-api";
-import {ResultCodesEnum} from "../../api/api";
-import {usersApi} from "../../api/users-api";
+import {appActions, AppActionsTypes} from '../app/app-reducer';
+import {authActions, AuthActionsTypes, getOwnerProfileData} from '../auth/auth-reducer';
+import {FormAction, stopSubmit} from 'redux-form';
+import {PhotosType, TProfileModel, TUserModel} from '../../types/types';
+import {CommonThunkType, InferActionsTypes} from '../store';
+import {profileApi} from '../../api/profile-api';
+import {ResultCodesEnum} from '../../api/api';
+import {usersApi} from '../../api/users-api';
 
 const initialState = {
     profile: null as TProfileModel | null,
@@ -18,17 +18,17 @@ const initialState = {
 
 const profileReducer = (state = initialState, action: ProfileActionsTypes): TProfileInitialState => {
     switch (action.type) {
-        case "PORTFOLIO/PROFILE/SET-USER-PROFILE":
-        case "PORTFOLIO/PROFILE/SET_PROFILE_STATUS":
-        case "PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS":
-        case "PORTFOLIO/PROFILE/SET_FRIENDS":
-        case "PORTFOLIO/PROFILE/SET_FRIENDS_COUNT":
+        case 'PORTFOLIO/PROFILE/SET-USER-PROFILE':
+        case 'PORTFOLIO/PROFILE/SET_PROFILE_STATUS':
+        case 'PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS':
+        case 'PORTFOLIO/PROFILE/SET_FRIENDS':
+        case 'PORTFOLIO/PROFILE/SET_FRIENDS_COUNT':
             return {
                 ...state,
                 ...action.payload
 
             };
-        case "PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS":
+        case 'PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS':
             return {
                 ...state,
                 profile: {
@@ -71,9 +71,14 @@ export const profileActions = {
 
 // thunks
 
-export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
+export const getUserProfile = (userId?: number): ThunkType => async (dispatch, getState) => {
     dispatch(appActions.toggleIsFetching(true));
-    let data = await profileApi.getUserProfile(userId);
+    const id = userId || getState().auth.userId;
+
+    if (!id) throw new Error('No user id');
+
+    const data = await profileApi.getUserProfile(id);
+
     dispatch(profileActions.setUserProfile(data));
     dispatch(appActions.toggleIsFetching(false));
 };
@@ -122,10 +127,10 @@ export const updateProfileData = (profileData: TProfileModel): ThunkType => asyn
             contacts: any
         }
 
-        let errors: Errors = {"contacts": {}};
+        let errors: Errors = {'contacts': {}};
 
         errorItems.forEach((item: string) => {
-            errors["contacts"][item] = 'Invalid url format';
+            errors['contacts'][item] = 'Invalid url format';
         });
         dispatch(stopSubmit('edit', errors));
     }
