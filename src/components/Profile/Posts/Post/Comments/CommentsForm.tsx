@@ -1,14 +1,14 @@
 import React, {useEffect, useRef} from "react";
 import style from './Comments.module.css';
 import defaultAvatar from "../../../../../assets/images/user.png";
-import {createField, GetObjectsKeys, Textarea} from "../../../../common/FormsControls/FormsControls";
+import {createField, GetObjectsKeys, Textarea} from "../../../../common/forms-controls/FormsControls";
 import {Button, Tooltip} from "antd";
 import {maxLength} from "../../../../../utils/validators";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {useClearFormAfterSubmit} from "../../../../../hook/useClearFormeAfterSubmit";
 import {useScrollToRef} from "../../../../../hook/useScrollToRef";
 import {CloseOutlined, EditOutlined} from "@ant-design/icons/lib";
-import EditingInfo from "../../../../common/FormsControls/EditingInfo/EditingInfo";
+import EditingInfo from "../../../../common/forms-controls/EditingInfo/EditingInfo";
 
 export type CommentsFormPropsType = {
     avatar: string

@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import Profile from "./Profile";
-import {connect} from "react-redux";
+import Profile from './Profile';
+import {connect} from 'react-redux';
 import {
     getProfileStatus,
     getUserProfile,
-    profileActions,
     updateProfileStatus,
     uploadProfilePhoto
-} from "../../redux/profile/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {startDialogs} from "../../redux/dialogs/dialog-reducer";
-import {TProfileModel} from "../../types/types";
-import {AppStateType} from "../../redux/store";
-
-const {updateProfileDataSuccess} = profileActions;
+} from '../../redux/profile/profile-reducer';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {startDialogs} from '../../redux/dialogs/dialog-reducer';
+import {TProfileModel} from '../../types/types';
+import {AppStateType} from '../../redux/store';
 
 type MapStatePropsType = {
     profile: TProfileModel | null
@@ -30,7 +27,6 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void
     getProfileStatus: (userId: number) => void
-    updateProfileDataSuccess: (isUpdateSuccess: boolean) => void
     updateProfileStatus: (status: string) => void
     uploadProfilePhoto: (photoFile: any) => void
     startDialogs: (userId: number) => void
@@ -71,8 +67,6 @@ const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus
         if (!userId) props.history.push('/auth');
 
         if (userId) loadProfile(userId);
-
-        if (props.isUpdateSuccess) props.updateProfileDataSuccess(false);
     }, []);
 
     useEffect(() => {
@@ -129,7 +123,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
     getUserProfile,
     getProfileStatus,
-    updateProfileDataSuccess,
     updateProfileStatus,
     uploadProfilePhoto,
     startDialogs

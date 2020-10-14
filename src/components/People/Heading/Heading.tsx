@@ -1,6 +1,6 @@
 import React from "react";
 import style from '../People.module.css';
-import TabsNavigation from "../../common/TabsNavigation/TabsNavigation";
+import TabsNavigation from "../../common/tabs-navigation/TabsNavigation";
 
 const BASE_URL = '/people';
 

@@ -8,6 +8,8 @@ import {ActionCreator} from 'redux';
 import {Selector} from 'reselect';
 import {AppStateType} from '../../../redux/store';
 import {useSelector} from '../../../hook/useSelector';
+import {ProcessStatusEnum} from '../../../types/types';
+import {useMessage} from '../../../hook/useMessage';
 
 type PropsType = {
     title: string
@@ -21,10 +23,17 @@ type PropsType = {
 export const SettingsForm: React.FC<PropsType> = ({title, formModel, formName, handleSubmit, action, selector}) => {
     const dispatch = useDispatch();
     const initialValues = useSelector(selector);
+    const processStatus = useSelector<ProcessStatusEnum | null>(state => state.app.processStatus);
 
     useEffect(() => {
         if (!initialValues && action) dispatch(action());
     }, []);
+
+    useMessage({
+        success: 'Your changes have been saved!',
+        loading: 'Saving',
+        error: 'Something went wrong'
+    }, processStatus);
 
     return (
         <ReduxForm

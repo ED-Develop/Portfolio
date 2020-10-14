@@ -4,7 +4,7 @@ import SearchForm, {TSearchFormData} from "./SearchForm";
 import SearchList from "./SearchList";
 import {TUserModel} from "../../../types/types";
 import {debounce} from 'lodash';
-import Fade from "../../common/Animations/Fade";
+import Fade from "../../common/animations/Fade";
 
 type PropsType = {
     searchResults: Array<TUserModel>

@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import defaultAvatar from '../../../../assets/images/user.png'
 import {TUserModel} from "../../../../types/types";
 import {Button, Col} from "antd";
-import PopUpMenu from "../../../common/PopUpMenu/PopUpMenu";
+import PopUpMenu from "../../../common/pop-up-menu/PopUpMenu";
 import {DeleteOutlined, MailOutlined, PlusOutlined} from "@ant-design/icons/lib";
 
 type PropsType = {

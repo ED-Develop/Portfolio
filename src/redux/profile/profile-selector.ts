@@ -36,4 +36,6 @@ export const getProfileLinks = createSelector(getProfile, profile => {
     if (profile) return {...profile.contacts};
 
     return null;
-})
+});
+
+

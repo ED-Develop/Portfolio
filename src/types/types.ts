@@ -18,7 +18,7 @@ export type PhotosType = {
 
 
 export type TProfileModel = {
-    userId: string
+    userId: string | number
     lookingForAJob: boolean
     lookingForAJobDescription: string
     aboutMe: string
@@ -28,14 +28,14 @@ export type TProfileModel = {
 };
 
 export type TContacts = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
+    github: string | null
+    vk: string | null
+    facebook: string | null
+    instagram: string | null
+    twitter: string | null
+    website: string | null
+    youtube: string | null
+    mainLink: string | null
 }
 
 export type TPostModel = {
@@ -106,4 +106,10 @@ export type TLink = {
     title: string
     href: string
     icon?: string | ReactElement
+}
+
+export enum ProcessStatusEnum {
+    Pending = 'loading',
+    Success = 'success',
+    Error = 'error'
 }

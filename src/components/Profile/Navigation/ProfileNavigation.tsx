@@ -2,7 +2,7 @@ import React from "react";
 import style from './ProfileNavigation.module.css';
 import {Button, Col, Row} from "antd";
 import {CloseOutlined, MessageOutlined, PlusOutlined} from "@ant-design/icons/lib";
-import TabsNavigation from "../../common/TabsNavigation/TabsNavigation";
+import TabsNavigation from "../../common/tabs-navigation/TabsNavigation";
 
 type PropsType = {
     isMyProfile: boolean

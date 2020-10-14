@@ -1,4 +1,4 @@
-import Preloader from "../components/common/Preloader/Preloader";
+import Preloader from "../components/common/preloader/Preloader";
 import React, {FC} from "react";
 
 const withSuspense = (Component: React.ComponentType) => {

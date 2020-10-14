@@ -1,0 +1,21 @@
+{
+  "aboutMe": "I'm a react developer",
+  "contacts": {
+    "facebook": "www.sda.com",
+    "website": null,
+    "vk": "https://vk.com/ed_shvetsov",
+    "twitter": null,
+    "instagram": "https://www.instagram.com/e.shvetsov_/",
+    "youtube": "",
+    "github": "https://github.com/ED-Develop/123",
+    "mainLink": null
+  },
+  "lookingForAJob": false,
+  "lookingForAJobDescription": "React JS",
+  "fullName": "Eduard Shvetsov",
+  "userId": 5046,
+  "photos": {
+    "small": "https://social-network.samuraijs.com/activecontent/images/users/5046/user-small.jpg?v=27",
+    "large": "https://social-network.samuraijs.com/activecontent/images/users/5046/user.jpg?v=27"
+  }
+}

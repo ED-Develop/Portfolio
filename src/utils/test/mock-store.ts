@@ -16,13 +16,12 @@ export const configureActions = <T extends Function, R = {}>(...args: ArgumentTy
     return async (
         mockedMethod: jest.MockInstance<any, any>,
         response: R,
-        store: TMockStore,
         thunk: (...args: ArgumentTypes<T>) => CommonThunkType<any>,
         actionsCount: number
     ) => {
         mockedMethod.mockReturnValue(Promise.resolve(response));
-        await store.dispatch(thunk(...args));
-        const actions = store.getActions();
+        await mockStore.dispatch(thunk(...args));
+        const actions = mockStore.getActions();
 
         expect(actions.length).toBe(actionsCount);
 

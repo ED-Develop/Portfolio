@@ -1,11 +1,13 @@
 import {appActions, AppActionsTypes} from '../app/app-reducer';
 import {authActions, AuthActionsTypes, getOwnerProfileData} from '../auth/auth-reducer';
-import {FormAction, stopSubmit} from 'redux-form';
+import {FormAction} from 'redux-form';
 import {PhotosType, TProfileModel, TUserModel} from '../../types/types';
 import {CommonThunkType, InferActionsTypes} from '../store';
 import {profileApi} from '../../api/profile-api';
 import {ResultCodesEnum} from '../../api/api';
 import {usersApi} from '../../api/users-api';
+import {commonThunkHandler} from '../thunk-handler';
+import {getOwnerId} from '../common';
 
 const initialState = {
     profile: null as TProfileModel | null,
@@ -20,7 +22,6 @@ const profileReducer = (state = initialState, action: ProfileActionsTypes): TPro
     switch (action.type) {
         case 'PORTFOLIO/PROFILE/SET-USER-PROFILE':
         case 'PORTFOLIO/PROFILE/SET_PROFILE_STATUS':
-        case 'PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS':
         case 'PORTFOLIO/PROFILE/SET_FRIENDS':
         case 'PORTFOLIO/PROFILE/SET_FRIENDS_COUNT':
             return {
@@ -55,10 +56,6 @@ export const profileActions = {
         type: 'PORTFOLIO/PROFILE/UPLOAD_PROFILE_PHOTO_SUCCESS',
         photos
     } as const),
-    updateProfileDataSuccess: (isUpdateSuccess: boolean) => ({
-        type: 'PORTFOLIO/PROFILE/UPDATE_PROFILE_DATA_SUCCESS',
-        payload: {isUpdateSuccess}
-    } as const),
     setFriends: (friends: Array<TUserModel>) => ({
         type: 'PORTFOLIO/PROFILE/SET_FRIENDS',
         payload: {friends}
@@ -72,21 +69,19 @@ export const profileActions = {
 // thunks
 
 export const getUserProfile = (userId?: number): ThunkType => async (dispatch, getState) => {
-    dispatch(appActions.toggleIsFetching(true));
-    const id = userId || getState().auth.userId;
+    commonThunkHandler(async () => {
+        const data = await profileApi.getUserProfile(userId || getOwnerId(getState));
 
-    if (!id) throw new Error('No user id');
-
-    const data = await profileApi.getUserProfile(id);
-
-    dispatch(profileActions.setUserProfile(data));
-    dispatch(appActions.toggleIsFetching(false));
+        dispatch(profileActions.setUserProfile(data));
+    }, dispatch);
 };
 
 export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
-    let status = await profileApi.getProfileStatus(userId);
+    await commonThunkHandler(async () => {
+        const status = await profileApi.getProfileStatus(userId);
 
-    dispatch(profileActions.setProfileStatus(status));
+        dispatch(profileActions.setProfileStatus(status));
+    }, dispatch, {visualization: false, resultCode: false});
 };
 export const updateProfileStatus = (status: string): ThunkType => async (dispatch) => {
     let resultCode = await profileApi.updateProfileStatus(status);
@@ -106,34 +101,22 @@ export const uploadProfilePhoto = (photoFile: File): ThunkType => async (dispatc
     dispatch(appActions.uploadInProgress(false));
 };
 
-export const updateProfileData = (profileData: TProfileModel): ThunkType => async (dispatch, getState) => {
-    dispatch(profileActions.updateProfileDataSuccess(false));
-    let response = await profileApi.updateProfileData(profileData);
+export const updateProfileData = (profileData: Partial<TProfileModel>): ThunkType => async (dispatch, getState) => {
+    await commonThunkHandler(async () => {
+        const oldProfile = getState().profile.profile;
 
-    if (response.resultCode === ResultCodesEnum.Success) {
-        let userId = getState().auth.userId;
+        if (!oldProfile) throw new Error('No existing profile');
 
-        if (userId) dispatch(getOwnerProfileData(userId));
+        const newProfile = {...oldProfile, ...profileData};
+        const response = await profileApi.updateProfileData(newProfile);
 
-        dispatch(profileActions.updateProfileDataSuccess(true));
-    } else {
-        let errorItems = response.messages.map((message: any) => {
-            let start = message.indexOf('>') + 1;
-            let item = message.slice(start, message.indexOf(')', start));
-            return item[0].toLowerCase() + item.slice(1);
-        });
-
-        type Errors = {
-            contacts: any
+        if (response.resultCode === ResultCodesEnum.Success) {
+            dispatch(profileActions.setUserProfile(newProfile));
+            dispatch(getOwnerProfileData());
         }
 
-        let errors: Errors = {'contacts': {}};
-
-        errorItems.forEach((item: string) => {
-            errors['contacts'][item] = 'Invalid url format';
-        });
-        dispatch(stopSubmit('edit', errors));
-    }
+        return response;
+    }, dispatch, {visualization: false, status: true});
 };
 
 export const getFriends = (): ThunkType => async (dispatch) => {

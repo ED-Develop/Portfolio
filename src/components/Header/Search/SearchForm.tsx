@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import style from "./Search.module.css";
-import {createField, CustomInput, GetObjectsKeys} from "../../common/FormsControls/FormsControls";
+import {createField, CustomInput, GetObjectsKeys} from "../../common/forms-controls/FormsControls";
 import {LoadingOutlined, SearchOutlined} from "@ant-design/icons/lib";
 import {InjectedFormProps, reduxForm} from "redux-form";
 

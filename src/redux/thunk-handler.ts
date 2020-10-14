@@ -1,14 +1,20 @@
-import {Dispatch} from "redux";
-import {appActions} from "./app/app-reducer";
-import {ResultCodesEnum} from "../api/api";
+import {Dispatch} from 'redux';
+import {appActions} from './app/app-reducer';
+import {ResultCodesEnum} from '../api/api';
+import {ProcessStatusEnum} from '../types/types';
 
 type TCommonThunkHandler = (
     callback: () => Promise<any>,
     dispatch: Dispatch,
-    isResultCode?: boolean,
-    withoutVisualization?: boolean
+    options?: TOptions
 ) => void;
 type TThunkHandler = (callback: () => Promise<any>, dispatch: Dispatch) => () => Promise<any>;
+
+type TOptions = {
+    resultCode?: boolean
+    visualization?: boolean
+    status?: boolean
+}
 
 const withProcessVisualization: TThunkHandler = (callback, dispatch) => async () => {
     dispatch(appActions.toggleIsFetching(true));
@@ -29,27 +35,61 @@ const withTryCatch: TThunkHandler = (callback, dispatch) => async () => {
 const withResultCodeHandling: TThunkHandler = (callback) => async () => {
     const data = await callback();
 
-    if (data.resultCode && data.resultCode === ResultCodesEnum.Error) {
+    if (data?.resultCode === ResultCodesEnum.Error) {
         console.log(data);
     }
 
     return data;
+};
+
+const withProcessStatus: TThunkHandler = (callback, dispatch) => async () => {
+    dispatch(appActions.changeProcessStatus(ProcessStatusEnum.Pending));
+    const data = await callback();
+    dispatch(appActions.changeProcessStatus(ProcessStatusEnum.Success));
+
+    return data;
 }
 
-export const commonThunkHandler: TCommonThunkHandler = async (callback, dispatch, isResultCode, withoutVisualization) => {
-    let withFetching;
+const defaultOptions = {
+    resultCode: true,
+    visualization: true,
+    status: false
+}
 
-    if (withoutVisualization) {
-        return await withTryCatch(callback, dispatch)();
-    } else {
-        if (isResultCode) {
-            const withResultCode = withResultCodeHandling(callback, dispatch);
+export const commonThunkHandler: TCommonThunkHandler = async (callback, dispatch, options = defaultOptions) => {
+    const {resultCode, visualization, status} = options;
+    let tryCatchBody = callback;
 
-            withFetching = withProcessVisualization(withResultCode, dispatch);
+    if (status) {
+        if (visualization) {
+            let withFetching;
+
+            if (resultCode) {
+                const withResultCode = withResultCodeHandling(callback, dispatch);
+
+                withFetching = withProcessVisualization(withResultCode, dispatch);
+            } else {
+                withFetching = withProcessVisualization(callback, dispatch);
+            }
+
+            tryCatchBody = withProcessStatus(withFetching, dispatch);
+
         } else {
-            withFetching = withProcessVisualization(callback, dispatch);
+            tryCatchBody = withProcessStatus(callback, dispatch);
         }
 
-        return await withTryCatch(withFetching, dispatch)();
+        return await withTryCatch(tryCatchBody, dispatch)();
+    } else {
+        if (visualization) {
+            if (resultCode) {
+                const withResultCode = withResultCodeHandling(callback, dispatch);
+
+                tryCatchBody = withProcessVisualization(withResultCode, dispatch);
+            } else {
+                tryCatchBody = withProcessVisualization(callback, dispatch);
+            }
+        }
     }
+
+    return await withTryCatch(tryCatchBody, dispatch)();
 }

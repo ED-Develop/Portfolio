@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import style from './Search.module.css';
 import {TUserModel} from "../../../types/types";
-import AvatarImage from "../../common/Helpers/AvatarImage";
+import AvatarImage from "../../common/helpers/AvatarImage";
 import {useOutsideClick} from "../../../hook/useOutsideClick";
 import {NavLink} from "react-router-dom";
 import {debounce} from "lodash";

@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Comments.module.css";
-import PopUpMenu from "../../../../common/PopUpMenu/PopUpMenu";
+import PopUpMenu from "../../../../common/pop-up-menu/PopUpMenu";
 import {BugOutlined, DeleteOutlined, EditOutlined, LikeOutlined} from "@ant-design/icons/lib";
 import {Comment} from "antd";
 import {TPostComment} from "../../../../../types/types";

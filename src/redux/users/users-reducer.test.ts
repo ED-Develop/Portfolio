@@ -122,7 +122,7 @@ describe('Users Reducer: ', () => {
 
         test('Get users', async () => {
             const getActions = configureActions<typeof getUsers, any>(4, 1);
-            const actions = await getActions(usersApiMock.getUsers, response, mockStore, getUsers, 5);
+            const actions = await getActions(usersApiMock.getUsers, response, getUsers, 5);
 
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(userActions.setUsers(users));
@@ -133,7 +133,7 @@ describe('Users Reducer: ', () => {
 
         test('Get friends', async () => {
             const getActions = configureActions<typeof getFriends, any>(1, 1);
-            const actions = await getActions(usersApiMock.getFriends, response, mockStore, getFriends, 5);
+            const actions = await getActions(usersApiMock.getFriends, response, getFriends, 5);
 
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(userActions.setUsers(users));
@@ -144,7 +144,7 @@ describe('Users Reducer: ', () => {
 
         test('Get all users', async () => {
             const getActions = configureActions<typeof getAllUsers>(4, 1);
-            const actions = await getActions(usersApiMock.getUsers, response, mockStore, getAllUsers, 7);
+            const actions = await getActions(usersApiMock.getUsers, response, getAllUsers, 7);
 
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(userActions.setTotalCount(4));
@@ -160,7 +160,7 @@ describe('Users Reducer: ', () => {
 
             test('Follow', async () => {
                 const getActions = configureActions<typeof follow>(1);
-                const actions = await getActions(usersApiMock.follow, resultCode, mockStore, follow, 3);
+                const actions = await getActions(usersApiMock.follow, resultCode, follow, 3);
 
                 expect(actions[0]).toEqual(userActions.toggleFollowingProgress(true, 1));
                 expect(actions[1]).toEqual(userActions.followSuccess(1));
@@ -169,7 +169,7 @@ describe('Users Reducer: ', () => {
 
             test('Un follow', async () => {
                 const getActions = configureActions<typeof unFollow>(1);
-                const actions = await getActions(usersApiMock.unFollow, resultCode, mockStore, unFollow, 3);
+                const actions = await getActions(usersApiMock.unFollow, resultCode, unFollow, 3);
 
                 expect(actions[0]).toEqual(userActions.toggleFollowingProgress(true, 1));
                 expect(actions[1]).toEqual(userActions.unFollowSuccess(1));

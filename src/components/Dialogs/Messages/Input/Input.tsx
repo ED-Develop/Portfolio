@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import style from './Input.module.css'
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, GetObjectsKeys, Textarea} from "../../../common/FormsControls/FormsControls";
+import {createField, GetObjectsKeys, Textarea} from "../../../common/forms-controls/FormsControls";
 import {maxLength} from "../../../../utils/validators";
 import defaultAvatar from '../../../../assets/images/user.png';
 

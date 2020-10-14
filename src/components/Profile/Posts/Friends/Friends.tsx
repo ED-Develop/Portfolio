@@ -2,7 +2,7 @@ import React from "react";
 import style from './Friends.module.css';
 import {Affix, Button, Col, Row} from "antd";
 import {TFriendsTitle} from "../../../../redux/users/users-selector";
-import AvatarImage from "../../../common/Helpers/AvatarImage";
+import AvatarImage from "../../../common/helpers/AvatarImage";
 import {NavLink} from "react-router-dom";
 import {formatName} from "../../../../utils/helpers";
 

@@ -1,9 +1,13 @@
 import React from 'react';
 import {SettingsForm} from '../form/SettingsForm';
 import {TField} from '../../common/form/fieldsManager';
-import {required} from '../../../utils/validators';
+import {maxLength, required} from '../../../utils/validators';
 import {getProfileAbout} from '../../../redux/profile/profile-selector';
-import {getUserProfile} from '../../../redux/profile/profile-reducer';
+import {getUserProfile, updateProfileData} from '../../../redux/profile/profile-reducer';
+import {useDispatch} from 'react-redux';
+import {FORM} from '../../../constants/forms';
+import {useSelector} from '../../../hook/useSelector';
+import {getFormValues} from 'redux-form';
 
 type TFormData = {
     fullName: string
@@ -13,6 +17,9 @@ type TFormData = {
 }
 
 export const SettingsAbout = () => {
+    const dispatch = useDispatch();
+    const formValue = useSelector(getFormValues(FORM.settingsAbout)) as TFormData;
+
     const formModel: Array<TField<TFormData>> = [
         {
             name: 'fullName',
@@ -25,7 +32,8 @@ export const SettingsAbout = () => {
             name: 'aboutMe',
             label: 'General Information',
             placeholder: 'Information about you',
-            type: 'textarea'
+            type: 'textarea',
+            validate: [maxLength(250)]
         },
         {
             name: 'lookingForAJob',
@@ -36,18 +44,18 @@ export const SettingsAbout = () => {
             name: 'lookingForAJobDescription',
             label: 'Job description',
             placeholder: 'Information about job of your dream',
-            type: 'textarea'
+            type: 'textarea',
+            disabled: !formValue?.lookingForAJob,
+            validate: [maxLength(250)]
         }
     ];
 
-    const handleSubmit = (value: TFormData) => {
-        console.log(value);
-    }
+    const handleSubmit = (value: TFormData) => dispatch(updateProfileData({...value}));
 
     return (
         <SettingsForm
             title='Contact Info'
-            formName='about'
+            formName={FORM.settingsAbout}
             formModel={formModel}
             handleSubmit={handleSubmit}
             action={getUserProfile}

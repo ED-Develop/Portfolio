@@ -6,6 +6,9 @@ import {authApi} from '../../api/auth-api';
 import {ResultCodesEnum, ResultCodesForCaptchaEnum} from '../../api/api';
 import {securityApi} from '../../api/security-api';
 import {CommonThunkType, InferActionsTypes} from '../store';
+import {getOwnerId} from '../common';
+import {TDeleteAccountFormData} from '../../components/settings/delete-account/DeleteAccount';
+import {FORM} from '../../constants/forms';
 
 const initialState = {
     userId: null as number | null,
@@ -54,13 +57,14 @@ export const authActions = {
 
 // thunks
 
-export const getOwnerProfileData = (userId: number): ThunkType => async (dispatch) => {
+export const getOwnerProfileData = (userId?: number): ThunkType => async (dispatch, getState) => {
     await commonThunkHandler(async () => {
-        const data = await profileApi.getUserProfile(userId);
-        const status = await profileApi.getProfileStatus(userId);
+        const id = userId || getOwnerId(getState);
+        const data = await profileApi.getUserProfile(id);
+        const status = await profileApi.getProfileStatus(id);
 
         dispatch(authActions.setProfileData(data.photos, data.fullName, status));
-    }, dispatch);
+    }, dispatch, {resultCode: false, visualization: false});
 };
 
 export const auth = (): ThunkType => async (dispatch) => {
@@ -75,7 +79,7 @@ export const auth = (): ThunkType => async (dispatch) => {
         }
 
         return data;
-    }, dispatch, true);
+    }, dispatch);
 };
 
 export const login = (formData: LoginFormData): ThunkType => async (dispatch) => {
@@ -89,13 +93,13 @@ export const login = (formData: LoginFormData): ThunkType => async (dispatch) =>
                 dispatch(getCaptchaUrl());
             }
 
-            const message = data.messages ? data.messages : 'Some error';
+            const message = data.messages ? data.messages : ['Some error'];
 
             dispatch(stopSubmit('login', {_error: message}));
         }
 
         dispatch(authActions.setCaptchaUrl(null));
-    }, dispatch, true);
+    }, dispatch);
 };
 
 export const logout = (): ThunkType => async (dispatch) => {
@@ -107,7 +111,7 @@ export const logout = (): ThunkType => async (dispatch) => {
         }
 
         return {resultCode};
-    }, dispatch, true);
+    }, dispatch);
 };
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
@@ -117,6 +121,16 @@ export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
         dispatch(authActions.setCaptchaUrl(data.url));
     }, dispatch);
 };
+
+export const deleteAccount = ({email}: TDeleteAccountFormData): ThunkType => async (dispatch, getState) => {
+    await commonThunkHandler(async () => {
+        if (email === getState().auth.email) {
+            dispatch(logout());
+        } else {
+            dispatch(stopSubmit(FORM.deleteAccount, {_error: ['Incorrect email']}));
+        }
+    }, dispatch);
+}
 
 type InitialStateType = typeof initialState;
 export type AuthActionsTypes = InferActionsTypes<typeof authActions>;
