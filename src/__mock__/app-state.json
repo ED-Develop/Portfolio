@@ -17,7 +17,27 @@
     "count": 5
   },
   "profile": {
-    "profile": null,
+    "profile": {
+      "aboutMe": null,
+      "contacts": {
+        "facebook": null,
+        "website": null,
+        "vk": null,
+        "twitter": null,
+        "instagram": null,
+        "youtube": null,
+        "github": null,
+        "mainLink": null
+      },
+      "lookingForAJob": false,
+      "lookingForAJobDescription": "React JS",
+      "fullName": "Eduard Shvetsov",
+      "userId": 5046,
+      "photos": {
+        "small": "https://social-network.samuraijs.com/activecontent/images/users/5046/user-small.jpg?v=27",
+        "large": "https://social-network.samuraijs.com/activecontent/images/users/5046/user.jpg?v=27"
+      }
+    },
     "status": "",
     "followed": false,
     "isUpdateSuccess": false,
@@ -25,7 +45,7 @@
     "friendsCount": 0
   },
   "auth": {
-    "userId": null,
+    "userId": 1,
     "login": null,
     "email": null,
     "status": null,

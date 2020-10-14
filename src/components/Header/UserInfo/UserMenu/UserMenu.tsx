@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import style from '../UserInfo.module.css';
-import AvatarImage from "../../../common/Helpers/AvatarImage";
+import AvatarImage from "../../../common/helpers/AvatarImage";
 import {PoweroffOutlined, RocketOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons/lib";
 import UserMenuItem, {TUserMenuItem} from "./UserMenuItem";
 import {Switch} from "antd";

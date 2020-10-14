@@ -6,7 +6,7 @@ import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {appActions} from "../../redux/app/app-reducer";
 import {Redirect, withRouter, RouteComponentProps} from "react-router-dom";
-import Preloader from "../common/Preloader/Preloader";
+import Preloader from "../common/preloader/Preloader";
 import {AppStateType} from "../../redux/store";
 
 const {addMessage} = dialogsActions;

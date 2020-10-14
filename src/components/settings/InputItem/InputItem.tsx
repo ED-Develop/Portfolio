@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import style from '../Edit.module.css';
 import {Field} from "redux-form";
-import {CustomInput} from "../../common/FormsControls/FormsControls";
+import {CustomInput} from "../../common/forms-controls/FormsControls";
 
 type PropsType = {
     name: string

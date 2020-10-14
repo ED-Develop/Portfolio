@@ -1,11 +1,18 @@
-import profileReducer, {getFriends, profileActions, TProfileInitialState} from "./profile-reducer";
-import {usersApi, UsersResponseType} from "../../api/users-api";
-import {users} from "../../utils/test/models";
-import {configureActions, mockStore} from "../../utils/test/mock-store";
-import {appActions} from "../app/app-reducer";
+import profileReducer, {getFriends, profileActions, TProfileInitialState, updateProfileData} from './profile-reducer';
+import {usersApi, UsersResponseType} from '../../api/users-api';
+import {users} from '../../utils/test/models';
+import {configureActions, mockStore} from '../../utils/test/mock-store';
+import {appActions} from '../app/app-reducer';
+import {profileApi} from '../../api/profile-api';
+import {BaseResponseType} from '../../api/api';
+import profile from '../../__mock__/profile.json'
+import {ProcessStatusEnum} from '../../types/types';
 
 jest.mock('../../api/users-api');
 const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
+
+jest.mock('../../api/profile-api');
+const profileApiMock = profileApi as jest.Mocked<typeof profileApi>;
 
 describe('Profile reducer', () => {
     let state: TProfileInitialState;
@@ -57,12 +64,29 @@ describe('Profile reducer', () => {
         })
 
         test('Get friends', async () => {
-            const actions = await configureActions()(usersApiMock.getFriends, response, mockStore, getFriends, 4);
+            const actions = await configureActions()(usersApiMock.getFriends, response, getFriends, 4);
 
             expect(actions[0]).toEqual(appActions.toggleIsFetching(true));
             expect(actions[1]).toEqual(profileActions.setFriends(users));
             expect(actions[2]).toEqual(profileActions.setFriendsCount(4));
             expect(actions[3]).toEqual(appActions.toggleIsFetching(false));
-        })
+        });
+
+        describe('UpdateProfileData', () => {
+            const response: BaseResponseType = {
+                data: {},
+                messages: [],
+                resultCode: 0
+            };
+
+            test('should success update profile data', async () => {
+                const actions = await configureActions<typeof updateProfileData>(profile)
+                (profileApiMock.updateProfileData, response, updateProfileData, 4);
+
+                expect(actions[0]).toEqual(appActions.changeProcessStatus(ProcessStatusEnum.Pending));
+                expect(actions[1]).toEqual(profileActions.setUserProfile(profile));
+                expect(actions[2]).toEqual(appActions.changeProcessStatus(ProcessStatusEnum.Success));
+            })
+        });
     });
 });

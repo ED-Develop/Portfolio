@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Post.module.css";
 import defaultAvatar from "../../../../assets/images/user.png";
-import PopUpMenu from "../../../common/PopUpMenu/PopUpMenu";
+import PopUpMenu from "../../../common/pop-up-menu/PopUpMenu";
 import {BugOutlined, DeleteOutlined, DisconnectOutlined, EditOutlined, ShareAltOutlined} from "@ant-design/icons/lib";
 
 type PropsType = {

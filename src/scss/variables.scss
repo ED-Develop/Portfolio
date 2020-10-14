@@ -2,6 +2,7 @@
 
 $input-bg: #f1f3f4;
 $btn-primary-hover-bg: #26a0d7;
+$link-gray-hover-bg: #ededed;
 
 //borders
 
@@ -9,7 +10,12 @@ $input-br: #eceff5;
 $input-hover-br: #eceff5;
 $input-focus-br: #d0d0d0;
 
+$separate-br: 1px solid #ebebee;
+
 //text colors
 
 $input-tx: #666;
 $danger-tx: #ff4d4f;
+$link-gray-tx: #474747;
+$link-active-tx: #1a73e8;
+$title-tx: #545454;

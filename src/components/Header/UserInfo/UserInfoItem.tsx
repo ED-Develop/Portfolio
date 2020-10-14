@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import style from "./UserInfo.module.css";
 import Dropdown from "./Dropdown";
-import Fade from "../../common/Animations/Fade";
+import Fade from "../../common/animations/Fade";
 
 type TContent = {
     Component: React.FC<any>

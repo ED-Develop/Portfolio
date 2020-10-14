@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import './App.css';
 import {HashRouter, Route, Switch} from "react-router-dom";
 import {connect, Provider} from "react-redux";
-import Preloader from "./components/common/Preloader/Preloader";
+import Preloader from "./components/common/preloader/Preloader";
 import {appActions, initializeApp} from "./redux/app/app-reducer";
 import store, {AppStateType} from "./redux/store";
 import withSuspense from "./hoc/withSuspense";
 import MainRoutes from "./components/MainRoutes";
-import ErrorAlert from "./components/common/ErrorAlert/ErrorAlert";
+import ErrorAlert from "./components/common/error-alert/ErrorAlert";
 
 const Login = withSuspense(React.lazy(() => import ("./components/auth/login/Login")));
 

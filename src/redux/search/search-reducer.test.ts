@@ -91,7 +91,7 @@ describe('Search reducer: ', () => {
         describe('Search items: ', () => {
             test('should set new items', async () => {
                 const getActions = configureActions<typeof searchItems>('test');
-                const actions = await getActions(usersApiMock.searchUsers, response, mockStore, searchItems, 6);
+                const actions = await getActions(usersApiMock.searchUsers, response, searchItems, 6);
 
                 expect(actions[0]).toEqual(searchActions.toggleIsSearchFetching(true));
                 expect(actions[1]).toEqual(searchActions.setSearchItems(users));
@@ -103,7 +103,7 @@ describe('Search reducer: ', () => {
 
             test('should push items to array', async () => {
                 const getActions = configureActions<typeof searchItems>('test', true);
-                const actions = await getActions(usersApiMock.searchUsers, response, mockStore, searchItems, 6);
+                const actions = await getActions(usersApiMock.searchUsers, response, searchItems, 6);
 
                 expect(actions[0]).toEqual(searchActions.toggleIsSearchFetching(true));
                 expect(actions[1]).toEqual(searchActions.pushSearchItems(users));
@@ -121,7 +121,7 @@ describe('Search reducer: ', () => {
 
             test('should dispatch correct actions', async () => {
                 const getActions = configureActions<typeof restoreSearchList>();
-                const actions = await getActions(storageMock, users, mockStore, restoreSearchList, 1);
+                const actions = await getActions(storageMock, users, restoreSearchList, 1);
 
                 expect(actions[0]).toEqual(searchActions.setSearchItems(users));
             });
@@ -140,14 +140,14 @@ describe('Search reducer: ', () => {
 
             test('shouldn\'t cash item if item exist', async () => {
                 const getActions = configureActions<typeof cashSelectedItem>(user);
-                await getActions(storageMock, users, mockStore, cashSelectedItem, 0);
+                await getActions(storageMock, users, cashSelectedItem, 0);
 
                 expect(storageMock).toHaveBeenCalledTimes(1);
             });
 
             test('should cash item', async () => {
                 const getActions = configureActions<typeof cashSelectedItem>({...user, id: 10});
-                await getActions(storageMock, [], mockStore, cashSelectedItem, 0);
+                await getActions(storageMock, [], cashSelectedItem, 0);
 
                 expect(storageMock).toHaveBeenNthCalledWith(1, 'social-network:searched');
                 expect(storageMock).toHaveBeenNthCalledWith(2, 'social-network:searched', expectedCash);
@@ -155,7 +155,7 @@ describe('Search reducer: ', () => {
 
             test('cash length should be not more 5', async () => {
                 const getActions = configureActions<typeof cashSelectedItem>({...user, id: 10});
-                await getActions(storageMock, users, mockStore, cashSelectedItem, 0);
+                await getActions(storageMock, users, cashSelectedItem, 0);
                 const cashedItems = storageMock.mock.calls[1][1] as Array<TUserModel>;
 
                 expect(cashedItems.length).toBe(5);

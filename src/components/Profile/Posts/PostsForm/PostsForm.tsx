@@ -1,15 +1,15 @@
 import React, {FC, useRef, useState} from 'react';
 import style from './PostForm.module.css';
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, GetObjectsKeys, Textarea} from "../../../common/FormsControls/FormsControls";
+import {createField, GetObjectsKeys, Textarea} from "../../../common/forms-controls/FormsControls";
 import {Button} from "antd";
 import s from "../Posts.module.css";
 import defaultAvatar from "../../../../assets/images/user.png";
-import UploadInput, {UploadInputPropsType} from "../../../common/FormsControls/UploadInput/UploadInput";
+import UploadInput, {UploadInputPropsType} from "../../../common/forms-controls/UploadInput/UploadInput";
 import {TPostContent, TUploadedFile} from "../../../../types/types";
 import {useClearFormAfterSubmit} from "../../../../hook/useClearFormeAfterSubmit";
 import {useScrollToRef} from "../../../../hook/useScrollToRef";
-import EditingInfo from "../../../common/FormsControls/EditingInfo/EditingInfo";
+import EditingInfo from "../../../common/forms-controls/EditingInfo/EditingInfo";
 
 export type PostsFormPropsType = {
     firstName: string | null

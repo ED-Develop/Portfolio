@@ -1,0 +1,23 @@
+@import "src/scss/variables";
+
+.modalForm {
+  font-weight: 600 !important;
+  font-size: 15px;
+
+  &__title {
+    font-weight: 700;
+    color: $title-tx;
+  }
+
+  &__close {
+    color: #000;
+
+    &:hover {
+      color: $title-tx;
+    }
+  }
+
+  &__btn {
+    font-weight: 600;
+  }
+}

@@ -184,7 +184,7 @@ const followUnfollowFlow = async (
         dispatch(userActions.toggleFollowingProgress(false, userId));
 
         return {resultCode};
-    }, dispatch, true, true);
+    }, dispatch, {visualization: false});
 };
 
 export const follow = (userId: number): ThunkType => async (dispatch) => {
