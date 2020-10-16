@@ -9,6 +9,7 @@ import {useDispatch} from 'react-redux';
 import {submit} from 'redux-form';
 import {FORM} from '../../../constants/forms';
 import {deleteAccount} from '../../../redux/auth/auth-reducer';
+import {url} from '../../../utils/routeManager';
 
 export type TDeleteAccountFormData = {
     email: string
@@ -30,7 +31,7 @@ export const DeleteAccount = () => {
     return (
         <Modal
             title={<h4 className={style.modalForm__title}>Please confirm account deleting</h4>}
-            closeIcon={<NavLink to='/settings' className={style.modalForm__close}><CloseOutlined/></NavLink>}
+            closeIcon={<NavLink to={url('settings')} className={style.modalForm__close}><CloseOutlined/></NavLink>}
             footer={<Button className={style.modalForm__btn} type='primary' onClick={handleClick}>Delete</Button>}
             visible
             centered

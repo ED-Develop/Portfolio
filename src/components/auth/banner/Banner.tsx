@@ -4,6 +4,7 @@ import logo from '../../../assets/images/logo-light.png';
 import {Layout} from 'antd';
 import banner from '../../../assets/images/login-banner.jpg';
 import {NavLink} from 'react-router-dom';
+import {url} from '../../../utils/routeManager';
 
 const {Content} = Layout;
 
@@ -13,8 +14,8 @@ export const Banner = () => {
     };
 
     const links = [
-        {path: '/', title: 'About'},
-        {path: '/', title: 'Contact'},
+        {path: url('base'), title: 'About'},
+        {path: url('base'), title: 'Contact'},
     ];
 
     return (

@@ -1,5 +1,6 @@
 export const FORM = {
     deleteAccount: 'deleteAccount',
     settingsAbout: 'settingsAbout',
-    socialLinks: 'socialLinks'
+    socialLinks: 'socialLinks',
+    search: 'search'
 };
