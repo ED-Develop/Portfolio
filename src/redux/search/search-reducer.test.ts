@@ -18,7 +18,7 @@ jest.mock('../../api/local-storage/local-storage');
 const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
 const storageMock = storage as jest.MockedFunction<typeof storage>;
 
-describe('Search reducer: ', () => {
+describe('search reducer: ', () => {
     let state: TSearchInitialState;
 
     beforeEach(() => {
@@ -88,7 +88,7 @@ describe('Search reducer: ', () => {
             storageMock.mockClear();
         });
 
-        describe('Search items: ', () => {
+        describe('search items: ', () => {
             test('should set new items', async () => {
                 const getActions = configureActions<typeof searchItems>('test');
                 const actions = await getActions(usersApiMock.searchUsers, response, searchItems, 6);

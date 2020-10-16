@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
-import {HashRouter, Route, Switch} from "react-router-dom";
-import {connect, Provider} from "react-redux";
-import Preloader from "./components/common/preloader/Preloader";
-import {appActions, initializeApp} from "./redux/app/app-reducer";
-import store, {AppStateType} from "./redux/store";
-import withSuspense from "./hoc/withSuspense";
-import MainRoutes from "./components/MainRoutes";
-import ErrorAlert from "./components/common/error-alert/ErrorAlert";
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {connect, Provider} from 'react-redux';
+import Preloader from './components/common/preloader/Preloader';
+import {appActions, initializeApp} from './redux/app/app-reducer';
+import store, {AppStateType} from './redux/store';
+import withSuspense from './hoc/withSuspense';
+import MainRoutes from './components/MainRoutes';
+import ErrorAlert from './components/common/error-alert/ErrorAlert';
+import {url} from './utils/routeManager';
 
-const Login = withSuspense(React.lazy(() => import ("./components/auth/login/Login")));
+const Login = withSuspense(React.lazy(() => import ('./components/auth/login/Login')));
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
@@ -60,9 +61,9 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
             <div className="app-container">
                 {this.props.globalError && <ErrorAlert message={this.props.globalError.message}/>}
                 <Switch>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Route path={url('login')} render={() => <Login/>}/>
                     <Route
-                        path='/'
+                        path={url('base')}
                         render={() => (
                             <MainRoutes
                                 isAsideCollapsed={this.state.isAsideCollapsed}
@@ -89,11 +90,11 @@ const AppConnected = connect<MapStatePropsType, MapDispatchPropsType, {}, AppSta
 
 const App: React.FC = () => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Provider store={store}>
                 <AppConnected/>
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
     )
 };
 

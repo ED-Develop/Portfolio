@@ -10,13 +10,14 @@ import {AuthForm} from '../form/AuthForm';
 import {ReduxFormInput} from '../../common/form/redux-form-fields/ReduxFormFields';
 import {useSelector} from '../../../hook/useSelector';
 import {login} from '../../../redux/auth/auth-reducer';
+import {url} from '../../../utils/routeManager';
 
 const Login: FC = () => {
     const dispatch = useDispatch();
     const isAuth = useSelector(state => state.auth.isAuth);
     const captchaURL = useSelector(state => state.auth.captchaURL);
 
-    if (isAuth) return <Redirect to='/'/>;
+    if (isAuth) return <Redirect to={url('base')}/>;
 
     const formData: Array<TField<LoginFormData>> = [
         {name: 'email', type: 'text', placeholder: 'Your email', validate: [email, required]},
@@ -31,7 +32,7 @@ const Login: FC = () => {
             <h3>Sign In</h3>
             <p>
                 Don't have an account.
-                <a href="https://social-network.samuraijs.com/signUp" target='_blank'> Sign Up</a>
+                <a href={url('sign-up')} target='_blank'> Sign Up</a>
             </p>
             <AuthForm
                 handleSubmit={handleSubmit}
@@ -54,7 +55,7 @@ const Login: FC = () => {
                     )
                 }
             </AuthForm>
-            <a className={style.forgetLink} target='_blank' href="https://social-network.samuraijs.com/login">
+            <a className={style.forgetLink} target='_blank' href={url('reset-password')}>
                 Forget your password
             </a>
         </Landing>

@@ -14,7 +14,7 @@ const usersApiMock = usersApi as jest.Mocked<typeof usersApi>;
 jest.mock('../../api/profile-api');
 const profileApiMock = profileApi as jest.Mocked<typeof profileApi>;
 
-describe('Profile reducer', () => {
+describe('profile reducer', () => {
     let state: TProfileInitialState;
 
     beforeEach(() => {

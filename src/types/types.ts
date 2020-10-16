@@ -113,3 +113,5 @@ export enum ProcessStatusEnum {
     Success = 'success',
     Error = 'error'
 }
+
+export type TId = string | number
