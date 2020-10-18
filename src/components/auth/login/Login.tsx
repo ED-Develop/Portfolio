@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import style from '../Auth.module.scss';
 import {useDispatch} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import {LoginFormData} from '../../../types/types';
 import {Landing} from '../landing/Landing';
 import {TField} from '../../common/form/fieldsManager';
@@ -14,10 +13,7 @@ import {url} from '../../../utils/routeManager';
 
 const Login: FC = () => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(state => state.auth.isAuth);
     const captchaURL = useSelector(state => state.auth.captchaURL);
-
-    if (isAuth) return <Redirect to={url('base')}/>;
 
     const formData: Array<TField<LoginFormData>> = [
         {name: 'email', type: 'text', placeholder: 'Your email', validate: [email, required]},

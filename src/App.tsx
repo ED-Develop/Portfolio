@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import {connect, Provider} from 'react-redux';
 import Preloader from './components/common/preloader/Preloader';
 import {appActions, initializeApp} from './redux/app/app-reducer';
 import store, {AppStateType} from './redux/store';
-import withSuspense from './hoc/withSuspense';
-import MainRoutes from './components/MainRoutes';
 import ErrorAlert from './components/common/error-alert/ErrorAlert';
-import {url} from './utils/routeManager';
-
-const Login = withSuspense(React.lazy(() => import ('./components/auth/login/Login')));
+import {BaseRoutes} from './components/routing/BaseRoutes';
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type MapDispatchPropsType = {
@@ -60,19 +56,10 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
         return (
             <div className="app-container">
                 {this.props.globalError && <ErrorAlert message={this.props.globalError.message}/>}
-                <Switch>
-                    <Route path={url('login')} render={() => <Login/>}/>
-                    <Route
-                        path={url('base')}
-                        render={() => (
-                            <MainRoutes
-                                isAsideCollapsed={this.state.isAsideCollapsed}
-                                isFetching={this.props.isFetching}
-                                toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
-                            />
-                        )}
-                    />
-                </Switch>
+                <BaseRoutes
+                    isAsideCollapsed={this.state.isAsideCollapsed}
+                    toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
+                />
             </div>
         );
     }
