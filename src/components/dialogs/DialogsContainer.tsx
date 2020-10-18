@@ -2,7 +2,6 @@ import React, {ComponentType} from 'react';
 import {dialogsActions, getDialogs, getMessages} from '../../redux/dialogs/dialog-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
-import withAuthRedirect from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 import {appActions} from '../../redux/app/app-reducer';
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
@@ -83,6 +82,5 @@ export default compose<ComponentType>(
         toggleIsSuccess,
         getDialogs
     }),
-    withAuthRedirect,
     withRouter
 )(DialogsContainer);
