@@ -3,18 +3,25 @@ import {ProjectType} from "../../types/types";
 const initialState = {
     projects: [
         {
-            name: 'Online store',
-            type: 'SPA',
-            technologies: 'React/redux',
+            title: 'Online store',
+            stack: ['React', 'Redux'],
             logo: 'https://us.123rf.com/450wm/natalypaint/natalypaint1704/natalypaint170400066/77108225-web-banner-online-store-with-shopping-bags-concept-online-shopping.jpg?ver=6',
-            link: 'https://ed-develop.github.io/online-store/'
+            link: 'https://ed-develop.github.io/online-store/',
+            description: 'It’s a replica for Google Sheets. This is SPA without any JavaScript framework. I’ve developed my own framework, using OOP principles. Ideas for this project I\'ve used from a video course.\n'
         },
         {
-            name: 'Sports Hold',
-            type: 'HTML layout',
-            technologies: 'Bootstrap/SCSS',
-            logo: 'https://pbs.twimg.com/media/DT-MU2QW4AE3hEO.jpg',
-            link: 'https://ed-develop.github.io/sport-hold/'
+            title: 'Online store',
+            stack: ['React', 'Redux'],
+            logo: 'https://us.123rf.com/450wm/natalypaint/natalypaint1704/natalypaint170400066/77108225-web-banner-online-store-with-shopping-bags-concept-online-shopping.jpg?ver=6',
+            link: 'https://ed-develop.github.io/online-store/',
+            description: 'It’s a replica for Google Sheets. This is SPA without any JavaScript framework. I’ve developed my own framework, using OOP principles. Ideas for this project I\'ve used from a video course.\n'
+        },
+        {
+            title: 'Online store',
+            stack: ['React', 'Redux'],
+            logo: 'https://us.123rf.com/450wm/natalypaint/natalypaint1704/natalypaint170400066/77108225-web-banner-online-store-with-shopping-bags-concept-online-shopping.jpg?ver=6',
+            link: 'https://ed-develop.github.io/online-store/',
+            description: 'It’s a replica for Google Sheets. This is SPA without any JavaScript framework. I’ve developed my own framework, using OOP principles. Ideas for this project I\'ve used from a video course.\n'
         }
     ] as Array<ProjectType>
 };

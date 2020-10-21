@@ -1,0 +1,71 @@
+@import "src/scss/variables";
+
+.projects {
+  font-size: 15px;
+
+  &__title {
+    font-size: 31px;
+    color: $title-tx;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+
+  &__item {
+    padding: 20px 0 25px;
+    border-bottom: $separate-br;
+  }
+
+  &__logo {
+    img {
+      width: 55px;
+      height: 55px;
+      border-radius: 4px;
+    }
+  }
+
+  &__name {
+    a {
+      color: $title-item-tx;
+      font-size: 22px;
+      font-weight: 600;
+      position: relative;
+      padding: 0 2px;
+
+      &:hover {
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+          background-color: $title-item-tx;
+        }
+      }
+    }
+  }
+
+  &__description {
+    color: $input-tx;
+  }
+
+  &__stack {
+    display: flex;
+  }
+
+  &__stackItem {
+    display: flex;
+    height: 28px;
+    align-items: center;
+    padding: 0 13px;
+    margin-right: 10px;
+    font-weight: 600;
+    color: $tab-blue-tx;
+    background-color: $tab-blue-bg;
+    border-radius: 6px;
+  }
+
+  &__add {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

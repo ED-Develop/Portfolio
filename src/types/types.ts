@@ -80,11 +80,11 @@ export type TPostFormData = {
 }
 
 export type ProjectType = {
-    name: string,
-    type: string,
-    technologies: string,
-    logo: string,
+    title: string
+    stack: Array<string>
+    logo: string
     link: string
+    description: string
 }
 
 export type LoginFormData = {

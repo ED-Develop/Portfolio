@@ -2,6 +2,7 @@ import React from 'react';
 import {
     FieldPropsType,
     ReduxFormCheckbox,
+    ReduxFormFirebaseUpload,
     ReduxFormInput,
     ReduxFormTextarea
 } from './redux-form-fields/ReduxFormFields';
@@ -19,6 +20,8 @@ export function fieldsManager<V>({type, ...props}: TField<V>) {
             return <ReduxFormCheckbox {...props} type={type} key={props.name as string}/>
         case 'textarea':
             return <ReduxFormTextarea {...props} key={props.name as string}/>
+        case 'file':
+            return <ReduxFormFirebaseUpload {...props} type={type} key={props.name as string}/>
         default:
             return <ReduxFormInput {...props} key={props.name as string}/>;
     }
