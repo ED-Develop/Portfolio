@@ -1,0 +1,30 @@
+@import "src/scss/variables";
+
+.add {
+  &__btn {
+    cursor: pointer;
+    padding: 5px;
+
+    &:hover {
+      color: $link-gray-tx;
+    }
+  }
+
+  &__input {
+    margin-bottom: 15px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__listItem {
+    font-weight: 600;
+    color: $tab-blue-tx;
+    background-color: $tab-blue-bg;
+    border-radius: 6px;
+    border-color: $input-br;
+    margin-bottom: 5px;
+  }
+}

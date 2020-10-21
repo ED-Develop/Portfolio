@@ -7,8 +7,9 @@ import {CustomCheckbox} from '../fields/chekbox/CustomChekbox';
 import {CustomInput} from '../fields/input/CustomInput';
 import {CustomTextarea} from '../fields/textarea/CustomTextarea';
 import {FirebaseUploadInput} from '../fields/upload/FirebaseUploadInput';
+import {AddInput} from '../fields/add-input/AddInput';
 
-export type TFieldType = 'text' | 'password' | 'checkbox' | 'textarea' | 'file'
+export type TFieldType = 'text' | 'password' | 'checkbox' | 'textarea' | 'file' | 'add'
 
 export type FieldPropsType = {
     name: string
@@ -73,3 +74,4 @@ export const ReduxFormInput = reduxFormField(CustomInput);
 export const ReduxFormCheckbox = reduxFormField(CustomCheckbox);
 export const ReduxFormTextarea = reduxFormField(CustomTextarea);
 export const ReduxFormFirebaseUpload = reduxFormField(FirebaseUploadInput);
+export const ReduxFormAddInput = reduxFormField(AddInput);

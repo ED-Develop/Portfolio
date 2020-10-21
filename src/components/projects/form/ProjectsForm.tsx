@@ -10,6 +10,7 @@ type TFormData = {
     description: string
     link: string
     logo: string
+    stack: Array<string>
 }
 
 export const ProjectsForm = () => {
@@ -39,6 +40,12 @@ export const ProjectsForm = () => {
             type:'file',
             label: 'Project Logo',
             storage: 'projects'
+        },
+        {
+            name: 'stack',
+            type: 'add',
+            label: 'Stack of Technologies',
+            placeholder: 'Project Technology'
         }
     ];
 
