@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './Projects.module.scss';
 import {Col, Row} from 'antd';
 import {ProjectsList} from './list/ProjectsList';
 import {useSelector} from '../../hook/useSelector';
 import {AddProject} from './add/AddProject';
 import {ProjectRoutes} from './routes/ProjectRoutes';
+import {useDispatch} from 'react-redux';
+import {getProjects} from '../../redux/project/projects-reducer';
+import {selectProjects} from '../../redux/project/projects-selectors';
 
 const Projects: React.FC = () => {
-    const projects = useSelector(state => state.projects.projects);
+    const dispatch = useDispatch();
+    const projects = useSelector(selectProjects);
+
+    useEffect(() => {
+        dispatch(getProjects());
+    }, []);
 
     return (
         <div className={style.projects}>

@@ -5,9 +5,11 @@ import {RcFile, UploadChangeParam, UploadFile, UploadFileStatus} from 'antd/lib/
 import StorageAPI from '../../../../../api/firebase/storage';
 import {WrappedFieldInputProps, WrappedFieldMetaProps} from 'redux-form/lib/Field';
 import {useDispatch} from 'react-redux';
-import {change, hasSubmitSucceeded, registerField} from 'redux-form';
+import {change, getFormInitialValues, hasSubmitSucceeded, registerField} from 'redux-form';
 import {useSelector} from '../../../../../hook/useSelector';
 import {localClient} from '../../../../../api/local-storage/local-storage';
+import {TObject} from '../../../../../types/types';
+import {findFileName} from '../../../../../utils/helpers';
 
 type PropsType = WrappedFieldInputProps & WrappedFieldMetaProps & {
     storage: string
@@ -25,10 +27,28 @@ export const FirebaseUploadInput: React.FC<PropsType> = ({storage, form, name, m
     const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
     const [storageAPI] = useState(new StorageAPI(storage));
     const submitSucceeded = useSelector(hasSubmitSucceeded(form));
+    const initialValues = useSelector<TObject>(getFormInitialValues(form));
 
     useEffect(() => {
-        if (submitSucceeded) localClient.set(localStorageKey, true);
-    }, [submitSucceeded]);
+        if (initialValues) {
+            const urls = initialValues[name];
+            const createFile = (url: string, id: number): TFile => ({
+                name: findFileName(url),
+                uid: `${id}`,
+                size: 1,
+                type: '',
+                url
+            });
+
+            setFileList(() => {
+                return Array.isArray(urls) ? urls.map(createFile) : createFile(urls, 1);
+            });
+        }
+    }, [initialValues]);
+
+    useEffect(() => {
+        if (submitSucceeded || (initialValues && initialValues[name])) localClient.set(localStorageKey, true);
+    }, [submitSucceeded, initialValues]);
 
     const handleUpload = async (file: RcFile) => {
         setFile('', 'uploading', {

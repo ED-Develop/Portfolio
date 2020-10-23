@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Aside component:  Should renders correctly 1`] = `
-<div>
-  <aside
-    class="sider ant-layout-sider ant-layout-sider-dark"
-    style="flex: 0 0 33%; max-width: 33%; min-width: 33%; width: 33%;"
-  >
-    <div
-      class="ant-layout-sider-children"
-    >
-      <div
-        class="landing__sider"
-      />
-    </div>
-  </aside>
-</div>
-`;
-
 exports[`aside component:  Should renders correctly 1`] = `
 <div>
   <aside

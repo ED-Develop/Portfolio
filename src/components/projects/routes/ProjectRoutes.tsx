@@ -7,6 +7,7 @@ export const ProjectRoutes = () => {
     return (
         <Switch>
             <Route path={url('projects:add')} render={() => <ProjectsForm/>}/>
+            <Route path={url('projects:update')} render={() => <ProjectsForm/>}/>
         </Switch>
     )
 };

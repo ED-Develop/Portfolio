@@ -1,18 +1,48 @@
 @import "src/scss/variables";
 
+$title-margin: 25px;
+$title-height: 48px;
+$top-offset: $main-top-offset + $title-height + $title-margin;
+
 .projects {
   font-size: 15px;
 
   &__title {
+    height: $title-height;
     font-size: 31px;
     color: $title-tx;
     font-weight: 600;
-    margin-bottom: 25px;
+    margin-bottom: $title-margin;
+  }
+
+  &__list {
+    position: relative;
+    min-height: calc(100vh - #{$top-offset});
+
+    &_empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__empty {
+    position: absolute;
   }
 
   &__item {
     padding: 20px 0 25px;
     border-bottom: $separate-br;
+  }
+
+  &__itemContent {
+    position: relative;
+  }
+
+  &__menuBtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
   }
 
   &__logo {
@@ -67,5 +97,9 @@
   &__add {
     display: flex;
     justify-content: flex-end;
+  }
+
+  &__removeBtn {
+    color: $danger-tx !important;
   }
 }

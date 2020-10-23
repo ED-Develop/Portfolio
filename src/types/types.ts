@@ -79,7 +79,8 @@ export type TPostFormData = {
     photos: Array<string>
 }
 
-export type ProjectType = {
+export type TProjectModel = {
+    id: string
     title: string
     stack: Array<string>
     logo: string

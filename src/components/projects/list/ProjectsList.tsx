@@ -1,17 +1,21 @@
 import React from 'react';
+import style from '../Projects.module.scss';
 import {ProjectItem} from '../item/ProjectItem';
-import {ProjectType} from '../../../types/types';
+import {TProjectModel} from '../../../types/types';
+import {Empty} from 'antd';
 
 type PropsType = {
-    projects: Array<ProjectType>
+    projects: Array<TProjectModel>
 }
 
 export const ProjectsList: React.FC<PropsType> = ({projects}) => {
     return (
-        <>
+        <div className={`${style.projects__list} ${!projects.length ? style.projects__list_empty : ''}`}>
             {
-                projects.map(project => <ProjectItem {...project}/>)
+                projects.length
+                    ? projects.map(project => <ProjectItem key={project.id} {...project}/>)
+                    : <Empty className={style.projects__empty}/>
             }
-        </>
+        </div>
     )
 }

@@ -16,6 +16,7 @@ type PropsType = {
     description?: string
     formName: string
     submitBtnText?: string
+    initialValues?: any
 }
 
 export const ModalForm: React.FC<PropsType> = ({title, closePath, handleSubmit, formModel, description, formName, ...props}) => {
@@ -39,6 +40,8 @@ export const ModalForm: React.FC<PropsType> = ({title, closePath, handleSubmit, 
             <ReduxForm
                 onSubmit={handleSubmit}
                 form={formName}
+                initialValues={props.initialValues}
+                enableReinitialize
             >
                 {
                     ({error}) => (

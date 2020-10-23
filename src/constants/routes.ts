@@ -15,6 +15,7 @@ export const routes = [
     {name: 'people', path: '/people/:filter?'},
     {name: 'projects', path: '/projects'},
     {name: 'projects:add', path: '/projects/add'},
+    {name: 'projects:update', path: '/projects/:projectId/edit'},
     {name: 'settings', path: '/settings'},
     {name: 'settings:links', path: '/settings/links'},
     {name: 'settings:delete', path: '/settings/delete'},
@@ -29,5 +30,8 @@ export type TParams = {
     },
     people: {
         filter: PeopleFilterEnum | null
+    },
+    projects: {
+        projectId: string
     }
 }

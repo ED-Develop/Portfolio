@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {ModalForm} from '../../common/form/modal/ModalForm';
 import {url} from '../../../utils/routeManager';
 import {TField} from '../../common/form/fieldsManager';
 import {FORM} from '../../../constants/forms';
 import {link, required} from '../../../utils/validators';
+import {useHistory, useParams} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {addProject, editProject} from '../../../redux/project/projects-reducer';
+import {useProcessStatus} from '../../../hook/useProcessStatus';
+import {useSelector} from '../../../hook/useSelector';
+import {selectProjectById} from '../../../redux/project/projects-selectors';
 
-type TFormData = {
+export type TProjectFormData = {
     title: string
     description: string
     link: string
@@ -13,8 +19,26 @@ type TFormData = {
     stack: Array<string>
 }
 
+type TParams = {
+    projectId: string
+}
+
+type TMode = 'create' | 'update';
+
 export const ProjectsForm = () => {
-    const formModel: Array<TField<TFormData>> = [
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const {projectId} = useParams<TParams>();
+    const [mode, setMode] = useState<TMode>('create');
+    const project = useSelector(selectProjectById(projectId || ''));
+
+    useEffect(() => {
+        if (projectId) setMode('update');
+    }, []);
+
+    useProcessStatus(() => history.push(url('projects')));
+
+    const formModel: Array<TField<TProjectFormData>> = [
         {
             name: 'title',
             type: 'text',
@@ -37,7 +61,7 @@ export const ProjectsForm = () => {
         },
         {
             name: 'logo',
-            type:'file',
+            type: 'file',
             label: 'Project Logo',
             storage: 'projects'
         },
@@ -49,17 +73,32 @@ export const ProjectsForm = () => {
         }
     ];
 
-    const handleSubmit = (value: TFormData) => {
-        console.log(value);
+    const handleSubmit = (value: TProjectFormData) => {
+        const action = mode === 'update' ? editProject(value, projectId) : addProject(value);
+
+        dispatch(action);
     }
+
+    const getTitle = () => mode === 'create' ? 'Add new project' : 'Edit project';
+
+    const initialValues = useMemo(() => {
+        if (project) {
+            const {id, ...restProject} = project;
+
+            return restProject;
+        }
+
+        return void 0;
+    }, [project]);
 
     return (
         <ModalForm
-            title='Add new project'
+            title={getTitle()}
             closePath={url('projects')}
             handleSubmit={handleSubmit}
             formModel={formModel}
             formName={FORM.projects}
+            initialValues={initialValues}
         />
     )
 };
