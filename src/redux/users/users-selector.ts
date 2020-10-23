@@ -1,19 +1,14 @@
-import {createSelector} from "reselect";
-import {AppStateType} from "../store";
-import {TUserModel} from "../../types/types";
+import {AppStateType} from '../store';
+import {TUserModel} from '../../types/types';
+import {TSelector} from '../../hook/useSelector';
 
-export const getUsers = (state: AppStateType) => state.people.usersData;
-
-export const getUsersData = createSelector(getUsers, (users) => {
-    return users.filter((u) => true);
-});
+export const selectUsers: TSelector<Array<TUserModel>> = (state) => state.people.usersData;
 
 export type TFriendsTitle = Omit<Omit<TUserModel, 'status'>, 'followed'>
 
-export const getCount = (state: AppStateType) => state.people.count;
-export const getCurrentPage = (state: AppStateType) => state.people.currentPage;
-export const getStartPage = (state: AppStateType) => state.people.startPage;
-export const getTotalCount = (state: AppStateType) => state.people.totalCount;
-export const getIsFetching = (state: AppStateType) => state.app.isFetching;
-export const getFollowingInProgress = (state: AppStateType) => state.people.followingInProgress;
+export const selectCount = (state: AppStateType) => state.people.count;
+export const selectCurrentPage = (state: AppStateType) => state.people.currentPage;
+export const selectStartPage = (state: AppStateType) => state.people.startPage;
+export const selectTotalCount = (state: AppStateType) => state.people.totalCount;
+export const selectFollowingInProgress = (state: AppStateType) => state.people.followingInProgress;
 
