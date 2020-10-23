@@ -1,0 +1,22 @@
+@import "src/scss/variables";
+
+$title-margin: 25px;
+$title-height: 48px;
+$top-offset: $main-top-offset + $title-height + $title-margin;
+
+.main {
+  font-size: 15px;
+
+  &__title {
+    height: $title-height;
+    font-size: 31px;
+    color: $title-tx;
+    font-weight: 600;
+    margin-bottom: $title-margin;
+  }
+
+  &__content {
+    position: relative;
+    min-height: calc(100vh - #{$top-offset});
+  }
+}

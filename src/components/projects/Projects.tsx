@@ -8,6 +8,7 @@ import {ProjectRoutes} from './routes/ProjectRoutes';
 import {useDispatch} from 'react-redux';
 import {getProjects} from '../../redux/project/projects-reducer';
 import {selectProjects} from '../../redux/project/projects-selectors';
+import {MainLayout} from '../common/layout/main/MainLayout';
 
 const Projects: React.FC = () => {
     const dispatch = useDispatch();
@@ -18,8 +19,10 @@ const Projects: React.FC = () => {
     }, []);
 
     return (
-        <div className={style.projects}>
-            <h1 className={style.projects__title}>Projects</h1>
+        <MainLayout
+            className={style.projects}
+            title='Projects'
+        >
             <Row>
                 <Col span={16}>
                     <ProjectsList projects={projects}/>
@@ -29,7 +32,7 @@ const Projects: React.FC = () => {
                 </Col>
             </Row>
             <ProjectRoutes/>
-        </div>
+        </MainLayout>
     )
 };
 
