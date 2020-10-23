@@ -9,17 +9,22 @@ import {useDispatch} from 'react-redux';
 import {getProjects} from '../../redux/project/projects-reducer';
 import {selectProjects} from '../../redux/project/projects-selectors';
 import {MainLayout} from '../common/layout/main/MainLayout';
+import {selectIsFetching} from '../../redux/app/app-selectors';
 
 const Projects: React.FC = () => {
     const dispatch = useDispatch();
     const projects = useSelector(selectProjects);
+    const isFetching = useSelector(selectIsFetching);
 
     useEffect(() => {
         dispatch(getProjects());
     }, []);
 
+    if (isFetching) return null;
+
     return (
         <MainLayout
+            isEmpty={!projects.length}
             className={style.projects}
             title='Projects'
         >
