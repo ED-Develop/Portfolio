@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.scss';
+import './scss/App.scss';
 import {BrowserRouter} from 'react-router-dom';
 import {connect, Provider} from 'react-redux';
 import Preloader from './components/common/preloader/Preloader';
@@ -14,15 +14,26 @@ type MapDispatchPropsType = {
     setGlobalError: (globalError: any) => void
 }
 type AppPropsType = MapStatePropsType & MapDispatchPropsType;
+
+export type TAside = {
+    width: string
+    collapsedWidth: string
+    isCollapsed: boolean
+}
+
 type LocalStateType = {
-    isAsideCollapsed: boolean
+    aside: TAside
 }
 
 class AppContainer extends Component<AppPropsType, LocalStateType> {
     constructor(props: AppPropsType) {
         super(props);
         this.state = {
-            isAsideCollapsed: false
+            aside: {
+                width: '20%',
+                collapsedWidth: '11%',
+                isCollapsed: false
+            }
         }
     }
 
@@ -46,7 +57,10 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
     toggleIsAsideCollapsed = () => {
         this.setState(state => ({
             ...state,
-            isAsideCollapsed: !state.isAsideCollapsed
+            aside: {
+                ...state.aside,
+                isCollapsed: !state.aside.isCollapsed
+            }
         }))
     };
 
@@ -54,13 +68,13 @@ class AppContainer extends Component<AppPropsType, LocalStateType> {
         if (!this.props.initialized) return <Preloader/>
 
         return (
-            <div className="app-container">
+            <>
                 {this.props.globalError && <ErrorAlert message={this.props.globalError.message}/>}
                 <BaseRoutes
-                    isAsideCollapsed={this.state.isAsideCollapsed}
+                    aside={this.state.aside}
                     toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
                 />
-            </div>
+            </>
         );
     }
 }

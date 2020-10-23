@@ -1,20 +1,26 @@
 import React, {FC} from 'react';
 import style from './Aside.module.css';
-import Nav from "./nav/Nav";
-import {Affix, Layout} from "antd";
+import Nav from './nav/Nav';
+import {Affix, Layout} from 'antd';
+import {TAside} from '../../App';
 
 const {Sider} = Layout;
 
 type PropsType = {
-    isAuth: boolean,
-    collapsed: boolean
+    aside: TAside
 }
 
-const Aside: FC<PropsType> = ({collapsed}) => {
+const Aside: FC<PropsType> = ({aside}) => {
     return (
-        <Sider theme='light' width='20.8%' className={style.aside} collapsed={collapsed} collapsedWidth={'16.6%'}>
+        <Sider
+            theme='light'
+            width={aside.width}
+            className={style.aside}
+            collapsed={aside.isCollapsed}
+            collapsedWidth={aside.collapsedWidth}
+        >
             <Affix offsetTop={80}>
-                <Nav collapsed={collapsed}/>
+                <Nav collapsed={aside.isCollapsed}/>
             </Affix>
         </Sider>
     )

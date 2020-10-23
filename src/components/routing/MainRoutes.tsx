@@ -1,5 +1,4 @@
 import React from 'react';
-import AsideContainer from '../aside/AsideContainer';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import ProfileContainer from '../profile/ProfileContainer';
 import Projects from '../projects/Projects';
@@ -10,29 +9,31 @@ import HeaderContainer from '../header/HeaderContainer';
 import {Settings} from '../settings/Settings';
 import {url} from '../../utils/routeManager';
 import {useSelector} from '../../hook/useSelector';
+import {ContentWrapper} from '../common/layout/ContentWrapper';
+import {TAside} from '../../App';
+import Aside from '../aside/Aside';
 
-const {Content} = Layout;
 const DialogsContainer = withSuspense(React.lazy(() => import ('../dialogs/DialogsContainer')));
 const People = withSuspense(React.lazy(() => import ('../people/PeopleContainer')));
 
 type PropsType = {
-    isAsideCollapsed: boolean
+    aside: TAside
     toggleIsAsideCollapsed: () => void
 }
 
-const MainRoutes: React.FC<PropsType> = ({isAsideCollapsed, toggleIsAsideCollapsed}) => {
+const MainRoutes: React.FC<PropsType> = ({aside, toggleIsAsideCollapsed}) => {
     const isFetching = useSelector(state => state.app.isFetching);
 
     return (
         <>
             <HeaderContainer
                 toggleIsAsideCollapsed={toggleIsAsideCollapsed}
-                isAsideCollapsed={isAsideCollapsed}
+                aside={aside}
             />
             <Layout className='app-main'>
                 {isFetching && <Preloader/>}
-                <AsideContainer collapsed={isAsideCollapsed}/>
-                <Content className='app-content'>
+                <Aside aside={aside}/>
+                <ContentWrapper>
                     <Switch>
                         <Route path={url('profile')} render={() => <ProfileContainer/>}/>
                         <Route path={url('messages')} render={() => <DialogsContainer/>}/>
@@ -41,7 +42,7 @@ const MainRoutes: React.FC<PropsType> = ({isAsideCollapsed, toggleIsAsideCollaps
                         <Route path={url('settings')} render={() => <Settings/>}/>
                         <Redirect from={url('base')} to={url<'profile'>('profile', {userId: ''})}/>
                     </Switch>
-                </Content>
+                </ContentWrapper>
             </Layout>
         </>
     )

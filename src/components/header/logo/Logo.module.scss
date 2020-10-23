@@ -1,0 +1,18 @@
+.logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 120px;
+  }
+
+  &_small {
+    img {
+      width: 40px;
+    }
+  }
+}
+
+.menuIcon {
+  margin-right: 15px;
+}

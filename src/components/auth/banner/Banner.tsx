@@ -1,6 +1,6 @@
 import React, {CSSProperties} from 'react';
 import style from '../Auth.module.scss';
-import logo from '../../../assets/images/logo-light.png';
+import logo from '../../../assets/images/logo-dark.png';
 import {Layout} from 'antd';
 import banner from '../../../assets/images/login-banner.jpg';
 import {NavLink} from 'react-router-dom';
