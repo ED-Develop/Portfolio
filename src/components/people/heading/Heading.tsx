@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../People.module.css';
+import style from '../People.module.scss';
 import TabsNavigation from '../../common/tabs-navigation/TabsNavigation';
 import {url} from '../../../utils/routeManager';
 import {PeopleFilterEnum} from '../PeopleContainer';

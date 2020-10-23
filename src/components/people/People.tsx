@@ -1,9 +1,9 @@
-import React from "react";
-import style from "./People.module.css";
-import UserList from "./users-list/UsersList";
-import {TUserModel} from "../../types/types";
-import Heading from "./heading/Heading";
-import {Pagination} from "antd";
+import React from 'react';
+import style from './People.module.scss';
+import UserList from './users-list/UsersList';
+import {TUserModel} from '../../types/types';
+import Heading from './heading/Heading';
+import {Pagination} from 'antd';
 
 type PropsType = {
     isFetching: boolean
@@ -13,13 +13,13 @@ type PropsType = {
     startPage: number
     totalCount: number
     followingInProgress: Array<number>
-    getCurrentPageUsers: (currentPage: number) => void
+    handlePageChanged: (currentPage: number) => void
     follow: (userId: number) => void
     unFollow: (userId: number) => void
     changePageSize: (pageSize: number, currentPage: number) => void
 }
 
-const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, getCurrentPageUsers, ...props}) => {
+const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, handlePageChanged, ...props}) => {
     return (
         <div className={style.container}>
             <div>
@@ -35,7 +35,7 @@ const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, getCu
                 <Pagination
                     total={totalCount}
                     current={currentPage}
-                    onChange={getCurrentPageUsers}
+                    onChange={handlePageChanged}
                     onShowSizeChange={props.changePageSize}
                     pageSizeOptions={['15', '30', '60', '90']}
                     defaultPageSize={props.count}

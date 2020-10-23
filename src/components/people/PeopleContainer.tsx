@@ -1,20 +1,23 @@
-import React, {ComponentType, FC, useEffect} from 'react';
-import {connect} from "react-redux";
-import {follow, getAllUsers, getFriends, getUsers, unFollow, userActions} from "../../redux/users/users-reducer";
-import {AppStateType} from "../../redux/store";
-import {TUserModel} from "../../types/types";
+import React, {ComponentType, FC, useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {follow, getAllUsers, getFriends, getUsers, unFollow, userActions} from '../../redux/users/users-reducer';
+import {AppStateType} from '../../redux/store';
+import {TUserModel} from '../../types/types';
 import {
-    getCount,
-    getCurrentPage,
-    getFollowingInProgress,
-    getIsFetching,
-    getStartPage,
-    getTotalCount,
-    getUsersData
-} from "../../redux/users/users-selector";
-import People from "./People";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {compose} from "redux";
+    selectCount,
+    selectCurrentPage,
+    selectFollowingInProgress,
+    selectStartPage,
+    selectTotalCount,
+    selectUsers
+} from '../../redux/users/users-selector';
+import People from './People';
+import {useParams, useHistory} from 'react-router-dom';
+import {compose} from 'redux';
+import {selectIsFetching} from '../../redux/app/app-selectors';
+import {url} from '../../utils/routeManager';
+import * as queryString from 'querystring';
+import {useQuery} from '../../hook/useQuery';
 
 const {setPageSize} = userActions;
 
@@ -39,34 +42,61 @@ type MapDispatchPropsType = {
 
 export enum PeopleFilterEnum {
     New = 'new',
-    Friends = 'friends'
+    Friends = 'friends',
+    All = 'all'
 }
 
-type PropsType = MapStatePropsType & MapDispatchPropsType & RouteComponentProps<{ filter: PeopleFilterEnum }>;
+type TParams = {
+    filter?: PeopleFilterEnum
+}
+
+type TQuery = {
+    page?: string
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
 
 const PeopleContainer: FC<PropsType> = (props) => {
-    const {match, history, location, staticContext, ...restProps} = props;
-    const filter: PeopleFilterEnum = match.params.filter;
+    const history = useHistory();
+    const query = useQuery<TQuery>();
+    const filter: PeopleFilterEnum = useParams<TParams>().filter || PeopleFilterEnum.All;
+    const [initialized, setInitialized] = useState(false);
 
-    const getUsers = (filter: string, pageSize: number, currentPage: number) => {
-        if (filter === PeopleFilterEnum.New) {
-            props.getUsers(pageSize, currentPage);
-        } else if (filter === PeopleFilterEnum.Friends) {
-            props.getFriends(pageSize, currentPage);
-        } else {
-            props.getAllUsers(pageSize, currentPage);
+    const getUsers = (filter: PeopleFilterEnum, pageSize: number, currentPage: number = 1) => {
+        const {getFriends, getUsers, getAllUsers} = props;
+
+        const actions: { [key in PeopleFilterEnum]: any } = {
+            [PeopleFilterEnum.Friends]: getFriends,
+            [PeopleFilterEnum.New]: getUsers,
+            [PeopleFilterEnum.All]: getAllUsers
         }
+
+        actions[filter](pageSize, currentPage);
     }
 
-    useEffect(() => {
-        getUsers(filter, props.count, props.currentPage);
-    }, []);
+    const getPageNumber = () => initialized ? 1 : (query.page ? +query.page : props.currentPage);
 
     useEffect(() => {
-        getUsers(filter, props.count, props.currentPage);
+        if (!initialized) setInitialized(true);
+
+        getUsers(filter, props.count, getPageNumber());
     }, [filter]);
 
-    const getCurrentPageUsers = (currentPage: number) => getUsers(filter, props.count, currentPage);
+    const setCurrentPageToUrl = (currentPage: number) => {
+        history.push({
+            pathname: url('people', getParams(filter)),
+            search: queryString.stringify(getQuery(currentPage))
+        });
+    };
+
+    useEffect(() => {
+        setCurrentPageToUrl(props.currentPage);
+    }, [props.currentPage]);
+
+    const getQuery = (page: number): TQuery => page > 1 ? {page: String(page)} : {};
+    const getParams = (filter: PeopleFilterEnum) => ({filter: filter === PeopleFilterEnum.All ? null : filter});
+
+    const handlePageChanged = (currentPage: number) => getUsers(filter, props.count, currentPage);
 
     const changePageSize = (currentPage: number, pageSize: number) => {
         getUsers(filter, pageSize, currentPage);
@@ -76,23 +106,23 @@ const PeopleContainer: FC<PropsType> = (props) => {
     if (props.isFetching) return null;
 
     return <People
-        {...restProps}
-        getCurrentPageUsers={getCurrentPageUsers}
+        {...props}
+        handlePageChanged={handlePageChanged}
         changePageSize={changePageSize}
     />
 };
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-    usersData: getUsersData(state),
-    count: getCount(state),
-    currentPage: getCurrentPage(state),
-    startPage: getStartPage(state),
-    totalCount: getTotalCount(state),
-    isFetching: getIsFetching(state),
-    followingInProgress: getFollowingInProgress(state)
+    usersData: selectUsers(state),
+    count: selectCount(state),
+    currentPage: selectCurrentPage(state),
+    startPage: selectStartPage(state),
+    totalCount: selectTotalCount(state),
+    isFetching: selectIsFetching(state),
+    followingInProgress: selectFollowingInProgress(state)
 });
 
-export default compose<ComponentType>(withRouter, connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
+export default compose<ComponentType>(connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
     {
         follow,
         getUsers,
