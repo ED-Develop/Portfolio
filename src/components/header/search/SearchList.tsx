@@ -7,6 +7,7 @@ import {NavLink} from 'react-router-dom';
 import {debounce} from 'lodash';
 import {searchItems} from '../../../redux/search/search-reducer';
 import {url} from '../../../utils/routeManager';
+import {Empty} from 'antd';
 
 type PropsType = {
     title: string
@@ -88,7 +89,11 @@ const SearchList: React.FC<PropsType> = ({title, results, isInputFocus, hideSear
                                 </NavLink>
                             </li>
                         ))
-                        : <li className={style.empty}>No results</li>
+                        : (
+                            <li className={style.empty}>
+                                <Empty description='No results'/>
+                            </li>
+                        )
                 }
             </ul>
         </div>
