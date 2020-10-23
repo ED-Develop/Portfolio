@@ -1,0 +1,12 @@
+@import "src/scss/variables";
+
+.modal {
+  &__header,
+  button {
+    font-weight: 600;
+  }
+
+  &__header {
+    color: $title-tx;
+  }
+}

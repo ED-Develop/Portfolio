@@ -2,7 +2,7 @@ import React from 'react';
 import AsideContainer from '../aside/AsideContainer';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import ProfileContainer from '../profile/ProfileContainer';
-import Projects from '../Projects/Projects';
+import Projects from '../projects/Projects';
 import withSuspense from '../../hoc/withSuspense';
 import {Layout} from 'antd';
 import Preloader from '../common/preloader/Preloader';
@@ -34,12 +34,12 @@ const MainRoutes: React.FC<PropsType> = ({isAsideCollapsed, toggleIsAsideCollaps
                 <AsideContainer collapsed={isAsideCollapsed}/>
                 <Content className='app-content'>
                     <Switch>
-                        <Redirect exact from={url('base')} to={url<'profile'>('profile', {userId: ''})}/>
                         <Route path={url('profile')} render={() => <ProfileContainer/>}/>
                         <Route path={url('messages')} render={() => <DialogsContainer/>}/>
                         <Route path={url('people')} render={() => <People/>}/>
                         <Route path={url('projects')} render={() => <Projects/>}/>
                         <Route path={url('settings')} render={() => <Settings/>}/>
+                        <Redirect from={url('base')} to={url<'profile'>('profile', {userId: ''})}/>
                     </Switch>
                 </Content>
             </Layout>

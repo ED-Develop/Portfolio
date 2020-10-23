@@ -56,8 +56,8 @@ const defaultOptions = {
     status: false
 }
 
-export const commonThunkHandler: TCommonThunkHandler = async (callback, dispatch, options = defaultOptions) => {
-    const {resultCode, visualization, status} = options;
+export const commonThunkHandler: TCommonThunkHandler = async (callback, dispatch, options) => {
+    const {resultCode, visualization, status} = {...defaultOptions, ...options};
     let tryCatchBody = callback;
 
     if (status) {

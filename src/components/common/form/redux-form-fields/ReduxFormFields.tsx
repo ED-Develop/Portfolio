@@ -6,8 +6,10 @@ import {ValidatorsType} from '../../../../utils/validators';
 import {CustomCheckbox} from '../fields/chekbox/CustomChekbox';
 import {CustomInput} from '../fields/input/CustomInput';
 import {CustomTextarea} from '../fields/textarea/CustomTextarea';
+import {FirebaseUploadInput} from '../fields/upload/FirebaseUploadInput';
+import {AddInput} from '../fields/add-input/AddInput';
 
-export type TFieldType = 'text' | 'password' | 'checkbox' | 'textarea'
+export type TFieldType = 'text' | 'password' | 'checkbox' | 'textarea' | 'file' | 'add'
 
 export type FieldPropsType = {
     name: string
@@ -17,22 +19,19 @@ export type FieldPropsType = {
     type?: TFieldType
     placeholder?: string
     disabled?: boolean
+    storage?: string
+    multiple?: boolean
 }
 
-type ComponentPropsType = WrappedFieldProps & {
-    name: string
-    label?: string
-    error?: string
-    type?: TFieldType
-    placeholder?: string
+type ComponentPropsType = Omit<FieldPropsType, 'validate'> & WrappedFieldProps & {
     required: boolean
-    disabled?: boolean
 };
 
 const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldPropsType> => {
     const FieldComponent: React.FC<ComponentPropsType> = ({meta, input, label, type, error, ...props}) => {
         const isError = () => error || (meta.touched && meta.error) ? 'error' : 'success';
         const getHelpMessage = () => error || (meta.touched && meta.error);
+        const metaProps = () => ['file'].some(i => i === type) ? meta : {};
 
         return (
             <Form.Item
@@ -48,6 +47,7 @@ const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldProp
                     type={type}
                     {...input}
                     {...props}
+                    {...metaProps()}
                 />
             </Form.Item>
         );
@@ -73,3 +73,5 @@ const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldProp
 export const ReduxFormInput = reduxFormField(CustomInput);
 export const ReduxFormCheckbox = reduxFormField(CustomCheckbox);
 export const ReduxFormTextarea = reduxFormField(CustomTextarea);
+export const ReduxFormFirebaseUpload = reduxFormField(FirebaseUploadInput);
+export const ReduxFormAddInput = reduxFormField(AddInput);

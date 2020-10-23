@@ -79,12 +79,13 @@ export type TPostFormData = {
     photos: Array<string>
 }
 
-export type ProjectType = {
-    name: string,
-    type: string,
-    technologies: string,
-    logo: string,
+export type TProjectModel = {
+    id: string
+    title: string
+    stack: Array<string>
+    logo: string
     link: string
+    description: string
 }
 
 export type LoginFormData = {

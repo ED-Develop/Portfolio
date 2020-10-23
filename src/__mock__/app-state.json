@@ -59,5 +59,8 @@
     "isUpload": false,
     "globalError": null,
     "isSuccess": false
+  },
+  "projects": {
+    "projects": null
   }
 }

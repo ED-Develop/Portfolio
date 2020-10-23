@@ -1,16 +1,16 @@
-import {TPostComment, TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../types/types";
-import {CommonThunkType, InferActionsTypes} from "../store";
-import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector} from "redux-form";
-import {AppActionsTypes} from "../app/app-reducer";
+import {TPostComment, TPostContent, TPostFormData, TPostModel, TUploadedFile} from '../../types/types';
+import {CommonThunkType, InferActionsTypes} from '../store';
+import {arrayPush, arrayRemove, destroy, FormAction, formValueSelector} from 'redux-form';
+import {AppActionsTypes} from '../app/app-reducer';
 import {
     postApi,
     postStorage,
     TCreateCommentPayload,
     TCreatePostPayload,
-    TCreateResponse
-} from "../../api/firebase/posts-api";
-import {parseContent, updateObjectInArray} from "../../utils/helpers";
-import {validateForm} from "../common";
+} from '../../api/firebase/posts-api';
+import {parseContent, updateObjectInArray} from '../../utils/helpers';
+import {validateForm} from '../common';
+import {TFirebaseCreateResponse} from '../../api/firebase/firebase';
 
 const initialState = {
     postData: [] as Array<TPostModel>,
@@ -213,7 +213,7 @@ export const addPost = (postData: TPostFormData, formName: string): ThunkType =>
             comments: []
         };
 
-        const response = await postApi.create<TCreatePostPayload, TCreateResponse>(newPost);
+        const response = await postApi.create<TCreatePostPayload, TFirebaseCreateResponse>(newPost);
 
         dispatch(timelineActions.addPost({postId: response.name, ...newPost}));
     }

@@ -1,3 +1,5 @@
+import {TId, TObject} from '../types/types';
+
 export const updateObjectInArray = <A extends { [key: string]: any }, I, >
 (arr: Array<A>, arrItemId: I, arrKeyId: keyof A, objOfProp: Partial<A>) => {
     return arr.map((item) => {
@@ -37,3 +39,7 @@ export const findFileName = (string: string) => {
 
 
 export const formatName = (string: string) => string.replace(/[_-]/g, ' ');
+
+type TWitId = TObject & { id: TId };
+
+export const findById = (arr: Array<TWitId>, id: TId) => arr.find((item) => item.id === id);

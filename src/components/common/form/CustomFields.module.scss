@@ -2,12 +2,15 @@
 
 .field {
   border-radius: 7px;
-  background-color: $input-bg;
   border: 1px solid $input-br;
   outline: none;
   color: $input-tx;
   padding-left: 16px;
   padding-right: 16px;
+
+  &, input {
+    background-color: $input-bg;
+  }
 
   &::placeholder {
     font-size: 15px;

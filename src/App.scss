@@ -1,5 +1,6 @@
 @import '~antd/dist/antd.css';
 @import 'scss/custom-antd.css';
+@import "scss/variables";
 
 * {
     padding: 0;
@@ -24,7 +25,7 @@ body .app-container {
 }
 
 .app-main {
-    padding-top: 79px;
+    padding-top: $main-top-offset;
     background-color: #fff;
 }
 

@@ -1,10 +1,6 @@
-import {FirebaseAPI} from "./firebase";
+import {FirebaseAPI, TFirebaseCreateResponse} from './firebase';
 import {TPostModel, TPostComment, TPostContent} from "../../types/types";
 import StorageAPI from "./storage";
-
-export type TCreateResponse = {
-    name: string
-}
 
 export type TCreatePostPayload = Omit<TPostModel, 'postId' & { postId?: string }>
 export type TCreateCommentPayload = Omit<TPostComment, 'id' & { id?: string }>
@@ -71,7 +67,7 @@ class PostsApi extends FirebaseAPI {
     }
 
     createComment(comment: TCreateCommentPayload, postId: string) {
-        return this.create<TCreateCommentPayload, TCreateResponse>(comment, `${postId}/comments/`);
+        return this.create<TCreateCommentPayload, TFirebaseCreateResponse>(comment, `${postId}/comments/`);
     }
 
     editComment<P>(content: P, postId: string, commentId: string) {
