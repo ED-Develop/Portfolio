@@ -1,9 +1,9 @@
-import React from "react";
-import style from "./People.module.css";
-import UserList from "./users-list/UsersList";
-import {TUserModel} from "../../types/types";
-import Heading from "./heading/Heading";
-import {Pagination} from "antd";
+import React from 'react';
+import style from './People.module.scss';
+import UserList from './users-list/UsersList';
+import {TUserModel} from '../../types/types';
+import Heading from './heading/Heading';
+import {Pagination} from 'antd';
 
 type PropsType = {
     isFetching: boolean
