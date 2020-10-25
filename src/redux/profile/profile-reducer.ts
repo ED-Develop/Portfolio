@@ -72,15 +72,15 @@ export const getUserProfile = (userId?: number): ThunkType => async (dispatch, g
     commonThunkHandler(async () => {
         const data = await profileApi.getUserProfile(userId || getOwnerId(getState));
 
-        dispatch(profileActions.setUserProfile(data));
-    }, dispatch);
+        if (data) dispatch(profileActions.setUserProfile(data));
+    }, dispatch, {visualization: false, resultCode: false});
 };
 
 export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
     await commonThunkHandler(async () => {
         const status = await profileApi.getProfileStatus(userId);
 
-        dispatch(profileActions.setProfileStatus(status));
+        if (status) dispatch(profileActions.setProfileStatus(status));
     }, dispatch, {visualization: false, resultCode: false});
 };
 export const updateProfileStatus = (status: string): ThunkType => async (dispatch) => {

@@ -79,7 +79,9 @@ export const auth = (): ThunkType => async (dispatch) => {
         }
 
         return data;
-    }, dispatch);
+    }, dispatch, {
+        visualization: false
+    });
 };
 
 export const login = (formData: LoginFormData): ThunkType => async (dispatch) => {

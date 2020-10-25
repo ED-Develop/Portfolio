@@ -1,15 +1,21 @@
 .heading {
-    border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .heading h1 {
-    font-size: 23px;
-    font-weight: 600;
+  font-size: 23px;
+  font-weight: 600;
 }
 
 .paginator {
-    display: flex;
-    justify-content: center;
-    padding-top: 50px;
-    justify-self: end;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 50px;
 }

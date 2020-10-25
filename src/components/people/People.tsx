@@ -35,7 +35,7 @@ const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, handl
 
     return (
         <MainLayout
-            className={style.container}
+            contentClassName={style.container}
             title={title}
         >
             <div>
