@@ -16,7 +16,6 @@ type PropsType = {
     status: string
     isAuth: boolean
     isMyProfile: boolean
-    followed: boolean
     uploadPhoto: (photo: File) => void
     startDialogs: (userId: number) => void
     updateProfileStatus: (status: string) => void
@@ -58,7 +57,7 @@ const Profile: FC<PropsType> = ({profile, uploadPhoto, isUpload, startDialogs, .
                 isMyProfile={props.isMyProfile}
                 updateProfileStatus={props.updateProfileStatus}
             />
-            <ProfileNavigation isMyProfile={props.isMyProfile} followed={props.followed} userId={props.userId}/>
+            <ProfileNavigation isMyProfile={props.isMyProfile} userId={props.userId}/>
             <Switch>
                 <Redirect
                     from={url('profile', {userId: null})}

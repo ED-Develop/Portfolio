@@ -19,7 +19,6 @@ type MapStatePropsType = {
     status: string
     isAuth: boolean
     isUpload: boolean
-    followed: boolean
     isUpdateSuccess: boolean
     isSuccess: boolean
 }
@@ -74,7 +73,6 @@ const ProfileContainer: React.FC<PropsType> = ({getUserProfile, getProfileStatus
         isMyProfile={isMyProfile}
         profile={props.profile}
         isUpload={props.isUpload}
-        followed={props.followed}
         isUploadModal={isUploadModal}
         setIsUploadModal={setIsUploadModal}
     />
@@ -87,7 +85,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     status: state.profile.status,
     isAuth: state.auth.isAuth,
     isUpload: state.app.isUpload,
-    followed: state.profile.followed,
     isUpdateSuccess: state.profile.isUpdateSuccess,
     isSuccess: state.app.isSuccess
 });
