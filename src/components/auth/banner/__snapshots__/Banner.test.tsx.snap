@@ -10,7 +10,7 @@ exports[`Banner component:  Should renders correctly 1`] = `
     >
       <img
         alt="logo"
-        src="logo-dark.png"
+        src="logo-small.png"
       />
     </div>
     <div
