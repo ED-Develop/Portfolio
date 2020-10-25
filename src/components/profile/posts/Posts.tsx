@@ -48,7 +48,7 @@ const Posts: FC<PropsType> = React.memo((
 
     return (
         <Row gutter={38}>
-            <Col span={15} className={style.container}>
+            <Col xxl={16} xl={14} lg={13} className={style.container}>
                 {isMyProfile && <div className={style.inputField}>
                     <MyPostForm
                         onSubmit={submitForm}
@@ -87,7 +87,7 @@ const Posts: FC<PropsType> = React.memo((
                     ))
                 }
             </Col>
-            <Col span={9}>
+            <Col xxl={8} xl={10} lg={11}>
                 {props.aboutProfile && <About aboutProfile={props.aboutProfile} isMyProfile={isMyProfile}/>}
                 <Friends friends={props.friends} friendsCount={props.friendsCount}/>
             </Col>

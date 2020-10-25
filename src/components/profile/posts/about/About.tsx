@@ -1,24 +1,14 @@
-import React from "react";
+import React from 'react';
 import style from './About.module.css';
-import {
-    AntCloudOutlined,
-    AntDesignOutlined,
-    CheckOutlined,
-    CloseOutlined,
-    FacebookOutlined,
-    GithubOutlined,
-    IeOutlined,
-    InstagramOutlined,
-    ProfileOutlined,
-    TwitterOutlined,
-    UserOutlined,
-    YoutubeOutlined
-} from "@ant-design/icons/lib";
-import {TAboutProfile} from "../../../../redux/timeline/timeline-selector";
-import {TContacts} from "../../../../types/types";
-import {NavLink} from "react-router-dom";
-import {Button} from "antd";
+import {TAboutProfile} from '../../../../redux/timeline/timeline-selector';
+import {TContacts} from '../../../../types/types';
+import {NavLink} from 'react-router-dom';
+import {Button} from 'antd';
 import {url} from '../../../../utils/routeManager';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faFacebookF, faGithub, faInstagram, faTwitter, faVk, faYoutube} from '@fortawesome/free-brands-svg-icons';
+import {IconDefinition} from '@fortawesome/fontawesome-common-types';
+import {faCheck, faFileAlt, faGlobe, faLink, faTimes, faUser} from '@fortawesome/free-solid-svg-icons';
 
 type PropsType = {
     aboutProfile: TAboutProfile,
@@ -29,15 +19,15 @@ type TAboutIcon = { [key in keyof Omit<TAboutProfile, 'contacts'>]: any };
 type TContactsIcon = { [key in keyof TContacts]: TContactIcon };
 
 type TContactIcon = {
-    icon: React.ReactNode,
+    icon: IconDefinition,
     color: string
 }
 
 const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo}, isMyProfile}) => {
     const aboutIcons: TAboutIcon = {
-        aboutMe: <UserOutlined/>,
-        lookingForAJob: restAboutInfo.lookingForAJob ? <CheckOutlined/> : <CloseOutlined/>,
-        lookingForAJobDescription: <ProfileOutlined/>
+        aboutMe: faUser,
+        lookingForAJob: restAboutInfo.lookingForAJob ? faCheck : faTimes,
+        lookingForAJobDescription: faFileAlt
     };
 
     const profileInfo = {
@@ -46,27 +36,39 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo},
     };
 
     const contactsIcons: TContactsIcon = {
-        facebook: {icon: <FacebookOutlined/>, color: '#3b5998'},
-        github: {icon: <GithubOutlined/>, color: '#24292e'},
-        instagram: {icon: <InstagramOutlined/>, color: '#E1306C'},
-        mainLink: {icon: <AntCloudOutlined/>, color: '#FD1D1D'},
-        twitter: {icon: <TwitterOutlined/>, color: '#1DA1F2'},
-        vk: {icon: <AntDesignOutlined/>, color: '#1A4B78'},
-        website: {icon: <IeOutlined/>, color: '#1EBBEE'},
-        youtube: {icon: <YoutubeOutlined/>, color: '#FF0000'}
+        facebook: {icon: faFacebookF, color: '#3b5998'},
+        github: {icon: faGithub, color: '#24292e'},
+        instagram: {icon: faInstagram, color: '#E1306C'},
+        mainLink: {icon: faLink, color: '#FD1D1D'},
+        twitter: {icon: faTwitter, color: '#1DA1F2'},
+        vk: {icon: faVk, color: '#1A4B78'},
+        website: {icon: faGlobe, color: '#1EBBEE'},
+        youtube: {icon: faYoutube, color: '#FF0000'}
     };
+
+    const isLookingForAJobDescription = (key: string) => {
+        return key === 'lookingForAJobDescription' ? restAboutInfo.lookingForAJob : true;
+    }
 
     return (
         <div className={style.profile__about}>
             <h3>About</h3>
             <div className={style.about}>
                 {
-                    Object.keys(profileInfo).map(key => (
-                        <div className={style.about__item} key={key}>
-                            <span className={style.icon}>{aboutIcons[key as keyof TAboutIcon]}</span>
-                            {profileInfo[key as keyof typeof profileInfo]}
-                        </div>
-                    ))
+                    Object.keys(profileInfo).map(key => {
+                        const value = profileInfo[key as keyof typeof profileInfo];
+
+                        if (!value || !isLookingForAJobDescription(key)) return null;
+
+                        return (
+                            <div className={style.about__item} key={key}>
+                                    <span className={style.icon}>
+                                        <FontAwesomeIcon icon={aboutIcons[key as keyof TAboutIcon]}/>
+                                    </span>
+                                <span>{value}</span>
+                            </div>
+                        )
+                    })
                 }
             </div>
             <div className={style.contacts}>
@@ -84,7 +86,7 @@ const About: React.FC<PropsType> = ({aboutProfile: {contacts, ...restAboutInfo},
                                     style={{color: iconObj.color}}
                                     key={key}
                                 >
-                                    {iconObj.icon}
+                                    <FontAwesomeIcon icon={iconObj.icon}/>
                                 </a>
                             )
                         }
