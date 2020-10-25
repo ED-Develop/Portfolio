@@ -8,6 +8,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import UploadModal from './banner/UploadModal';
 import {TUploadModal} from './ProfileContainer';
 import {url} from '../../utils/routeManager';
+import {ProfileRoutes} from './routes/ProfileRoutes';
 
 type PropsType = {
     profile: TProfileModel
@@ -58,17 +59,7 @@ const Profile: FC<PropsType> = ({profile, uploadPhoto, isUpload, startDialogs, .
                 updateProfileStatus={props.updateProfileStatus}
             />
             <ProfileNavigation isMyProfile={props.isMyProfile} userId={props.userId}/>
-            <Switch>
-                <Redirect
-                    from={url('profile', {userId: null})}
-                    to={url('profile:timeline', {userId: null})}
-                    exact
-                />
-                <Route
-                    path={url('profile:timeline')}
-                    render={() => <PostsContainer isMyProfile={props.isMyProfile}/>}
-                />
-            </Switch>
+            <ProfileRoutes isMyProfile={props.isMyProfile}/>
         </div>
     )
 };

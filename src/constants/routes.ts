@@ -5,7 +5,6 @@ export const routes = [
     {name: 'base', path: '/'},
     {name: 'profile', path: '/profile/:userId?'},
     {name: 'profile:timeline', path: '/profile/:userId?/timeline'},
-    {name: 'profile:about', path: '/profile/:userId?/about'},
     {name: 'profile:photos', path: '/profile/:userId?/photos'},
     {name: 'profile:videos', path: '/profile/:userId?/videos'},
     {name: 'login', path: '/sign-in'},

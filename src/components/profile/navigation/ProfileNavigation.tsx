@@ -16,7 +16,6 @@ const ProfileNavigation: React.FC<PropsType> = ({isMyProfile, userId}) => {
 
     const navItems = [
         {title: 'Timeline', href: url('profile:timeline', params)},
-        {title: 'About', href: url('profile:about', params)},
         {title: 'Photos', href: url('profile:photos', params)},
         {title: 'Videos', href: url('profile:videos', params)}
     ];

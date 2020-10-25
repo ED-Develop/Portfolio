@@ -12,8 +12,8 @@ import {useSelector} from '../../hook/useSelector';
 import {ContentWrapper} from '../common/layout/ContentWrapper';
 import {TAside} from '../../App';
 import Aside from '../aside/Aside';
+import {ComingSoon} from '../common/layout/coming-soon/ComingSoon';
 
-const DialogsContainer = withSuspense(React.lazy(() => import ('../dialogs/DialogsContainer')));
 const People = withSuspense(React.lazy(() => import ('../people/PeopleContainer')));
 
 type PropsType = {
@@ -36,11 +36,11 @@ const MainRoutes: React.FC<PropsType> = ({aside, toggleIsAsideCollapsed}) => {
                 <ContentWrapper>
                     <Switch>
                         <Route path={url('profile')} render={() => <ProfileContainer/>}/>
-                        <Route path={url('messages')} render={() => <DialogsContainer/>}/>
+                        <Route path={url('messages')} render={() => <ComingSoon isFullScreen/>}/>
                         <Route path={url('people')} render={() => <People/>}/>
                         <Route path={url('projects')} render={() => <Projects/>}/>
                         <Route path={url('settings')} render={() => <Settings/>}/>
-                        <Redirect from={url('base')} to={url<'profile'>('profile', {userId: ''})}/>
+                        <Redirect from={url('base')} to={url('profile', {userId: null})}/>
                     </Switch>
                 </ContentWrapper>
             </Layout>
