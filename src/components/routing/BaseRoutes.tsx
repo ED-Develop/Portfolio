@@ -5,6 +5,7 @@ import MainRoutes from './MainRoutes';
 import withSuspense from '../../hoc/withSuspense';
 import {useSelector} from '../../hook/useSelector';
 import {TAside} from '../../App';
+import {NotFound} from '../common/layout/404/NotFound';
 
 const Login = withSuspense(React.lazy(() => import ('../auth/login/Login')));
 
@@ -34,6 +35,7 @@ export const BaseRoutes: React.FC<PropsType> = ({aside, toggleIsAsideCollapsed})
         <Switch>
             {isAuth ? authRedirects : notAuthRedirects}
             <Route path={url('login')} render={() => <Login/>}/>
+            <Route path={url('404')} render={() => <NotFound/>}/>
             <Route
                 path={url('base')}
                 render={() => (

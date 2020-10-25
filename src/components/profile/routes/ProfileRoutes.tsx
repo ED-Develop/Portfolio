@@ -16,18 +16,10 @@ export const ProfileRoutes: React.FC<PropsType> = ({isMyProfile}) => {
                 to={url('profile:timeline', {userId: null})}
                 exact
             />
-            <Route
-                path={url('profile:timeline')}
-                render={() => <PostsContainer isMyProfile={isMyProfile}/>}
-            />
-            <Route
-                path={url('profile:photos')}
-                render={() => <ComingSoon/>}
-            />
-            <Route
-                path={url('profile:videos')}
-                render={() => <ComingSoon/>}
-            />
+            <Route path={url('profile:timeline')} render={() => <PostsContainer isMyProfile={isMyProfile}/>}/>
+            <Route path={url('profile:photos')} render={() => <ComingSoon/>}/>
+            <Route path={url('profile:videos')} render={() => <ComingSoon/>}/>
+            <Redirect to={url('404')}/>
         </Switch>
     )
 }

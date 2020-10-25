@@ -40,7 +40,8 @@ const MainRoutes: React.FC<PropsType> = ({aside, toggleIsAsideCollapsed}) => {
                         <Route path={url('people')} render={() => <People/>}/>
                         <Route path={url('projects')} render={() => <Projects/>}/>
                         <Route path={url('settings')} render={() => <Settings/>}/>
-                        <Redirect from={url('base')} to={url('profile', {userId: null})}/>
+                        <Redirect exact from={url('base')} to={url('profile', {userId: null})}/>
+                        <Redirect to={url('404')}/>
                     </Switch>
                 </ContentWrapper>
             </Layout>
