@@ -8,18 +8,26 @@ import {ProjectRoutes} from './routes/ProjectRoutes';
 import {useDispatch} from 'react-redux';
 import {getProjects} from '../../redux/project/projects-reducer';
 import {selectProjects} from '../../redux/project/projects-selectors';
+import {MainLayout} from '../common/layout/main/MainLayout';
+import {selectIsFetching} from '../../redux/app/app-selectors';
 
 const Projects: React.FC = () => {
     const dispatch = useDispatch();
     const projects = useSelector(selectProjects);
+    const isFetching = useSelector(selectIsFetching);
 
     useEffect(() => {
         dispatch(getProjects());
     }, []);
 
+    if (isFetching) return null;
+
     return (
-        <div className={style.projects}>
-            <h1 className={style.projects__title}>Projects</h1>
+        <MainLayout
+            isEmpty={!projects.length}
+            className={style.projects}
+            title='Projects'
+        >
             <Row>
                 <Col span={16}>
                     <ProjectsList projects={projects}/>
@@ -29,7 +37,7 @@ const Projects: React.FC = () => {
                 </Col>
             </Row>
             <ProjectRoutes/>
-        </div>
+        </MainLayout>
     )
 };
 

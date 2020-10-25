@@ -14,7 +14,7 @@
 }
 
 .about__item {
-    height: 40px;
+    min-height: 40px;
     display: flex;
     align-items: center;
     line-height: 22px;
@@ -27,8 +27,8 @@
 }
 
 .icon {
-    height: 40px;
-    width: 40px;
+    min-height: 40px;
+    min-width: 40px;
     border-radius: 50%;
     background-color: #f1f3f4;
     display: flex;
@@ -38,11 +38,18 @@
     margin-right: 12px;
 }
 
+.contacts {
+    margin-bottom: 5px;
+}
+
+.contacts .icon {
+    margin-bottom: 10px;
+}
+
 .icon_big {
     font-size: 22px;
 }
 
-.contacts,
 .about {
     margin-bottom: 15px;
 }

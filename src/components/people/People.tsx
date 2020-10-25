@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import style from './People.module.scss';
 import UserList from './users-list/UsersList';
 import {TUserModel} from '../../types/types';
 import Heading from './heading/Heading';
 import {Pagination} from 'antd';
+import {MainLayout} from '../common/layout/main/MainLayout';
+import {PeopleFilterEnum} from './PeopleContainer';
 
 type PropsType = {
     isFetching: boolean
@@ -12,6 +14,7 @@ type PropsType = {
     currentPage: number
     startPage: number
     totalCount: number
+    filter: PeopleFilterEnum
     followingInProgress: Array<number>
     handlePageChanged: (currentPage: number) => void
     follow: (userId: number) => void
@@ -20,8 +23,21 @@ type PropsType = {
 }
 
 const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, handlePageChanged, ...props}) => {
+    const title = useMemo(() => {
+        const titles: { [key in PeopleFilterEnum]: string } = {
+            [PeopleFilterEnum.All]: 'All Peoples',
+            [PeopleFilterEnum.New]: 'New Peoples',
+            [PeopleFilterEnum.Friends]: 'Your Friends'
+        }
+
+        return titles[props.filter];
+    }, [props.filter]);
+
     return (
-        <div className={style.container}>
+        <MainLayout
+            contentClassName={style.container}
+            title={title}
+        >
             <div>
                 <Heading/>
                 <UserList
@@ -41,7 +57,7 @@ const People: React.FC<PropsType> = ({isFetching, totalCount, currentPage, handl
                     defaultPageSize={props.count}
                 />
             </div>
-        </div>
+        </MainLayout>
     )
 }
 

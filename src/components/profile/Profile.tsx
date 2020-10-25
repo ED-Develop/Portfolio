@@ -8,6 +8,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import UploadModal from './banner/UploadModal';
 import {TUploadModal} from './ProfileContainer';
 import {url} from '../../utils/routeManager';
+import {ProfileRoutes} from './routes/ProfileRoutes';
 
 type PropsType = {
     profile: TProfileModel
@@ -16,7 +17,6 @@ type PropsType = {
     status: string
     isAuth: boolean
     isMyProfile: boolean
-    followed: boolean
     uploadPhoto: (photo: File) => void
     startDialogs: (userId: number) => void
     updateProfileStatus: (status: string) => void
@@ -58,18 +58,8 @@ const Profile: FC<PropsType> = ({profile, uploadPhoto, isUpload, startDialogs, .
                 isMyProfile={props.isMyProfile}
                 updateProfileStatus={props.updateProfileStatus}
             />
-            <ProfileNavigation isMyProfile={props.isMyProfile} followed={props.followed} userId={props.userId}/>
-            <Switch>
-                <Redirect
-                    from={url('profile', {userId: null})}
-                    to={url('profile:timeline', {userId: null})}
-                    exact
-                />
-                <Route
-                    path={url('profile:timeline')}
-                    render={() => <PostsContainer isMyProfile={props.isMyProfile}/>}
-                />
-            </Switch>
+            <ProfileNavigation isMyProfile={props.isMyProfile} userId={props.userId}/>
+            <ProfileRoutes isMyProfile={props.isMyProfile}/>
         </div>
     )
 };

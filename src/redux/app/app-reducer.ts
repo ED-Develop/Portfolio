@@ -52,9 +52,7 @@ export const appActions = {
 // thunks
 
 export const initializeApp = (): ThunkType => async (dispatch) => {
-    let promise = dispatch(auth());
-
-    Promise.all([promise]).then(() => {
+    Promise.all([dispatch(auth())]).then(() => {
         dispatch(appActions.initializedSuccess());
     })
 };

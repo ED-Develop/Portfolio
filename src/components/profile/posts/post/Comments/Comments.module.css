@@ -23,26 +23,8 @@
     margin: 0 15px;
 }
 
-.comments__form textarea {
-    height: 38px;
-    background-color: #f1f3f4;
-    border-radius: 50px;
-    line-height: 30px;
-    font-size: 14px;
-    color: #666;
-    padding: 3px 15px;
-}
-
-.comments__form textarea:focus {
-    background-color: #fff;
-    border-radius: 5px;
-    border-color: #f1f3f4;
-    box-shadow: none;
-}
-
-.comments__form textarea::placeholder {
-    font-size: 14px;
-    color: #818181;
+.comments__form button {
+    font-weight: 600;
 }
 
 .comment {

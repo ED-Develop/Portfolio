@@ -107,6 +107,7 @@ const PeopleContainer: FC<PropsType> = (props) => {
 
     return <People
         {...props}
+        filter={filter}
         handlePageChanged={handlePageChanged}
         changePageSize={changePageSize}
     />

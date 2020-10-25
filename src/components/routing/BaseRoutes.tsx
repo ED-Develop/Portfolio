@@ -4,11 +4,13 @@ import {url} from '../../utils/routeManager';
 import MainRoutes from './MainRoutes';
 import withSuspense from '../../hoc/withSuspense';
 import {useSelector} from '../../hook/useSelector';
+import {TAside} from '../../App';
+import {NotFound} from '../common/layout/404/NotFound';
 
 const Login = withSuspense(React.lazy(() => import ('../auth/login/Login')));
 
 type PropsType = {
-    isAsideCollapsed: boolean
+    aside: TAside
     toggleIsAsideCollapsed: () => void
 }
 
@@ -26,18 +28,19 @@ const notAuthRedirects = addRedirects([
     url('people')
 ], url('login'));
 
-export const BaseRoutes: React.FC<PropsType> = ({isAsideCollapsed, toggleIsAsideCollapsed}) => {
+export const BaseRoutes: React.FC<PropsType> = ({aside, toggleIsAsideCollapsed}) => {
     const isAuth = useSelector(state => state.auth.isAuth);
 
     return (
         <Switch>
             {isAuth ? authRedirects : notAuthRedirects}
             <Route path={url('login')} render={() => <Login/>}/>
+            <Route path={url('404')} render={() => <NotFound/>}/>
             <Route
                 path={url('base')}
                 render={() => (
                     <MainRoutes
-                        isAsideCollapsed={isAsideCollapsed}
+                        aside={aside}
                         toggleIsAsideCollapsed={toggleIsAsideCollapsed}
                     />
                 )}

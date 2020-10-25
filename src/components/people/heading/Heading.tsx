@@ -13,7 +13,6 @@ const Heading = () => {
 
     return (
         <div className={style.heading}>
-            <h1>Your Friends</h1>
             <TabsNavigation navItems={navItems}/>
         </div>
     )

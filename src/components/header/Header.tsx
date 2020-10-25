@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import style from './Header.module.css'
-import Logo from "./logo/Logo";
+import Logo from './logo/Logo';
 import Search from './search/Search'
-import UserInfo from "./user-info/UserInfo";
-import {Col, Row} from "antd";
-import {Layout} from "antd";
-import {TUserModel} from "../../types/types";
+import UserInfo from './user-info/UserInfo';
+import {Col, Row} from 'antd';
+import {Layout} from 'antd';
+import {TUserModel} from '../../types/types';
+import {TAside} from '../../App';
 
 const {Content, Sider} = Layout;
 
@@ -18,7 +19,7 @@ type PropsType = {
     isSearchFetching: boolean
     avatar: string | null
     toggleIsAsideCollapsed: () => void
-    isAsideCollapsed: boolean
+    aside: TAside
     searchResults: Array<TUserModel>
     searchItems: (string: string, next?: boolean) => void,
     restoreSearchList: () => void
@@ -27,12 +28,17 @@ type PropsType = {
     reset: (formName: string) => void
 }
 
-const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, isAsideCollapsed, searchItems, searchResults, ...props}) => {
+const Header: FC<PropsType> = ({logout, avatar, toggleIsAsideCollapsed, aside, searchItems, searchResults, ...props}) => {
     return (
         <header className={style.header}>
             <Layout>
-                <Sider theme='light' width='20.8%' collapsed={isAsideCollapsed} collapsedWidth={'16.6%'}>
-                    <Logo toggleIsAsideCollapsed={toggleIsAsideCollapsed} isAsideCollapsed={isAsideCollapsed}/>
+                <Sider
+                    theme='light'
+                    width={aside.width}
+                    collapsed={aside.isCollapsed}
+                    collapsedWidth={aside.collapsedWidth}
+                >
+                    <Logo toggleIsAsideCollapsed={toggleIsAsideCollapsed} isAsideCollapsed={aside.isCollapsed}/>
                 </Sider>
                 <Content className={style.headerContainer}>
                     <Row>

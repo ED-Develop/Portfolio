@@ -1,20 +1,19 @@
 import React, {FC} from 'react';
 import style from './Posts.module.css';
-import Post from "./post/Post";
-import MyPostForm, {PostsFormPropsType} from "./form/PostsForm";
-import defaultAvatar from '../../../assets/images/user.png';
-import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from "../../../types/types";
-import {Col, Row} from "antd";
-import {Dispatch} from "redux";
-import {DecoratedFormProps} from "redux-form/lib/reduxForm";
-import About from "./about/About";
-import {TAboutProfile} from "../../../redux/timeline/timeline-selector";
-import {TFriendsTitle} from "../../../redux/users/users-selector";
-import Friends from "./friends/Friends";
+import Post from './post/Post';
+import MyPostForm, {PostsFormPropsType} from './form/PostsForm';
+import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from '../../../types/types';
+import {Col, Row} from 'antd';
+import {Dispatch} from 'redux';
+import {DecoratedFormProps} from 'redux-form/lib/reduxForm';
+import About from './about/About';
+import {TAboutProfile} from '../../../redux/timeline/timeline-selector';
+import {TFriendsTitle} from '../../../redux/users/users-selector';
+import Friends from './friends/Friends';
 
 type PropsType = {
     postData: Array<TPostModel>
-    avatar: string | null
+    avatar: string
     firstName: string | null
     userId: number | null
     isMyProfile: boolean
@@ -48,7 +47,7 @@ const Posts: FC<PropsType> = React.memo((
 
     return (
         <Row gutter={38}>
-            <Col span={15} className={style.container}>
+            <Col xxl={16} xl={14} lg={13} className={style.container}>
                 {isMyProfile && <div className={style.inputField}>
                     <MyPostForm
                         onSubmit={submitForm}
@@ -72,7 +71,7 @@ const Posts: FC<PropsType> = React.memo((
                         <Post
                             key={post.postId}
                             isMyProfile={isMyProfile}
-                            avatar={avatar || defaultAvatar}
+                            avatar={avatar}
                             post={post}
                             changePostLike={changePostLike}
                             deletePost={deletePost}
@@ -87,7 +86,7 @@ const Posts: FC<PropsType> = React.memo((
                     ))
                 }
             </Col>
-            <Col span={9}>
+            <Col xxl={8} xl={10} lg={11}>
                 {props.aboutProfile && <About aboutProfile={props.aboutProfile} isMyProfile={isMyProfile}/>}
                 <Friends friends={props.friends} friendsCount={props.friendsCount}/>
             </Col>

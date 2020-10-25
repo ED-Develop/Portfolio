@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
-import style from './Logo.module.css';
+import React, {FC, useMemo} from 'react';
+import style from './Logo.module.scss';
 import {NavLink} from "react-router-dom";
 import logo from '../../../assets/images/logo.png'
+import logoSmall from '../../../assets/images/logo-small.png'
 // @ts-ignore
 import Burger from 'react-css-burger';
 import {url} from '../../../utils/routeManager';
@@ -12,8 +13,10 @@ type PropsType = {
 }
 
 const Logo: FC<PropsType> = ({toggleIsAsideCollapsed, isAsideCollapsed}) => {
+    const logoImage = useMemo(() => isAsideCollapsed ? logoSmall : logo, [isAsideCollapsed]);
+
     return (
-        <div className={style.logo}>
+        <div className={`${style.logo} ${isAsideCollapsed ? style.logo_small : ''}`}>
             <Burger
                 active={!isAsideCollapsed}
                 burger="arrow"
@@ -23,7 +26,7 @@ const Logo: FC<PropsType> = ({toggleIsAsideCollapsed, isAsideCollapsed}) => {
                 style={{margin: 0, marginRight: '15px'}}
                 onClick={toggleIsAsideCollapsed}
             />
-            <NavLink to={url('base')}><img src={logo} alt="Logo"/></NavLink>
+            <NavLink to={url('base')}><img src={logoImage} alt="Logo"/></NavLink>
         </div>
     )
 };

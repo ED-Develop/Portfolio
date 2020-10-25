@@ -52,12 +52,12 @@ export const ProjectItem: FC<PropsType> = ({title, logo, link, description, stac
 
     return (
         <Row className={style.projects__item}>
-            <Col span={2}>
+            <Col xxl={2} xl={3} md={4}>
                 <div className={style.projects__logo}>
                     <img src={logo} alt={`${title} logo`}/>
                 </div>
             </Col>
-            <Col span={22} className={style.projects__itemContent}>
+            <Col xxl={22} xl={21} md={20} className={style.projects__itemContent}>
                 <h2 className={style.projects__name}>
                     <a target='_blank' href={link}>{title}</a>
                 </h2>

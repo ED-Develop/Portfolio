@@ -6,6 +6,7 @@ import {AppStateType} from "../../redux/store";
 import {cashSelectedItem, restoreSearchList, searchActions, searchItems} from "../../redux/search/search-reducer";
 import {TUserModel} from "../../types/types";
 import {reset} from "redux-form";
+import {TAside} from '../../App';
 
 const {setSearchString} = searchActions;
 
@@ -31,7 +32,7 @@ type MapDispatchPropsType = {
 
 type OwnProps = {
     toggleIsAsideCollapsed: () => void
-    isAsideCollapsed: boolean
+    aside: TAside
 }
 
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnProps

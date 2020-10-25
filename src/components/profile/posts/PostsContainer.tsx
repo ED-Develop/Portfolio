@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Posts from './Posts';
 import {connect} from 'react-redux';
-import {getFirstName, getFriendsTitles} from '../../../redux/profile/profile-selector';
+import {selectFirstName, selectFriendsTitles} from '../../../redux/profile/profile-selector';
 import {TPostContent, TPostFormData, TPostModel, TUploadedFile} from '../../../types/types';
 import {AppStateType} from '../../../redux/store';
 import {
@@ -23,15 +23,16 @@ import {destroy} from 'redux-form';
 import {Dispatch} from 'redux';
 import {DecoratedFormProps} from 'redux-form/lib/reduxForm';
 import {PostsFormPropsType} from './form/PostsForm';
-import {getAboutProfileInfo, TAboutProfile} from '../../../redux/timeline/timeline-selector';
+import {slectAboutProfileInfo, TAboutProfile} from '../../../redux/timeline/timeline-selector';
 import {TFriendsTitle} from '../../../redux/users/users-selector';
 import {getFriends} from '../../../redux/profile/profile-reducer';
+import {selectUserAvatar} from '../../../redux/auth/auth-selectors';
 
 const {removeUploadedFile} = timelineActions;
 
 type MapStatePropsType = {
     postData: Array<TPostModel>
-    avatar: string | null
+    avatar: string
     firstName: string | null
     userId: number | null
     uploadedFiles: Array<TUploadedFile>
@@ -124,12 +125,12 @@ const PostsContainer: React.FC<PostsPropsType> = (props) => {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     postData: state.timeline.postData,
-    avatar: state.profile.profile && state.profile.profile.photos.small,
-    firstName: getFirstName(state),
+    avatar: selectUserAvatar(state),
+    firstName: selectFirstName(state),
     userId: state.auth.userId,
     uploadedFiles: state.timeline.uploadedFiles,
-    aboutProfile: getAboutProfileInfo(state),
-    friends: getFriendsTitles(state),
+    aboutProfile: slectAboutProfileInfo(state),
+    friends: selectFriendsTitles(state),
     friendsCount: state.profile.friendsCount
 });
 
