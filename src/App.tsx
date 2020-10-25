@@ -1,19 +1,14 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import './scss/App.scss';
 import {BrowserRouter} from 'react-router-dom';
-import {connect, Provider} from 'react-redux';
-import Preloader from './components/common/preloader/Preloader';
+import {Provider, useDispatch} from 'react-redux';
 import {appActions, initializeApp} from './redux/app/app-reducer';
-import store, {AppStateType} from './redux/store';
+import store from './redux/store';
 import ErrorAlert from './components/common/error-alert/ErrorAlert';
 import {BaseRoutes} from './components/routing/BaseRoutes';
-
-type MapStatePropsType = ReturnType<typeof mapStateToProps>
-type MapDispatchPropsType = {
-    initializeApp: () => void
-    setGlobalError: (globalError: any) => void
-}
-type AppPropsType = MapStatePropsType & MapDispatchPropsType;
+import {useSelector} from './hook/useSelector';
+import {selectGlobalError, selectInitialized} from './redux/app/app-selectors';
+import {InitLoader} from './components/common/init-loader/InitLoader';
 
 export type TAside = {
     width: string
@@ -21,82 +16,58 @@ export type TAside = {
     isCollapsed: boolean
 }
 
-type LocalStateType = {
-    aside: TAside
-}
+const App = () => {
+    const dispatch = useDispatch();
+    const initialized = useSelector(selectInitialized);
+    const globalError = useSelector(selectGlobalError);
 
-class AppContainer extends Component<AppPropsType, LocalStateType> {
-    constructor(props: AppPropsType) {
-        super(props);
-        this.state = {
-            aside: {
-                width: '20%',
-                collapsedWidth: '11%',
-                isCollapsed: false
-            }
-        }
-    }
+    const [aside, setAside] = useState<TAside>({
+        width: '20%',
+        collapsedWidth: '11%',
+        isCollapsed: false
+    });
 
-    catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
-        this.props.setGlobalError(promiseRejectionEvent);
-    };
-
-    hideModalWindow = () => {
-        this.props.setGlobalError(null);
-    };
-
-    componentDidMount() {
-        this.props.initializeApp();
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors);
-    }
-
-    toggleIsAsideCollapsed = () => {
-        this.setState(state => ({
-            ...state,
-            aside: {
-                ...state.aside,
-                isCollapsed: !state.aside.isCollapsed
-            }
+    const toggleIsAsideCollapsed = () => {
+        setAside(aside => ({
+            ...aside,
+            isCollapsed: !aside.isCollapsed
         }))
     };
 
-    render() {
-        if (!this.props.initialized) return <Preloader/>
+    const catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
+        dispatch(appActions.setGlobalError(promiseRejectionEvent.reason));
+    };
 
-        return (
-            <>
-                {this.props.globalError && <ErrorAlert message={this.props.globalError.message}/>}
-                <BaseRoutes
-                    aside={this.state.aside}
-                    toggleIsAsideCollapsed={this.toggleIsAsideCollapsed}
-                />
-            </>
-        );
-    }
+    useEffect(() => {
+        dispatch(initializeApp());
+        window.addEventListener('unhandledrejection', catchAllUnhandledErrors);
+
+        return () => {
+            window.removeEventListener('unhandledrejection', catchAllUnhandledErrors);
+        }
+    }, []);
+
+    if (!initialized) return <InitLoader/>;
+
+    return (
+        <>
+            {globalError && <ErrorAlert message={globalError.message}/>}
+            <BaseRoutes
+                aside={aside}
+                toggleIsAsideCollapsed={toggleIsAsideCollapsed}
+            />
+        </>
+    );
 }
 
-const mapStateToProps = (state: AppStateType) => ({
-    isAuth: state.auth.isAuth,
-    initialized: state.app.initialized,
-    globalError: state.app.globalError,
-    isFetching: state.app.isFetching
-});
-
-const AppConnected = connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps,
-    {initializeApp, setGlobalError: appActions.setGlobalError})(AppContainer);
-
-const App: React.FC = () => {
+const AppWithProviders: React.FC = () => {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                <AppConnected/>
+                <App/>
             </Provider>
         </BrowserRouter>
-    )
+    );
 };
 
-export default App;
+export default AppWithProviders;

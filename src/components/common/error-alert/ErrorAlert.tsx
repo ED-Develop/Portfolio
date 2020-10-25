@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./ErrorAlert.module.css";
+import style from "./ErrorAlert.module.scss";
 import {Alert} from "antd";
 
 type PropsType = {
@@ -15,6 +15,7 @@ const ErrorAlert: React.FC<PropsType> = ({message}) => {
                 type='error'
                 closable
                 showIcon
+                className={style.errorAlert__window}
             />
         </div>
     )
