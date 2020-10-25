@@ -21,6 +21,12 @@ const Login: FC = () => {
         {name: 'rememberMe', type: 'checkbox', label: ' Remember me'}
     ];
 
+    const initialValues: LoginFormData = {
+        email: process.env.REACT_APP_EMAIL || '',
+        password: process.env.REACT_APP_PASSWORD || '',
+        rememberMe: false
+    }
+
     const handleSubmit = (value: LoginFormData) => dispatch(login(value));
 
     return (
@@ -32,6 +38,7 @@ const Login: FC = () => {
             </p>
             <AuthForm
                 handleSubmit={handleSubmit}
+                initialValues={initialValues}
                 formModel={formData}
                 formName='login'
                 btnText='Get Started'

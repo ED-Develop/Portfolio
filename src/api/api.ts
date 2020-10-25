@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    baseURL: process.env.REACT_APP_SAMURAI_API,
     headers: {
-        "API-KEY": "64c21cc3-b97f-48de-b1a2-ded888ce4466"
+        'API-KEY': process.env.REACT_APP_SAMURAI_API_KEY
     }
 });
 

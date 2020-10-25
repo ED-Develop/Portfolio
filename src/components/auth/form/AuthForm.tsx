@@ -9,13 +9,15 @@ type PropsType = {
     formModel: Array<TField<any>>
     formName: string
     btnText?: string
+    initialValues?: any
 }
 
-export const AuthForm: React.FC<PropsType> = ({handleSubmit, formModel, children, formName, btnText}) => {
+export const AuthForm: React.FC<PropsType> = ({handleSubmit, formModel, children, formName, btnText, initialValues}) => {
     return (
         <ReduxForm
             onSubmit={handleSubmit}
             className={style.landing__form}
+            initialValues={initialValues}
             form={formName}
         >
             {

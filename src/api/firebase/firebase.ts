@@ -4,19 +4,19 @@ import {BaseAPI} from '../base-api';
 import {TObject} from '../../types/types';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyBxo0wX9tg2u4RWr6AMJL4p-_r5nC9XLdw',
-    authDomain: 'social-network-6361c.firebaseapp.com',
-    databaseURL: 'https://social-network-6361c.firebaseio.com',
-    projectId: 'social-network-6361c',
-    storageBucket: 'social-network-6361c.appspot.com',
-    messagingSenderId: '123793187557',
-    appId: '1:123793187557:web:e30085e97bfbff12b86a0c'
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_API,
+    databaseURL: process.env.REACT_APP_FIREBASE_API_DATABASE,
+    projectId: process.env.REACT_APP_FIREBASE_API_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_API_STORAGE,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_API_MESSAGING_ID,
+    appId: process.env.REACT_APP_FIREBASE_API_APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const instance = axios.create({
-    baseURL: 'https://social-network-6361c.firebaseio.com/',
+    baseURL: process.env.REACT_APP_FIREBASE_API_DATABASE,
     headers: {
         'Content-Type': 'application/json'
     }
