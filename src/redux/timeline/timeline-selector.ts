@@ -11,7 +11,7 @@ export type TAboutProfile = {
     contacts: TContacts
 }
 
-export const getAboutProfileInfo = createSelector(getProfile, (profile): TAboutProfile | null => {
+export const slectAboutProfileInfo = createSelector(getProfile, (profile): TAboutProfile | null => {
     if (profile) {
         return {
             aboutMe: profile?.aboutMe,

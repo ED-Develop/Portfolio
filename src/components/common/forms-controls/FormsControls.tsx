@@ -64,12 +64,6 @@ export const Textarea: FC<CustomFieldPropsType & WrappedFieldProps> = ({
     )
 };
 
-export const CustomCheckbox: FC<WrappedFieldProps> = ({input, meta}) => {
-    return (
-        <Checkbox {...input}/>
-    )
-}
-
 export type CreateFieldOptionsType<ForkKeysType, P = {}, RE extends HTMLElement | null = null> = {
     component: ComponentType<any> | string,
     name: ForkKeysType,
