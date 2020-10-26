@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomTextarea component Should renders correctly 1`] = `
+<div>
+  <textarea
+    class="ant-input field field_textarea"
+  />
+</div>
+`;

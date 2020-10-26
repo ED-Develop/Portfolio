@@ -1,0 +1,66 @@
+{
+  "people": {
+    "usersData": [],
+    "count": 15,
+    "currentPage": 1,
+    "startPage": 1,
+    "totalCount": 0,
+    "followingInProgress": [],
+    "paginationValues": null
+  },
+  "search": {
+    "searchString": "",
+    "searchItems": [],
+    "isSearchFetching": false,
+    "totalCount": 15,
+    "currentPage": 1,
+    "count": 5
+  },
+  "profile": {
+    "profile": {
+      "aboutMe": null,
+      "contacts": {
+        "facebook": null,
+        "website": null,
+        "vk": null,
+        "twitter": null,
+        "instagram": null,
+        "youtube": null,
+        "github": null,
+        "mainLink": null
+      },
+      "lookingForAJob": false,
+      "lookingForAJobDescription": "React JS",
+      "fullName": "Eduard Shvetsov",
+      "userId": 5046,
+      "photos": {
+        "small": "https://social-network.samuraijs.com/activecontent/images/users/5046/user-small.jpg?v=27",
+        "large": "https://social-network.samuraijs.com/activecontent/images/users/5046/user.jpg?v=27"
+      }
+    },
+    "status": "",
+    "followed": false,
+    "isUpdateSuccess": false,
+    "friends": [],
+    "friendsCount": 0
+  },
+  "auth": {
+    "userId": 1,
+    "login": null,
+    "email": null,
+    "status": null,
+    "isAuth": false,
+    "photos": {},
+    "captchaURL": null
+  },
+  "app": {
+    "initialized": false,
+    "isFetching": false,
+    "isUpload": false,
+    "globalError": null,
+    "isSuccess": false
+  },
+  "projects": {
+    "projects": null
+  }
+}

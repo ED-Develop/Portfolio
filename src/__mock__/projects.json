@@ -1,0 +1,31 @@
+[
+  {
+    "description": "Application for looking and saving information about movies." ,
+    "link": "https://movies-ed.herokuapp.com/" ,
+    "logo": "https://firebasestorage.googleapis.com/v0/b/social-network-6361c.appspot.com/o/projects%2F144-1445791_transparent-movie-marquee-png-flat-movies-icon-png.png?alt=media&token=5284b577-55b8-4225-a4ff-0cb10051a261" ,
+    "stack": [
+      "React" ,
+      "Graph QL" ,
+      "Apollo" ,
+      "Express" ,
+      "TypeScript" ,
+      "Formik"
+    ] ,
+    "title": "Movies Info" ,
+    "id": "-MKFaZ6OqLvo29XULYXm"
+  } ,
+  {
+    "description": "It’s a replica for Google Sheets. This is SPA without any JavaScript framework. I’ve developed my own framework, using OOP principles. Ideas for this project I've used from a video course." ,
+    "link": "https://edward-dev26.github.io/excel/" ,
+    "logo": "https://firebasestorage.googleapis.com/v0/b/social-network-6361c.appspot.com/o/projects%2Fmicrosoft-excel-for-ipad-2014-05-02.png?alt=media&token=91518a1a-092c-485a-b688-c4e4352dbc54" ,
+    "stack": [
+      "Pure JavaScript" ,
+      "OOP" ,
+      "Jest" ,
+      "Webpack" ,
+      "Babel"
+    ] ,
+    "title": "Excel" ,
+    "id": "-MKFbCc7x0Fo1LJRrONW"
+  }
+]

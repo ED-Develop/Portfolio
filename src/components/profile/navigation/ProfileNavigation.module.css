@@ -1,0 +1,21 @@
+.profile__navigation {
+    height: 63px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #efefef;
+    box-shadow: 0 6px 17px -12px #c4c4c4;
+    margin-bottom: 25px;
+}
+
+.navBtns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navBtns button {
+    width: 165px;
+    height: 40px;
+    margin-left: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}

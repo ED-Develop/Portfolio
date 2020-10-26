@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Landing component Should renders correctly 1`] = `
+<div>
+  <section
+    class="ant-layout ant-layout-has-sider container"
+  >
+    <main
+      class="ant-layout-content landing__banner"
+    >
+      <div
+        class="logo"
+      >
+        <img
+          alt="logo"
+          src="logo-small.png"
+        />
+      </div>
+      <div
+        class="title"
+      >
+        <h1>
+          Make your life more interesting with Socialite Social Network
+        </h1>
+      </div>
+      <ul
+        class="nav"
+      >
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            href="/"
+          >
+            About
+          </a>
+        </li>
+        <li>
+          <a
+            aria-current="page"
+            class="active"
+            href="/"
+          >
+            Contact
+          </a>
+        </li>
+      </ul>
+    </main>
+    <aside
+      class="sider ant-layout-sider ant-layout-sider-dark"
+      style="flex: 0 0 33%; max-width: 33%; min-width: 33%; width: 33%;"
+    >
+      <div
+        class="ant-layout-sider-children"
+      >
+        <div
+          class="landing__sider"
+        />
+      </div>
+    </aside>
+  </section>
+</div>
+`;

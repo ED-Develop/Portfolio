@@ -1,0 +1,30 @@
+.header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    padding: 0 44px 0 18px;
+    box-shadow: 0 1px 0 0 rgba(139, 141, 157, 0.05), 10px 1px 7px 0 rgba(65, 71, 108, 0.15)
+}
+
+.headerContainer {
+    background-color: #fff;
+    overflow-x: visible !important;
+}
+
+.auth .login {
+    color: #fff;
+    font-size: 16px;
+    padding: 14.5px 20px;
+    cursor: pointer;
+    border-left: 1px solid #6d6e71;
+    border-right: 1px solid #6d6e71;
+    display: block;
+    text-decoration: none;
+}
+.auth .login:hover {
+    background-color: #3f3a3b;
+}

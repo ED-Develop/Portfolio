@@ -1,0 +1,24 @@
+.uploadButton {
+    color: #929292;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 5px;
+    width: 150px;
+    height: 36px;
+    text-align: left;
+    background-color: #fff;
+    transition: background-color .2s;
+}
+
+.uploadButton:hover {
+    background-color: #f1f3f4;
+    color: #3e416d;
+    transition: background-color .2s;
+}
+
+.uploadButton img {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    margin-right: 7px;
+}

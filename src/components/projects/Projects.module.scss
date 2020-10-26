@@ -1,0 +1,82 @@
+@import "src/scss/variables";
+
+.projects {
+  &__item {
+    padding: 20px 0 20px;
+    border-bottom: $separate-br;
+  }
+
+  &__itemContent {
+    position: relative;
+  }
+
+  &__menuBtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+
+  &__logo {
+    img {
+      width: 55px;
+      max-width: 100%;
+      height: 55px;
+      border-radius: 4px;
+    }
+  }
+
+  &__name {
+    a {
+      color: $title-item-tx;
+      font-size: 22px;
+      font-weight: 600;
+      position: relative;
+      padding: 0 2px;
+
+      &:hover {
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+          background-color: $title-item-tx;
+        }
+      }
+    }
+  }
+
+  &__description {
+    color: $input-tx;
+  }
+
+  &__stack {
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      margin-bottom: 6px;
+    }
+  }
+
+  &__stackItem {
+    display: flex;
+    height: 28px;
+    align-items: center;
+    padding: 0 13px;
+    margin-right: 10px;
+    font-weight: 600;
+    color: $tab-blue-tx;
+    background-color: $tab-blue-bg;
+    border-radius: 6px;
+  }
+
+  &__add {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__removeBtn {
+    color: $danger-tx !important;
+  }
+}
