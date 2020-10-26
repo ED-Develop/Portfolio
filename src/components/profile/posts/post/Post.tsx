@@ -34,7 +34,7 @@ const Post: FC<PropsType> = ({post, deletePost, changePostLike, avatar, userId, 
         <div className={style.posts_post}>
             <PostHeading
                 date={post.date}
-                photo={post.user.photos.small || defaultAvatar}
+                photo={post.user.photos?.small || defaultAvatar}
                 user={post.user.fullName}
                 isPostOwner={userId === post.user.id}
                 onDeletePost={onDeletePost}
