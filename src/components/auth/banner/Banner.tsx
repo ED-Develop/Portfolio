@@ -24,7 +24,7 @@ export const Banner = () => {
                 <img src={logo} alt="logo"/>
             </div>
             <div className={style.title}>
-                <h1>Make your life more interesting with Socialite Social Network</h1>
+                <h1>Make your life more interesting with Social Network</h1>
             </div>
             <ul className={style.nav}>
                 {
