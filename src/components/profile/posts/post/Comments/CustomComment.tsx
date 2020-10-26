@@ -62,7 +62,7 @@ const CustomComment: React.FC<PropsType> = ({comment, userId, deleteComment, pos
                     </PopUpMenu>
                 </div>
             }
-            avatar={comment.user.photos.small || defaultAvatar}
+            avatar={comment.user.photos?.small || defaultAvatar}
             actions={
                 [
                     <span className={style.like}><span><LikeOutlined/></span> Like</span>,
