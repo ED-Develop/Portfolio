@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
 import style from './Post.module.css';
-import {TPostModel} from "../../../../types/types";
+import {TPostModel} from '../../../../types/types';
 import like from '../../../../assets/images/reactions_like.png';
 import love from '../../../../assets/images/reactions_love.png';
-import Statistic from "./Statistic";
-import Comments from "./Comments/Comments";
-import {Tooltip} from "antd";
-import PostHeading from "./PostHeading";
-import PostContent from "./PostContent";
+import Statistic from './Statistic';
+import Comments from './Comments/Comments';
+import {Tooltip} from 'antd';
+import PostHeading from './PostHeading';
+import PostContent from './PostContent';
+import defaultAvatar from '../../../../assets/images/user.png';
 
 type PropsType = {
     post: TPostModel,
@@ -33,7 +34,7 @@ const Post: FC<PropsType> = ({post, deletePost, changePostLike, avatar, userId, 
         <div className={style.posts_post}>
             <PostHeading
                 date={post.date}
-                photo={post.user.photos.small}
+                photo={post.user.photos.small || defaultAvatar}
                 user={post.user.fullName}
                 isPostOwner={userId === post.user.id}
                 onDeletePost={onDeletePost}

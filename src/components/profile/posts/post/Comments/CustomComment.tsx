@@ -1,10 +1,11 @@
-import React from "react";
-import style from "./Comments.module.css";
-import PopUpMenu from "../../../../common/pop-up-menu/PopUpMenu";
-import {BugOutlined, DeleteOutlined, EditOutlined, LikeOutlined} from "@ant-design/icons/lib";
-import {Comment} from "antd";
-import {TPostComment} from "../../../../../types/types";
-import {findReply} from "../../../../../utils/helpers";
+import React from 'react';
+import style from './Comments.module.css';
+import PopUpMenu from '../../../../common/pop-up-menu/PopUpMenu';
+import {BugOutlined, DeleteOutlined, EditOutlined, LikeOutlined} from '@ant-design/icons/lib';
+import {Comment} from 'antd';
+import {TPostComment} from '../../../../../types/types';
+import {findReply} from '../../../../../utils/helpers';
+import defaultAvatar from '../../../../../assets/images/user.png';
 
 type PropsType = {
     comment: TPostComment
@@ -61,7 +62,7 @@ const CustomComment: React.FC<PropsType> = ({comment, userId, deleteComment, pos
                     </PopUpMenu>
                 </div>
             }
-            avatar={comment.user.photos.small}
+            avatar={comment.user.photos.small || defaultAvatar}
             actions={
                 [
                     <span className={style.like}><span><LikeOutlined/></span> Like</span>,
