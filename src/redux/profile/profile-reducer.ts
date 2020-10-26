@@ -73,7 +73,7 @@ export const getUserProfile = (userId?: number): ThunkType => async (dispatch, g
         const data = await profileApi.getUserProfile(userId || getOwnerId(getState));
 
         if (data) dispatch(profileActions.setUserProfile(data));
-    }, dispatch, {visualization: false, resultCode: false});
+    }, dispatch, {resultCode: false});
 };
 
 export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
