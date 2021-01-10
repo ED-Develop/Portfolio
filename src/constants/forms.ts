@@ -3,5 +3,6 @@ export const FORM = {
     settingsAbout: 'settingsAbout',
     socialLinks: 'socialLinks',
     search: 'search',
-    projects: 'projects'
+    projects: 'projects',
+    chat: 'chat'
 };

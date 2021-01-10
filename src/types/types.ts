@@ -48,6 +48,13 @@ export type TPostModel = {
     comments: Array<TPostComment>
 }
 
+export type TMessageModel = {
+    message: string
+    photo: string | null
+    userId: TId
+    userName: string
+}
+
 export type PostUserType = {
     fullName: string | null
     id: number | null

@@ -31,7 +31,7 @@ const App = () => {
         setAside(aside => ({
             ...aside,
             isCollapsed: !aside.isCollapsed
-        }))
+        }));
     };
 
     const catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
@@ -44,7 +44,7 @@ const App = () => {
 
         return () => {
             window.removeEventListener('unhandledrejection', catchAllUnhandledErrors);
-        }
+        };
     }, []);
 
     if (!initialized) return <InitLoader/>;
@@ -58,7 +58,7 @@ const App = () => {
             />
         </>
     );
-}
+};
 
 const AppWithProviders: React.FC = () => {
     return (

@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import style from '../CustomFields.module.scss';
+import cn from 'classnames';
 import {Field, WrappedFieldProps} from 'redux-form';
 import {Form} from 'antd';
 import {ValidatorsType} from '../../../../utils/validators';
@@ -21,6 +22,8 @@ export type FieldPropsType = {
     disabled?: boolean
     storage?: string
     multiple?: boolean
+    wrapperClassName?: string
+    className?: string
 }
 
 type ComponentPropsType = Omit<FieldPropsType, 'validate'> & WrappedFieldProps & {
@@ -28,7 +31,15 @@ type ComponentPropsType = Omit<FieldPropsType, 'validate'> & WrappedFieldProps &
 };
 
 const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldPropsType> => {
-    const FieldComponent: React.FC<ComponentPropsType> = ({meta, input, label, type, error, ...props}) => {
+    const FieldComponent: React.FC<ComponentPropsType> = ({
+                                                              meta,
+                                                              input,
+                                                              label,
+                                                              type,
+                                                              error,
+                                                              wrapperClassName,
+                                                              ...props
+                                                          }) => {
         const isError = () => error || (meta.touched && meta.error) ? 'error' : 'success';
         const getHelpMessage = () => error || (meta.touched && meta.error);
         const metaProps = () => ['file'].some(i => i === type) ? meta : {};
@@ -40,7 +51,7 @@ const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldProp
                 help={getHelpMessage()}
                 labelCol={type === 'checkbox' ? {} : {span: 24}}
                 required={props.required}
-                className={style.field__label}
+                className={cn(style.field__label, wrapperClassName)}
 
             >
                 <Component
@@ -51,7 +62,7 @@ const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldProp
                 />
             </Form.Item>
         );
-    }
+    };
 
     return ({name, validate, ...props}) => {
         const isRequired = useMemo(() => {
@@ -66,8 +77,8 @@ const reduxFormField = (Component: React.ComponentType<any>): React.FC<FieldProp
                 required={isRequired}
                 {...props}
             />
-        )
-    }
+        );
+    };
 };
 
 export const ReduxFormInput = reduxFormField(CustomInput);

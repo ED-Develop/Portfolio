@@ -14,7 +14,7 @@ type PropsType = {
 const Nav: FC<PropsType> = ({collapsed}) => {
     const navItem = [
         {title: 'Profile', href: url('profile', {userId: null}), icon: profile},
-        {title: 'Messages', href: url('messages', {userId: null}), icon: chat},
+        {title: 'Chat', href: url('chat'), icon: chat},
         {title: 'People', href: url<'people'>('people', {filter: null}), icon: friends},
         {title: 'Projects', href: url('projects'), icon: jobs}
     ];

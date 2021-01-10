@@ -15,6 +15,7 @@ import Aside from '../aside/Aside';
 import {ComingSoon} from '../common/layout/coming-soon/ComingSoon';
 
 const People = withSuspense(React.lazy(() => import ('../people/PeopleContainer')));
+const ChatPage = withSuspense(React.lazy(() => import('../../pages/chat/ChatPage')));
 
 type PropsType = {
     aside: TAside
@@ -37,6 +38,7 @@ const MainRoutes: React.FC<PropsType> = ({aside, toggleIsAsideCollapsed}) => {
                     <Switch>
                         <Route path={url('profile')} render={() => <ProfileContainer/>}/>
                         <Route path={url('messages')} render={() => <ComingSoon isFullScreen/>}/>
+                        <Route path={url('chat')} render={() => <ChatPage/>}/>
                         <Route path={url('people')} render={() => <People/>}/>
                         <Route path={url('projects')} render={() => <Projects/>}/>
                         <Route path={url('settings')} render={() => <Settings/>}/>

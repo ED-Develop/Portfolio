@@ -19,6 +19,8 @@ $min-height: calc(100vh - #{$top-offset});
   &__content {
     position: relative;
     min-height: $min-height;
+    display: flex;
+    flex-direction: column;
   }
 
   &__empty {

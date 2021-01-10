@@ -12,6 +12,7 @@ export const routes = [
     {name: 'sign-up', path: 'https://social-network.samuraijs.com/signUp'},
     {name: 'reset-password', path: 'https://social-network.samuraijs.com/login'},
     {name: 'messages', path: '/messages/:userId?'},
+    {name: 'chat', path: '/chat'},
     {name: 'people', path: '/people/:filter?'},
     {name: 'projects', path: '/projects'},
     {name: 'projects:add', path: '/projects/add'},
