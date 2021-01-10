@@ -4,26 +4,15 @@ import {TMessageModel} from '../../../types/types';
 
 import {Message} from './Message';
 
-const messages: Array<TMessageModel> = [
-    {
-        message: 'Hello',
-        photo: null,
-        userId: 1,
-        userName: 'Dimich'
-    },
-    {
-        message: 'Hi',
-        photo: null,
-        userId: 2,
-        userName: 'Edward'
-    }
-];
+type PropsType = {
+    messages: Array<TMessageModel>
+}
 
-export const Messages = () => {
+export const Messages: React.FC<PropsType> = ({messages}) => {
     return (
         <div className={style.messages}>
             {
-                messages.map(message => <Message {...message}/>)
+                messages.map((message, index) => <Message {...message} key={index}/>)
             }
         </div>
     );

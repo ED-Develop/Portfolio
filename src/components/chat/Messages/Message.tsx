@@ -1,14 +1,17 @@
 import React from 'react';
 import style from './Messages.module.scss';
 import cn from 'classnames';
-
+import {useSelector} from '../../../hook/useSelector';
+import {selectUserId} from '../../../redux/auth/auth-selectors';
 import {TMessageModel} from '../../../types/types';
+
 import AvatarImage from '../../common/helpers/AvatarImage';
 
 type PropsType = TMessageModel;
 
 export const Message: React.FC<PropsType> = ({message, photo, userId, userName}) => {
-    const isMyMessage = userId === 2;
+    const myId = useSelector(selectUserId);
+    const isMyMessage = userId === myId;
 
     return (
         <div

@@ -1,6 +1,8 @@
 @import "src/scss/variables";
+@import "src/pages/chat/variables";
 
 .chatForm {
+  max-height: $chat-form-height;
   padding: 16px;
   border-top: $separate-br;
   display: flex;

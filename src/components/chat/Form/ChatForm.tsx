@@ -8,17 +8,19 @@ import {FORM} from '../../../constants/forms';
 import {fieldsManager, TField} from '../../common/form/fieldsManager';
 import {Button} from 'antd';
 import {SendOutlined} from '@ant-design/icons';
+import {Dispatch} from 'redux';
+import {reset} from 'redux-form';
 
-type TChatFormData = {
+export type TChatFormData = {
     message: string
 }
 
-export const ChatForm = () => {
-    const url = useSelector(selectUserAvatar);
+type PropsType = {
+    onSubmit: (data: TChatFormData) => void
+}
 
-    const handleSubmit = (value: TChatFormData) => {
-        console.log(value);
-    };
+export const ChatForm: React.FC<PropsType> = ({onSubmit}) => {
+    const avatar = useSelector(selectUserAvatar);
 
     const formModel: Array<TField<TChatFormData>> = [
         {
@@ -30,6 +32,11 @@ export const ChatForm = () => {
         }
     ];
 
+    const handleSubmit = (data: TChatFormData, dispatch: Dispatch) => {
+        onSubmit(data);
+        dispatch(reset(FORM.chat));
+    };
+
     return (
         <ReduxForm
             form={FORM.chat}
@@ -40,7 +47,7 @@ export const ChatForm = () => {
                     <div className={style.chatForm}>
                         <AvatarImage
                             type="large"
-                            imgUrl={url}
+                            imgUrl={avatar}
                             className={style.chatForm__avatar}
                         />
                         <div className={style.chatForm__fields}>

@@ -1,9 +1,5 @@
 @import "src/scss/variables";
-
-$title-margin: 25px;
-$title-height: 48px;
-$top-offset: $main-top-offset + $title-height + $title-margin;
-$min-height: calc(100vh - #{$top-offset});
+@import "./variables";
 
 .main {
   font-size: 15px;

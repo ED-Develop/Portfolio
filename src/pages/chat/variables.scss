@@ -1,0 +1,5 @@
+@import "src/components/common/layout/main/variables";
+
+$padding-bottom: 50px;
+$chat-form-height: 83px;
+$max-messages-height: $top-offset + $padding-bottom + $chat-form-height;
