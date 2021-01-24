@@ -24,10 +24,11 @@ const withProcessVisualization: TThunkHandler = (callback, dispatch) => async ()
     return data;
 };
 
-const withTryCatch: TThunkHandler = (callback, dispatch) => async () => {
+export const withTryCatch: TThunkHandler = (callback, dispatch) => async () => {
     try {
         return await callback();
     } catch (e) {
+        console.log(e);
         dispatch(appActions.setGlobalError(e));
     }
 };

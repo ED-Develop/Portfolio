@@ -17,9 +17,10 @@ export type TChatFormData = {
 
 type PropsType = {
     onSubmit: (data: TChatFormData) => void
+    disabled?: boolean
 }
 
-export const ChatForm: React.FC<PropsType> = ({onSubmit}) => {
+export const ChatForm: React.FC<PropsType> = ({onSubmit, disabled}) => {
     const avatar = useSelector(selectUserAvatar);
 
     const formModel: Array<TField<TChatFormData>> = [
@@ -59,6 +60,7 @@ export const ChatForm: React.FC<PropsType> = ({onSubmit}) => {
                             htmlType="submit"
                             icon={<SendOutlined/>}
                             className={style.chatForm__btn}
+                            disabled={disabled}
                         />
                     </div>
                 )

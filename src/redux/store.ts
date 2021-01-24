@@ -10,6 +10,7 @@ import appReducer from "./app/app-reducer";
 import projectsReducer from "./project/projects-reducer";
 import timelineReducer from "./timeline/timeline-reducer";
 import searchReducer from "./search/search-reducer";
+import chatReducer from './chat/chat-reducer';
 
 const rootReducer = combineReducers({
     profile: profileReducer,
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     app: appReducer,
     projects: projectsReducer,
     timeline: timelineReducer,
-    search: searchReducer
+    search: searchReducer,
+    chat: chatReducer
 });
 
 type RootReducerType = typeof rootReducer

@@ -1,35 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import style from './Chat.module.scss';
 
 import {Messages} from './Messages/Messages';
 import {ChatForm, TChatFormData} from './Form/ChatForm';
-import {TMessageModel} from '../../types/types';
-
-const wsChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
+import {useSelector} from '../../hook/useSelector';
+import {selectMessages} from '../../redux/chat/chat-selectors';
+import {useDispatch} from 'react-redux';
+import {sendMessage, startChatListening, stopChatListening} from '../../redux/chat/chat-reducer';
 
 export const Chat = () => {
-    const [messages, setMessages] = useState<Array<TMessageModel>>([]);
-
-    const handleReceiveMessage = (e: MessageEvent) => {
-        setMessages(prevState => ([...prevState, ...(JSON.parse(e.data) || [])]));
-    };
+    const dispatch = useDispatch();
+    const messages = useSelector(selectMessages);
 
     useEffect(() => {
-        wsChannel.addEventListener('message', handleReceiveMessage);
+        dispatch(startChatListening());
 
         return () => {
-            wsChannel.removeEventListener('message', handleReceiveMessage);
+            dispatch(stopChatListening);
         };
     }, []);
 
     const handleSendMessage = ({message}: TChatFormData) => {
-        wsChannel.send(message);
+        dispatch(sendMessage(message));
     };
 
     return (
         <div className={style.chat}>
             <Messages messages={messages}/>
-            <ChatForm onSubmit={handleSendMessage}/>
+            <ChatForm
+                onSubmit={handleSendMessage}
+            />
         </div>
     );
 };
